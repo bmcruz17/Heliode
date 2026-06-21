@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ── SEO ── -->
+<title>Heliode — GPU Compute & AI Inference for Austin, SF, Seattle & Boston</title>
+<meta name="description" content="Cheaper, managed GPU compute for AI inference. We source wholesale GPU capacity and run it for you — one bill, real uptime, real support. Serving startups in Austin, the Bay Area, Seattle, and Boston.">
+<meta name="keywords" content="GPU compute, AI inference, GPU cloud, rent GPUs, inference hosting, Austin GPU cloud, San Francisco AI compute, Seattle GPU rental, Boston AI infrastructure, cheap GPU hours, H100 B200 inference">
+<link rel="canonical" href="https://heliode.com/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#ffffff">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Heliode — GPU Compute for AI Inference">
+<meta property="og:description" content="Wholesale-sourced GPU compute, managed for you. One bill, real uptime. Built for inference-heavy startups in Austin, SF, Seattle, and Boston.">
+<meta property="og:url" content="https://heliode.com/">
+<meta property="og:site_name" content="Heliode">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Heliode — GPU Compute for AI Inference">
+<meta name="twitter:description" content="Wholesale-sourced GPU compute, managed for you. Serving Austin, SF, Seattle, and Boston.">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Heliode","url":"https://heliode.com","description":"Managed GPU compute for AI inference, sourced wholesale and run for you.","areaServed":["Austin, TX","San Francisco Bay Area, CA","Seattle, WA","Boston, MA","United States"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","serviceType":"GPU compute and AI inference hosting","provider":{"@type":"Organization","name":"Heliode"},"areaServed":["Austin","San Francisco","Seattle","Boston"],"description":"Wholesale-sourced, managed GPU capacity for AI inference workloads with a single bill, managed uptime, and dedicated support."}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#ffffff;--bg2:#f4f7fc;--panel:#ffffff;
+    --ink:#0d1320;--mute:#555c66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-bright:#3b82f6;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-bright:#fb923c;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+    --dark:#0d1320;
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;}
+  h1,h2,h3,h4,.brand{font-family:'Space Grotesk',sans-serif;}
+
+  .bar{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(255,255,255,0.82);border-bottom:1px solid var(--line);}
+  .bar-in{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-weight:700;font-size:1.02rem;letter-spacing:-0.01em;display:flex;align-items:center;gap:9px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 0 4px var(--accent-dim);animation:pulse 2.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--accent-dim);}50%{box-shadow:0 0 0 7px rgba(251,146,60,0.06);}}
+  .bar a.cta{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.84rem;color:#fff;background:var(--accent);text-decoration:none;padding:9px 16px;border-radius:9px;transition:.2s;}
+  .bar a.cta:hover{background:var(--accent-hover);}
+
+  .hero{position:relative;padding:80px 0 62px;border-bottom:1px solid var(--line);overflow:hidden;background:linear-gradient(180deg,#ffffff,var(--bg2));}
+  .hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0.6;}
+  .hero-in{position:relative;z-index:2;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--blue-line);}
+  h1{font-weight:700;font-size:clamp(2.1rem,6.2vw,3.85rem);line-height:1.04;letter-spacing:-0.03em;max-width:16ch;margin-bottom:22px;}
+  h1 em{font-style:normal;color:var(--blue);}
+  .lede{font-size:clamp(1rem,2.3vw,1.18rem);color:var(--mute);max-width:54ch;margin-bottom:30px;}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.92rem;border-radius:11px;padding:14px 22px;cursor:pointer;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.2s;}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(249,115,22,0.28);}
+  .btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 8px 22px rgba(249,115,22,0.34);}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line2);}
+  .btn-ghost:hover{border-color:var(--blue-line);color:var(--blue);}
+  .cities{margin-top:34px;display:flex;gap:8px;flex-wrap:wrap;}
+  .pill{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--mute);border:1px solid var(--line2);border-radius:999px;padding:6px 13px;background:rgba(255,255,255,0.6);}
+  .pill b{color:var(--ink);font-weight:500;}
+
+  .strip{border-bottom:1px solid var(--line);background:var(--bg);}
+  .strip-in{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
+  .cell{background:var(--bg);padding:26px 22px;}
+  .cell .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;color:var(--blue);line-height:1;}
+  .cell .k{font-size:0.84rem;color:var(--mute);margin-top:9px;}
+  @media(max-width:680px){.strip-in{grid-template-columns:1fr;}}
+
+  section.blk{padding:62px 0;border-bottom:1px solid var(--line);}
+  .alt{background:var(--bg2);}
+  .sec-eye{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);margin-bottom:14px;}
+  h2{font-weight:700;font-size:clamp(1.5rem,3.6vw,2.25rem);letter-spacing:-0.025em;margin-bottom:18px;max-width:22ch;}
+  .body-lg{font-size:1.04rem;color:var(--mute);max-width:62ch;}
+  .body-lg + .body-lg{margin-top:14px;}
+
+  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;}
+  .feat{background:var(--panel);padding:24px 20px;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .feat .ic{font-family:'JetBrains Mono',monospace;color:var(--blue);font-size:0.7rem;margin-bottom:12px;}
+  .feat h4{font-weight:600;font-size:1rem;margin-bottom:7px;letter-spacing:-0.01em;}
+  .feat p{font-size:0.88rem;color:var(--mute);}
+  @media(max-width:760px){.feats{grid-template-columns:1fr;}}
+
+  .steps{counter-reset:s;list-style:none;margin-top:8px;}
+  .steps li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line);}
+  .steps li:first-child{border-top:none;}
+  .steps .num{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--blue);font-size:1.1rem;}
+  .steps h4{font-weight:600;font-size:1.05rem;margin-bottom:5px;letter-spacing:-0.01em;}
+  .steps p{font-size:0.92rem;color:var(--mute);max-width:60ch;}
+
+  .city-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px;}
+  .city{background:var(--panel);padding:24px 22px;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .city h3{font-weight:600;font-size:1.1rem;margin-bottom:6px;letter-spacing:-0.01em;}
+  .city .tag{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--blue);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+  .city p{font-size:0.88rem;color:var(--mute);}
+  @media(max-width:680px){.city-grid{grid-template-columns:1fr;}}
+
+  .road{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
+  .phase{background:var(--panel);padding:26px 22px;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .phase.next{border-color:var(--accent-line);background:linear-gradient(180deg,var(--accent-dim),#fff);}
+  .phase .when{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--accent-hover);letter-spacing:0.06em;margin-bottom:10px;}
+  .phase h4{font-weight:600;font-size:1.15rem;margin-bottom:8px;letter-spacing:-0.01em;}
+  .phase p{font-size:0.9rem;color:var(--mute);}
+  @media(max-width:680px){.road{grid-template-columns:1fr;}}
+
+  .form{max-width:520px;margin-top:8px;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:520px){.grid-2{grid-template-columns:1fr;}}
+  .fld{display:block;font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);margin:14px 0 7px;}
+  .inp{width:100%;background:#fff;border:1px solid var(--line2);border-radius:11px;padding:13px 14px;color:var(--ink);font-family:'Inter',sans-serif;font-size:0.94rem;outline:none;transition:.2s;}
+  .inp:focus{border-color:var(--blue-line);box-shadow:0 0 0 3px var(--blue-dim);}
+  .inp::placeholder{color:var(--faint);}
+  textarea.inp{min-height:96px;resize:vertical;}
+  .form .btn{margin-top:18px;width:100%;justify-content:center;}
+  .ok{display:none;padding:22px;border:1px solid var(--blue-line);background:var(--blue-dim);border-radius:14px;margin-top:8px;}
+  .ok h4{color:var(--blue);font-size:1.1rem;margin-bottom:6px;font-weight:600;}
+  .ok p{color:var(--mute);font-size:0.9rem;}
+  .err{color:#dc2626;font-size:0.84rem;margin-top:12px;display:none;}
+
+  footer{padding:48px 0 40px;background:var(--bg2);border-top:1px solid var(--line);}
+  .foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start;}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:0.84rem;color:var(--mute);}
+  .foot-links a{text-decoration:none;}.foot-links a:hover{color:var(--blue);}
+  .legal{margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--faint);line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>HELIODE</div>
+  <a class="cta" href="#contact">Request capacity</a>
+</div></div>
+
+<header class="hero">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="wrap hero-in">
+    <div class="eyebrow">GPU compute · AI inference · US-based</div>
+    <h1>Inference compute that costs less — <em>and someone actually runs it for you.</em></h1>
+    <p class="lede">Hyperscaler GPU pricing is brutal and capacity is hard to get. We source GPU power on the open market, manage it end to end, and hand you one bill, dependable uptime, and a real person to call. You ship models. We handle the metal.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#contact">Get a capacity quote →</a>
+      <a class="btn btn-ghost" href="#how">How it works</a>
+    </div>
+    <div class="cities">
+      <span class="pill">Serving <b>Austin</b></span>
+      <span class="pill"><b>San Francisco</b> Bay Area</span>
+      <span class="pill"><b>Seattle</b></span>
+      <span class="pill"><b>Boston</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="strip"><div class="wrap"><div class="strip-in">
+  <div class="cell"><div class="n">2–5×</div><div class="k">What hyperscalers charge over open-market GPU rates for comparable inference hardware.</div></div>
+  <div class="cell"><div class="n">One bill</div><div class="k">Managed capacity, uptime, and support — instead of juggling five provider accounts.</div></div>
+  <div class="cell"><div class="n">Inference-first</div><div class="k">Built for the steady, 24/7, latency-sensitive workloads that dominate AI compute by 2026.</div></div>
+</div></div></div>
+
+<section class="blk" id="what">
+  <div class="wrap">
+    <div class="sec-eye">What we do</div>
+    <h2>You need GPU-hours. You don't need another cloud to babysit.</h2>
+    <p class="body-lg" style="margin-bottom:26px;">Most teams buying inference compute are stuck between two bad options: pay hyperscaler prices for convenience, or stitch together cheap marketplace capacity yourself and own the uptime headaches. We sit in the middle — sourcing capacity at open-market rates and running it as a managed service, so you get the price of the marketplace with the reliability of a real provider.</p>
+    <div class="feats">
+      <div class="feat"><div class="ic">// price</div><h4>Open-market sourcing</h4><p>We buy capacity where it's cheapest — marketplace and spot supply well under hyperscaler on-demand — and pass the savings through.</p></div>
+      <div class="feat"><div class="ic">// uptime</div><h4>Managed for you</h4><p>Provisioning, failover, monitoring, and support are ours. You get a stable endpoint and an SLA, not a pile of accounts.</p></div>
+      <div class="feat"><div class="ic">// simple</div><h4>One contract, one invoice</h4><p>Reserve the GPU-hours you need monthly. Predictable cost, no surprise egress math, no lock-in.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk alt" id="how">
+  <div class="wrap">
+    <div class="sec-eye">How it works</div>
+    <h2>From first call to running workloads in days, not quarters.</h2>
+    <ol class="steps">
+      <li><span class="num">1</span><div><h4>Tell us your workload</h4><p>Model, throughput, and where your users are. We size the capacity and quote you a monthly GPU-hour rate that undercuts what you're paying now.</p></div></li>
+      <li><span class="num">2</span><div><h4>We source and stand it up</h4><p>We secure the capacity on the open market, configure it, and hand you a stable endpoint. You don't touch a provider console.</p></div></li>
+      <li><span class="num">3</span><div><h4>You run, we keep it up</h4><p>Monitoring, failover, and support are on us. One invoice at month end. Scale up or down as your load changes.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="blk" id="markets">
+  <div class="wrap">
+    <div class="sec-eye">Where we're starting</div>
+    <h2>Built for the cities where inference teams actually are.</h2>
+    <p class="body-lg" style="margin-bottom:20px;">We're onboarding inference-heavy startups in four metros first — the places with the highest concentration of teams shipping AI products and feeling the GPU squeeze.</p>
+    <div class="city-grid">
+      <div class="city"><div class="tag">Austin, TX</div><h3>Austin GPU compute</h3><p>A fast-growing AI hub with cheap power and a deep startup bench. We help Austin teams cut inference cost without moving to a hyperscaler contract.</p></div>
+      <div class="city"><div class="tag">San Francisco Bay Area</div><h3>Bay Area AI compute</h3><p>The densest concentration of inference workloads in the country. We give Bay Area teams managed GPU capacity at marketplace prices.</p></div>
+      <div class="city"><div class="tag">Seattle, WA</div><h3>Seattle GPU cloud</h3><p>Cloud-native talent and heavy AI product work. We handle the compute layer so Seattle teams can focus on shipping.</p></div>
+      <div class="city"><div class="tag">Boston, MA</div><h3>Boston AI infrastructure</h3><p>Research-driven and enterprise-heavy. We give Boston teams cost-efficient, managed inference capacity with real support.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk alt" id="vision">
+  <div class="wrap">
+    <div class="sec-eye">The roadmap</div>
+    <h2>Today we broker compute. Next, we build it — on rooftops.</h2>
+    <p class="body-lg">Reselling capacity proves the demand. The bigger move is owning it. We're building toward a distributed network of solar-powered GPU nodes deployed on homes — generating compute close to where it's used, on clean power, without waiting years for grid hookups or new data centers. When that capacity comes online in your region, you're already a customer, and your compute gets cheaper and closer at the same time.</p>
+    <div class="road">
+      <div class="phase"><div class="when">NOW · Phase 1</div><h4>Managed brokerage</h4><p>Source open-market GPU capacity, run it as a service, sign inference teams in our launch metros. Prove demand with real contracts.</p></div>
+      <div class="phase next"><div class="when">NEXT · Phase 2</div><h4>Owned distributed network</h4><p>Solar-backed GPU nodes on residential rooftops — regional, renewable, low-latency capacity we own and operate. Customers migrate onto cheaper, closer compute.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="contact">
+  <div class="wrap">
+    <div class="sec-eye">Get started</div>
+    <h2>Tell us what you're running. We'll send a quote.</h2>
+    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Give us the basics and we'll come back with a GPU-hour rate and availability for your region.</p>
+    <div class="form" id="form">
+      <div class="grid-2">
+        <div><label class="fld" for="f-name">Name</label><input class="inp" id="f-name" type="text" placeholder="Your name"></div>
+        <div><label class="fld" for="f-company">Company</label><input class="inp" id="f-company" type="text" placeholder="Company"></div>
+      </div>
+      <div class="grid-2">
+        <div><label class="fld" for="f-email">Work email</label><input class="inp" id="f-email" type="email" placeholder="you@company.com"></div>
+        <div><label class="fld" for="f-city">City / region</label><input class="inp" id="f-city" type="text" placeholder="Austin, SF, Seattle, Boston…"></div>
+      </div>
+      <label class="fld" for="f-workload">Your workload</label>
+      <textarea class="inp" id="f-workload" placeholder="Model(s), rough GPU-hours or monthly spend, and what you're paying now."></textarea>
+      <div class="err" id="f-err"></div>
+      <button class="btn btn-primary" id="f-btn" onclick="submitLead()">Request a quote →</button>
+    </div>
+    <div class="ok" id="ok">
+      <h4>Got it — talk soon.</h4>
+      <p>Your request is in. We'll follow up at the email you gave us with a rate and availability for your region.</p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="foot-grid">
+    <div class="brand"><span class="dot"></span>HELIODE</div>
+    <div class="foot-links">
+      <a href="#what">What we do</a>
+      <a href="#how">How it works</a>
+      <a href="#markets">Markets</a>
+      <a href="#vision">Roadmap</a>
+      <a href="#contact">Request capacity</a>
+    </div>
+  </div>
+  <div class="foot-links" style="margin-top:18px;font-size:0.78rem;color:var(--faint);">
+    <span>GPU compute Austin</span><span>AI inference San Francisco</span><span>GPU cloud Seattle</span><span>AI infrastructure Boston</span>
+  </div>
+  <div class="legal">© 2026 Heliode. Managed GPU compute for AI inference. Pricing and availability vary by workload and region.</div>
+</div></footer>
+
+<script>
+  var SB_URL = 'https://viinhpdufvtjxovdsrra.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZpaW5ocGR1ZnZ0anhvdmRzcnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MjE2NzMsImV4cCI6MjA5NjA5NzY3M30.qCHbB0qmGu15HQbJs8TmZy7WS1qW9HSzRNv88eLQWfs';
+
+  function submitLead(){
+    var err=document.getElementById('f-err'), btn=document.getElementById('f-btn');
+    var email=document.getElementById('f-email').value.trim();
+    err.style.display='none';
+    if(!email){ err.textContent='Add a work email so we can send the quote.'; err.style.display='block'; return; }
+    btn.disabled=true; btn.textContent='Sending…';
+    var payload={
+      name:document.getElementById('f-name').value.trim(),
+      company:document.getElementById('f-company').value.trim(),
+      email:email,
+      city:document.getElementById('f-city').value.trim(),
+      workload:document.getElementById('f-workload').value.trim(),
+      source:'index'
+    };
+    fetch(SB_URL+'/rest/v1/compute_leads',{
+      method:'POST',
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(payload)
+    }).then(function(r){
+      if(r.ok){ document.getElementById('form').style.display='none'; document.getElementById('ok').style.display='block'; }
+      else { throw new Error(); }
+    }).catch(function(){
+      btn.disabled=false; btn.textContent='Request a quote →';
+      err.textContent='Something went wrong — email us directly at hello@heliode.com.'; err.style.display='block';
+    });
+  }
+
+  (function(){
+    var c=document.getElementById('net'); if(!c) return;
+    var x=c.getContext('2d'),W,H,nodes,DPR=Math.min(window.devicePixelRatio||1,2);
+    function size(){W=c.clientWidth;H=c.clientHeight;c.width=W*DPR;c.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0);build();}
+    function build(){nodes=[];var n=Math.max(12,Math.floor(W/80));for(var i=0;i<n;i++)nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.22,vy:(Math.random()-0.5)*0.22,p:Math.random()*6.28});}
+    function tick(){
+      x.clearRect(0,0,W,H);
+      for(var i=0;i<nodes.length;i++){var a=nodes[i];a.x+=a.vx;a.y+=a.vy;a.p+=0.03;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+        for(var j=i+1;j<nodes.length;j++){var b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+          if(d<140){x.strokeStyle='rgba(37,99,235,'+(0.16*(1-d/140))+')';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}}}
+      for(var k=0;k<nodes.length;k++){var p=nodes[k];x.fillStyle='rgba(37,99,235,'+(0.45+Math.sin(p.p)*0.28)+')';x.beginPath();x.arc(p.x,p.y,1.6+Math.sin(p.p)*0.5,0,6.28);x.fill();}
+      requestAnimationFrame(tick);
+    }
+    if(!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)){window.addEventListener('resize',size);size();tick();}
+    else {size();}
+  })();
+</script>
+</body>
+</html>
