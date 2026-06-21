@@ -58,7 +58,11 @@
 
   .hero{position:relative;padding:80px 0 62px;border-bottom:1px solid var(--line);overflow:hidden;background:linear-gradient(180deg,#ffffff,var(--bg2));}
   .hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0.6;}
-  .hero-in{position:relative;z-index:2;}
+  .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.04fr 0.96fr;gap:36px;align-items:center;}
+  .hero-copy{min-width:0;}
+  .hero-art{position:relative;}
+  .hero-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 40px rgba(37,99,235,0.10));}
+  @media(max-width:860px){.hero-in{grid-template-columns:1fr;gap:18px;}.hero-art{max-width:400px;margin:4px auto 0;}}
   .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .eyebrow::before{content:"";width:26px;height:1px;background:var(--blue-line);}
   h1{font-weight:700;font-size:clamp(2.1rem,6.2vw,3.85rem);line-height:1.04;letter-spacing:-0.03em;max-width:16ch;margin-bottom:22px;}
@@ -89,11 +93,26 @@
   .body-lg + .body-lg{margin-top:14px;}
 
   .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;}
-  .feat{background:var(--panel);padding:24px 20px;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
-  .feat .ic{font-family:'JetBrains Mono',monospace;color:var(--blue);font-size:0.7rem;margin-bottom:12px;}
+  .feat{background:var(--panel);padding:24px 20px;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(13,19,32,0.03);transition:.2s;}
+  .feat:hover{transform:translateY(-3px);border-color:var(--blue-line);box-shadow:0 12px 26px rgba(13,19,32,0.07);}
+  .feat-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--blue-dim);color:var(--blue);margin-bottom:14px;}
+  .feat-ic svg{width:22px;height:22px;}
+  .feat .ic{font-family:'JetBrains Mono',monospace;color:var(--blue);font-size:0.7rem;margin-bottom:10px;}
   .feat h4{font-weight:600;font-size:1rem;margin-bottom:7px;letter-spacing:-0.01em;}
   .feat p{font-size:0.88rem;color:var(--mute);}
   @media(max-width:760px){.feats{grid-template-columns:1fr;}}
+
+  /* Integrations */
+  .integ-cat{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);margin:20px 0 8px;}
+  .integ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .integ{display:flex;align-items:center;gap:11px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 14px;font-size:0.88rem;color:var(--ink);transition:.2s;}
+  .integ:hover{border-color:var(--blue-line);transform:translateY(-2px);box-shadow:0 6px 16px rgba(13,19,32,0.05);}
+  .integ .gi{width:26px;height:26px;flex:0 0 26px;border-radius:7px;background:var(--blue-dim);color:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.66rem;font-weight:500;}
+  .integ-cta{margin-top:26px;background:linear-gradient(180deg,var(--accent-dim),#fff);border:1px solid var(--accent-line);border-radius:16px;padding:22px 24px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between;}
+  .integ-cta h4{font-weight:600;font-size:1.08rem;margin-bottom:5px;letter-spacing:-0.01em;}
+  .integ-cta p{font-size:0.9rem;color:var(--mute);max-width:62ch;}
+  .integ-cta .btn{flex-shrink:0;}
+  @media(max-width:760px){.integ-grid{grid-template-columns:repeat(2,1fr);}}
 
   /* How it works — visual flow */
   .flow{margin:8px 0 30px;}
@@ -170,6 +189,7 @@
 <header class="hero">
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap hero-in">
+    <div class="hero-copy">
     <div class="eyebrow">GPU compute · AI inference · US-based</div>
     <h1>Inference compute that costs less — <em>and someone actually runs it for you.</em></h1>
     <p class="lede">Hyperscaler GPU pricing is brutal and capacity is hard to get. We source GPU power on the open market, run it for you, and hand you one bill and a real person to call — cheaper GPU-hours on a reliable base layer, without you babysitting the metal. <strong>Send us your current GPU bill and we'll beat it — free, for two weeks.</strong></p>
@@ -182,6 +202,53 @@
       <span class="pill"><b>San Francisco</b> Bay Area</span>
       <span class="pill"><b>Seattle</b></span>
       <span class="pill"><b>Boston</b></span>
+    </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 520 470" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Distributed GPU compute on homes">
+        <defs>
+          <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fb923c" stop-opacity="0.85"/><stop offset="45%" stop-color="#f97316" stop-opacity="0.30"/><stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#eef2f9"/><stop offset="100%" stop-color="#e0e7f2"/></linearGradient>
+          <linearGradient id="hub" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+        </defs>
+        <circle cx="402" cy="104" r="150" fill="url(#sun)"/>
+        <circle cx="402" cy="104" r="30" fill="#f97316" opacity="0.92"/>
+        <circle cx="402" cy="104" r="30" fill="none" stroke="#fb923c" stroke-width="1.5"><animate attributeName="r" values="30;40;30" dur="4.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.55;0;0.55" dur="4.5s" repeatCount="indefinite"/></circle>
+        <g stroke-linecap="round" fill="none">
+          <path d="M260 214 C 192 240 150 280 110 320" stroke="#d6dae1" stroke-width="2"/>
+          <path d="M260 214 L 260 320" stroke="#d6dae1" stroke-width="2"/>
+          <path d="M260 214 C 328 240 370 280 410 320" stroke="#d6dae1" stroke-width="2"/>
+          <path d="M260 214 C 192 240 150 280 110 320" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 70"><animate attributeName="stroke-dashoffset" from="74" to="0" dur="2.4s" repeatCount="indefinite"/></path>
+          <path d="M260 214 L 260 320" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 70"><animate attributeName="stroke-dashoffset" from="74" to="0" dur="2s" repeatCount="indefinite"/></path>
+          <path d="M260 214 C 328 240 370 280 410 320" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 70"><animate attributeName="stroke-dashoffset" from="74" to="0" dur="2.6s" repeatCount="indefinite"/></path>
+        </g>
+        <rect x="232" y="158" width="56" height="56" rx="13" fill="url(#hub)"/>
+        <g stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round">
+          <rect x="248" y="174" width="24" height="24" rx="4"/><rect x="256" y="182" width="8" height="8" rx="1.5" fill="#fff" stroke="none"/>
+          <line x1="255" y1="168" x2="255" y2="174"/><line x1="265" y1="168" x2="265" y2="174"/><line x1="255" y1="198" x2="255" y2="204"/><line x1="265" y1="198" x2="265" y2="204"/>
+        </g>
+        <g>
+          <polygon points="64,362 110,326 156,362" fill="url(#roof)" stroke="#cdd4df" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="76" y="362" width="68" height="76" rx="3" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
+          <rect x="100" y="402" width="20" height="36" rx="2" fill="#e7edf6"/><rect x="84" y="374" width="14" height="14" rx="2" fill="#e7edf6"/><rect x="122" y="374" width="14" height="14" rx="2" fill="#e7edf6"/>
+          <circle cx="110" cy="320" r="7" fill="url(#hub)"/><circle cx="110" cy="320" r="7" fill="none" stroke="#f97316" stroke-width="2"><animate attributeName="r" values="7;13;7" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0;0.8" dur="3s" repeatCount="indefinite"/></circle>
+        </g>
+        <g>
+          <polygon points="214,362 260,326 306,362" fill="url(#roof)" stroke="#cdd4df" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="226" y="362" width="68" height="76" rx="3" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
+          <rect x="250" y="402" width="20" height="36" rx="2" fill="#e7edf6"/><rect x="234" y="374" width="14" height="14" rx="2" fill="#e7edf6"/><rect x="272" y="374" width="14" height="14" rx="2" fill="#e7edf6"/>
+          <circle cx="260" cy="320" r="7" fill="url(#hub)"/><circle cx="260" cy="320" r="7" fill="none" stroke="#f97316" stroke-width="2"><animate attributeName="r" values="7;13;7" dur="3.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0;0.8" dur="3.4s" repeatCount="indefinite"/></circle>
+        </g>
+        <g>
+          <polygon points="364,362 410,326 456,362" fill="url(#roof)" stroke="#cdd4df" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="376" y="362" width="68" height="76" rx="3" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
+          <rect x="400" y="402" width="20" height="36" rx="2" fill="#e7edf6"/><rect x="384" y="374" width="14" height="14" rx="2" fill="#e7edf6"/><rect x="422" y="374" width="14" height="14" rx="2" fill="#e7edf6"/>
+          <circle cx="410" cy="320" r="7" fill="url(#hub)"/><circle cx="410" cy="320" r="7" fill="none" stroke="#f97316" stroke-width="2"><animate attributeName="r" values="7;13;7" dur="2.7s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0;0.8" dur="2.7s" repeatCount="indefinite"/></circle>
+        </g>
+        <line x1="40" y1="438" x2="480" y2="438" stroke="#d6dae1" stroke-width="1.5"/>
+      </svg>
     </div>
   </div>
 </header>
@@ -198,9 +265,9 @@
     <h2>You need GPU-hours. You don't need another cloud to babysit.</h2>
     <p class="body-lg" style="margin-bottom:26px;">Most teams buying inference compute are stuck between two bad options: pay hyperscaler prices for convenience, or stitch together cheap marketplace capacity yourself and own the uptime headaches. We sit in the middle — sourcing capacity at open-market rates and running it as a managed service, so you get marketplace pricing with someone actually running it for you.</p>
     <div class="feats">
-      <div class="feat"><div class="ic">// price</div><h4>Open-market sourcing</h4><p>We buy capacity where it's cheapest — marketplace and spot supply well under hyperscaler on-demand — and pass the savings through.</p></div>
-      <div class="feat"><div class="ic">// managed</div><h4>We handle the babysitting</h4><p>Provisioning, monitoring, and support are ours, on a reliable base layer. You get one endpoint to point at, not a pile of marketplace accounts.</p></div>
-      <div class="feat"><div class="ic">// simple</div><h4>One contract, one invoice</h4><p>Reserve the GPU-hours you need monthly. Predictable cost, no surprise egress math, no lock-in.</p></div>
+      <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 7 9 13 13 9 21 17"/><polyline points="21 12 21 17 16 17"/></svg></div><div class="ic">// price</div><h4>Open-market sourcing</h4><p>We buy capacity where it's cheapest — marketplace and spot supply well under hyperscaler on-demand — and pass the savings through.</p></div>
+      <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="ic">// managed</div><h4>We handle the babysitting</h4><p>Provisioning, monitoring, and support are ours, on a reliable base layer. You get one endpoint to point at, not a pile of marketplace accounts.</p></div>
+      <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l3 3v15l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg></div><div class="ic">// simple</div><h4>One contract, one invoice</h4><p>Reserve the GPU-hours you need monthly. Predictable cost, no surprise egress math, no lock-in.</p></div>
     </div>
   </div>
 </section>
@@ -249,6 +316,54 @@
       <li><span class="num">2</span><div><h4>We source and stand it up</h4><p>We secure the capacity on the open market, configure it, and hand you a reliable endpoint. You don't touch a provider console.</p></div></li>
       <li><span class="num">3</span><div><h4>You run, we handle the babysitting</h4><p>Monitoring and support are on us. One invoice at month end. Scale up or down as your load changes.</p></div></li>
     </ol>
+  </div>
+</section>
+
+<section class="blk" id="integrations">
+  <div class="wrap">
+    <div class="sec-eye">Plugs into your stack</div>
+    <h2>Works with the tools your team already runs.</h2>
+    <p class="body-lg" style="margin-bottom:6px;">Point your existing inference stack at Heliode — no rewrites. Standard endpoints and the frameworks you already use, with the common tooling wired in.</p>
+
+    <div class="integ-cat">Serving &amp; frameworks</div>
+    <div class="integ-grid">
+      <div class="integ"><span class="gi">vL</span>vLLM</div>
+      <div class="integ"><span class="gi">PT</span>PyTorch</div>
+      <div class="integ"><span class="gi">HF</span>Hugging Face</div>
+      <div class="integ"><span class="gi">Ol</span>Ollama</div>
+    </div>
+
+    <div class="integ-cat">Orchestration &amp; runtime</div>
+    <div class="integ-grid">
+      <div class="integ"><span class="gi">Sk</span>SkyPilot</div>
+      <div class="integ"><span class="gi">K8</span>Kubernetes</div>
+      <div class="integ"><span class="gi">Ray</span>Ray</div>
+      <div class="integ"><span class="gi">Do</span>Docker</div>
+    </div>
+
+    <div class="integ-cat">Tooling &amp; observability</div>
+    <div class="integ-grid">
+      <div class="integ"><span class="gi">LC</span>LangChain</div>
+      <div class="integ"><span class="gi">LI</span>LlamaIndex</div>
+      <div class="integ"><span class="gi">WB</span>Weights &amp; Biases</div>
+      <div class="integ"><span class="gi">Gr</span>Grafana</div>
+    </div>
+
+    <div class="integ-cat">Data, storage &amp; ops</div>
+    <div class="integ-grid">
+      <div class="integ"><span class="gi">S3</span>Amazon S3</div>
+      <div class="integ"><span class="gi">R2</span>Cloudflare R2</div>
+      <div class="integ"><span class="gi">Pg</span>Postgres</div>
+      <div class="integ"><span class="gi">St</span>Stripe</div>
+    </div>
+
+    <div class="integ-cta">
+      <div>
+        <h4>Don't see your stack?</h4>
+        <p>We build custom integrations with you — wiring Heliode into exactly how your team ships: provisioning hooks, model endpoints, and data pipelines tailored to your workflow.</p>
+      </div>
+      <a class="btn btn-primary" href="#contact">Tell us your stack →</a>
+    </div>
   </div>
 </section>
 
