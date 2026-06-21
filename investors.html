@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heliode — Investor Portal</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#ffffff;--bg2:#f4f7fc;--panel:#ffffff;
+    --ink:#0d1320;--mute:#555c66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-bright:#3b82f6;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg2);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  a{color:var(--blue);}
+  h1,h2,h3,h4,.brand{font-family:'Space Grotesk',sans-serif;}
+
+  .bar{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(255,255,255,0.85);border-bottom:1px solid var(--line);}
+  .bar-in{max-width:920px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-weight:700;font-size:1.02rem;letter-spacing:-0.01em;display:flex;align-items:center;gap:9px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-dim);}
+  .brand .tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;color:var(--faint);text-transform:uppercase;margin-left:6px;}
+  .who{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--mute);display:flex;align-items:center;gap:12px;}
+  .lnk{background:none;border:none;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:0.72rem;cursor:pointer;padding:0;}
+  .lnk:hover{text-decoration:underline;}
+
+  .wrap{max-width:920px;margin:0 auto;padding:42px 24px 80px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:34px 30px;box-shadow:0 2px 10px rgba(13,19,32,0.04);}
+  .gate{max-width:440px;margin:6vh auto 0;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  h1.t{font-weight:700;font-size:1.6rem;letter-spacing:-0.02em;margin-bottom:8px;}
+  .sub{font-size:0.92rem;color:var(--mute);margin-bottom:24px;}
+  .fld{display:block;font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);margin:16px 0 7px;}
+  .inp{width:100%;background:#fff;border:1px solid var(--line2);border-radius:11px;padding:13px 14px;color:var(--ink);font-family:'Inter',sans-serif;font-size:0.94rem;outline:none;transition:.2s;}
+  .inp:focus{border-color:var(--blue-line);box-shadow:0 0 0 3px var(--blue-dim);}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.94rem;border-radius:11px;padding:14px 22px;cursor:pointer;border:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s;width:100%;margin-top:22px;}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(249,115,22,0.26);}
+  .btn-primary:hover{background:var(--accent-hover);}
+  .btn:disabled{opacity:.55;cursor:not-allowed;}
+  .msg{font-size:0.84rem;margin-top:14px;display:none;}
+  .msg.err{color:#dc2626;}
+  .foot-note{font-family:'JetBrains Mono',monospace;font-size:0.64rem;color:var(--faint);margin-top:20px;line-height:1.7;}
+
+  /* NDA */
+  .nda-body{max-height:46vh;overflow-y:auto;border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--bg2);font-size:0.86rem;color:var(--mute);margin:8px 0 18px;}
+  .nda-body h3{color:var(--ink);font-size:0.92rem;margin:16px 0 6px;}
+  .nda-body h3:first-child{margin-top:0;}
+  .nda-body p{margin-bottom:10px;}
+  .agree-row{display:flex;align-items:flex-start;gap:10px;font-size:0.86rem;color:var(--ink);margin-bottom:6px;}
+  .agree-row input{margin-top:3px;width:16px;height:16px;accent-color:var(--blue);}
+
+  /* Proposal */
+  .prop-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:8px;}
+  .stamp{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--faint);text-transform:uppercase;letter-spacing:0.08em;}
+  .prop{position:relative;}
+  .prop h2{font-size:1.5rem;letter-spacing:-0.02em;margin:0 0 6px;}
+  .prop .lede{font-size:1rem;color:var(--mute);margin-bottom:26px;}
+  .prop section{padding:22px 0;border-top:1px solid var(--line);}
+  .prop section:first-of-type{border-top:none;}
+  .prop h3{font-size:1.12rem;letter-spacing:-0.01em;margin-bottom:10px;display:flex;align-items:baseline;gap:10px;}
+  .prop h3 .nx{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--accent);}
+  .prop h4{font-size:0.96rem;margin:14px 0 4px;}
+  .prop p{font-size:0.92rem;color:var(--mute);margin-bottom:10px;max-width:70ch;}
+  .prop ul{margin:0 0 10px 0;padding-left:20px;}
+  .prop li{font-size:0.92rem;color:var(--mute);margin-bottom:6px;}
+  .prop strong{color:var(--ink);}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0;}
+  .kpi{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 14px;}
+  .kpi .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;color:var(--blue);line-height:1;}
+  .kpi .k{font-size:0.74rem;color:var(--mute);margin-top:7px;}
+  table.fin{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.86rem;}
+  table.fin th,table.fin td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);}
+  table.fin th{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--faint);background:var(--bg2);}
+  table.fin td.num{font-family:'JetBrains Mono',monospace;text-align:right;color:var(--ink);}
+  table.fin tr.tot td{font-weight:600;color:var(--ink);border-top:2px solid var(--line2);}
+  .callout{background:linear-gradient(180deg,var(--blue-dim),#fff);border:1px solid var(--blue-line);border-radius:14px;padding:18px 20px;margin:14px 0;}
+  .callout p{color:var(--ink);margin:0;font-size:0.92rem;}
+  .disclaimer{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--faint);line-height:1.7;margin-top:24px;border-top:1px solid var(--line);padding-top:18px;}
+  @media(max-width:680px){.kpis{grid-template-columns:repeat(2,1fr);}.card{padding:24px 18px;}}
+
+  /* leak-deterrent watermark over proposal */
+  .wm{position:fixed;inset:0;z-index:5;pointer-events:none;overflow:hidden;opacity:0.05;}
+  .wm-inner{position:absolute;top:-20%;left:-20%;width:140%;height:140%;transform:rotate(-30deg);
+    font-family:'JetBrains Mono',monospace;font-size:18px;line-height:5.2;color:#0d1320;white-space:pre-wrap;word-break:break-word;}
+  .hidden{display:none !important;}
+  .spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;display:inline-block;animation:sp .7s linear infinite;}
+  @keyframes sp{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>HELIODE<span class="tag">Investor Portal</span></div>
+  <div class="who" id="who" hidden><span id="who-email"></span><button class="lnk" id="logout">Sign out</button></div>
+</div></div>
+
+<!-- ░░ LOGIN ░░ -->
+<div class="wrap" id="screen-login">
+  <div class="card gate">
+    <div class="eyebrow">Confidential · Authorized access only</div>
+    <h1 class="t">Investor sign-in</h1>
+    <p class="sub">Enter the credentials issued to you. Access is logged and the materials are bound by a confidentiality agreement.</p>
+    <label class="fld" for="email">Email</label>
+    <input class="inp" id="email" type="email" autocomplete="username" placeholder="you@firm.com">
+    <label class="fld" for="password">Password</label>
+    <input class="inp" id="password" type="password" autocomplete="current-password" placeholder="••••••••••">
+    <button class="btn btn-primary" id="login-btn">Sign in</button>
+    <div class="msg err" id="login-msg"></div>
+    <div class="foot-note">Don't have access? Request credentials at hello@heliodegrid.com. © 2026 Heliode · ATMX Holdings.</div>
+  </div>
+</div>
+
+<!-- ░░ NDA ░░ -->
+<div class="wrap hidden" id="screen-nda">
+  <div class="card" style="max-width:640px;margin:0 auto;">
+    <div class="eyebrow">Step 1 of 2 · Confidentiality agreement</div>
+    <h1 class="t">Before you view the proposal</h1>
+    <p class="sub">You must read and accept the agreement below to access the Heliode Grid investment materials.</p>
+    <div class="nda-body" id="nda-text"><!-- injected --></div>
+    <label class="fld" for="legalname">Type your full legal name to sign</label>
+    <input class="inp" id="legalname" type="text" placeholder="Full legal name">
+    <label class="agree-row" style="margin-top:14px;">
+      <input type="checkbox" id="agree-box">
+      <span>I have read, understood, and agree to be bound by the Confidentiality Agreement above. I am accessing these materials on behalf of myself and/or the entity I represent.</span>
+    </label>
+    <button class="btn btn-primary" id="nda-btn" disabled>Agree &amp; continue</button>
+    <div class="msg err" id="nda-msg"></div>
+  </div>
+</div>
+
+<!-- ░░ PROPOSAL ░░ -->
+<div class="wrap hidden" id="screen-proposal">
+  <div class="wm" id="wm" aria-hidden="true"><div class="wm-inner" id="wm-inner"></div></div>
+  <div class="card" style="position:relative;z-index:6;">
+    <div class="prop-head">
+      <div><div class="eyebrow" style="margin-bottom:8px;">Confidential investment proposal</div></div>
+      <div class="stamp" id="prop-stamp"></div>
+    </div>
+    <div class="prop" id="prop-content"><!-- fetched from Supabase --></div>
+  </div>
+</div>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+  const SB_URL = 'https://pyosjuuvbxzyjtokfqfu.supabase.co';
+  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5b3NqdXV2Ynh6eWp0b2tmcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjk4MTcsImV4cCI6MjA5NzY0NTgxN30.7bH19ZZJHxchfRVt3t-I20gJ44WvbR3al516QhwQpmw';
+  const sb = createClient(SB_URL, SB_KEY);
+
+  const $ = id => document.getElementById(id);
+  const screens = { login:$('screen-login'), nda:$('screen-nda'), proposal:$('screen-proposal') };
+  function show(name){ for(const k in screens) screens[k].classList.toggle('hidden', k!==name); }
+
+  // Confidentiality agreement text (review with counsel before use).
+  const NDA_HTML = `
+    <h3>Heliode Grid — Confidentiality Agreement</h3>
+    <p>This Agreement governs your access to confidential materials concerning Heliode Grid, a venture of ATMX Holdings (the "Company"). By signing below you ("Recipient") agree:</p>
+    <h3>1. Confidential Information</h3>
+    <p>"Confidential Information" means all non-public information disclosed through this portal, including the business plan, financial models, unit economics, strategy, projections, and the existence and terms of any potential transaction.</p>
+    <h3>2. Use &amp; non-disclosure</h3>
+    <p>Recipient will use the Confidential Information solely to evaluate a possible investment, will keep it strictly confidential, and will not copy, distribute, reproduce, or disclose it to any third party without the Company's prior written consent.</p>
+    <h3>3. No offer of securities</h3>
+    <p>These materials are for discussion only and do not constitute an offer to sell or a solicitation to buy any security. All figures are preliminary estimates and are not guarantees of performance.</p>
+    <h3>4. Term</h3>
+    <p>These obligations remain in effect for two (2) years from the date of acceptance. Upon request, Recipient will destroy or return all Confidential Information.</p>
+    <h3>5. Governing law</h3>
+    <p>This Agreement is governed by the laws of the State of [STATE]. This is a preliminary click-through agreement; the Company may require a counter-signed agreement before disclosing further materials.</p>
+  `;
+  $('nda-text').innerHTML = NDA_HTML;
+
+  // ---- routing ----
+  async function route(){
+    const { data:{ session } } = await sb.auth.getSession();
+    if(!session){ show('login'); $('who').hidden = true; return; }
+    $('who').hidden = false;
+    $('who-email').textContent = session.user.email;
+    const { data:acc } = await sb.from('nda_acceptances').select('user_id').eq('user_id', session.user.id).maybeSingle();
+    if(acc){ await loadProposal(session.user); show('proposal'); }
+    else { show('nda'); }
+  }
+
+  // ---- login ----
+  $('login-btn').addEventListener('click', login);
+  $('password').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+  async function login(){
+    const btn=$('login-btn'), msg=$('login-msg');
+    msg.style.display='none';
+    const email=$('email').value.trim(), password=$('password').value;
+    if(!email || !password){ msg.textContent='Enter your email and password.'; msg.style.display='block'; return; }
+    btn.disabled=true; btn.innerHTML='<span class="spin"></span> Signing in…';
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    btn.disabled=false; btn.textContent='Sign in';
+    if(error){ msg.textContent='Sign-in failed. Check your credentials or contact hello@heliodegrid.com.'; msg.style.display='block'; return; }
+    route();
+  }
+
+  // ---- NDA ----
+  function ndaReady(){ $('nda-btn').disabled = !($('agree-box').checked && $('legalname').value.trim().length>1); }
+  $('agree-box').addEventListener('change', ndaReady);
+  $('legalname').addEventListener('input', ndaReady);
+  $('nda-btn').addEventListener('click', async () => {
+    const btn=$('nda-btn'), msg=$('nda-msg'); msg.style.display='none';
+    const { data:{ session } } = await sb.auth.getSession();
+    if(!session){ show('login'); return; }
+    btn.disabled=true; btn.innerHTML='<span class="spin"></span> Recording…';
+    const { error } = await sb.from('nda_acceptances').insert({ user_id: session.user.id, full_name: $('legalname').value.trim() });
+    if(error){ btn.disabled=false; btn.textContent='Agree & continue'; msg.textContent='Could not record acceptance — please retry.'; msg.style.display='block'; return; }
+    await loadProposal(session.user); show('proposal');
+  });
+
+  // ---- proposal ----
+  async function loadProposal(user){
+    const { data, error } = await sb.from('proposal').select('content').eq('id',1).single();
+    const stamp = `${user.email} · accessed ${new Date().toLocaleString()}`;
+    $('prop-stamp').textContent = stamp;
+    // tiled watermark
+    $('wm-inner').textContent = (`HELIODE CONFIDENTIAL · ${user.email} · ${new Date().toLocaleDateString()}   `).repeat(120);
+    if(error || !data){ $('prop-content').innerHTML = '<p style="color:#dc2626">The proposal is not available yet. Please contact hello@heliodegrid.com.</p>'; return; }
+    $('prop-content').innerHTML = data.content;
+  }
+
+  $('logout').addEventListener('click', async () => { await sb.auth.signOut(); $('email').value=''; $('password').value=''; route(); });
+
+  route();
+</script>
+</body>
+</html>
