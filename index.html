@@ -265,14 +265,17 @@
 </div></footer>
 
 <script>
-  var SB_URL = 'https://viinhpdufvtjxovdsrra.supabase.co';
-  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZpaW5ocGR1ZnZ0anhvdmRzcnJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MjE2NzMsImV4cCI6MjA5NjA5NzY3M30.qCHbB0qmGu15HQbJs8TmZy7WS1qW9HSzRNv88eLQWfs';
+  // Heliode lead backend — fill in with Heliode's own Supabase project before launch.
+  // (Intentionally NOT connected to any other venture's backend.)
+  var SB_URL = 'YOUR_HELIODE_SUPABASE_URL';
+  var SB_KEY = 'YOUR_HELIODE_SUPABASE_ANON_KEY';
 
   function submitLead(){
     var err=document.getElementById('f-err'), btn=document.getElementById('f-btn');
     var email=document.getElementById('f-email').value.trim();
     err.style.display='none';
     if(!email){ err.textContent='Add a work email so we can send the quote.'; err.style.display='block'; return; }
+    if(SB_URL.indexOf('http')!==0){ err.textContent='Form isn’t live yet — email us directly at hello@heliode.com.'; err.style.display='block'; return; }
     btn.disabled=true; btn.textContent='Sending…';
     var payload={
       name:document.getElementById('f-name').value.trim(),
