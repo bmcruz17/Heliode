@@ -84,6 +84,40 @@
   .callout{background:linear-gradient(180deg,var(--blue-dim),#fff);border:1px solid var(--blue-line);border-radius:14px;padding:18px 20px;margin:14px 0;}
   .callout p{color:var(--ink);margin:0;font-size:0.92rem;}
   .disclaimer{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--faint);line-height:1.7;margin-top:24px;border-top:1px solid var(--line);padding-top:18px;}
+
+  /* deal snapshot + ROI calculator */
+  .snap{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 24px;}
+  .snap .s{background:linear-gradient(180deg,var(--blue-dim),#fff);border:1px solid var(--blue-line);border-radius:14px;padding:16px 14px;}
+  .snap .s .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;color:var(--blue);line-height:1;}
+  .snap .s .k{font-size:0.74rem;color:var(--mute);margin-top:7px;}
+  @media(max-width:680px){.snap{grid-template-columns:repeat(2,1fr);}}
+  table.ramp{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:0.84rem;}
+  table.ramp th,table.ramp td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;}
+  table.ramp th:first-child,table.ramp td:first-child{text-align:left;}
+  table.ramp th{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);background:#fff;}
+  table.ramp td.mk{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--accent);text-align:left;}
+  .calc{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:22px;margin:20px 0;}
+  .calc h3{font-size:1.12rem;letter-spacing:-0.01em;margin-bottom:4px;}
+  .calc-sub{font-size:0.84rem;color:var(--mute);margin-bottom:16px;}
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:600px){.calc-grid{grid-template-columns:1fr;}}
+  .calc label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--faint);margin-bottom:6px;}
+  .calc input[type=number]{width:100%;background:#fff;border:1px solid var(--line2);border-radius:10px;padding:11px 12px;font-family:'Inter',sans-serif;font-size:0.94rem;color:var(--ink);outline:none;}
+  .calc input[type=number]:focus{border-color:var(--blue-line);box-shadow:0 0 0 3px var(--blue-dim);}
+  .calc input[type=range]{width:100%;accent-color:var(--accent);margin-top:4px;}
+  .range-val{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--ink);}
+  .range-mk{font-family:'JetBrains Mono',monospace;font-size:0.64rem;color:var(--accent);margin-top:5px;}
+  .assump{margin-top:14px;}
+  .assump summary{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--blue);cursor:pointer;}
+  .calc-out{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px;border-top:1px dashed var(--line2);padding-top:18px;}
+  .calc-out .o{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .calc-out .o.hl{background:var(--accent);border-color:var(--accent);}
+  .calc-out .o .ok{font-size:0.7rem;color:var(--mute);}
+  .calc-out .o.hl .ok{color:rgba(255,255,255,.85);}
+  .calc-out .o .ov{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;color:var(--ink);margin-top:5px;}
+  .calc-out .o.hl .ov{color:#fff;}
+  .calc-note{font-family:'JetBrains Mono',monospace;font-size:0.64rem;color:var(--faint);line-height:1.7;margin-top:14px;}
+  .prop-divider{border:none;border-top:1px solid var(--line);margin:28px 0;}
   @media(max-width:680px){.kpis{grid-template-columns:repeat(2,1fr);}.card{padding:24px 18px;}}
 
   /* leak-deterrent watermark over proposal */
@@ -144,6 +178,56 @@
       <div><div class="eyebrow" style="margin-bottom:8px;">Confidential investment proposal</div></div>
       <div class="stamp" id="prop-stamp"></div>
     </div>
+
+    <div class="snap">
+      <div class="s"><div class="n">~$7,600</div><div class="k">Net profit / home / month</div></div>
+      <div class="s"><div class="n">~$380K</div><div class="k">Pilot (50 homes) / month</div></div>
+      <div class="s"><div class="n">~$7.6M</div><div class="k">At 1,000 homes / month</div></div>
+      <div class="s"><div class="n">~$730M</div><div class="k">Illustrative value @ 1,000 homes</div></div>
+    </div>
+
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin-bottom:4px;">Scale trajectory</h3>
+    <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">Per-home economics hold as the network grows across markets. Illustrative — at ~$7,600/home·mo net and an 8&times; multiple on annual net.</p>
+    <table class="ramp">
+      <thead><tr><th>Network</th><th>Markets</th><th>Profit / mo</th><th>Profit / yr</th><th>Illustrative value</th></tr></thead>
+      <tbody>
+        <tr><td>50</td><td class="mk">Austin pilot</td><td>$380K</td><td>$4.6M</td><td>$37M</td></tr>
+        <tr><td>250</td><td class="mk">Austin</td><td>$1.9M</td><td>$22.8M</td><td>$182M</td></tr>
+        <tr><td>1,000</td><td class="mk">+ Dallas</td><td>$7.6M</td><td>$91M</td><td>$730M</td></tr>
+        <tr><td>5,000</td><td class="mk">+ Boston, CA</td><td>$38M</td><td>$456M</td><td>$3.6B</td></tr>
+        <tr><td>10,000</td><td class="mk">multi-market</td><td>$76M</td><td>$912M</td><td>$7.3B</td></tr>
+      </tbody>
+    </table>
+
+    <div class="calc">
+      <h3>Model your investment</h3>
+      <p class="calc-sub">Enter your amount and the network size you want to model — everything updates live. These are illustrative assumptions you can change, not a promise of value or return.</p>
+      <div class="calc-grid">
+        <div><label for="c-invest">Your investment ($)</label><input type="number" id="c-invest" value="100000" min="0" step="5000"></div>
+        <div><label for="c-round">Investing at company valuation ($, post-money)</label><input type="number" id="c-round" value="10000000" min="100000" step="500000"></div>
+      </div>
+      <div style="margin-top:14px;">
+        <label for="c-homes">Network size to model: <span class="range-val" id="c-homes-val">1,000 homes</span></label>
+        <input type="range" id="c-homes" min="50" max="10000" step="50" value="1000">
+        <div class="range-mk" id="c-homes-mk"></div>
+      </div>
+      <details class="assump">
+        <summary>Adjust economic assumptions</summary>
+        <div class="calc-grid" style="margin-top:10px;">
+          <div><label for="c-net">Net profit / home / month ($)</label><input type="number" id="c-net" value="7600" min="0" step="100"></div>
+          <div><label for="c-mult">Valuation multiple (&times; annual net)</label><input type="number" id="c-mult" value="8" min="1" step="1"></div>
+        </div>
+      </details>
+      <div class="calc-out">
+        <div class="o"><div class="ok">Your equity stake</div><div class="ov" id="o-stake">&mdash;</div></div>
+        <div class="o"><div class="ok">Company profit at this scale</div><div class="ov" id="o-profit">&mdash;</div></div>
+        <div class="o"><div class="ok">Illustrative company valuation</div><div class="ov" id="o-val">&mdash;</div></div>
+        <div class="o hl"><div class="ok">Your stake value &middot; return</div><div class="ov" id="o-return">&mdash;</div></div>
+      </div>
+      <div class="calc-note">Illustrative only. Outputs show node-level net contribution and exclude corporate overhead, taxes, debt service, and dilution from future financing rounds — all of which reduce actual returns. Valuation uses an assumed multiple on annual net. Nothing here is an offer of securities or a guarantee of performance; actual terms are set with qualified advisors.</div>
+    </div>
+
+    <hr class="prop-divider">
     <div class="prop" id="prop-content"><!-- fetched from Supabase --></div>
   </div>
 </div>
@@ -228,6 +312,44 @@
   }
 
   $('logout').addEventListener('click', async () => { await sb.auth.signOut(); $('email').value=''; $('password').value=''; route(); });
+
+  // ---- ROI calculator ----
+  function fmtUSD(v){
+    if(!isFinite(v)) return '—';
+    const a=Math.abs(v);
+    if(a>=1e9) return '$'+(v/1e9).toFixed(2)+'B';
+    if(a>=1e6) return '$'+(v/1e6).toFixed(2)+'M';
+    if(a>=1e3) return '$'+(v/1e3).toFixed(0)+'K';
+    return '$'+Math.round(v).toLocaleString();
+  }
+  function markets(h){
+    if(h<=50) return 'Austin pilot';
+    if(h<=250) return 'Austin';
+    if(h<=1000) return 'Austin + Dallas';
+    if(h<=5000) return 'Austin, Dallas + Boston';
+    return 'Austin, Dallas, Boston, California +';
+  }
+  function calc(){
+    const invest=+$('c-invest').value||0;
+    const round=+$('c-round').value||0;
+    const homes=+$('c-homes').value||0;
+    const net=+$('c-net').value||0;
+    const mult=+$('c-mult').value||0;
+    $('c-homes-val').textContent=homes.toLocaleString()+' homes';
+    $('c-homes-mk').textContent=markets(homes);
+    const monthly=homes*net, annual=monthly*12, valuation=annual*mult;
+    const stakePct=round>0?invest/round:0;
+    const stakeValue=stakePct*valuation;
+    const roi=invest>0?stakeValue/invest:0;
+    $('o-stake').textContent=(stakePct*100).toFixed(2)+'%';
+    $('o-profit').textContent=fmtUSD(monthly)+'/mo';
+    $('o-val').textContent=fmtUSD(valuation);
+    $('o-return').textContent=fmtUSD(stakeValue)+'  ·  '+roi.toFixed(1)+'×';
+  }
+  ['c-invest','c-round','c-homes','c-net','c-mult'].forEach(id=>{
+    const el=$(id); if(el) el.addEventListener('input', calc);
+  });
+  if($('c-invest')) calc();
 
   route();
 </script>
