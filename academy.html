@@ -188,14 +188,15 @@
     <nav class="toc" id="toc">
       <a href="#m1"><b>01</b>The big idea</a>
       <a href="#m2"><b>02</b>AI &amp; GPUs 101</a>
-      <a href="#m3"><b>03</b>The compute market</a>
-      <a href="#m4"><b>04</b>TAM · SAM · SOM</a>
-      <a href="#m5"><b>05</b>Unit economics</a>
-      <a href="#m6"><b>06</b>Fundraising 101</a>
-      <a href="#m7"><b>07</b>Risks &amp; validation</a>
-      <a href="#m8"><b>08</b>Sales &amp; closing</a>
-      <a href="#m9"><b>09</b>The Sunrun pitch</a>
-      <a href="#m10"><b>10</b>Glossary</a>
+      <a href="#m3"><b>03</b>The silicon landscape</a>
+      <a href="#m4"><b>04</b>The compute market</a>
+      <a href="#m5"><b>05</b>TAM · SAM · SOM</a>
+      <a href="#m6"><b>06</b>Unit economics</a>
+      <a href="#m7"><b>07</b>Fundraising 101</a>
+      <a href="#m8"><b>08</b>Risks &amp; validation</a>
+      <a href="#m9"><b>09</b>Sales &amp; closing</a>
+      <a href="#m10"><b>10</b>The Sunrun pitch</a>
+      <a href="#m11"><b>11</b>Glossary</a>
     </nav>
   </aside>
 
@@ -327,9 +328,98 @@
       </div>
     </section>
 
-    <!-- ===== M3 ===== -->
+    <!-- ===== M3 — THE SILICON LANDSCAPE ===== -->
     <section class="module" id="m3">
       <div class="mod-num">Module 03</div>
+      <h2>The silicon landscape — who makes the compute</h2>
+      <p>We resell and deploy chips, so you should know them cold: the <strong>types of processors</strong>, <strong>who designs them</strong>, <strong>who physically makes them</strong>, <strong>what the names mean</strong>, and <strong>who's fighting whom</strong>. This is the map under everything else in the course.</p>
+
+      <h3>The types of processors</h3>
+      <table class="t"><thead><tr><th>Chip</th><th>What it is</th><th>Good at</th></tr></thead><tbody>
+        <tr><td><strong>CPU</strong><br>Central Processing Unit</td><td>A few powerful, flexible cores. The general-purpose "brain."</td><td class="n">Logic, sequential tasks, running the OS</td></tr>
+        <tr><td><strong>GPU</strong><br>Graphics Processing Unit</td><td>Thousands of small cores doing math in parallel. <b>The AI workhorse — what we sell.</b></td><td class="n">Training &amp; inference (parallel matrix math)</td></tr>
+        <tr><td><strong>TPU / ASIC</strong><br>Tensor Proc. Unit / custom chip</td><td>A chip hard-wired for one job. TPUs are Google's AI ASIC.</td><td class="n">Max efficiency on one workload</td></tr>
+        <tr><td><strong>FPGA</strong><br>Field-Programmable Gate Array</td><td>A chip you can re-wire after manufacture.</td><td class="n">Flexible, low-volume specialized work</td></tr>
+        <tr><td><strong>NPU</strong><br>Neural Processing Unit</td><td>A small AI accelerator built into phones/laptops.</td><td class="n">On-device AI (Apple Neural Engine, etc.)</td></tr>
+      </tbody></table>
+      <p>For our business, <strong>GPUs</strong> are the product. The rest matter because they shape the competition — especially custom ASICs the cloud giants build to escape paying NVIDIA.</p>
+
+      <h3>Who makes them — designers vs. manufacturers</h3>
+      <p>The single most important distinction in chips: <strong>designing a chip and manufacturing one are two different businesses.</strong></p>
+      <ul>
+        <li><strong>Fabless designers</strong> design chips but don't build them: <strong>NVIDIA, AMD, Apple, Qualcomm, Broadcom.</strong> NVIDIA designs the H100 — it doesn't make it.</li>
+        <li><strong>Foundries</strong> physically manufacture chips for others: <strong>TSMC</strong> (Taiwan) makes the vast majority of the world's leading-edge chips, including NVIDIA's. <strong>Samsung</strong> (Korea) is #2.</li>
+        <li><strong>IDMs</strong> do both — design <em>and</em> make: <strong>Intel</strong> is the classic example (now also opening its foundry to others).</li>
+        <li><strong>Memory</strong> is its own industry: <strong>HBM</strong> (high-bandwidth memory) — the scarce memory stacked next to AI GPUs — is made by <strong>SK Hynix, Samsung, and Micron.</strong> HBM supply is often the real bottleneck, not the GPU die.</li>
+        <li><strong>The toolmaker:</strong> <strong>ASML</strong> (Netherlands) is the <em>only</em> company that makes the EUV lithography machines required to print the most advanced chips. No ASML, no leading-edge silicon.</li>
+      </ul>
+      <div class="eg"><b>Why this matters to you:</b> when a customer asks "why are H100s so scarce and expensive?" the answer is this chain — one designer (NVIDIA), one dominant foundry (TSMC), one memory bottleneck (HBM), one toolmaker (ASML). Concentration at every step = scarcity, and scarcity is the spread we sell into.</div>
+
+      <h3>Where they're made (and why it's fragile)</h3>
+      <table class="t"><thead><tr><th>Step</th><th>Where</th><th>Risk</th></tr></thead><tbody>
+        <tr><td>Leading-edge logic (the GPU itself)</td><td class="n">Taiwan (TSMC) — ~90% of the most advanced</td><td class="n">Geopolitical (Taiwan/China)</td></tr>
+        <tr><td>Memory (HBM/DRAM)</td><td class="n">South Korea, USA (Micron)</td><td class="n">Tight supply, few players</td></tr>
+        <tr><td>EUV machines</td><td class="n">Netherlands (ASML)</td><td class="n">Single point of failure</td></tr>
+        <tr><td>Packaging / assembly</td><td class="n">Taiwan, China, SE Asia</td><td class="n">Concentrated</td></tr>
+      </tbody></table>
+      <p>The whole world's AI runs through a handful of facilities in a few countries. That's why governments are spending billions to reshore it — the <strong>U.S. CHIPS Act</strong> is funding TSMC in Arizona, Intel in Ohio/Arizona, and Samsung in Texas. The fragility <em>is</em> the opportunity: scarce supply that favors big buyers leaves the long tail underserved — our wedge.</p>
+
+      <h3>What the names actually mean</h3>
+      <p>NVIDIA names each <strong>architecture (generation) after a scientist</strong>, then numbers the chips within it:</p>
+      <table class="t"><thead><tr><th>Name</th><th>Decode</th></tr></thead><tbody>
+        <tr><td><strong>H100 / H200</strong></td><td><b>H = Hopper</b> (Grace Hopper). 100 = flagship data-center die; 200 = a refresh with more/faster memory.</td></tr>
+        <tr><td><strong>A100</strong></td><td><b>A = Ampere</b> (André-Marie Ampère) — the prior data-center generation.</td></tr>
+        <tr><td><strong>L40S</strong></td><td><b>L = Ada Lovelace</b> architecture; 40 = its tier; <b>S</b> = a higher-performance variant. Power-efficient, great for inference.</td></tr>
+        <tr><td><strong>B200 / GB200</strong></td><td><b>B = Blackwell</b> (David Blackwell), the current top generation. "GB" = a Grace CPU + Blackwell GPU paired.</td></tr>
+        <tr><td><strong>Rubin</strong> (next)</td><td>Named for astronomer Vera Rubin — NVIDIA's upcoming generation.</td></tr>
+      </tbody></table>
+      <p>Suffixes describe the <strong>form factor</strong>, not the brain: <strong>SXM</strong> (high-power module for servers) vs <strong>PCIe</strong> (a card). And "<strong>4nm / 3nm</strong>" process names are now marketing for a generation of manufacturing — not a literal measurement. Others follow similar logic: AMD's <strong>Instinct MI300X</strong> (MI = Machine Intelligence), Google's <strong>TPU v5e/v5p</strong> (e = efficiency, p = performance), AWS <strong>Trainium</strong> (training) and <strong>Inferentia</strong> (inference).</p>
+
+      <h3>The competition — who's fighting whom</h3>
+      <p>"Competition" in AI compute happens at several layers. Know which one you're actually in.</p>
+      <ol>
+        <li><strong>Chip designers:</strong> <strong>NVIDIA</strong> (dominant) vs <strong>AMD</strong> (Instinct) vs <strong>Intel</strong> (Gaudi) — and the hyperscalers building their <em>own</em> chips to stop paying NVIDIA: <strong>Google TPU, AWS Trainium/Inferentia, Microsoft Maia, Meta MTIA.</strong></li>
+        <li><strong>The software moat:</strong> NVIDIA's real lock-in is <strong>CUDA</strong>, its software ecosystem. AMD's <strong>ROCm</strong> is trying to break it. Whoever owns the developer wins — which is why NVIDIA's lead is about more than the chip.</li>
+        <li><strong>Foundries:</strong> <strong>TSMC vs Samsung vs Intel Foundry</strong> — the race to manufacture the most advanced node.</li>
+        <li><strong>Memory:</strong> <strong>SK Hynix vs Samsung vs Micron</strong> for the HBM that every AI GPU needs.</li>
+        <li><strong>Compute providers — this is our layer:</strong> hyperscalers (AWS/GCP/Azure) vs neoclouds (CoreWeave, Lambda, Crusoe) vs marketplaces (Vast, RunPod) vs distributed players (Span + NVIDIA's XFRA).</li>
+      </ol>
+      <div class="eg"><b>Heliode's position:</b> we are deliberately <b>agnostic at the chip layer.</b> We don't bet on who wins the chip war — we buy whatever delivers the best price-performance (H100/H200, L40S, or AMD if the economics win) and sell it managed. The only competition that directly matters to us is layer 5 — the compute providers — and we beat them on cheaper + managed + local + fast.</div>
+
+      <div class="take"><div class="t">Key takeaways</div><ul>
+        <li>Types: CPU (brain), <b>GPU (our product)</b>, TPU/ASIC (custom), FPGA (re-wirable), NPU (on-device).</li>
+        <li>Designing ≠ making: NVIDIA designs, <b>TSMC (Taiwan) makes</b>, SK Hynix/Samsung/Micron supply HBM, <b>ASML</b> makes the one machine it all depends on.</li>
+        <li>Most advanced chips come from a few facilities in a few countries — that fragility is the scarcity we sell into.</li>
+        <li>Names = scientist (architecture) + number (tier): H = Hopper, A = Ampere, L = Lovelace, B = Blackwell.</li>
+        <li>We're chip-agnostic; our fight is at the compute-provider layer, not the chip war.</li>
+      </ul></div>
+      <details class="film"><summary>🎬 Film this — "Who actually makes AI run" <span class="dur">~80 sec</span></summary>
+      <div class="film-body">
+        <div class="lbl">Script (read to camera)</div>
+        <div class="script">
+          <p>"Everyone says 'NVIDIA makes the AI chips.' Half true — and the other half explains why they're so scarce. NVIDIA <i>designs</i> the H100. It doesn't build it. Almost every advanced AI chip on Earth is physically made by one company, TSMC, in Taiwan."</p>
+          <p>"And it doesn't stop there. The chip needs special memory called HBM — that's basically three companies. And the machines that print the chips? One company, ASML, in the Netherlands. So the entire AI boom runs through a chain where almost every link is a single point of failure. That's why GPUs are scarce, and scarcity is exactly the gap we sell into."</p>
+          <p>"Quick decoder so you sound sharp: NVIDIA names each generation after a scientist. H100 — H is Hopper. A100 — Ampere. L40S — Lovelace. B200 — Blackwell. The letter is the generation, the number is how big. Now you can read a spec sheet like you built it."</p>
+        </div>
+        <div class="lbl">On-screen text (captions)</div>
+        <span class="ost">NVIDIA designs. TSMC builds.</span><span class="ost">~90% of advanced chips: Taiwan</span><span class="ost">HBM = 3 companies</span><span class="ost">EUV machines = 1 company (ASML)</span><span class="ost">H=Hopper · A=Ampere · L=Lovelace · B=Blackwell</span>
+        <div class="lbl">Visuals / B-roll</div>
+        <ul class="vis">
+          <li>Build the supply chain as a chain graphic, each link a single logo — then highlight how thin each link is.</li>
+          <li>A world map pinning Taiwan (TSMC), Korea (memory), Netherlands (ASML).</li>
+          <li>Flip cards decoding H100 / A100 / L40S / B200 → scientist portraits.</li>
+        </ul>
+      </div></details>
+      <div class="quiz"><div class="quiz-h">Quick check</div>
+        <div class="qq" data-a="b"><p class="qp">1. NVIDIA's role in making an H100 is best described as…</p><div class="opts"><button data-o="a">It manufactures the chip in its own factories</button><button data-o="b">It <em>designs</em> the chip; TSMC manufactures it</button><button data-o="c">It only writes the software</button></div><div class="fb"><b>Answer: B.</b> NVIDIA is fabless — it designs, TSMC (Taiwan) fabricates. That split is central to why supply is constrained.</div></div>
+        <div class="qq" data-a="c"><p class="qp">2. In "H100," what does the H stand for?</p><div class="opts"><button data-o="a">High-performance</button><button data-o="b">Hardware</button><button data-o="c">Hopper — the architecture, named after Grace Hopper</button></div><div class="fb"><b>Answer: C.</b> NVIDIA names generations after scientists (Hopper, Ampere, Lovelace, Blackwell); the number is the tier.</div></div>
+        <div class="qq" data-a="a"><p class="qp">3. Why is Heliode "chip-agnostic"?</p><div class="opts"><button data-o="a">We buy whatever has the best price-performance and sell it managed — we don't bet on who wins the chip war</button><button data-o="b">Because all chips are identical</button><button data-o="c">Because we manufacture our own</button></div><div class="fb"><b>Answer: A.</b> Our fight is at the compute-provider layer. We stay neutral on NVIDIA vs AMD vs custom silicon and ride whatever wins on economics.</div></div>
+      </div>
+    </section>
+
+    <!-- ===== M4 ===== -->
+    <section class="module" id="m4">
+      <div class="mod-num">Module 04</div>
       <h2>The compute market &amp; its economics</h2>
       <h3>Demand drivers</h3>
       <p>Every AI feature shipped into a product adds permanent inference load. It's steady (24/7), latency-sensitive, and compounding as adoption grows — a utility-like demand curve, which is what you want underneath a capacity business.</p>
@@ -380,9 +470,9 @@
       </div>
     </section>
 
-    <!-- ===== M4 ===== -->
-    <section class="module" id="m4">
-      <div class="mod-num">Module 04</div>
+    <!-- ===== M5 ===== -->
+    <section class="module" id="m5">
+      <div class="mod-num">Module 05</div>
       <h2>Market sizing — TAM, SAM, SOM</h2>
       <p>Investors want to know how big this can get. Three nested numbers answer that — from the whole universe down to what you can realistically capture.</p>
       <table class="t"><thead><tr><th>Term</th><th>What it means</th><th>Heliode</th></tr></thead><tbody>
@@ -430,9 +520,9 @@
       </div>
     </section>
 
-    <!-- ===== M5 ===== -->
-    <section class="module" id="m5">
-      <div class="mod-num">Module 05</div>
+    <!-- ===== M6 ===== -->
+    <section class="module" id="m6">
+      <div class="mod-num">Module 06</div>
       <h2>Unit economics — does one unit make money?</h2>
       <h3>Three margin words (so they don't trip you up)</h3>
       <ul>
@@ -486,9 +576,9 @@
       </div>
     </section>
 
-    <!-- ===== M6 ===== -->
-    <section class="module" id="m6">
-      <div class="mod-num">Module 06</div>
+    <!-- ===== M7 ===== -->
+    <section class="module" id="m7">
+      <div class="mod-num">Module 07</div>
       <h2>Fundraising 101 — raising $2M on a SAFE</h2>
       <h3>The basics of equity</h3>
       <p>Your company is divided into <strong>shares</strong>. Selling shares gives investors ownership (a %) and gives you cash. The list of who owns what is the <strong>cap table</strong>. Every raise <strong>dilutes</strong> existing owners (their % shrinks) — fine if the pie grows faster than your slice shrinks.</p>
@@ -548,9 +638,9 @@
       </div>
     </section>
 
-    <!-- ===== M7 ===== -->
-    <section class="module" id="m7">
-      <div class="mod-num">Module 07</div>
+    <!-- ===== M8 ===== -->
+    <section class="module" id="m8">
+      <div class="mod-num">Module 08</div>
       <h2>Risks &amp; the 90-day validation sprint</h2>
       <p>Honest founders name the risks and attack them. In order of how much they matter:</p>
       <ol>
@@ -599,9 +689,9 @@
       </div>
     </section>
 
-    <!-- ===== M8 — SALES & CLOSING ===== -->
-    <section class="module" id="m8">
-      <div class="mod-num">Module 08</div>
+    <!-- ===== M9 — SALES & CLOSING ===== -->
+    <section class="module" id="m9">
+      <div class="mod-num">Module 09</div>
       <h2>Sales &amp; closing — how we actually win the account</h2>
       <p>Everything before this module is <em>why</em> Heliode is a business. This one is <em>how the revenue actually shows up.</em> No deal closes itself. You'll learn the motion end to end — find the right buyer, run the conversation, handle the objections you'll really hear, and ask for the business without flinching.</p>
 
@@ -691,9 +781,9 @@
       </div>
     </section>
 
-    <!-- ===== M9 — THE SUNRUN PITCH ===== -->
-    <section class="module" id="m9">
-      <div class="mod-num">Module 09</div>
+    <!-- ===== M10 — THE SUNRUN PITCH ===== -->
+    <section class="module" id="m10">
+      <div class="mod-num">Module 10</div>
       <h2>The Sunrun partnership pitch — deal prep</h2>
       <p>This module is your pre-meeting brief. You're a former Sunrun rep, so you walk in with credibility most people can't buy. The goal: turn that warmth into a partnership where <strong>Sunrun powers and deploys, and Heliode brings the compute, the customers, and the managed layer</strong> — built market-by-market on demand.</p>
 
@@ -776,14 +866,19 @@
       </div>
     </section>
 
-    <!-- ===== M10 — GLOSSARY ===== -->
-    <section class="module" id="m10">
-      <div class="mod-num">Module 10</div>
+    <!-- ===== M11 — GLOSSARY ===== -->
+    <section class="module" id="m11">
+      <div class="mod-num">Module 11</div>
       <h2>Glossary</h2>
       <dl class="gloss">
         <dt>GPU</dt><dd>The chip that runs AI's parallel math. Our product is access to GPUs.</dd>
         <dt>VRAM</dt><dd>A GPU's on-chip memory; bigger AI models need more of it.</dd>
-        <dt>CUDA</dt><dd>NVIDIA's software ecosystem — a big reason NVIDIA dominates (lock-in).</dd>
+        <dt>CUDA</dt><dd>NVIDIA's software ecosystem — a big reason NVIDIA dominates (lock-in). AMD's equivalent is ROCm.</dd>
+        <dt>CPU / TPU / ASIC / NPU</dt><dd>Other processor types: CPU = general-purpose brain; TPU/ASIC = chip hard-wired for one job (e.g. Google TPU); NPU = small on-device AI accelerator.</dd>
+        <dt>HBM</dt><dd>High-Bandwidth Memory — the fast memory stacked next to an AI GPU. Made by SK Hynix, Samsung, Micron; often the real supply bottleneck.</dd>
+        <dt>Fabless / Foundry / IDM</dt><dd>Fabless = designs chips, doesn't make them (NVIDIA, AMD); foundry = manufactures for others (TSMC, Samsung); IDM = does both (Intel).</dd>
+        <dt>TSMC</dt><dd>Taiwan Semiconductor — the foundry that manufactures ~90% of the world's most advanced chips, including NVIDIA's.</dd>
+        <dt>ASML</dt><dd>The Dutch company that makes the EUV lithography machines required to print leading-edge chips — a single point of failure for the whole industry.</dd>
         <dt>GPU-hour</dt><dd>One GPU running for one hour — the unit we buy wholesale and resell.</dd>
         <dt>Inference</dt><dd>Running a trained AI model in production. The steady, 24/7 load we target.</dd>
         <dt>Training</dt><dd>Building the model — a huge, one-time compute job (vs. continuous inference).</dd>
