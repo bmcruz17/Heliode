@@ -86,6 +86,13 @@ create policy "admins update leads"
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists "admins delete leads" on public.compute_leads;
+create policy "admins delete leads"
+  on public.compute_leads
+  for delete
+  to authenticated
+  using (public.is_admin());
+
 -- ── Funnel summary view (counts + recency per stage) ────────────────
 create or replace view public.lead_funnel as
 select

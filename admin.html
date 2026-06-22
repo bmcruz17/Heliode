@@ -77,8 +77,10 @@
   .cell-in:focus{border-color:var(--blue-line);box-shadow:0 0 0 2px var(--blue-dim);}
   select.cell-in{cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;}
   .q{width:96px;font-family:'JetBrains Mono',monospace;}
-  .saved{font-size:0.66rem;color:#16a34a;font-family:'JetBrains Mono',monospace;opacity:0;transition:opacity .2s;}
+  .saved{font-size:0.66rem;color:#16a34a;font-family:'JetBrains Mono',monospace;opacity:0;transition:opacity .2s;display:block;margin-top:5px;}
   .saved.show{opacity:1;}
+  .del{border:1px solid var(--line2);background:#fff;color:#dc2626;border-radius:7px;width:28px;height:28px;cursor:pointer;font-size:0.82rem;line-height:1;transition:.15s;}
+  .del:hover{background:#dc2626;color:#fff;border-color:#dc2626;}
   .empty{padding:40px;text-align:center;color:var(--faint);font-size:0.9rem;}
   .stat-line{font-size:0.82rem;color:var(--mute);margin-bottom:16px;}
   .stat-line b{color:var(--ink);font-weight:600;}
@@ -232,7 +234,7 @@
         +'<td><select class="cell-in js-status" style="color:'+(COLORS[l.status||'new'])+'">'+opts+'</select></td>'
         +'<td><input class="cell-in q js-quote" type="text" value="'+esc(l.quoted_amount||'')+'" placeholder="$/mo"></td>'
         +'<td><input class="cell-in js-notes" type="text" value="'+esc(l.notes||'')+'" placeholder="Add a note…"></td>'
-        +'<td><span class="saved">✓ saved</span></td>'
+        +'<td><button class="del js-del" title="Delete this lead">✕</button><span class="saved">✓ saved</span></td>'
         +'</tr>';
     });
     $('rows').innerHTML=html;
@@ -257,6 +259,14 @@
       });
       tr.querySelector('.js-notes').addEventListener('change', async function(){
         const v=this.value.trim(); if(await patch(id,{notes:v})){ if(lead) lead.notes=v; flash(tr); }
+      });
+      tr.querySelector('.js-del').addEventListener('click', async ()=>{
+        const who = lead && (lead.name || lead.email) || 'this lead';
+        if(!confirm('Delete "'+who+'"? This permanently removes the lead and cannot be undone.')) return;
+        const { error } = await sb.from('compute_leads').delete().eq('id', id);
+        if(error){ alert('Could not delete: '+(error.message||'unknown error')); return; }
+        leads = leads.filter(l=>String(l.id)!==id);
+        render();
       });
     });
   }
