@@ -100,16 +100,17 @@ returns boolean language sql security definer stable set search_path = public as
 $$;
 grant execute on function public.is_rep() to authenticated;
 
-create or replace function public.link_rep_on_signup()
+create or replace function public.link_accounts_on_signup()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
-  update public.reps set user_id = new.id
-  where lower(email) = lower(new.email) and user_id is null;
+  update public.reps      set user_id = new.id where lower(email) = lower(new.email) and user_id is null;
+  update public.investors set user_id = new.id where lower(email) = lower(new.email) and user_id is null;
   return new;
 end; $$;
-drop trigger if exists trg_link_rep on auth.users;
-create trigger trg_link_rep after insert on auth.users
-  for each row execute function public.link_rep_on_signup();
+drop trigger if exists trg_link_rep      on auth.users;
+drop trigger if exists trg_link_accounts on auth.users;
+create trigger trg_link_accounts after insert on auth.users
+  for each row execute function public.link_accounts_on_signup();
 
 alter table public.compute_leads add column if not exists rep_id         uuid references auth.users(id);
 alter table public.compute_leads add column if not exists stage          text not null default 'prospect';
@@ -153,6 +154,25 @@ select v.name, v.category, v.stage from (values
   ('Exxact','hardware','to_contact')
 ) as v(name,category,stage)
 where not exists (select 1 from public.vendors w where w.name = v.name);
+
+
+-- ░░ 4b. INVESTOR ACCESS (allowlist managed from the dashboard) ░░░░░░
+create table if not exists public.investors (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid unique references auth.users(id) on delete set null,
+  email text not null unique, name text, firm text,
+  created_at timestamptz not null default now()
+);
+alter table public.investors enable row level security;
+drop policy if exists "investor reads self"     on public.investors;
+create policy "investor reads self"     on public.investors for select to authenticated using (user_id = auth.uid());
+drop policy if exists "admins manage investors" on public.investors;
+create policy "admins manage investors" on public.investors for all to authenticated using (public.is_admin()) with check (public.is_admin());
+create or replace function public.is_investor()
+returns boolean language sql security definer stable set search_path = public as $$
+  select exists (select 1 from public.investors where user_id = auth.uid());
+$$;
+grant execute on function public.is_investor() to authenticated;
 
 
 -- ░░ 5. PROPOSAL TEXT FIXES (safe no-ops if already applied) ░░░░░░░░░

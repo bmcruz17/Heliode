@@ -193,6 +193,7 @@
     <label class="fld" for="password">Password</label>
     <input class="inp" id="password" type="password" autocomplete="current-password" placeholder="••••••••••">
     <button class="btn btn-primary" id="login-btn">Sign in</button>
+    <button class="lnk" id="signup-btn" style="margin-top:12px;display:block;">First time? Create your password →</button>
     <div class="msg err" id="login-msg"></div>
     <div class="foot-note">Don't have access? Request credentials at hello@heliodegrid.com. © 2026 Heliode · ATMX Holdings.</div>
   </div>
@@ -389,6 +390,14 @@
     if(!session){ show('login'); $('who').hidden = true; return; }
     $('who').hidden = false;
     $('who-email').textContent = session.user.email;
+    // Allowlist gate: only approved investors (or admins) reach the proposal.
+    const { data:okInv } = await sb.rpc('is_investor');
+    const { data:okAdm } = await sb.rpc('is_admin');
+    if(!okInv && !okAdm){
+      await sb.auth.signOut(); $('who').hidden = true;
+      const m=$('login-msg'); m.textContent='This account isn’t authorized for the investor room — contact hello@heliodegrid.com for access.'; m.style.display='block';
+      show('login'); return;
+    }
     const { data:acc } = await sb.from('nda_acceptances').select('user_id').eq('user_id', session.user.id).maybeSingle();
     if(acc){ await loadProposal(session.user); show('proposal'); }
     else { show('nda'); }
@@ -407,6 +416,17 @@
     btn.disabled=false; btn.textContent='Sign in';
     if(error){ msg.textContent='Sign-in failed. Check your credentials or contact hello@heliodegrid.com.'; msg.style.display='block'; return; }
     route();
+  }
+  $('signup-btn').addEventListener('click', signup);
+  async function signup(){
+    const msg=$('login-msg'); msg.style.display='none';
+    const email=$('email').value.trim(), password=$('password').value;
+    if(!email || !password){ msg.textContent='Enter your email and choose a password.'; msg.style.display='block'; return; }
+    if(password.length<6){ msg.textContent='Password must be at least 6 characters.'; msg.style.display='block'; return; }
+    const { data, error } = await sb.auth.signUp({ email, password });
+    if(error){ msg.textContent='Could not create account: '+error.message; msg.style.display='block'; return; }
+    if(data.session){ route(); }
+    else { msg.textContent='Account created — check your email to confirm, then sign in.'; msg.style.display='block'; }
   }
 
   // ---- NDA ----

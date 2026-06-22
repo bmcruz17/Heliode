@@ -141,6 +141,7 @@
       <button class="tab on" id="tab-leads">Clients / Leads</button>
       <button class="tab" id="tab-vendors">Vendors</button>
       <button class="tab" id="tab-reps">Reps</button>
+      <button class="tab" id="tab-investors">Investors</button>
     </div>
 
     <div id="leads-view">
@@ -182,6 +183,23 @@
         <table>
           <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Override</th><th>Status</th><th></th></tr></thead>
           <tbody id="rreps"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="investors-view" style="display:none;">
+      <div class="stat-line" id="istat"></div>
+      <div class="add-vform" style="grid-template-columns:1.4fr 1fr 1fr auto;">
+        <input class="vin inp" id="i-email" type="email" placeholder="Investor email (their login)">
+        <input class="vin inp" id="i-name" placeholder="Name">
+        <input class="vin inp" id="i-firm" placeholder="Firm">
+        <button class="btn btn-primary" id="i-add">+ Grant access</button>
+      </div>
+      <p class="stat-line" style="margin:-6px 0 14px;">They get in by signing up at <b>/investors.html</b> with this email — then NDA → proposal.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Firm</th><th>Status</th><th></th></tr></thead>
+          <tbody id="rinv"></tbody>
         </table>
       </div>
     </div>
@@ -256,6 +274,7 @@
     render();
     loadVendors();
     loadReps();
+    loadInvestors();
   }
 
   async function patch(id, body){
@@ -343,9 +362,10 @@
   ];
   let vendors=[], vendorsReady=false;
 
-  ['leads','vendors','reps'].forEach(v=> $('tab-'+v).addEventListener('click',()=>showView(v)));
+  const VIEWS=['leads','vendors','reps','investors'];
+  VIEWS.forEach(v=> $('tab-'+v).addEventListener('click',()=>showView(v)));
   function showView(v){
-    ['leads','vendors','reps'].forEach(x=>{
+    VIEWS.forEach(x=>{
       $('tab-'+x).classList.toggle('on', x===v);
       $(x+'-view').style.display = x===v ? 'block' : 'none';
     });
@@ -434,6 +454,37 @@
       const id=b.getAttribute('data-id');
       const { error } = await sb.from('reps').delete().eq('id', id);
       if(!error){ reps=reps.filter(x=>String(x.id)!==id); renderReps(); }
+    }));
+  }
+
+  // ── Investors (grant portal access from dashboard by email) ──
+  let investors=[];
+  async function loadInvestors(){
+    const { data, error } = await sb.from('investors').select('*').order('created_at',{ascending:true});
+    if(error){ investors=[]; $('istat').textContent='Investor access not enabled yet — run investors_access.sql in Supabase.'; renderInvestors(); return; }
+    investors=data||[]; renderInvestors();
+  }
+  $('i-add').addEventListener('click', async ()=>{
+    const email=$('i-email').value.trim().toLowerCase(); if(!email){ alert('Enter the investor\'s email.'); return; }
+    const { error } = await sb.from('investors').insert({ email, name:$('i-name').value.trim(), firm:$('i-firm').value.trim() });
+    if(error){ alert('Could not add (run investors_access.sql first?): '+error.message); return; }
+    $('i-email').value=$('i-name').value=$('i-firm').value=''; loadInvestors();
+  });
+  function renderInvestors(){
+    if(!$('istat').textContent.startsWith('Investor access not enabled')) $('istat').innerHTML='<b>'+investors.length+'</b> investors with access';
+    let html='';
+    investors.forEach(r=>{
+      const active=!!r.user_id;
+      html+='<tr><td class="who-cell">'+esc(r.name||'—')+'</td><td class="sub"><a href="mailto:'+esc(r.email)+'">'+esc(r.email)+'</a></td><td class="sub">'+esc(r.firm||'—')+'</td>'
+        +'<td>'+(active?'<span style="color:#16a34a;font-weight:600">● Active</span>':'<span style="color:#f97316;font-weight:600">○ Pending signup</span>')+'</td>'
+        +'<td><button class="del js-idel" data-id="'+esc(r.id)+'" title="Revoke access">✕</button></td></tr>';
+    });
+    $('rinv').innerHTML = html || '<tr><td colspan="5" class="sub" style="padding:22px;text-align:center">No investors yet — grant access above.</td></tr>';
+    $('rinv').querySelectorAll('.js-idel').forEach(b=> b.addEventListener('click', async ()=>{
+      if(!confirm('Revoke this investor\'s access?')) return;
+      const id=b.getAttribute('data-id');
+      const { error } = await sb.from('investors').delete().eq('id', id);
+      if(!error){ investors=investors.filter(x=>String(x.id)!==id); renderInvestors(); }
     }));
   }
 
