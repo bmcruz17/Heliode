@@ -3,6 +3,9 @@
 These are **rough 2026 ballparks** to frame the conversation, not quotes. Get
 real BOMs Monday and replace these. GPU street prices move fast.
 
+> **Working definition (locked):** a *node* = one **8-GPU server** (8× H100-class),
+> ~$250K all-in. All docs (homepage, teaser, opportunity, proposal) use this.
+
 ## What your own numbers imply today
 Your teaser states ~$7.6K/mo **net** per node, ~year-3 payback, ~+$170K net
 over 5 years. Working backward, that implies a node costs roughly:
