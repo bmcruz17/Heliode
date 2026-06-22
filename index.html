@@ -69,6 +69,9 @@
   h1 em{font-style:normal;color:var(--blue);}
   .lede{font-size:clamp(1rem,2.3vw,1.18rem);color:var(--mute);max-width:54ch;margin-bottom:30px;}
   .cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+  .guarantee{display:inline-flex;align-items:center;gap:9px;margin-top:16px;background:var(--accent-dim);border:1px solid var(--accent-line);color:#9a3412;border-radius:999px;padding:9px 16px;font-size:0.86rem;font-weight:500;line-height:1.35;}
+  .guarantee svg{width:17px;height:17px;color:var(--accent);flex:0 0 auto;}
+  .guarantee b{font-weight:600;color:var(--ink);}
   .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.92rem;border-radius:11px;padding:14px 22px;cursor:pointer;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.2s;}
   .btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(249,115,22,0.28);}
   .btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 8px 22px rgba(249,115,22,0.34);}
@@ -192,11 +195,12 @@
     <div class="hero-copy">
     <div class="eyebrow">GPU compute · AI inference · US-based</div>
     <h1>Inference compute that costs less — <em>and someone actually runs it for you.</em></h1>
-    <p class="lede">Hyperscaler GPU pricing is brutal and capacity is hard to get. We source GPU power on the open market, run it for you, and hand you one bill and a real person to call — cheaper GPU-hours on a reliable base layer, without you babysitting the metal. <strong>Send us your current GPU bill and we'll beat it — free, for two weeks.</strong></p>
+    <p class="lede">Hyperscaler GPU pricing is brutal and capacity is hard to get. We source GPU power on the open market, run it for you, and hand you one bill and a real person to call — cheaper GPU-hours on a reliable base layer, without you babysitting the metal. <strong>Send us your current GPU bill — we'll beat it, guaranteed.</strong></p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#contact">Start a free 2-week trial →</a>
       <a class="btn btn-ghost" href="#how">How it works</a>
     </div>
+    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>Rate-beat guarantee:</b> if we can't beat your current GPU rate, you pay nothing.</span></div>
     <div class="cities">
       <span class="pill">Serving <b>Austin</b></span>
       <span class="pill"><b>San Francisco</b> Bay Area</span>
@@ -403,8 +407,8 @@
 <section class="blk" id="contact">
   <div class="wrap">
     <div class="sec-eye">Get started</div>
-    <h2>Send us your current GPU bill. We'll beat it — free, for two weeks.</h2>
-    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll stand up a no-risk two-week trial that undercuts your current bill.</p>
+    <h2>Send us your current GPU bill. We'll beat your rate — guaranteed.</h2>
+    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll stand up a no-risk two-week trial that beats your current rate. If we can't beat it, you pay nothing.</p>
     <div class="form" id="form">
       <div class="grid-2">
         <div><label class="fld" for="f-name">Name</label><input class="inp" id="f-name" type="text" placeholder="Your name"></div>
