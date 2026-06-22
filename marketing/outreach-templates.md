@@ -21,7 +21,7 @@ number, make the ask tiny (just their bill).
 > Want a real number? Reply with last month's GPU bill (or rough monthly
 > spend) and I'll send back what the same workload runs on us. No call needed.
 >
-> — {your name}, Heliode · heliodegrid.com
+> — {your name}, Heliode · heliode.ai
 
 ### B. Cold — shorter variant
 **Subject:** {company}'s GPU spend

@@ -22,7 +22,7 @@ committed/reseller pricing you can mark up and still beat hyperscalers.
 > **partner / reseller program**; and how fast we can **scale up/down**? Looking
 > to start now. Thanks!
 >
-> — Brandon Cruz, Heliode · hello@heliodegrid.com
+> — Brandon Cruz, Heliode · hello@heliode.ai
 
 ---
 

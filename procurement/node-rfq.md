@@ -22,7 +22,7 @@ into the economics (replaces the ~$250K estimate).
 > volume pricing at 1 / 5 / 10 / 50 units. Financing or lease-to-own options
 > welcome. Spec sheet attached/below. Thanks!
 >
-> — Brandon Cruz, Heliode · hello@heliodegrid.com
+> — Brandon Cruz, Heliode · hello@heliode.ai
 
 ---
 

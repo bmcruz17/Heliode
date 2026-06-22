@@ -247,7 +247,7 @@ insert into public.admins (email, user_id, name)
 values ('brandonmcruz@mac.com', 'ada0f047-f5d1-4b38-aae8-919ec22da230', 'Brandon Cruz')
 on conflict (email) do update set user_id = excluded.user_id;
 insert into public.admins (email, name)
-values ('debbie.nixon@heliodegrid.com', 'Debbie Nixon')
+values ('debbie.nixon@heliode.ai', 'Debbie Nixon')
 on conflict (email) do nothing;
 
 

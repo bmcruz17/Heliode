@@ -17,7 +17,7 @@
 <title>Heliode — GPU Compute & AI Inference for Austin, SF, Seattle & Boston</title>
 <meta name="description" content="Cheaper, managed GPU compute for AI inference. We source wholesale GPU capacity and run it for you — one bill, real uptime, real support. Serving startups in Austin, the Bay Area, Seattle, and Boston.">
 <meta name="keywords" content="GPU compute, AI inference, GPU cloud, rent GPUs, inference hosting, Austin GPU cloud, San Francisco AI compute, Seattle GPU rental, Boston AI infrastructure, cheap GPU hours, H100 B200 inference">
-<link rel="canonical" href="https://heliodegrid.com/">
+<link rel="canonical" href="https://heliode.ai/">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
@@ -25,18 +25,18 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Heliode — GPU Compute for AI Inference">
 <meta property="og:description" content="Wholesale-sourced GPU compute, managed for you. One bill, real uptime. Built for inference-heavy startups in Austin, SF, Seattle, and Boston.">
-<meta property="og:url" content="https://heliodegrid.com/">
+<meta property="og:url" content="https://heliode.ai/">
 <meta property="og:site_name" content="Heliode">
-<meta property="og:image" content="https://heliodegrid.com/og.png">
+<meta property="og:image" content="https://heliode.ai/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Heliode — GPU Compute for AI Inference">
 <meta name="twitter:description" content="Wholesale-sourced GPU compute, managed for you. Serving Austin, SF, Seattle, and Boston.">
-<meta name="twitter:image" content="https://heliodegrid.com/og.png">
+<meta name="twitter:image" content="https://heliode.ai/og.png">
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Heliode","url":"https://heliodegrid.com","description":"Managed GPU compute for AI inference, sourced wholesale and run for you.","areaServed":["Austin, TX","San Francisco Bay Area, CA","Seattle, WA","Boston, MA","United States"]}
+{"@context":"https://schema.org","@type":"Organization","name":"Heliode","url":"https://heliode.ai","description":"Managed GPU compute for AI inference, sourced wholesale and run for you.","areaServed":["Austin, TX","San Francisco Bay Area, CA","Seattle, WA","Boston, MA","United States"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Service","serviceType":"GPU compute and AI inference hosting","provider":{"@type":"Organization","name":"Heliode"},"areaServed":["Austin","San Francisco","Seattle","Boston"],"description":"Wholesale-sourced, managed GPU capacity for AI inference workloads with a single bill, managed uptime, and dedicated support."}
@@ -568,7 +568,7 @@
     var email=document.getElementById('f-email').value.trim();
     err.style.display='none';
     if(!email){ err.textContent='Add a work email so we can send the quote.'; err.style.display='block'; return; }
-    if(SB_URL.indexOf('http')!==0){ err.textContent='Form isn’t live yet — email us directly at hello@heliodegrid.com.'; err.style.display='block'; return; }
+    if(SB_URL.indexOf('http')!==0){ err.textContent='Form isn’t live yet — email us directly at hello@heliode.ai.'; err.style.display='block'; return; }
     btn.disabled=true; btn.textContent='Sending…';
     var payload={
       name:document.getElementById('f-name').value.trim(),
@@ -591,7 +591,7 @@
       else { throw new Error(); }
     }).catch(function(){
       btn.disabled=false; btn.textContent='Get my quote →';
-      err.textContent='Something went wrong — email us directly at hello@heliodegrid.com.'; err.style.display='block';
+      err.textContent='Something went wrong — email us directly at hello@heliode.ai.'; err.style.display='block';
     });
   }
 

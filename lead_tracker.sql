@@ -15,7 +15,7 @@
 --   2. Copy that user's UID (the long id shown in the Users list).
 --   3. Run, replacing the placeholders:
 --        insert into public.admins (user_id, email)
---        values ('PASTE-YOUR-UID-HERE', 'you@heliodegrid.com');
+--        values ('PASTE-YOUR-UID-HERE', 'you@heliode.ai');
 --   4. Open /admin.html and sign in with that email + password.
 -- ════════════════════════════════════════════════════════════════════
 

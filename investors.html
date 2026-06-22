@@ -8,9 +8,9 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
 <meta property="og:title" content="Heliode Grid — Investor Portal">
-<meta property="og:image" content="https://heliodegrid.com/og.png">
+<meta property="og:image" content="https://heliode.ai/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://heliodegrid.com/og.png">
+<meta name="twitter:image" content="https://heliode.ai/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -195,7 +195,7 @@
     <button class="btn btn-primary" id="login-btn">Sign in</button>
     <button class="lnk" id="signup-btn" style="margin-top:12px;display:block;">First time? Create your password →</button>
     <div class="msg err" id="login-msg"></div>
-    <div class="foot-note">Don't have access? Request credentials at hello@heliodegrid.com. © 2026 Heliode · ATMX Holdings.</div>
+    <div class="foot-note">Don't have access? Request credentials at hello@heliode.ai. © 2026 Heliode · ATMX Holdings.</div>
   </div>
 </div>
 
@@ -400,7 +400,7 @@
     const { data:okAdm } = await sb.rpc('is_admin');
     if(!okInv && !okAdm){
       await sb.auth.signOut(); $('who').hidden = true;
-      const m=$('login-msg'); m.textContent='This account isn’t authorized for the investor room — contact hello@heliodegrid.com for access.'; m.style.display='block';
+      const m=$('login-msg'); m.textContent='This account isn’t authorized for the investor room — contact hello@heliode.ai for access.'; m.style.display='block';
       show('login'); return;
     }
     const isOwner = (session.user.email||'').toLowerCase() === 'brandonmcruz@mac.com';
@@ -420,7 +420,7 @@
     btn.disabled=true; btn.innerHTML='<span class="spin"></span> Signing in…';
     const { error } = await sb.auth.signInWithPassword({ email, password });
     btn.disabled=false; btn.textContent='Sign in';
-    if(error){ msg.textContent='Sign-in failed. Check your credentials or contact hello@heliodegrid.com.'; msg.style.display='block'; return; }
+    if(error){ msg.textContent='Sign-in failed. Check your credentials or contact hello@heliode.ai.'; msg.style.display='block'; return; }
     route();
   }
   $('signup-btn').addEventListener('click', signup);
@@ -470,7 +470,7 @@
     $('prop-stamp').textContent = stamp;
     // tiled watermark
     $('wm-inner').textContent = (`HELIODE CONFIDENTIAL · ${user.email} · ${new Date().toLocaleDateString()}   `).repeat(120);
-    if(error || !data){ $('prop-content').innerHTML = '<p style="color:#dc2626">The proposal is not available yet. Please contact hello@heliodegrid.com.</p>'; return; }
+    if(error || !data){ $('prop-content').innerHTML = '<p style="color:#dc2626">The proposal is not available yet. Please contact hello@heliode.ai.</p>'; return; }
     $('prop-content').innerHTML = data.content;
   }
 
