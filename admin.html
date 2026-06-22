@@ -114,6 +114,7 @@
     <a class="btn" href="academy.html" style="text-decoration:none;color:var(--ink);">📘 Founder's Course</a>
     <a class="btn" href="playbook.html" style="text-decoration:none;color:var(--ink);">📋 Playbook</a>
     <a class="btn" href="rep.html" style="text-decoration:none;color:var(--ink);">🧑‍💼 Rep portal</a>
+    <a class="btn" href="join.html" style="text-decoration:none;color:var(--ink);">🪙 Recruit page</a>
     <button class="btn" id="refresh">↻ Refresh</button>
     <button class="btn" id="lock">Sign out</button>
   </div>
@@ -139,6 +140,7 @@
     <div class="tabs">
       <button class="tab on" id="tab-leads">Clients / Leads</button>
       <button class="tab" id="tab-vendors">Vendors</button>
+      <button class="tab" id="tab-reps">Reps</button>
     </div>
 
     <div id="leads-view">
@@ -164,6 +166,24 @@
         <button class="btn btn-primary" id="v-add">+ Add vendor</button>
       </div>
       <div class="vboard" id="vboard"></div>
+    </div>
+
+    <div id="reps-view" style="display:none;">
+      <div class="stat-line" id="rstat"></div>
+      <div class="add-vform" style="grid-template-columns:1.4fr 1fr 1fr 0.7fr auto;">
+        <input class="vin inp" id="r-email" type="email" placeholder="Rep email (their login)">
+        <input class="vin inp" id="r-name" placeholder="Name">
+        <input class="vin inp" id="r-phone" placeholder="Phone">
+        <input class="vin inp" id="r-pct" type="number" placeholder="Override %">
+        <button class="btn btn-primary" id="r-add">+ Add rep</button>
+      </div>
+      <p class="stat-line" style="margin:-6px 0 14px;">They activate by signing up at <b>/rep.html</b> with this email — it links automatically.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Override</th><th>Status</th><th></th></tr></thead>
+          <tbody id="rreps"></tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -235,6 +255,7 @@
     $('bar-actions').style.display='flex';
     render();
     loadVendors();
+    loadReps();
   }
 
   async function patch(id, body){
@@ -322,13 +343,12 @@
   ];
   let vendors=[], vendorsReady=false;
 
-  $('tab-leads').addEventListener('click',()=>showView('leads'));
-  $('tab-vendors').addEventListener('click',()=>showView('vendors'));
+  ['leads','vendors','reps'].forEach(v=> $('tab-'+v).addEventListener('click',()=>showView(v)));
   function showView(v){
-    $('tab-leads').classList.toggle('on',v==='leads');
-    $('tab-vendors').classList.toggle('on',v==='vendors');
-    $('leads-view').style.display = v==='leads'?'block':'none';
-    $('vendors-view').style.display = v==='vendors'?'block':'none';
+    ['leads','vendors','reps'].forEach(x=>{
+      $('tab-'+x).classList.toggle('on', x===v);
+      $(x+'-view').style.display = x===v ? 'block' : 'none';
+    });
   }
 
   async function loadVendors(){
@@ -378,6 +398,43 @@
       card.querySelector('.js-vnotes').addEventListener('change', async function(){ if(await vpatch(id,{notes:this.value.trim()})){ if(v)v.notes=this.value.trim(); vflash(card); } });
       card.querySelector('.js-vdel').addEventListener('click', async ()=>{ if(!confirm('Delete '+((v&&v.name)||'this vendor')+'?')) return; const { error }=await sb.from('vendors').delete().eq('id',id); if(!error){ vendors=vendors.filter(x=>String(x.id)!==id); renderVendors(); } });
     });
+  }
+
+  // ── Reps (create from dashboard by email) ──
+  let reps=[];
+  async function loadReps(){
+    const { data, error } = await sb.from('reps').select('*').order('created_at',{ascending:true});
+    if(error){ reps=[]; $('rstat').textContent='Reps not enabled yet — run rep_portal.sql in Supabase.'; renderReps(); return; }
+    reps=data||[]; renderReps();
+  }
+  $('r-add').addEventListener('click', async ()=>{
+    const email=$('r-email').value.trim().toLowerCase(); if(!email){ alert('Enter the rep\'s email.'); return; }
+    const override_pct = parseFloat($('r-pct').value) || 17.5;
+    const { error } = await sb.from('reps').insert({ email, name:$('r-name').value.trim(), phone:$('r-phone').value.trim(), override_pct });
+    if(error){ alert('Could not add (run rep_portal.sql first?): '+error.message); return; }
+    $('r-email').value=$('r-name').value=$('r-phone').value=$('r-pct').value=''; loadReps();
+  });
+  function renderReps(){
+    if(reps.length!==undefined && !$('rstat').textContent.startsWith('Reps not enabled')) $('rstat').innerHTML='<b>'+reps.length+'</b> reps';
+    let html='';
+    reps.forEach(r=>{
+      const active=!!r.user_id;
+      html+='<tr>'
+        +'<td class="who-cell">'+esc(r.name||'—')+'</td>'
+        +'<td class="sub"><a href="mailto:'+esc(r.email)+'">'+esc(r.email)+'</a></td>'
+        +'<td class="sub">'+esc(r.phone||'—')+'</td>'
+        +'<td class="spend">'+esc(r.override_pct)+'%</td>'
+        +'<td>'+(active?'<span style="color:#16a34a;font-weight:600">● Active</span>':'<span style="color:#f97316;font-weight:600">○ Pending signup</span>')+'</td>'
+        +'<td><button class="del js-rdel" data-id="'+esc(r.id)+'" title="Remove rep">✕</button></td>'
+        +'</tr>';
+    });
+    $('rreps').innerHTML = html || '<tr><td colspan="6" class="sub" style="padding:22px;text-align:center">No reps yet — add one above.</td></tr>';
+    $('rreps').querySelectorAll('.js-rdel').forEach(b=> b.addEventListener('click', async ()=>{
+      if(!confirm('Remove this rep? (Their login stays in Supabase Auth; this just unlinks them.)')) return;
+      const id=b.getAttribute('data-id');
+      const { error } = await sb.from('reps').delete().eq('id', id);
+      if(!error){ reps=reps.filter(x=>String(x.id)!==id); renderReps(); }
+    }));
   }
 
   route();

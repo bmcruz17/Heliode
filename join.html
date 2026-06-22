@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Heliode — Stake Your Claim (Founding Sales)</title>
+<meta name="description" content="There's a gold rush in AI compute. Heliode owns the supply line — and we're handing out claims. Uncapped commission, equity you earn by landing customers, ground floor.">
+<meta property="og:title" content="Heliode — There's a gold rush in AI. Stake your claim.">
+<meta property="og:description" content="We own the supply behind AI inference. Closers wanted — uncapped commission + earned equity, ground floor.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#ffffff;--bg2:#faf7f0;--panel:#ffffff;
+    --ink:#0d1320;--mute:#555c66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-line:rgba(37,99,235,0.28);
+    --gold:#e0a92e;--gold-deep:#b9851a;--gold-dim:rgba(224,169,46,0.10);--gold-line:rgba(224,169,46,0.4);
+    --accent:#f97316;--accent-hover:#ea580c;
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:#2b3340;font-family:'Inter',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;color:var(--ink);}
+  .wrap{max-width:820px;margin:0 auto;padding:0 22px;}
+  a{color:var(--blue);}
+
+  .bar{position:sticky;top:0;z-index:30;background:rgba(13,19,32,0.92);border-bottom:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(10px);}
+  .bar-in{max-width:820px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{color:#fff;font-weight:700;font-size:1.02rem;display:flex;align-items:center;gap:9px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--gold-dim);}
+  .bar .cta{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.82rem;color:#0d1320;background:var(--gold);padding:9px 16px;border-radius:9px;text-decoration:none;}
+
+  .hero{position:relative;overflow:hidden;padding:90px 0 70px;background:linear-gradient(140deg,#0d1320 0%,#241a08 70%,#3a2a0c 100%);}
+  .hero::after{content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:760px;height:760px;background:radial-gradient(circle,rgba(224,169,46,0.22),transparent 62%);pointer-events:none;}
+  .hero-in{position:relative;z-index:1;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:inline-flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--gold-line);}
+  .hero h1{color:#fff;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.05;margin-bottom:20px;max-width:18ch;}
+  .hero h1 em{font-style:normal;color:var(--gold);}
+  .hero p{color:#d7cdb8;font-size:clamp(1.05rem,2.2vw,1.25rem);max-width:60ch;}
+  .hero .btn{margin-top:34px;}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.98rem;border-radius:11px;padding:15px 26px;text-decoration:none;display:inline-block;background:var(--gold);color:#0d1320;border:none;cursor:pointer;transition:.2s;}
+  .btn:hover{background:#f0b733;transform:translateY(-1px);}
+
+  section{padding:56px 0;border-bottom:1px solid var(--line);}
+  section.alt{background:var(--bg2);}
+  .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-deep);background:var(--gold-dim);border:1px solid var(--gold-line);border-radius:999px;padding:5px 13px;margin-bottom:16px;}
+  h2{font-size:clamp(1.5rem,3.4vw,2.1rem);margin-bottom:14px;}
+  p.lead{font-size:1.08rem;color:var(--mute);margin-bottom:14px;}
+  .body{font-size:1rem;color:#2b3340;margin-bottom:12px;}
+  ul{margin:6px 0 12px 4px;list-style:none;}
+  li{position:relative;padding-left:26px;margin-bottom:10px;color:#2b3340;}
+  li::before{content:"⛏";position:absolute;left:0;top:0;font-size:0.9rem;}
+  li b{color:var(--ink);}
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px;}
+  @media(max-width:640px){.cards{grid-template-columns:1fr;}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .card h3{font-size:1.05rem;margin-bottom:6px;}
+  .card p{font-size:0.92rem;color:var(--mute);}
+  .card .big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;color:var(--gold-deep);line-height:1;margin-bottom:6px;}
+  .metros{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .metro{font-family:'JetBrains Mono',monospace;font-size:0.78rem;border:1px solid var(--line2);border-radius:999px;padding:7px 14px;color:var(--ink);}
+  .metro.home{background:var(--gold-dim);border-color:var(--gold-line);color:var(--gold-deep);font-weight:600;}
+
+  .cta-band{background:linear-gradient(140deg,#0d1320,#241a08);text-align:center;padding:70px 0;border:none;}
+  .cta-band h2{color:#fff;max-width:20ch;margin:0 auto 12px;}
+  .cta-band p{color:#d7cdb8;max-width:48ch;margin:0 auto 26px;}
+
+  footer{padding:34px 0;background:#0d1320;}
+  .foot{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#8a909a;text-align:center;}
+  .disc{font-family:'JetBrains Mono',monospace;font-size:0.64rem;color:#5b6470;text-align:center;margin-top:14px;line-height:1.6;max-width:80ch;margin-left:auto;margin-right:auto;}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>HELIODE</div>
+  <a class="cta" href="#claim">Stake your claim</a>
+</div></div>
+
+<header class="hero"><div class="wrap hero-in">
+  <span class="eyebrow">Founding sales · ground floor</span>
+  <h1>There's a gold rush in AI. We own the <em>supply line</em>.</h1>
+  <p>Every AI company is mining the same thing — <strong>compute</strong>. It's scarce, brutally expensive, and they're bleeding cash on it. Heliode delivers it cheaper and runs it for them, and we're building the infrastructure behind AI inference itself. We've got the supply. We need people to go stake the claims.</p>
+  <a class="btn" href="#claim">I want in →</a>
+</div></header>
+
+<!-- THE GOLD RUSH -->
+<section><div class="wrap">
+  <div class="tag">The rush</div>
+  <h2>Compute is the gold. Whoever controls the supply wins.</h2>
+  <p class="lead">AI inference — running models in production — is exploding into a 24/7, always-on demand for GPU power. The miners (every AI startup) can't get enough of it, and they overpay 2–5× for what they do get.</p>
+  <p class="body">In every gold rush, the people who got rich weren't only the miners — it was whoever owned the supply, the tools, and the land. <b>That's us.</b> We source GPU compute wholesale, run it as a managed service, and we're building owned capacity behind it. You're not panning a creek — you're selling the one thing the entire industry is desperate for.</p>
+</div></section>
+
+<!-- WHO -->
+<section class="alt"><div class="wrap">
+  <div class="tag">Who</div>
+  <h2>Who we're looking for</h2>
+  <p class="lead">Closers. Hustlers. People who'd rather own upside than collect a salary cap.</p>
+  <ul>
+    <li><b>You can sell.</b> Door-to-door, B2B, phone, in-person — you close, and rejection doesn't rattle you.</li>
+    <li><b>You're a self-starter.</b> No one hands you leads or holds your hand. You go find the gold.</li>
+    <li><b>You want ownership,</b> not a ceiling. Uncapped commission and real equity excite you more than a base salary.</li>
+    <li><b>You move now.</b> You'd rather be early and build something than safe and late.</li>
+  </ul>
+  <p class="body">You do <b>not</b> need to be technical. We teach you the product. You bring the hustle.</p>
+</div></div></section>
+
+<!-- WHAT -->
+<section><div class="wrap">
+  <div class="tag">What's in it for you</div>
+  <h2>You eat what you kill — and you build a book that pays you for years.</h2>
+  <div class="cards">
+    <div class="card"><div class="big">Paid at signing</div><h3>Funded by the client</h3><p>The client pays a setup fee at signing — that's <b>your signing check.</b> You get paid the moment you close.</p></div>
+    <div class="card"><div class="big">Monthly override</div><h3>Recurring income</h3><p>You earn a <b>cut of every account, every month</b> it stays live. Land a book of clients and it pays you on repeat.</p></div>
+    <div class="card"><div class="big">Real equity</div><h3>You earn it by closing</h3><p>Land customers and you <b>earn ownership in the company</b> — it ladders up the more you bring. Not a maybe. Earned.</p></div>
+    <div class="card"><div class="big">A real seat</div><h3>Grow with it</h3><p>Once we close our raise and it's rolling, the people who built it get <b>defined roles + salary.</b> Ground floor.</p></div>
+  </div>
+  <p class="body" style="margin-top:18px;">All-commission to start — that's the trade for uncapped upside and equity most people never get offered.</p>
+</div></section>
+
+<!-- WHERE -->
+<section class="alt"><div class="wrap">
+  <div class="tag">Where</div>
+  <h2>The gold is where the AI teams are.</h2>
+  <p class="lead">We start in <b>Austin</b> — your home turf and a booming AI hub — then follow the demand to the metros packed with AI companies burning cash on compute.</p>
+  <div class="metros">
+    <span class="metro home">Austin — base camp</span>
+    <span class="metro">SF Bay Area</span>
+    <span class="metro">Seattle</span>
+    <span class="metro">Boston</span>
+    <span class="metro">Dallas</span>
+  </div>
+  <p class="body" style="margin-top:16px;">Dense clusters of seed-to-Series-A AI companies — each one a prospect with a GPU bill that hurts. Plenty of ground to claim.</p>
+</div></div></section>
+
+<!-- WHEN -->
+<section><div class="wrap">
+  <div class="tag">When</div>
+  <h2>Now. The claims are unstaked.</h2>
+  <p class="lead">This is the earliest it will ever be — which is exactly why it's the best time to be here.</p>
+  <ul>
+    <li><b>Equity is cheapest now.</b> Get in before the raise and your slice is worth the most.</li>
+    <li><b>The accounts are open.</b> No one owns these customer relationships yet. First in, first claim.</li>
+    <li><b>The market is on fire.</b> AI demand isn't slowing — the window to own the supply is open today.</li>
+  </ul>
+</div></section>
+
+<!-- HOW -->
+<section class="alt"><div class="wrap">
+  <div class="tag">How · what we're building</div>
+  <h2>We own the process behind the scenes of AI computing.</h2>
+  <p class="lead">Today we broker the compute — source it cheap on the open market and run it managed, so clients get a lower bill and someone to call.</p>
+  <p class="body">Next, we own it: GPU capacity in our own regional sites, close to the teams that need it, standing up in days — not the years a data center takes. Every client you land today feeds the network we build tomorrow. <b>You're not selling a product — you're getting in on the infrastructure layer of AI inference itself.</b></p>
+</div></div></section>
+
+<!-- CTA -->
+<section class="cta-band" id="claim"><div class="wrap">
+  <h2>Stake your claim.</h2>
+  <p>If you can sell and you want to own a piece of what's behind AI, let's talk. Bring the hustle — we'll show you the gold.</p>
+  <a class="btn" href="mailto:hello@heliodegrid.com?subject=I%20want%20in%20—%20Heliode%20founding%20sales&body=Tell%20us%20a%20bit%20about%20your%20sales%20background%20and%20why%20you're%20interested.">I want in →</a>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="foot">HELIODE · ATMX Holdings · hello@heliodegrid.com</div>
+  <div class="disc">All-commission opportunity to start; equity and roles subject to written agreement and standard vesting. Compensation figures discussed individually. Nothing here is a guarantee of earnings.</div>
+</div></footer>
+
+</body>
+</html>

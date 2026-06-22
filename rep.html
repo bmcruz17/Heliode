@@ -46,6 +46,8 @@
   .gate .btn{width:100%;margin-top:20px;color:#fff;background:var(--accent);border-color:var(--accent);padding:12px;}
   .gate .btn:hover{background:var(--accent-hover);}
   .gate-err{font-size:0.84rem;margin-top:12px;display:none;color:#dc2626;}
+  .lnk{display:block;background:none;border:none;color:var(--blue);font-family:'Inter',sans-serif;font-size:0.82rem;cursor:pointer;margin-top:12px;padding:0;}
+  .lnk:hover{text-decoration:underline;}
 
   /* Dashboard */
   #dash{display:none;}
@@ -103,6 +105,7 @@
   <label class="fld" for="g-pass">Password</label>
   <input class="inp" id="g-pass" type="password" autocomplete="current-password" placeholder="••••••••">
   <button class="btn" id="g-go">Sign in</button>
+  <button class="lnk" id="g-signup">First time? Create your password →</button>
   <div class="gate-err" id="g-err"></div>
 </div>
 
@@ -180,6 +183,16 @@
     if(error){ showGate('Sign-in failed. Check your credentials.'); return; }
     $('g-pass').value=''; route();
   }
+  $('g-signup').addEventListener('click', async ()=>{
+    $('g-err').style.display='none';
+    const email=$('g-email').value.trim(), password=$('g-pass').value;
+    if(!email||!password){ showGate('Enter your email and choose a password.'); return; }
+    if(password.length<6){ showGate('Password must be at least 6 characters.'); return; }
+    const { data, error } = await sb.auth.signUp({ email, password });
+    if(error){ showGate('Could not create account: '+error.message); return; }
+    if(data.session){ route(); }
+    else { showGate('Account created — check your email to confirm, then come back and sign in.'); }
+  });
   $('lock').addEventListener('click', async ()=>{ await sb.auth.signOut(); deals=[]; $('g-email').value=''; $('g-pass').value=''; route(); });
 
   async function load(){
