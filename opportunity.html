@@ -281,7 +281,43 @@
   .hero .stat-num { color: #fff; }
   .hero .stat-num small { color: var(--accent-bright); }
   .hero .stat-label { color: #aeb6c6; }
-</style>
+
+  /* ---- evidence / sources ---- */
+  .ev-grid { margin-top: 46px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .ev { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 26px 24px; box-shadow: 0 1px 2px rgba(13,19,32,0.03); }
+  .ev .ev-n { font-family: var(--display); font-size: clamp(26px, 3.2vw, 34px); font-weight: 700; color: var(--blue); letter-spacing: -0.02em; line-height: 1.05; }
+  .ev .ev-n small { font-size: 0.5em; color: var(--accent-hover); font-weight: 500; }
+  .ev h3 { font-size: 17px; margin: 12px 0 8px; }
+  .ev p { font-size: 14.5px; color: var(--muted); line-height: 1.58; }
+  .ev cite { display: block; margin-top: 10px; font-family: var(--mono); font-size: 11px; font-style: normal; color: var(--dim); letter-spacing: 0.02em; }
+  .sources { margin-top: 30px; border: 1px dashed var(--line); border-radius: 12px; padding: 16px 20px; background: var(--bg-2); }
+  .sources .sl { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+  .sources p { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+  .sources a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---- precedent (VPP + XFRA) ---- */
+  .prec-grid { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .prec { border: 1px solid var(--line); border-radius: 14px; padding: 30px 28px; background: var(--panel); box-shadow: 0 1px 2px rgba(13,19,32,0.03); }
+  .prec .prec-k { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); }
+  .prec h3 { font-size: 22px; margin: 12px 0 10px; }
+  .prec p { font-size: 15.5px; color: var(--muted); line-height: 1.62; margin-bottom: 10px; }
+  .prec strong { color: var(--ink); font-weight: 600; }
+  .prec .big-stat { font-family: var(--display); font-weight: 700; color: var(--blue); }
+  .prec-take { margin-top: 28px; border-left: 2px solid var(--accent); padding-left: 18px; font-size: 17px; color: var(--ink); font-family: var(--display); font-weight: 500; max-width: 70ch; }
+
+  /* ---- site archetypes / energy ---- */
+  .arch-grid { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .arch { border: 1px solid var(--line); border-radius: 14px; padding: 28px 26px; background: var(--panel); }
+  .arch.solar { background: linear-gradient(180deg, var(--accent-dim), #fff); border-color: var(--accent-line); }
+  .arch-k { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); }
+  .arch.solar .arch-k { color: var(--accent-hover); }
+  .arch h3 { font-size: 20px; margin: 10px 0 10px; }
+  .arch p { font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 8px; }
+  .arch ul { list-style: none; margin-top: 12px; }
+  .arch li { font-size: 14.5px; color: var(--muted); padding-left: 22px; position: relative; margin-bottom: 8px; }
+  .arch li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-family: var(--mono); }
+  .arch strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 860px) { .ev-grid, .prec-grid, .arch-grid { grid-template-columns: 1fr; } }</style>
 </head>
 <body>
 
@@ -376,8 +412,55 @@
     </div>
   </section>
 
-  <!-- ============ FIGURE 1: WHAT WE DEPLOY AT A SITE ============ -->
+  <!-- ============ WHY NOW — EVIDENCE ============ -->
   <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Why now</span>
+        <h2>The numbers behind the bottleneck.</h2>
+        <p>
+          This isn't a thesis we have to argue — the largest research houses have quantified it. Demand is exploding,
+          and the binding constraint everyone keeps hitting is <strong>power and time-to-build</strong>, not capital or chips alone.
+        </p>
+      </div>
+
+      <div class="ev-grid">
+        <div class="ev">
+          <div class="ev-n">~$7T</div>
+          <h3>Data-center capex by 2030</h3>
+          <p>Global capacity demand nearly triples — ~82&nbsp;GW (2025) to ~219&nbsp;GW (2030) — with roughly 70% of new demand driven by AI workloads.</p>
+          <cite>McKinsey, 2025</cite>
+        </div>
+        <div class="ev">
+          <div class="ev-n">#1<small> blocker</small></div>
+          <h3>Grid stress, not capital</h3>
+          <p>In a survey of 120 U.S. power-company and data-center executives, grid stress was the leading challenge to development. Power and interconnection are the bottleneck.</p>
+          <cite>Deloitte, 2025</cite>
+        </div>
+        <div class="ev">
+          <div class="ev-n">~100×</div>
+          <h3>Inference vs. training</h3>
+          <p>Inference is projected to become roughly 100× the workload volume of training — steady, latency-sensitive, 24/7 demand. Reported GPU utilization often runs under 50%, so capacity is scarce <em>and</em> poorly used.</p>
+          <cite>NVIDIA · industry reporting, 2024–25</cite>
+        </div>
+      </div>
+
+      <div class="sources">
+        <div class="sl">Evidence &amp; backing — verify against primary sources before distribution</div>
+        <p>
+          McKinsey, <a href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/the-cost-of-compute-a-7-trillion-dollar-race-to-scale-data-centers">"The cost of compute"</a> (2025) ·
+          Deloitte, <a href="https://www.deloitte.com/us/en/insights/topics/strategy/ai-data-centers-and-power-demand.html">"AI data centers jolt power demand"</a> (2025) ·
+          <a href="https://www.datacenterknowledge.com/networking/ai-and-latency-why-milliseconds-decide-data-center-winners">Data Center Knowledge</a> on inference latency &amp; "inference zones" ·
+          <a href="https://www.neureality.ai/blog/the-50-percent-ai-inference-problem">NeuReality</a> on inference utilization ·
+          distributed-inference research: EdgeFlow (IEEE INFOCOM 2022), a peer-reviewed federated-learning survey (PMC), and MDI-LLM (arXiv) establish that orchestrating inference across many heterogeneous nodes is a studied, working technique.
+          <em>Figures move fast — confirm and date each stat before sending to investors.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FIGURE 1: WHAT WE DEPLOY AT A SITE ============ -->
+  <section class="section">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">The node</span>
@@ -610,6 +693,78 @@
           </ul>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ SITE STRATEGY & ENERGY ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Site strategy &amp; energy</span>
+        <h2>Power-ready space, wherever it already exists.</h2>
+        <p>
+          The site doesn't have to be a warehouse — it has to have <strong>power</strong>. We deploy on two
+          archetypes, and we bring our own install crew so the electrical work is never a dependency on the landlord.
+        </p>
+      </div>
+
+      <div class="arch-grid">
+        <div class="arch">
+          <div class="arch-k">Archetype A · now</div>
+          <h3>Leased commercial / light-industrial</h3>
+          <p>Buildings that already carry heavy 3-phase service. Lease the space, install the node, go live in days. No new construction, no interconnection queue.</p>
+          <ul>
+            <li>Power is already at the panel</li>
+            <li>Fewer noise / zoning frictions</li>
+            <li>Fastest path to the first owned nodes</li>
+          </ul>
+        </div>
+        <div class="arch solar">
+          <div class="arch-k">Archetype B · expansion</div>
+          <h3>Service-upgraded residential, self-generating</h3>
+          <p>Our crew upgrades a home to <strong>400A service</strong> — at which point it becomes a commercial-grade power customer — then deploys the node on-site, paired with <strong>max-fit rooftop solar + battery</strong> through a solar partner (e.g. Sunrun).</p>
+          <ul>
+            <li>Solar + storage offsets a large share of energy cost and adds resilience</li>
+            <li>The homeowner gets the solar &amp; backup; we get a power-ready site</li>
+            <li>A distribution channel competitors can't easily assemble</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="econ-note" style="margin-top:28px;">
+        <strong>Honest framing on solar:</strong> a node runs 24/7 (~240&nbsp;kWh/day); ~20&nbsp;kW of rooftop solar yields on the order of 100&nbsp;kWh/day, so on-site solar + battery is a meaningful <em>energy-cost offset and resilience layer</em> — not a full off-grid supply. The upgraded utility service remains the primary feed. The partner relationship handles solar/storage capital and install; we underwrite to grid power and treat self-generation as upside.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ PRECEDENT: VPP + XFRA ============ -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The precedent</span>
+        <h2>The model is already proven — and already being funded.</h2>
+        <p>
+          Two real-world precedents de-risk the "distributed assets, coordinated by software" thesis. We're not
+          inventing the architecture; we're the managed, demand-side layer that rides on top of it.
+        </p>
+      </div>
+
+      <div class="prec-grid">
+        <div class="prec">
+          <div class="prec-k">Precedent 01 · power</div>
+          <h3>Tesla's Virtual Power Plant</h3>
+          <p>Tesla aggregates tens of thousands of distributed home batteries and solar into a single, software-coordinated grid asset. In July 2025, California VPPs delivered <span class="big-stat">&gt;535&nbsp;MW</span> — with Powerwall homes alone providing ~500&nbsp;MW.</p>
+          <p>Grid-scale capacity, assembled entirely from distributed hardware + AI coordination. Heliode applies the identical playbook to <strong>compute</strong> instead of power: a coordinated fleet of nodes behaving like one cloud.</p>
+        </div>
+        <div class="prec">
+          <div class="prec-k">Precedent 02 · compute</div>
+          <h3>Span + NVIDIA's XFRA</h3>
+          <p>In 2026, Span and NVIDIA launched XFRA — a distributed data-center network using existing electrical capacity to run GPUs in homes and small commercial space, targeting <span class="big-stat">~1&nbsp;GW by 2027</span>.</p>
+          <p>The validation is the point: NVIDIA is now funding the exact "go where the power already is" thesis. Heliode's wedge is a <strong>different layer</strong> — the managed service that signs and serves the end inference teams, sourcing today and owning capacity next, with our own service + self-generation site model.</p>
+        </div>
+      </div>
+
+      <p class="prec-take">When a $T-scale player puts capital behind your thesis, the question stops being "will this happen?" and becomes "who owns the customer and the deployment." That's the layer we're building.</p>
     </div>
   </section>
 

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Heliode Grid — Business Plan</title>
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#f4f7fc;--panel:#fff;--ink:#0d1320;--mute:#525a66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+    --body:#39414d;
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4,.brand{font-family:'Space Grotesk',sans-serif;}
+  a{color:var(--blue);}
+  .prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--blue));z-index:60;transition:width .1s;}
+
+  .bar{background:rgba(13,19,32,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.08);position:sticky;top:0;z-index:40;}
+  .bar-in{max-width:1100px;margin:0 auto;padding:12px 26px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  .brand{font-weight:700;font-size:1rem;display:flex;align-items:center;gap:9px;color:#fff;}
+  .brand .logo{width:20px;height:20px;display:inline-flex;}
+  .brand small{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:#9aa3b5;}
+  .bar-actions{display:flex;align-items:center;gap:14px;}
+  .bar a,.bar button{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#cdd5e3;background:none;border:none;cursor:pointer;text-decoration:none;}
+  .bar a:hover,.bar button:hover{color:#fff;}
+  .bar .printbtn{border:1px solid rgba(255,255,255,0.2);border-radius:7px;padding:5px 11px;color:#fff;}
+  .bar .printbtn:hover{background:rgba(255,255,255,0.1);}
+
+  .doc{max-width:840px;margin:0 auto;padding:46px 40px 110px;}
+  .cover{padding:30px 0 36px;border-bottom:1px solid var(--line);margin-bottom:10px;}
+  .lead-eye{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);}
+  .cover h1{font-size:2.5rem;letter-spacing:-0.025em;margin:10px 0 12px;line-height:1.05;}
+  .cover .sub{font-size:1.12rem;color:var(--mute);max-width:60ch;}
+  .cover .meta{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--faint);letter-spacing:0.04em;}
+
+  .toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:26px 0 8px;}
+  .toc .t{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);margin-bottom:12px;}
+  .toc ol{columns:2;column-gap:36px;margin:0;padding-left:18px;}
+  .toc li{margin-bottom:6px;font-size:0.9rem;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc a:hover{color:var(--blue);}
+
+  section.s{padding:34px 0;border-top:1px solid var(--line);scroll-margin-top:70px;}
+  .s-num{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);}
+  .s h2{font-size:1.5rem;letter-spacing:-0.02em;margin:6px 0 14px;}
+  .s h3{font-size:1.06rem;margin:22px 0 7px;letter-spacing:-0.01em;}
+  .s p{margin-bottom:12px;color:var(--body);}
+  .s ul,.s ol.list{margin:6px 0 14px 0;padding-left:22px;}
+  .s li{margin-bottom:7px;color:var(--body);}
+  .s strong{color:var(--ink);}
+  sup.fn{font-size:0.66em;color:var(--blue);font-weight:600;}
+
+  .callout{background:var(--blue-dim);border:1px solid var(--blue-line);border-radius:12px;padding:15px 18px;margin:16px 0;font-size:0.95rem;color:var(--body);}
+  .callout b{color:var(--blue);}
+  .flag{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;font-size:0.92rem;}
+  .flag .fl{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-hover);margin-bottom:6px;}
+
+  table.t{width:100%;border-collapse:collapse;margin:14px 0;font-size:0.9rem;}
+  table.t th,table.t td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.t th{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);}
+  table.t td.n{font-family:'JetBrains Mono',monospace;}
+  table.t tr.total td{background:var(--blue-dim);font-weight:600;}
+  table.t tr.total td.n{color:var(--blue);}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:8px 0 4px;}
+  .kpi{background:var(--panel);padding:18px 16px;}
+  .kpi .v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.4rem;color:var(--blue);letter-spacing:-0.02em;}
+  .kpi .v small{font-size:0.5em;color:var(--accent-hover);font-weight:500;}
+  .kpi .k{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mute);margin-top:6px;}
+
+  .refs{font-size:0.82rem;color:var(--mute);}
+  .refs li{margin-bottom:9px;}
+  .refs a{word-break:break-word;}
+  .disc{margin-top:14px;font-size:0.78rem;color:var(--faint);line-height:1.6;}
+
+  @media(max-width:720px){
+    .doc{padding:30px 20px 80px;}
+    .toc ol{columns:1;}
+    .kpis{grid-template-columns:1fr 1fr;}
+    .cover h1{font-size:1.9rem;}
+  }
+  @media print{
+    .prog,.bar{display:none !important;}
+    body{background:#fff;}
+    .doc{max-width:none;padding:0;}
+    section.s{page-break-inside:avoid;border-top:1px solid #ddd;}
+    .callout,.flag,table.t,.kpis{break-inside:avoid;}
+    a{color:#000;text-decoration:none;}
+    .refs a{color:#000;text-decoration:underline;}
+    @page{margin:16mm;}
+  }
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="logo"><svg viewBox="0 0 64 64" fill="none"><g stroke="#3b82f6" stroke-width="3" stroke-linecap="round"><line x1="32" y1="32" x2="51" y2="32"/><line x1="32" y1="32" x2="41.5" y2="48.5"/><line x1="32" y1="32" x2="22.5" y2="48.5"/><line x1="32" y1="32" x2="13" y2="32"/><line x1="32" y1="32" x2="22.5" y2="15.5"/><line x1="32" y1="32" x2="41.5" y2="15.5"/></g><g fill="#3b82f6"><circle cx="51" cy="32" r="4"/><circle cx="41.5" cy="48.5" r="4"/><circle cx="22.5" cy="48.5" r="4"/><circle cx="13" cy="32" r="4"/><circle cx="22.5" cy="15.5" r="4"/><circle cx="41.5" cy="15.5" r="4"/></g><circle cx="32" cy="32" r="9" fill="#f97316"/></svg></span>HELIODE · GRID <small>Business Plan</small></div>
+  <div class="bar-actions">
+    <a href="opportunity.html">Investor page</a>
+    <button class="printbtn" id="printbtn">Save as PDF</button>
+  </div>
+</div></div>
+
+<div class="doc">
+
+  <div class="cover">
+    <div class="lead-eye">Confidential business plan · for discussion only</div>
+    <h1>Heliode Grid</h1>
+    <p class="sub">The managed compute layer for AI inference — cheaper capacity today, owned regional capacity next, deployed where the power already exists.</p>
+    <div class="meta">ATMX Holdings · Austin, TX · June 2026 · Concept stage</div>
+  </div>
+
+  <div class="toc">
+    <div class="t">Contents</div>
+    <ol>
+      <li><a href="#s1">Executive summary</a></li>
+      <li><a href="#s2">The opportunity</a></li>
+      <li><a href="#s3">Vision &amp; philosophy</a></li>
+      <li><a href="#s4">Product &amp; service</a></li>
+      <li><a href="#s5">The model &amp; sites</a></li>
+      <li><a href="#s6">Technical feasibility</a></li>
+      <li><a href="#s7">Unit economics</a></li>
+      <li><a href="#s8">Market sizing</a></li>
+      <li><a href="#s9">Go-to-market</a></li>
+      <li><a href="#s10">Competition</a></li>
+      <li><a href="#s11">Team</a></li>
+      <li><a href="#s12">The raise</a></li>
+      <li><a href="#s13">Risks</a></li>
+      <li><a href="#s14">Sources</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <section class="s" id="s1">
+    <div class="s-num">Section 01</div>
+    <h2>Executive summary</h2>
+    <p><strong>Heliode Grid sells AI computing power and owns the process behind delivering it.</strong> AI inference — running trained models in production — is a steady, 24/7, latency-sensitive load that is growing faster than the industry can build for. The binding constraint isn't chips alone; it's <strong>power and time-to-build</strong>. New grid interconnections take years; new data centers take longer.</p>
+    <p>We attack that gap in two de-risked phases. <strong>Phase 1 (now):</strong> an asset-light managed brokerage — source GPU capacity on the open market, wrap it in a managed service, and resell it to inference teams below their current cloud bill. This earns revenue immediately and, critically, proves and secures the demand. <strong>Phase 2 (next):</strong> deploy owned GPU nodes on power-ready sites — leased commercial space first, and service-upgraded, self-generating residential sites as an expansion channel — financed against contracted compute revenue.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="v">days<small> vs 5–7 yr</small></div><div class="k">Deploy vs grid queue</div></div>
+      <div class="kpi"><div class="v">~$730<small>/GPU/mo</small></div><div class="k">Brokerage gross margin</div></div>
+      <div class="kpi"><div class="v">~$7.6K<small>/mo</small></div><div class="k">Owned-node net contribution</div></div>
+      <div class="kpi"><div class="v">~$2.0M</div><div class="k">Pre-seed raise</div></div>
+    </div>
+    <p>The moat is not the hardware — anyone can buy GPUs. It is <strong>distribution</strong>: sourcing sites, signing customers, installing, and operating many locations as one cloud. We are raising a ~$2.0M pre-seed to fund the team, software, brokerage launch, and a small number of proof nodes ahead of a 50-node Austin pilot.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="s" id="s2">
+    <div class="s-num">Section 02</div>
+    <h2>The opportunity — a quantified bottleneck</h2>
+    <p>Demand for AI compute is exploding, and the largest research houses have put numbers to the supply constraint.</p>
+    <ul>
+      <li>Global data-center capex could reach <strong>~$7 trillion by 2030</strong>; capacity demand nearly triples from ~82&nbsp;GW (2025) to ~219&nbsp;GW (2030), with roughly <strong>70% of new demand driven by AI</strong>.<sup class="fn">1</sup></li>
+      <li>In a survey of 120 U.S. power-company and data-center executives, <strong>grid stress was the leading challenge</strong> to development — the binding constraint is power and interconnection, not capital.<sup class="fn">2</sup></li>
+      <li><strong>Inference is projected to become ~100×</strong> the workload volume of training — steady, latency-sensitive, 24/7 demand — while reported GPU utilization often runs <strong>under 50%</strong>, so capacity is both scarce and poorly used.<sup class="fn">3,4</sup></li>
+      <li>The architecture is shifting toward latency-optimized <strong>"inference zones"</strong> near population centers, not only remote mega-campuses.<sup class="fn">3</sup></li>
+    </ul>
+    <div class="callout"><b>The opening:</b> centralized supply is gated on multi-year power and permitting. Placing compute where heavy power already exists — and managing the messy deployment most incumbents avoid — sidesteps the queue and serves the underserved long tail of seed-to-Series-A AI teams.</div>
+    <div class="flag"><div class="fl">Honesty note</div>Figures above move quickly. Verify each against its primary source and date it before any investor distribution. We cite to support the <em>problem</em>; we do not lean on any single number.</div>
+  </section>
+
+  <!-- 3 -->
+  <section class="s" id="s3">
+    <div class="s-num">Section 03</div>
+    <h2>Vision &amp; operating philosophy</h2>
+    <p>We reason from first principles: the question is not "how do we build a data center?" but "what actually limits AI compute, and what's the fastest way around it?" The answer is power and time. So we go where power already exists and stand compute up in days.</p>
+    <h3>The precedent: distributed assets, coordinated by software</h3>
+    <p>This model is proven. Tesla's <strong>Virtual Power Plant</strong> aggregates tens of thousands of distributed home batteries and solar into a single, AI-coordinated grid asset; in July 2025, California VPPs delivered <strong>&gt;535&nbsp;MW</strong>, with Powerwall homes alone providing ~500&nbsp;MW.<sup class="fn">5</sup> Grid-scale capacity, assembled entirely from distributed hardware. Heliode applies the identical playbook to <strong>compute</strong>: a coordinated fleet of nodes behaving like one cloud.</p>
+    <p>It is also already being funded. In 2026, <strong>Span and NVIDIA launched XFRA</strong> — a distributed data-center network running GPUs on existing electrical capacity in homes and small commercial space, targeting ~1&nbsp;GW by 2027.<sup class="fn">6</sup> That a chip-maker of NVIDIA's scale is capitalizing the "go where the power is" thesis validates the market. Heliode's wedge is a <strong>different layer</strong>: the managed, demand-side service that signs and serves the end inference teams — and a site model that pairs robust upgraded service with on-site self-generation.</p>
+  </section>
+
+  <!-- 4 -->
+  <section class="s" id="s4">
+    <div class="s-num">Section 04</div>
+    <h2>Product &amp; service</h2>
+    <p>We sell access to compute, measured in <strong>GPU-hours</strong>, wrapped in a managed service. The customer ships their model; we handle the metal. "Managed" means <strong>provisioning, orchestration, monitoring and reliability, one endpoint, and one bill</strong> — the layer the cheap marketplaces lack and the hyperscalers overcharge for.</p>
+    <h3>The arbitrage</h3>
+    <p>The same GPU-hour costs wildly different amounts by source. An H100-hour runs roughly <strong>~$2 wholesale</strong> on marketplaces; we resell it managed at <strong>~$3</strong>, still well under the <strong>$5–10</strong> a hyperscaler charges. The buyer saves; we keep ~$1/GPU-hr plus the managed-service premium.</p>
+    <table class="t"><thead><tr><th>Layer</th><th>Who</th><th>Trade-off</th></tr></thead><tbody>
+      <tr><td>Hyperscalers</td><td>AWS, Google, Azure</td><td class="n">Most expensive; convenient, locked-in</td></tr>
+      <tr><td>Neoclouds</td><td>CoreWeave, Lambda, Crusoe</td><td class="n">Mid-price; GPU-specialized</td></tr>
+      <tr><td>Marketplaces / spot</td><td>Vast.ai, RunPod</td><td class="n">Cheapest; less managed, variable</td></tr>
+    </tbody></table>
+    <p>We match the GPU to the workload: power-efficient <strong>L40S</strong> nodes for the broad inference market (≈⅓ the power and lower capex), and <strong>H100 / H200</strong> for the most demanding models — more revenue-generating compute per kilowatt on power-constrained sites.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="s" id="s5">
+    <div class="s-num">Section 05</div>
+    <h2>The model &amp; site strategy</h2>
+    <h3>Two phases</h3>
+    <ol class="list">
+      <li><strong>Phase 1 — Managed brokerage (now).</strong> Asset-light resale of managed capacity. Immediate revenue, near-zero CAC under a quote-first offer, and the demand proof that finances Phase 2.</li>
+      <li><strong>Phase 2 — Owned regional capacity (next).</strong> Owned GPU nodes on power-ready sites, financed against signed offtake. We own the hardware and the multi-year customer relationship; hardware refreshes every ~5 years.</li>
+    </ol>
+    <h3>Site archetypes</h3>
+    <p>A node is an 8-GPU server (~10&nbsp;kW, ~$250K). The site only needs <strong>power</strong> — and we bring our own install crew so electrical work is never a landlord dependency.</p>
+    <ul>
+      <li><strong>Archetype A — leased commercial / light-industrial (now):</strong> buildings already carrying heavy 3-phase service. Lease, install, go live in days; fewer noise/zoning frictions; fastest path to first owned nodes.</li>
+      <li><strong>Archetype B — service-upgraded residential, self-generating (expansion):</strong> our crew upgrades a home to <strong>400A service</strong> (making it a commercial-grade power customer), deploys the node, and pairs it with <strong>max-fit rooftop solar + battery</strong> via a solar partner (e.g. Sunrun). The homeowner gets solar and backup; we get a power-ready site and a distribution channel competitors can't easily assemble.</li>
+    </ul>
+    <div class="flag"><div class="fl">Honesty note — solar</div>A node runs 24/7 (~240&nbsp;kWh/day); ~20&nbsp;kW of rooftop solar yields on the order of 100&nbsp;kWh/day. On-site solar + battery is a meaningful <em>energy-cost offset and resilience layer, not a full off-grid supply</em>. The upgraded utility service remains the primary feed; we underwrite to grid power and treat self-generation as upside, with the partner carrying solar/storage capital and install.</div>
+  </section>
+
+  <!-- 6 -->
+  <section class="s" id="s6">
+    <div class="s-num">Section 06</div>
+    <h2>Technical feasibility</h2>
+    <p>The orchestration-and-billing software that makes many nodes behave like one cloud sits on a real, published research base — this is engineering, not speculation.</p>
+    <ul>
+      <li><strong>EdgeFlow</strong> — distributed inference for DAG-structured DNNs across heterogeneous edge devices (IEEE INFOCOM 2022).<sup class="fn">7</sup></li>
+      <li><strong>Federated Learning in Edge Computing</strong> — a peer-reviewed systematic survey of distributed ML across cloud, edge, and end devices.<sup class="fn">8</sup></li>
+      <li><strong>MDI-LLM</strong> — model-distributed inference deploying LLMs across low-power distributed nodes via pipeline parallelism (arXiv).<sup class="fn">9</sup></li>
+      <li>Production frameworks (NVIDIA FLARE, FEDML/TensorOpera) show the orchestration tooling exists today.</li>
+    </ul>
+    <p>This de-risks the mandate of the first critical hire — an infrastructure / compute lead who owns that software layer.</p>
+  </section>
+
+  <!-- 7 -->
+  <section class="s" id="s7">
+    <div class="s-num">Section 07</div>
+    <h2>Unit economics</h2>
+    <h3>Phase 1 — brokerage</h3>
+    <p>Per GPU-hour: pay ~$2, sell ~$3 → <strong>~$1 gross margin</strong>. One H100 run continuously (~730 hrs/mo) ≈ <strong>~$730 gross margin per GPU per month</strong>. A first real month of 5–6 clients at ~8 GPUs each (~48 GPUs) ≈ ~$105K revenue, ~$70K cost, <strong>~$35K gross profit</strong> — at near-zero CAC, since paid capacity only spins up once a customer says yes.</p>
+    <h3>Phase 2 — owned node (base case, 8×H100)</h3>
+    <table class="t"><thead><tr><th>Metric</th><th>Monthly</th><th>Annual</th></tr></thead><tbody>
+      <tr><td>Gross compute revenue</td><td class="n">~$9,800</td><td class="n">~$118K</td></tr>
+      <tr><td>Direct opex (power, lease, bandwidth)</td><td class="n">~$2,200</td><td class="n">~$26K</td></tr>
+      <tr class="total"><td>Net contribution</td><td class="n">~$7,600</td><td class="n">~$91K</td></tr>
+    </tbody></table>
+    <p>Assuming a deliberately conservative <strong>6%/yr</strong> compute-price decline and a hardware refresh at year 5: payback ~year 3, ~+$170K cumulative at 5 years. Sensitivity (realized $/GPU-hr × utilization): gross MRR ~$5,800–$14,300/mo; net contribution ~$3,600–$12,100/mo. On Archetype B, on-site self-generation reduces the power line of direct opex.</p>
+    <div class="flag"><div class="fl">Honesty note</div>The conservative case only just clears hardware amortization — which is exactly why a <strong>contracted buyer comes before any node goes on a rack</strong>. Hardware cost (~$250K) is a planning number to be ground-truthed with vendor quotes.</div>
+  </section>
+
+  <!-- 8 -->
+  <section class="s" id="s8">
+    <div class="s-num">Section 08</div>
+    <h2>Market sizing</h2>
+    <table class="t"><thead><tr><th>Tier</th><th>Definition</th><th>Heliode</th></tr></thead><tbody>
+      <tr><td><strong>TAM</strong></td><td>Total AI-compute / GPU infrastructure spend</td><td class="n">Hundreds of $B → $1T+ by 2030</td></tr>
+      <tr><td><strong>SAM</strong></td><td>GPU-as-a-service we can resell/own</td><td class="n">~$15–25B → $100B+</td></tr>
+      <tr><td><strong>SOM</strong></td><td>Realistic near-term capture</td><td class="n">Inference teams in our launch metros</td></tr>
+    </tbody></table>
+    <div class="callout"><b>Bottoms-up SOM:</b> ~500 inference-heavy teams across launch metros × ~$15K/mo avg GPU spend = ~$90M/yr nearby. Winning 15% over three years ≈ <b>~$13.5M/yr</b> — a defensible, build-from-reality number, not "1% of a trillion."</div>
+  </section>
+
+  <!-- 9 -->
+  <section class="s" id="s9">
+    <div class="s-num">Section 09</div>
+    <h2>Go-to-market</h2>
+    <p>We sell to teams already <strong>spending on GPUs and feeling it</strong> — AI startups, in-house ML teams, studios running models in production. The motion: <strong>prospect → open → discover → pitch → quote → close</strong>, anchored on the buyer's current bill so the saving is concrete. The quote-first offer means we only commit paid capacity once a customer commits.</p>
+    <p>Launch metros: <strong>Austin</strong> (base camp), then SF Bay Area, Seattle, Boston, and Dallas — dense clusters of seed-to-Series-A AI companies. Distribution is run through a commission-based founding sales team earning recurring overrides and earned equity, tracked in an internal Kanban pipeline.</p>
+  </section>
+
+  <!-- 10 -->
+  <section class="s" id="s10">
+    <div class="s-num">Section 10</div>
+    <h2>Competition</h2>
+    <p>We compete with hyperscalers (price), neoclouds (price + locality), DIY/spot (we remove the headache), and emerging distributed players such as XFRA (different layer). Our edge is the combination — <strong>cheaper + managed + local + fast to deploy</strong> — plus ownership of distribution.</p>
+    <p>On XFRA specifically: Span + NVIDIA are building distributed <em>supply</em> (selling capacity to clouds, residential-led). Heliode operates the <em>demand and managed layer</em> (signing and serving end inference teams) and can source from multiple supplies — potentially including networks like theirs. Their capital validates the thesis; our moat is the customer relationship and multi-source deployment they don't own.</p>
+  </section>
+
+  <!-- 11 -->
+  <section class="s" id="s11">
+    <div class="s-num">Section 11</div>
+    <h2>Team</h2>
+    <p>The founding strength is <strong>deployment</strong> — closing deals and coordinating real-world installs at scale, the unglamorous work that secures sites and stands compute up. Founder <strong>Brandon Cruz</strong> brings deep experience building systems and getting hard things done on the ground, including direct field/install and direct-sales operations.</p>
+    <p>The first critical hire is an <strong>infrastructure / compute lead</strong> to own the orchestration-and-billing software. A commission-based founding sales team scales distribution.</p>
+  </section>
+
+  <!-- 12 -->
+  <section class="s" id="s12">
+    <div class="s-num">Section 12</div>
+    <h2>The raise — ~$2.0M pre-seed</h2>
+    <p>A ~$2.0M pre-seed funds the company; the full pilot's node hardware is financed against contracted compute revenue, not equity.</p>
+    <table class="t"><thead><tr><th>Use</th><th>Amount</th></tr></thead><tbody>
+      <tr><td>Pre-seed: brokerage, team, software, proof nodes</td><td class="n">~$2.0M</td></tr>
+      <tr><td>Pilot node hardware (financed)</td><td class="n">~$12–14M</td></tr>
+      <tr><td>Site fit-out, install, ops, contingency</td><td class="n">~$1.5–2.5M</td></tr>
+      <tr class="total"><td>Full pilot total</td><td class="n">~$14–16M</td></tr>
+    </tbody></table>
+    <p>Instrument: a post-money <strong>SAFE</strong>; $2M at a ~$10–13M cap implies ~15–20% dilution — a healthy pre-seed. Structure: Delaware C-corp, founder stock with timely 83(b) election, raised from accredited investors under Reg&nbsp;D with qualified counsel. Milestones: launch brokerage and sign first contracts (90 days) → secure offtake + infrastructure hire → deploy first owned nodes → prove pilot economics and raise to scale.</p>
+  </section>
+
+  <!-- 13 -->
+  <section class="s" id="s13">
+    <div class="s-num">Section 13</div>
+    <h2>Risks &amp; dependencies</h2>
+    <ul>
+      <li><strong>Offtake first.</strong> A node is a ~$250K brick without a contracted buyer. The brokerage exists to prove and secure demand before deployment.</li>
+      <li><strong>Site/host acquisition.</strong> The hardest problem; mitigated by starting on power-ready commercial sites and bringing our own install crew.</li>
+      <li><strong>Hardware cost.</strong> ~$250K is a planning number — ground-truth with vendor quotes before committing capital.</li>
+      <li><strong>Financing.</strong> Hardware is financed against contracts; sequence the build behind signed demand.</li>
+      <li><strong>Price decline / GPU supply.</strong> Plan for ~6%/yr decline; solve sourcing and allocation early without a single point of failure.</li>
+      <li><strong>Distribution is the moat, not price.</strong> Compute commoditizes; the customer and site network is the durable asset.</li>
+    </ul>
+  </section>
+
+  <!-- 14 -->
+  <section class="s" id="s14">
+    <div class="s-num">Section 14</div>
+    <h2>Sources</h2>
+    <ol class="refs">
+      <li>McKinsey, "The cost of compute: A $7 trillion race to scale data centers" (2025). <a href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/the-cost-of-compute-a-7-trillion-dollar-race-to-scale-data-centers">mckinsey.com</a></li>
+      <li>Deloitte, "AI data centers jolt power demand" (2025). <a href="https://www.deloitte.com/us/en/insights/topics/strategy/ai-data-centers-and-power-demand.html">deloitte.com</a></li>
+      <li>Data Center Knowledge, "AI and Latency: Why Milliseconds Decide Data Center Winners." <a href="https://www.datacenterknowledge.com/networking/ai-and-latency-why-milliseconds-decide-data-center-winners">datacenterknowledge.com</a></li>
+      <li>NeuReality, "The 50% AI Inference Problem." <a href="https://www.neureality.ai/blog/the-50-percent-ai-inference-problem">neureality.ai</a></li>
+      <li>Tesla, "What Is a Virtual Power Plant?" <a href="https://www.tesla.com/support/energy/virtual-power-plant">tesla.com</a></li>
+      <li>SPAN, "SPAN Announces XFRA…" (2026). <a href="https://www.span.io/blog/span-announces-xfra-a-distributed-data-center-solution-to-close-the-speed-to-power-gap-for-ai-compute-demand">span.io</a></li>
+      <li>EdgeFlow, IEEE INFOCOM 2022. <a href="https://ieeexplore.ieee.org/document/9796908">ieeexplore.ieee.org</a></li>
+      <li>"Federated Learning in Edge Computing: A Systematic Survey," PMC. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9268650/">pmc.ncbi.nlm.nih.gov</a></li>
+      <li>MDI-LLM, arXiv (verify exact ID/title before citing). <a href="https://arxiv.org/abs/2503.06820">arxiv.org</a></li>
+    </ol>
+    <p class="disc">Concept-stage. All figures are preliminary estimates for discussion only and are not guarantees of performance. Statistics cited above should be re-verified against their primary sources and dated before distribution. Nothing herein is an offer to sell or a solicitation to buy any security. Legal, tax, and financing structures are subject to advice from qualified professionals. © 2026 Heliode · ATMX Holdings.</p>
+  </section>
+
+</div>
+
+<script>
+  document.getElementById('printbtn').addEventListener('click', ()=>window.print());
+  const prog=document.getElementById('prog');
+  window.addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    const p=h.scrollTop/((h.scrollHeight-h.clientHeight)||1);
+    prog.style.width=Math.min(100,p*100)+'%';
+  },{passive:true});
+</script>
+</body>
+</html>
