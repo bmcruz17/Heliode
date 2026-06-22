@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Heliode — Founder's Course</title>
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#f4f7fc;--panel:#ffffff;--ink:#0d1320;--mute:#525a66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+    --navy:#0d1320;
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4,.brand{font-family:'Space Grotesk',sans-serif;}
+  a{color:var(--blue);}
+  .prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--blue));z-index:60;transition:width .1s;}
+
+  .bar{background:rgba(13,19,32,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.08);position:sticky;top:0;z-index:40;display:none;}
+  .bar-in{max-width:1200px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  .brand{font-weight:700;font-size:1rem;display:flex;align-items:center;gap:9px;color:#fff;}
+  .brand .logo{width:20px;height:20px;display:inline-flex;}
+  .brand small{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:#9aa3b5;}
+  .bar-actions{display:flex;align-items:center;gap:10px;}
+  .bar a,.bar button{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#cdd5e3;background:none;border:none;cursor:pointer;text-decoration:none;}
+  .bar a:hover,.bar button:hover{color:#fff;}
+
+  /* Gate */
+  .gate{max-width:430px;margin:9vh auto 0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:32px 30px;box-shadow:0 12px 36px rgba(13,19,32,0.08);}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .gate h1{font-size:1.4rem;letter-spacing:-0.02em;margin-bottom:6px;}
+  .gate p{font-size:0.9rem;color:var(--mute);margin-bottom:14px;}
+  .fld{display:block;font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);margin:16px 0 7px;}
+  .inp{width:100%;background:#fff;border:1px solid var(--line2);border-radius:10px;padding:11px 13px;color:var(--ink);font-family:'Inter',sans-serif;font-size:0.92rem;outline:none;transition:.15s;}
+  .inp:focus{border-color:var(--blue-line);box-shadow:0 0 0 3px var(--blue-dim);}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.92rem;border-radius:10px;padding:12px;cursor:pointer;border:none;background:var(--accent);color:#fff;width:100%;margin-top:22px;}
+  .btn:hover{background:var(--accent-hover);}
+  .btn:disabled{opacity:.55;}
+  .gate-note{font-size:0.76rem;color:var(--faint);margin-top:16px;line-height:1.55;}
+  .gate-err{font-size:0.84rem;margin-top:14px;display:none;color:#dc2626;}
+  .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;display:inline-block;animation:sp .7s linear infinite;vertical-align:-2px;}
+  @keyframes sp{to{transform:rotate(360deg);}}
+
+  /* Course layout */
+  .app{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:264px 1fr;gap:0;align-items:start;}
+  .side{position:sticky;top:49px;align-self:start;height:calc(100vh - 49px);overflow-y:auto;background:var(--navy);padding:26px 18px 40px;}
+  .side .s-eye{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:#7c869b;margin:0 8px 12px;}
+  .toc a{display:block;color:#aeb6c6;text-decoration:none;font-size:0.86rem;padding:8px 10px;border-radius:8px;border-left:2px solid transparent;transition:.12s;margin-bottom:2px;}
+  .toc a:hover{color:#fff;background:rgba(255,255,255,0.05);}
+  .toc a.active{color:#fff;background:rgba(37,99,235,0.18);border-left-color:var(--accent);}
+  .toc a b{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--accent);margin-right:8px;}
+
+  .content{padding:38px 46px 100px;max-width:820px;}
+  .content .lead-eye{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);}
+  .content h1{font-size:2rem;letter-spacing:-0.02em;margin:8px 0 10px;}
+  .intro-p{font-size:1.05rem;color:var(--mute);margin-bottom:8px;}
+  .module{scroll-margin-top:74px;padding:38px 0;border-top:1px solid var(--line);}
+  .module:first-of-type{border-top:none;}
+  .mod-num{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);}
+  .module h2{font-size:1.5rem;letter-spacing:-0.02em;margin:6px 0 14px;}
+  .module h3{font-size:1.08rem;margin:24px 0 8px;letter-spacing:-0.01em;}
+  .module p{margin-bottom:13px;color:#3a424e;}
+  .module ul,.module ol{margin:6px 0 14px 0;padding-left:22px;}
+  .module li{margin-bottom:7px;color:#3a424e;}
+  .module strong{color:var(--ink);}
+  .eg{background:var(--blue-dim);border:1px solid var(--blue-line);border-radius:12px;padding:15px 18px;margin:16px 0;font-size:0.94rem;}
+  .eg b{color:var(--blue);}
+  .take{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:15px 18px;margin:20px 0 4px;}
+  .take .t{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+  .take ul{margin:0;padding-left:18px;}
+  .take li{font-size:0.9rem;margin-bottom:5px;}
+  table.t{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.9rem;}
+  table.t th,table.t td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);}
+  table.t th{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);}
+  table.t td.n{font-family:'JetBrains Mono',monospace;}
+  dl.gloss dt{font-weight:600;color:var(--ink);font-family:'Space Grotesk',sans-serif;margin-top:14px;}
+  dl.gloss dd{margin:2px 0 0;color:#3a424e;font-size:0.92rem;}
+  .hidden{display:none !important;}
+  @media(max-width:880px){
+    .app{grid-template-columns:1fr;}
+    .side{position:sticky;top:49px;height:auto;display:flex;gap:6px;overflow-x:auto;padding:10px 12px;white-space:nowrap;}
+    .side .s-eye{display:none;}
+    .toc{display:flex;gap:6px;}
+    .toc a{flex:0 0 auto;border-left:none;border-bottom:2px solid transparent;padding:7px 11px;font-size:0.8rem;}
+    .toc a.active{border-left:none;border-bottom-color:var(--accent);}
+    .toc a b{display:none;}
+    .content{padding:26px 22px 80px;}
+  }
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+
+<div class="bar" id="bar"><div class="bar-in">
+  <div class="brand"><span class="logo"><svg viewBox="0 0 64 64" fill="none"><g stroke="#3b82f6" stroke-width="3" stroke-linecap="round"><line x1="32" y1="32" x2="51" y2="32"/><line x1="32" y1="32" x2="41.5" y2="48.5"/><line x1="32" y1="32" x2="22.5" y2="48.5"/><line x1="32" y1="32" x2="13" y2="32"/><line x1="32" y1="32" x2="22.5" y2="15.5"/><line x1="32" y1="32" x2="41.5" y2="15.5"/></g><g fill="#3b82f6"><circle cx="51" cy="32" r="4"/><circle cx="41.5" cy="48.5" r="4"/><circle cx="22.5" cy="48.5" r="4"/><circle cx="13" cy="32" r="4"/><circle cx="22.5" cy="15.5" r="4"/><circle cx="41.5" cy="15.5" r="4"/></g><circle cx="32" cy="32" r="9" fill="#f97316"/></svg></span>HELIODE <small>Founder's Course</small></div>
+  <div class="bar-actions">
+    <a href="admin.html">Lead tracker</a>
+    <span style="color:#3a4456;">·</span>
+    <button id="lock">Sign out</button>
+  </div>
+</div></div>
+
+<!-- Gate -->
+<div class="gate" id="gate">
+  <div class="eyebrow">Confidential · Authorized access only</div>
+  <h1>Founder's Course</h1>
+  <p>Sign in with your admin account to open the course.</p>
+  <label class="fld" for="g-email">Email</label>
+  <input class="inp" id="g-email" type="email" autocomplete="username" placeholder="you@heliodegrid.com">
+  <label class="fld" for="g-pass">Password</label>
+  <input class="inp" id="g-pass" type="password" autocomplete="current-password" placeholder="••••••••••">
+  <button class="btn" id="g-go">Sign in</button>
+  <div class="gate-err" id="g-err"></div>
+  <p class="gate-note">Restricted to admin accounts on the allowlist. © 2026 Heliode · ATMX Holdings.</p>
+</div>
+
+<!-- Course -->
+<div id="course" class="hidden"><div class="app">
+  <aside class="side">
+    <div class="s-eye">Modules</div>
+    <nav class="toc" id="toc">
+      <a href="#m1"><b>01</b>The big idea</a>
+      <a href="#m2"><b>02</b>AI &amp; GPUs 101</a>
+      <a href="#m3"><b>03</b>The compute market</a>
+      <a href="#m4"><b>04</b>TAM · SAM · SOM</a>
+      <a href="#m5"><b>05</b>Unit economics</a>
+      <a href="#m6"><b>06</b>Fundraising 101</a>
+      <a href="#m7"><b>07</b>Risks &amp; validation</a>
+      <a href="#m8"><b>08</b>Glossary</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="lead-eye">Heliode Founder's Course</div>
+    <h1>From first principles to the raise.</h1>
+    <p class="intro-p">Everything behind Heliode in one place — the idea, the technology, the market and its economics, how to size it (TAM/SAM/SOM), the unit economics, and how the fundraise works. Read top to bottom, or jump around. Each module ends with the takeaways that matter.</p>
+
+    <section class="module" id="m1">
+      <div class="mod-num">Module 01</div>
+      <h2>The big idea — reasoning from first principles</h2>
+      <p>Start with the one sentence: <strong>Heliode sells AI computing power, and is building the distributed network that produces it — close to where the demand already is.</strong></p>
+      <h3>The bottleneck</h3>
+      <p>Modern AI runs on GPUs. Demand for them is exploding. But you can't just conjure more: a GPU needs a building, and a building needs <strong>power</strong> — and the power grid is the slow part. New grid hookups (interconnection) can take <strong>5–7 years</strong>, and a new data center is a multi-year, multi-billion-dollar build. So the true constraint on AI isn't only chips; it's <strong>power and time-to-build</strong>.</p>
+      <h3>The first-principles move</h3>
+      <p>If power and build-time are the constraint, don't fight the grid — go where power already exists. Commercial and light-industrial buildings already carry heavy electrical service. Put GPU capacity there, next to the teams that need it, and you stand up compute in <strong>days, not years.</strong></p>
+      <h3>Where the moat is</h3>
+      <p>The hard part isn't the chips — anyone can buy those. The hard part is <strong>distribution</strong>: finding the sites, signing them, installing, and operating many locations as if they were one. That's exactly the part big players don't want to do, which is why it's defensible. Heliode owns the <strong>site network and the customer relationships</strong>; the hardware rides on top and refreshes every ~5 years.</p>
+      <h3>Two phases (de-risked on purpose)</h3>
+      <ul>
+        <li><strong>Phase 1 — Managed brokerage (now):</strong> buy GPU capacity wholesale on the open market, wrap it in a managed service, resell it. Asset-light, revenue immediately, and it <em>proves demand</em> and signs the buyers (offtake) that de-risk Phase 2.</li>
+        <li><strong>Phase 2 — Owned capacity (next):</strong> deploy owned GPU clusters on power-ready sites, financed against those contracts — the way infrastructure is normally financed: against signed revenue, not equity.</li>
+      </ul>
+      <div class="take"><div class="t">Key takeaways</div><ul>
+        <li>The constraint on AI is power + build-time, not just chips.</li>
+        <li>Go where power already is → deploy in days, not years.</li>
+        <li>The moat is distribution (sites + customers), not the hardware.</li>
+        <li>Brokerage first proves demand and funds/secures the owned build.</li>
+      </ul></div>
+    </section>
+
+    <section class="module" id="m2">
+      <div class="mod-num">Module 02</div>
+      <h2>AI &amp; GPUs 101 — what we're actually selling</h2>
+      <h3>Training vs. inference</h3>
+      <p>An AI model has two phases of compute. <strong>Training</strong> is building the model — a huge, one-time, expensive compute job. <strong>Inference</strong> is <em>running</em> the finished model in production to answer requests — and it never stops. Every chatbot reply, image, or recommendation is an inference. As AI products ship, <strong>inference is overtaking training</strong> as the dominant, steady, 24/7 compute load. That steady demand is exactly what Heliode targets.</p>
+      <h3>What a GPU is, and why</h3>
+      <p>A GPU (graphics processing unit) is a chip built to do enormous amounts of simple math <em>in parallel</em>. AI is mostly matrix multiplication at massive scale, which is precisely what GPUs are good at and CPUs are slow at. NVIDIA dominates (H100, H200, and the newer Blackwell generation). GPUs are scarce, expensive, and power-hungry — which is the whole game.</p>
+      <h3>The unit: a GPU-hour</h3>
+      <p>Compute is bought and sold in <strong>GPU-hours</strong> — one GPU running for one hour. You rent capacity by the hour (or reserve it monthly). Heliode buys GPU-hours wholesale and resells them as a managed service.</p>
+      <h3>Who the players are (the supply ladder)</h3>
+      <table class="t"><thead><tr><th>Layer</th><th>Who</th><th>Price</th></tr></thead><tbody>
+        <tr><td>Hyperscalers</td><td>AWS, Google Cloud, Azure</td><td class="n">Highest — convenient, locked-in</td></tr>
+        <tr><td>Neoclouds</td><td>CoreWeave, Lambda, Crusoe, Together</td><td class="n">Mid — GPU-specialized</td></tr>
+        <tr><td>Marketplaces / spot</td><td>Vast.ai, RunPod, Spheron</td><td class="n">Lowest — cheap, less managed</td></tr>
+      </tbody></table>
+      <p>Heliode sources from the <strong>cheap layer</strong>, adds management and reliability, and sells <strong>below hyperscaler pricing</strong>. The gap between those layers is the opportunity.</p>
+      <div class="take"><div class="t">Key takeaways</div><ul>
+        <li>Inference = running models live, 24/7 — our target load.</li>
+        <li>GPUs do AI's parallel math; the unit is the GPU-hour.</li>
+        <li>There's a price ladder from marketplaces (cheap) to hyperscalers (expensive); we arbitrage it.</li>
+      </ul></div>
+    </section>
+
+    <section class="module" id="m3">
+      <div class="mod-num">Module 03</div>
+      <h2>The compute market &amp; its economics</h2>
+      <h3>Demand</h3>
+      <p>Inference demand is steady, latency-sensitive, and growing fast as AI gets embedded in real products. Unlike training (bursty), inference is a 24/7 utility — ideal for a capacity business.</p>
+      <h3>Supply (and why it's stuck)</h3>
+      <p>Supply can't keep up because the binding constraint is <strong>power</strong>, not chips. Grid interconnection queues run years; permitting is slow; data-center capex is enormous. This is why distributing onto existing power is such a leverage point.</p>
+      <h3>Pricing &amp; the spread</h3>
+      <p>The same GPU-hour costs wildly different amounts depending on where you buy it. That spread is the business.</p>
+      <div class="eg"><b>The arbitrage, concretely:</b> an H100-hour costs roughly <b>~$2 wholesale</b> on marketplaces. Heliode resells it managed at <b>~$3</b> — still <b>well under the $5–10</b> a hyperscaler charges. The buyer saves; Heliode keeps ~$1/GPU-hr plus the managed-service premium.</div>
+      <h3>Why brokerage works <em>now</em></h3>
+      <ul>
+        <li><strong>Asset-light:</strong> no hardware to buy — you resell others' capacity.</li>
+        <li><strong>Immediate revenue:</strong> margin shows up from month one.</li>
+        <li><strong>It proves demand</strong> and produces the signed offtake that makes owned hardware financeable.</li>
+      </ul>
+      <div class="take"><div class="t">Key takeaways</div><ul>
+        <li>Demand is a 24/7 utility; supply is throttled by power and build-time.</li>
+        <li>The price ladder creates a real spread you can capture.</li>
+        <li>Brokerage is the low-risk on-ramp that funds and de-risks the rest.</li>
+      </ul></div>
+    </section>
+
+    <section class="module" id="m4">
+      <div class="mod-num">Module 04</div>
+      <h2>Market sizing — TAM, SAM, SOM</h2>
+      <p>Investors want to know how big this can get. Three nested numbers answer that — from the whole universe down to what you can realistically capture.</p>
+      <table class="t"><thead><tr><th>Term</th><th>What it means</th><th>Heliode</th></tr></thead><tbody>
+        <tr><td><strong>TAM</strong><br><span class="sub">Total Addressable Market</span></td><td>Total spend if you served 100% of the entire market.</td><td class="n">AI compute / GPU infrastructure — hundreds of $B today → $1T+ by 2030.</td></tr>
+        <tr><td><strong>SAM</strong><br><span class="sub">Serviceable Available Market</span></td><td>The slice your specific product/model can actually serve.</td><td class="n">GPU-as-a-service you can resell/own — ~$15–25B → $100B+.</td></tr>
+        <tr><td><strong>SOM</strong><br><span class="sub">Serviceable Obtainable Market</span></td><td>The realistic share you can win in the next few years.</td><td class="n">Inference teams in Austin/SF/Seattle/Boston you can sign.</td></tr>
+      </tbody></table>
+      <h3>Top-down vs. bottoms-up</h3>
+      <p><strong>Top-down</strong> takes a giant analyst number and shaves a percentage off ("if we get 1% of a $100B market…"). Investors distrust it. <strong>Bottoms-up</strong> builds from reality: count customers × what they spend × your win rate. That earns respect.</p>
+      <div class="eg"><b>Bottoms-up SOM example:</b> say there are ~500 inference-heavy teams across your 4 metros, spending an average ~$15K/mo on GPUs. That's <b>$90M/yr</b> of nearby spend. Win 15% over three years → <b>~$13.5M/yr</b> in revenue you can credibly point to — far more convincing than "1% of a trillion."</div>
+      <h3>How to present it</h3>
+      <p>Lead with the <strong>massive TAM</strong> (ambition), then land on a <strong>credible bottoms-up SOM</strong> (believability). The big number gets attention; the small number gets the check.</p>
+      <div class="take"><div class="t">Key takeaways</div><ul>
+        <li>TAM = whole market, SAM = your serviceable slice, SOM = what you can realistically win.</li>
+        <li>Always back the SOM with a bottoms-up count, not a percentage of the TAM.</li>
+        <li>Pitch both: huge TAM for the upside, grounded SOM for credibility.</li>
+      </ul></div>
+    </section>
+
+    <section class="module" id="m5">
+      <div class="mod-num">Module 05</div>
+      <h2>Unit economics — does one unit make money?</h2>
+      <h3>Phase 1 — brokerage margin</h3>
+      <p>Per GPU-hour you pay ~$2 wholesale and sell ~$3 → <strong>~$1 gross margin</strong> (≈33%). A dedicated H100 run continuously (~730 hrs/mo) is <strong>~$2,190 revenue − ~$1,460 cost = ~$730 gross margin per GPU per month.</strong></p>
+      <div class="eg"><b>First real month, 5–6 clients:</b> at ~8 GPUs each that's ~48 GPUs → ~$105K revenue, ~$70K cost, <b>~$35K gross profit/month</b> — with near-zero CAC under the quote-first offer (you only spin up paid capacity once they say yes).</div>
+      <h3>Phase 2 — owned node</h3>
+      <p>A single owned node (≈16 GPUs + battery) base case: <strong>~$9,800/mo gross, ~$2,200/mo opex, ~$7,600/mo net contribution</strong>, ~year-3 payback, and roughly <strong>+$170K net per node over 5 years</strong>. The big caveat: hardware cost (~$220K is a planning number you must <strong>ground-truth with real quotes</strong>), and <strong>none of it works without contracted offtake.</strong></p>
+      <h3>The levers</h3>
+      <ul>
+        <li><strong>Realized price</strong> per GPU-hr and <strong>utilization</strong> (hours actually sold) drive revenue.</li>
+        <li><strong>Hardware cost</strong> and the annual <strong>price decline</strong> drive the long-run return.</li>
+        <li>Run the sensitivity grid before you commit capital — the conservative case must still clear amortization.</li>
+      </ul>
+      <div class="take"><div class="t">Key takeaways</div><ul>
+        <li>Brokerage: ~$730 gross margin per GPU/month; profit from month one.</li>
+        <li>Owned node: ~$7.6K/mo net, ~yr-3 payback — but only with signed offtake.</li>
+        <li>Ground-truth the hardware BOM; price, utilization, and cost are the swing factors.</li>
+      </ul></div>
+    </section>
+
+    <section class="module" id="m6">
+      <div class="mod-num">Module 06</div>
+      <h2>Fundraising 101 — raising $2M on a SAFE</h2>
+      <h3>The basics of equity</h3>
+      <p>Your company is divided into <strong>shares</strong>. Selling shares to investors gives them ownership (a %) and gives you cash. The full list of who owns what is the <strong>cap table</strong>. Every time you raise, existing owners are <strong>diluted</strong> (their % shrinks) — that's normal and fine if the pie grows.</p>
+      <h3>What a SAFE is</h3>
+      <p>A <strong>SAFE</strong> (Simple Agreement for Future Equity) is the standard early-stage instrument. The investor gives you money now; it converts into shares <em>later</em> (at your next priced round). It's fast and cheap — no need to set an exact share price today.</p>
+      <ul>
+        <li><strong>Valuation cap:</strong> the maximum company value at which their money converts — the number that really sets their ownership. Lower cap = more ownership for them.</li>
+        <li><strong>Discount:</strong> sometimes added — they convert at, say, 20% below the next round's price.</li>
+        <li><strong>Post-money SAFE</strong> (the YC standard) makes your dilution easy to calculate.</li>
+      </ul>
+      <h3>The math that matters</h3>
+      <p>Ownership = investment ÷ post-money valuation. Raising <strong>$2M on a ~$10M cap ≈ 20% dilution</strong>. A healthy pre-seed gives up ~15–25%. Price too high (giving up only 5%) and investors balk and you risk a painful <strong>down round</strong> later.</p>
+      <h3>Structure &amp; who you raise from</h3>
+      <ul>
+        <li><strong>Delaware C-corp</strong> is what investors expect — set it up (Clerky / Stripe Atlas / Carta), issue founder stock, and <strong>file your 83(b) within 30 days.</strong></li>
+        <li><strong>Angels</strong> write $25–100K; <strong>pre-seed funds</strong> lead with $250–500K; <strong>accelerators</strong> (YC, Capital Factory) add capital + network.</li>
+        <li><strong>Run it as a batch:</strong> line up many conversations so they overlap — competition is what raises your cap and creates urgency.</li>
+      </ul>
+      <h3>The one rule you don't break</h3>
+      <p>Selling shares is a <strong>securities transaction</strong>. Keep it to <strong>accredited investors</strong> under Regulation D and use a startup lawyer. Don't freelance this part.</p>
+      <div class="take"><div class="t">Key takeaways</div><ul>
+        <li>A SAFE = money now, shares later; the <strong>valuation cap</strong> sets ownership.</li>
+        <li>$2M on a ~$10M cap ≈ 20% dilution — a normal, healthy pre-seed.</li>
+        <li>Delaware C-corp + 83(b) + a lawyer + accredited investors. Batch the raise.</li>
+      </ul></div>
+    </section>
+
+    <section class="module" id="m7">
+      <div class="mod-num">Module 07</div>
+      <h2>Risks &amp; the 90-day validation sprint</h2>
+      <p>Honest founders name the risks and attack them. The biggest ones, in order:</p>
+      <ol>
+        <li><strong>Site/host acquisition</strong> — the hardest problem. De-risk by starting on <strong>power-ready commercial/light-industrial</strong> sites, not cold residential.</li>
+        <li><strong>Hardware cost</strong> — the ~$220K node is an estimate; get vendor quotes before committing capital.</li>
+        <li><strong>Offtake</strong> — no buyer, no business. The brokerage exists to produce signed demand.</li>
+        <li><strong>Financing</strong> — hardware is financed against contracts; that needs real offtake first.</li>
+        <li><strong>Regulatory/permitting, price decline, GPU supply, and team scope</strong> — manage early, plan conservatively.</li>
+      </ol>
+      <h3>The sprint (next 90 days)</h3>
+      <ul>
+        <li>A vendor-quoted hardware <strong>BOM</strong>.</li>
+        <li><strong>3–5 power-ready test sites</strong> with measured power, noise, install complexity.</li>
+        <li><strong>2–3 buyer contracts or LOIs</strong> via the brokerage.</li>
+        <li>An Austin <strong>electrical &amp; permitting</strong> read.</li>
+        <li>The model refreshed with real numbers.</li>
+      </ul>
+      <p>Clearing these turns the pilot from a concept into an <strong>underwritable plan</strong> — and lets you raise at a higher number, honestly.</p>
+      <div class="take"><div class="t">Key takeaways</div><ul>
+        <li>Name the risks; site acquisition and hardware cost are the big two.</li>
+        <li>Prove the hard parts in 90 days before the pilot raise.</li>
+        <li>Traction — real BOM, sites, and LOIs — is what earns a higher valuation.</li>
+      </ul></div>
+    </section>
+
+    <section class="module" id="m8">
+      <div class="mod-num">Module 08</div>
+      <h2>Glossary</h2>
+      <dl class="gloss">
+        <dt>GPU</dt><dd>The chip that runs AI's parallel math. Our product is access to GPUs.</dd>
+        <dt>GPU-hour</dt><dd>One GPU running for one hour — the unit we buy wholesale and resell.</dd>
+        <dt>Inference</dt><dd>Running a trained AI model in production. The steady, 24/7 load we target.</dd>
+        <dt>Training</dt><dd>Building the model — a huge, one-time compute job (vs. inference, which is continuous).</dd>
+        <dt>Node</dt><dd>One deployed unit of our hardware (a server with ~16 GPUs + battery) on a host site.</dd>
+        <dt>Hyperscaler / Neocloud / Marketplace</dt><dd>The price ladder of GPU supply — from expensive/convenient (AWS) to cheap/spot (Vast.ai).</dd>
+        <dt>MRR</dt><dd>Monthly Recurring Revenue — predictable monthly income.</dd>
+        <dt>Net contribution</dt><dd>Revenue minus a node's direct running costs, before company overhead and taxes.</dd>
+        <dt>Opex / Capex</dt><dd>Ongoing operating expense vs. one-time capital expense (hardware).</dd>
+        <dt>Amortization</dt><dd>Spreading a one-time hardware cost across its useful life to see true monthly profit.</dd>
+        <dt>Utilization</dt><dd>The share of hours a node is actually sold/working.</dd>
+        <dt>Offtake</dt><dd>A signed commitment from a buyer to purchase the compute.</dd>
+        <dt>LOI</dt><dd>Letter of Intent — a buyer's written (usually non-binding) intent to purchase.</dd>
+        <dt>CAC</dt><dd>Customer Acquisition Cost — what it costs to win a customer.</dd>
+        <dt>BOM</dt><dd>Bill of Materials — the itemized, quoted cost of everything in a node.</dd>
+        <dt>TAM / SAM / SOM</dt><dd>Total / Serviceable-available / Serviceable-obtainable market — the nested sizing numbers.</dd>
+        <dt>SAFE</dt><dd>Simple Agreement for Future Equity — money now that converts to shares later.</dd>
+        <dt>Valuation cap</dt><dd>The max company value at which a SAFE converts; it sets the investor's ownership.</dd>
+        <dt>Pre- / Post-money</dt><dd>Company value before / after the new investment is added.</dd>
+        <dt>Dilution</dt><dd>The reduction in existing owners' percentage when new shares are issued.</dd>
+        <dt>C-corp</dt><dd>The Delaware corporation structure investors expect for equity rounds.</dd>
+        <dt>83(b) election</dt><dd>A tax filing (within 30 days of getting founder stock) that can save you a lot later.</dd>
+        <dt>Reg D / Accredited investor</dt><dd>The private-placement rules; accredited investors meet income/net-worth thresholds.</dd>
+      </dl>
+    </section>
+  </main>
+</div></div>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  const SB_URL = 'https://pyosjuuvbxzyjtokfqfu.supabase.co';
+  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5b3NqdXV2Ynh6eWp0b2tmcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjk4MTcsImV4cCI6MjA5NzY0NTgxN30.7bH19ZZJHxchfRVt3t-I20gJ44WvbR3al516QhwQpmw';
+  const sb = createClient(SB_URL, SB_KEY);
+  const $ = id => document.getElementById(id);
+
+  function showGate(msg){
+    $('course').classList.add('hidden'); $('bar').style.display='none';
+    $('gate').classList.remove('hidden');
+    const e=$('g-err'); if(msg){ e.textContent=msg; e.style.display='block'; } else e.style.display='none';
+  }
+  function showCourse(email){
+    $('gate').classList.add('hidden');
+    $('course').classList.remove('hidden'); $('bar').style.display='block';
+    initScroll();
+  }
+  async function route(){
+    const { data:{ session } } = await sb.auth.getSession();
+    if(!session){ showGate(); return; }
+    const { data:isAdmin, error } = await sb.rpc('is_admin');
+    if(error){ showGate('Could not verify access — please try again.'); return; }
+    if(!isAdmin){ await sb.auth.signOut(); showGate('Signed in, but this account is not an authorized admin.'); return; }
+    showCourse(session.user.email);
+  }
+  $('g-go').addEventListener('click', signIn);
+  $('g-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') signIn(); });
+  async function signIn(){
+    const btn=$('g-go'); $('g-err').style.display='none';
+    const email=$('g-email').value.trim(), password=$('g-pass').value;
+    if(!email||!password){ showGate('Enter your email and password.'); return; }
+    btn.disabled=true; btn.innerHTML='<span class="spin"></span> Signing in…';
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    btn.disabled=false; btn.textContent='Sign in';
+    if(error){ showGate('Sign-in failed. Check your credentials.'); return; }
+    $('g-pass').value=''; route();
+  }
+  $('lock').addEventListener('click', async ()=>{ await sb.auth.signOut(); $('g-email').value=''; $('g-pass').value=''; route(); });
+
+  let scrollInit=false;
+  function initScroll(){
+    if(scrollInit) return; scrollInit=true;
+    const links=[...document.querySelectorAll('#toc a')];
+    const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+    function onScroll(){
+      const h=document.documentElement;
+      const p=h.scrollTop/((h.scrollHeight-h.clientHeight)||1);
+      $('prog').style.width=Math.min(100,p*100)+'%';
+      let idx=0; secs.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top<=130) idx=i; });
+      links.forEach((a,i)=>a.classList.toggle('active', i===idx));
+    }
+    window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  }
+  route();
+</script>
+</body>
+</html>
