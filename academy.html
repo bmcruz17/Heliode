@@ -77,6 +77,30 @@
   .take .t{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
   .take ul{margin:0;padding-left:18px;}
   .take li{font-size:0.9rem;margin-bottom:5px;}
+
+  /* graduate outcome promise */
+  .outcome{background:var(--navy);color:#e6ebf5;border-radius:16px;padding:24px 26px;margin:22px 0 8px;}
+  .outcome .o-eye{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .outcome h3{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;color:#fff;margin:0 0 12px;}
+  .outcome ul{margin:0;padding-left:20px;}
+  .outcome li{color:#c3ccdd;margin-bottom:7px;font-size:0.94rem;}
+  .outcome li b{color:#fff;}
+
+  /* film-this script blocks (for CapCut / Opus) */
+  .film{border:1px dashed var(--accent-line);background:var(--accent-dim);border-radius:14px;padding:0;margin:24px 0 4px;overflow:hidden;}
+  .film summary{list-style:none;cursor:pointer;padding:13px 18px;display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-hover);font-weight:500;}
+  .film summary::-webkit-details-marker{display:none;}
+  .film summary::before{content:"▶";font-size:0.6rem;transition:.15s;}
+  .film[open] summary::before{transform:rotate(90deg);}
+  .film summary .dur{margin-left:auto;color:var(--faint);font-size:0.62rem;letter-spacing:0.05em;}
+  .film-body{padding:4px 18px 18px;}
+  .film-body .lbl{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);margin:14px 0 5px;}
+  .film-body .lbl:first-child{margin-top:4px;}
+  .script{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;font-size:0.92rem;color:var(--body);line-height:1.6;}
+  .script p{margin-bottom:9px;}.script p:last-child{margin-bottom:0;}
+  .film-body .vis{font-size:0.88rem;color:var(--body);margin:0;padding-left:18px;}
+  .film-body .vis li{margin-bottom:4px;}
+  .ost{display:inline-block;background:#0d1320;color:#fff;font-family:'JetBrains Mono',monospace;font-size:0.78rem;padding:2px 8px;border-radius:6px;margin:3px 4px 3px 0;}
   table.t{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.9rem;}
   table.t th,table.t td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
   table.t th{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);}
@@ -123,7 +147,11 @@
     .print-cover .pc-s{color:#555;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;}
     .opts button{border:1px solid #ccc !important;background:#fff !important;color:#000 !important;}
     .fb{display:block !important;background:#f3f3f3 !important;}
-    .take,.eg,.quiz,.qq{break-inside:avoid;}
+    .take,.eg,.quiz,.qq,.film,.outcome{break-inside:avoid;}
+    .film{border:1px solid #ccc !important;background:#fafafa !important;}
+    .film .film-body{display:block !important;}
+    .outcome{background:#f3f3f3 !important;color:#000 !important;}
+    .outcome h3,.outcome li b{color:#000 !important;}.outcome li{color:#222 !important;}
     a{color:#000;text-decoration:none;}
     @page{margin:15mm;}
   }
@@ -165,7 +193,8 @@
       <a href="#m5"><b>05</b>Unit economics</a>
       <a href="#m6"><b>06</b>Fundraising 101</a>
       <a href="#m7"><b>07</b>Risks &amp; validation</a>
-      <a href="#m8"><b>08</b>Glossary</a>
+      <a href="#m8"><b>08</b>Sales &amp; closing</a>
+      <a href="#m9"><b>09</b>Glossary</a>
     </nav>
   </aside>
 
@@ -173,7 +202,22 @@
     <div class="print-cover"><div class="pc-t">Heliode — Founder's Course</div><div class="pc-s">From first principles to the raise · Confidential</div></div>
     <div class="lead-eye">Heliode Founder's Course</div>
     <h1>From first principles to the raise.</h1>
-    <p class="intro-p">Everything behind Heliode — the idea, the technology, the market and its economics, how to size it, the unit economics, and how the raise works. Read top to bottom or jump around; each module ends with takeaways and a quick quiz. Use <b>Save as PDF</b> (top right) for an offline copy.</p>
+    <p class="intro-p">Everything behind Heliode — who we are, what we sell, the problem we solve, the market and its economics, how to size it, the unit economics, how the raise works, and how to actually sell it. Read top to bottom or jump around; each module ends with takeaways and a quick quiz. Use <b>Save as PDF</b> (top right) for an offline copy.</p>
+
+    <div class="outcome">
+      <div class="o-eye">What you'll be able to do when you finish</div>
+      <h3>Graduate outcome — explain Heliode to anyone, and sell it.</h3>
+      <ul>
+        <li><b>Say what we do in one breath</b> — "we sell AI computing power and own the process behind it" — and back it up with the why.</li>
+        <li><b>Picture the whole machine:</b> what a GPU is, what a GPU-hour is, where we buy it, where we sell it, and why the spread exists.</li>
+        <li><b>Explain the real problem</b> — AI is throttled by power and build-time, not chips — and why our move (go where power already is) wins.</li>
+        <li><b>Run the numbers cold:</b> brokerage margin per GPU, owned-node payback, TAM/SAM/SOM, and what the raise buys.</li>
+        <li><b>Sit across from a prospect and close</b> — open, discover, pitch, handle the four objections you'll actually hear, and ask for the deal.</li>
+        <li><b>Walk into an investor meeting</b> able to defend every number on the page.</li>
+      </ul>
+    </div>
+
+    <div class="eg" style="margin-top:18px;">🎬 <b>Filming this as videos.</b> Every module has a collapsible <b style="color:var(--accent-hover)">▶ Film this</b> block with a ready-to-read script, on-screen text callouts, and B-roll/visual notes — sized for a 60–90s clip you can shoot on your phone and cut in CapCut or Opus Clip. Read the script to camera, drop the on-screen text as captions, and layer the visuals over the top. Do them in order and you'll have a full course playlist.</div>
 
     <!-- ===== M1 ===== -->
     <section class="module" id="m1">
@@ -201,6 +245,24 @@
         <li>The moat is distribution (sites + customers); hardware is a refreshing wedge.</li>
         <li>Brokerage first proves demand and funds/secures the owned build.</li>
       </ul></div>
+      <details class="film"><summary>🎬 Film this — "The big idea" <span class="dur">~75 sec</span></summary>
+      <div class="film-body">
+        <div class="lbl">Script (read to camera)</div>
+        <div class="script">
+          <p>"Everyone thinks the bottleneck for AI is chips. It's not. It's <b>power</b>. A GPU needs a building, and a building needs electricity — and getting new power to a site can take five to seven years. That's the real wall."</p>
+          <p>"So here's the move: instead of waiting years to build a new data center, we go where the power <i>already</i> exists — commercial and industrial buildings that already have heavy electrical service sitting there. We drop AI compute in, right next to the companies that need it, and we're live in days instead of years."</p>
+          <p>"And the part nobody copies? The chips aren't the moat — anyone can buy a GPU. The moat is the <b>network</b>: the sites and the customer relationships. We're not just selling compute. We own the process behind it. That's Heliode."</p>
+        </div>
+        <div class="lbl">On-screen text (captions)</div>
+        <span class="ost">It's not the chips.</span><span class="ost">It's the power.</span><span class="ost">5–7 yrs for new power</span><span class="ost">Go where power already is</span><span class="ost">Live in days, not years</span><span class="ost">We own the process behind AI compute</span>
+        <div class="lbl">Visuals / B-roll</div>
+        <ul class="vis">
+          <li>Open on your face, direct to camera — hook line first, no intro.</li>
+          <li>Cut to a stat card animating: "5–7 YEARS" for grid interconnection.</li>
+          <li>Map or warehouse exterior B-roll when you say "where the power already exists."</li>
+          <li>End on the Heliode logo + tagline "We own the process behind AI computing."</li>
+        </ul>
+      </div></details>
       <div class="quiz"><div class="quiz-h">Quick check</div>
         <div class="qq" data-a="b"><p class="qp">1. What is the real binding constraint on adding AI compute?</p><div class="opts"><button data-o="a">The number of software engineers</button><button data-o="b">Power availability and time-to-build</button><button data-o="c">Internet bandwidth</button></div><div class="fb"><b>Answer: B.</b> Chips matter, but power and the years-long build/interconnection timeline are what actually throttle new capacity.</div></div>
         <div class="qq" data-a="c"><p class="qp">2. Where is Heliode's durable moat?</p><div class="opts"><button data-o="a">Owning the best GPUs</button><button data-o="b">Having the cheapest electricity</button><button data-o="c">Distribution — the site network and customer relationships</button></div><div class="fb"><b>Answer: C.</b> Hardware commoditizes and refreshes; the site + customer network is the asset that compounds.</div></div>
@@ -239,6 +301,24 @@
         <li>"Managed" = provisioning, orchestration, reliability, one endpoint, one bill.</li>
         <li>We arbitrage the price ladder: buy cheap/spot, sell managed under hyperscaler rates.</li>
       </ul></div>
+      <details class="film"><summary>🎬 Film this — "What we actually sell" <span class="dur">~80 sec</span></summary>
+      <div class="film-body">
+        <div class="lbl">Script (read to camera)</div>
+        <div class="script">
+          <p>"Quick AI vocab, because it makes everything click. There are two jobs: <b>training</b> and <b>inference</b>. Training is building the model — one giant, expensive job, done once. Inference is <i>running</i> that finished model to answer real requests — and it never stops. Every chatbot reply, every image, every recommendation is an inference."</p>
+          <p>"As AI ships into actual products, inference is overtaking training. It's steady, it's 24/7, and it grows with every feature companies launch. That steady, always-on demand is exactly what you want underneath a compute business."</p>
+          <p>"What we sell is access to that compute, measured in <b>GPU-hours</b> — one GPU, one hour. We buy GPU-hours cheap, wrap them in a managed service — provisioning, reliability, one endpoint, one bill — and the customer just points at us. They ship the model, we handle the metal."</p>
+        </div>
+        <div class="lbl">On-screen text (captions)</div>
+        <span class="ost">Training = build it once</span><span class="ost">Inference = run it 24/7</span><span class="ost">Inference is overtaking training</span><span class="ost">Unit = the GPU-hour</span><span class="ost">You ship the model. We handle the metal.</span>
+        <div class="lbl">Visuals / B-roll</div>
+        <ul class="vis">
+          <li>Split-screen graphic: "TRAINING / once" vs "INFERENCE / always on."</li>
+          <li>Animate a single GPU + clock to define "GPU-hour."</li>
+          <li>Show the supply-ladder table (Hyperscaler → Neocloud → Marketplace) building row by row.</li>
+          <li>Close on the "one endpoint, one bill" line over a simple diagram (many machines → one arrow).</li>
+        </ul>
+      </div></details>
       <div class="quiz"><div class="quiz-h">Quick check</div>
         <div class="qq" data-a="b"><p class="qp">1. Which workload is Heliode's primary target?</p><div class="opts"><button data-o="a">Training — the one-time model build</button><button data-o="b">Inference — running models in production, 24/7</button><button data-o="c">Video rendering</button></div><div class="fb"><b>Answer: B.</b> Inference is the steady, growing, latency-sensitive load — ideal for a capacity business.</div></div>
         <div class="qq" data-a="c"><p class="qp">2. What is a "GPU-hour"?</p><div class="opts"><button data-o="a">The time it takes to train a model</button><button data-o="b">A GPU's memory capacity</button><button data-o="c">One GPU running for one hour — the unit we buy and sell</button></div><div class="fb"><b>Answer: C.</b> It's the basic billing unit of compute.</div></div>
@@ -275,6 +355,23 @@
         <li>The price ladder creates a real spread — but watch spot variability and idle commitments.</li>
         <li>Your edge is cheaper + managed + local + fast, not price alone.</li>
       </ul></div>
+      <details class="film"><summary>🎬 Film this — "Where the money is" <span class="dur">~70 sec</span></summary>
+      <div class="film-body">
+        <div class="lbl">Script (read to camera)</div>
+        <div class="script">
+          <p>"Here's the part that makes this a business. The exact same GPU-hour costs wildly different amounts depending on where you buy it. On the cheap marketplaces, an H100-hour runs around two dollars. At a big cloud — AWS, Google, Azure — that same hour is five to ten."</p>
+          <p>"We buy at the bottom, add the management the cheap layer doesn't have — reliability, orchestration, support — and we sell it for around three. The customer still pays way less than the hyperscaler, and we keep about a dollar an hour plus the service premium. That gap is the whole game."</p>
+          <p>"And demand under it behaves like a utility — steady, 24/7, growing with every AI feature shipped. Supply can't catch up because it's stuck behind power and permitting. Strong demand, throttled supply, a real price spread. That's why now."</p>
+        </div>
+        <div class="lbl">On-screen text (captions)</div>
+        <span class="ost">Buy ~$2</span><span class="ost">Sell ~$3</span><span class="ost">Hyperscaler: $5–10</span><span class="ost">Keep ~$1/hr + service</span><span class="ost">Strong demand · throttled supply</span>
+        <div class="lbl">Visuals / B-roll</div>
+        <ul class="vis">
+          <li>Build a simple bar/number line: $2 cost → $3 sell → $5–10 hyperscaler. Highlight the spread.</li>
+          <li>Animate the "$1/GPU-hr" margin landing in a pile.</li>
+          <li>Use a rising demand curve vs. a flat/stuck supply line for the "why now" beat.</li>
+        </ul>
+      </div></details>
       <div class="quiz"><div class="quiz-h">Quick check</div>
         <div class="qq" data-a="c"><p class="qp">1. Roughly what is the margin per H100-hour in the brokerage model?</p><div class="opts"><button data-o="a">~$0.05</button><button data-o="b">~$10</button><button data-o="c">~$1 (buy ~$2, sell ~$3)</button></div><div class="fb"><b>Answer: C.</b> ~$1/GPU-hr gross, while still undercutting the hyperscaler's $5–10.</div></div>
         <div class="qq" data-a="b"><p class="qp">2. What's a key risk hidden inside the spread?</p><div class="opts"><button data-o="a">Customers paying too quickly</button><button data-o="b">Committing to wholesale capacity that then sits idle, eating margin</button><button data-o="c">GPUs being too reliable</button></div><div class="fb"><b>Answer: B.</b> Match your wholesale commitments to actual demand; idle reserved capacity destroys margin.</div></div>
@@ -308,6 +405,23 @@
         <li>Back the SOM with a bottoms-up count, never a percentage of the TAM.</li>
         <li>Pitch both: huge TAM for upside, grounded SOM for credibility.</li>
       </ul></div>
+      <details class="film"><summary>🎬 Film this — "How big can this get?" <span class="dur">~70 sec</span></summary>
+      <div class="film-body">
+        <div class="lbl">Script (read to camera)</div>
+        <div class="script">
+          <p>"When an investor asks how big this can get, you answer with three numbers that nest inside each other. <b>TAM</b> is the whole market if you owned 100% of it — AI compute is hundreds of billions today, heading past a trillion by 2030. <b>SAM</b> is the slice you can actually serve. <b>SOM</b> is what you can realistically win in the next few years."</p>
+          <p>"Here's the trick that earns trust: never say 'we'll get 1% of a trillion-dollar market.' Investors hear that and tune out, because any giant number times 1% looks good. Instead, build it from the ground up — count real customers, times what they spend, times your win rate."</p>
+          <p>"Five hundred inference-heavy teams in our metros, fifteen grand a month each, that's ninety million a year nearby. Win fifteen percent over three years — call it thirteen and a half million a year — and now every input is something they can check. Big number for ambition, small number for the check."</p>
+        </div>
+        <div class="lbl">On-screen text (captions)</div>
+        <span class="ost">TAM · SAM · SOM</span><span class="ost">Never: "1% of a trillion"</span><span class="ost">Customers × spend × win rate</span><span class="ost">$90M nearby → ~$13.5M/yr</span><span class="ost">Ambition gets attention. Grounded gets the check.</span>
+        <div class="lbl">Visuals / B-roll</div>
+        <ul class="vis">
+          <li>Three nested circles animating outward (SOM inside SAM inside TAM).</li>
+          <li>Build the bottoms-up math on screen as you say each multiplier.</li>
+          <li>Red ✕ over "1% of $1T," green ✓ over the bottoms-up number.</li>
+        </ul>
+      </div></details>
       <div class="quiz"><div class="quiz-h">Quick check</div>
         <div class="qq" data-a="b"><p class="qp">1. Which number is "the realistic share you can win in a few years"?</p><div class="opts"><button data-o="a">TAM</button><button data-o="b">SOM</button><button data-o="c">SAM</button></div><div class="fb"><b>Answer: B.</b> SOM = Serviceable Obtainable Market — what you can actually capture near-term.</div></div>
         <div class="qq" data-a="a"><p class="qp">2. Why do investors distrust "1% of a $100B market"?</p><div class="opts"><button data-o="a">It's top-down — any huge number times 1% looks good, but isn't grounded in real customers</button><button data-o="b">Because 1% is too small to matter</button><button data-o="c">Because $100B markets don't exist</button></div><div class="fb"><b>Answer: A.</b> Top-down hand-waves; bottoms-up (customers × spend × win rate) is what earns trust.</div></div>
@@ -346,6 +460,24 @@
         <li>Brokerage: ~$730 gross margin per GPU/month, profit from month one, ~zero CAC.</li>
         <li>Owned node: ~$7.6K/mo net, ~yr-3 payback — only with signed offtake and a ground-truthed BOM.</li>
       </ul></div>
+      <details class="film"><summary>🎬 Film this — "Does one unit make money?" <span class="dur">~80 sec</span></summary>
+      <div class="film-body">
+        <div class="lbl">Script (read to camera)</div>
+        <div class="script">
+          <p>"Forget the whole company for a second — does a <i>single</i> unit make money? That's unit economics, and it's the question that actually matters."</p>
+          <p>"Phase one, brokerage: we buy an H100-hour for about two dollars, sell it for three. Run one GPU around the clock — about 730 hours a month — and that's roughly $730 of gross margin, per GPU, per month. Land five or six clients at eight GPUs each and you're at about $35,000 of gross profit in your first real month, with almost no cost to acquire them, because we only spin up paid capacity once they say yes."</p>
+          <p>"Phase two, when we own the node: about $9,800 a month in revenue, $7,600 after the direct costs, paying the hardware back around year three and netting roughly $170K over five years. But that only works with one thing — a signed buyer. No offtake, no node. We never deploy steel on a hope."</p>
+        </div>
+        <div class="lbl">On-screen text (captions)</div>
+        <span class="ost">~$1/hr × 730 hrs = ~$730/GPU/mo</span><span class="ost">First month: ~$35K gross profit</span><span class="ost">~Zero CAC (quote-first)</span><span class="ost">Owned node: ~$7,600/mo net</span><span class="ost">No offtake = no node</span>
+        <div class="lbl">Visuals / B-roll</div>
+        <ul class="vis">
+          <li>Counter animation: $2 → $3 → ×730 hrs → $730.</li>
+          <li>Stack 48 GPU icons, roll up to the ~$35K number.</li>
+          <li>For Phase 2, a small timeline showing payback hitting at year 3, then profit after.</li>
+          <li>Stamp "SIGNED OFFTAKE REQUIRED" on the node graphic for the last line.</li>
+        </ul>
+      </div></details>
       <div class="quiz"><div class="quiz-h">Quick check</div>
         <div class="qq" data-a="b"><p class="qp">1. Approx. monthly gross margin on one continuously-run H100 (brokerage)?</p><div class="opts"><button data-o="a">~$50</button><button data-o="b">~$730</button><button data-o="c">~$5,000</button></div><div class="fb"><b>Answer: B.</b> ~$1/hr × ~730 hrs ≈ $730 gross margin per GPU per month.</div></div>
         <div class="qq" data-a="c"><p class="qp">2. The owned-node model breaks without which one thing?</p><div class="opts"><button data-o="a">A logo</button><button data-o="b">Solar panels</button><button data-o="c">Contracted offtake (a committed buyer)</button></div><div class="fb"><b>Answer: C.</b> A node is only an asset if the compute is contracted; offtake is non-negotiable.</div></div>
@@ -391,6 +523,23 @@
         <li>$2M on a ~$10–13M cap ≈ 15–20% dilution — a normal, healthy pre-seed.</li>
         <li>Delaware C-corp + 83(b) + lawyer + accredited investors. Lead first, then batch the fill.</li>
       </ul></div>
+      <details class="film"><summary>🎬 Film this — "How the raise works" <span class="dur">~80 sec</span></summary>
+      <div class="film-body">
+        <div class="lbl">Script (read to camera)</div>
+        <div class="script">
+          <p>"Raising money sounds mysterious. It isn't. Your company is split into shares. You sell some shares, investors get a percentage, you get cash to build. Early on, you don't even price the shares — you use a <b>SAFE</b>: they give you money now, it turns into shares later, at your next round."</p>
+          <p>"The one number that matters on a SAFE is the <b>valuation cap</b> — the company value their money converts at. Ownership is basically investment divided by that cap. Raise two million on a ten-million cap, you give up about twenty percent. That's a healthy pre-seed."</p>
+          <p>"Two rules you don't break. One: set it up right — Delaware C-corp, issue your founder stock, and file your 83(b) within thirty days. Two: this is a securities transaction, so raise from <b>accredited investors</b> under Reg D, with a real startup lawyer. Then batch your conversations so they compete — competition is what raises your number."</p>
+        </div>
+        <div class="lbl">On-screen text (captions)</div>
+        <span class="ost">SAFE = money now, shares later</span><span class="ost">Ownership = $ ÷ cap</span><span class="ost">$2M on $10M cap ≈ 20%</span><span class="ost">Delaware C-corp · 83(b) in 30 days</span><span class="ost">Accredited investors · Reg D · use a lawyer</span>
+        <div class="lbl">Visuals / B-roll</div>
+        <ul class="vis">
+          <li>Pie chart losing a ~20% slice as the raise lands.</li>
+          <li>Show the cap table: $2M / $8M / $10M / $13M → 25% / 20% / 15% rows highlighting.</li>
+          <li>A "30-DAY" countdown stamp on the 83(b) line — it's the one deadline founders blow.</li>
+        </ul>
+      </div></details>
       <div class="quiz"><div class="quiz-h">Quick check</div>
         <div class="qq" data-a="b"><p class="qp">1. On a SAFE, which term most sets the investor's ownership?</p><div class="opts"><button data-o="a">The discount</button><button data-o="b">The valuation cap</button><button data-o="c">The logo</button></div><div class="fb"><b>Answer: B.</b> Ownership ≈ investment ÷ post-money cap, so the cap is the lever that matters most.</div></div>
         <div class="qq" data-a="a"><p class="qp">2. Raising $2M on a ~$10M post-money cap means giving up roughly…</p><div class="opts"><button data-o="a">~20%</button><button data-o="b">~2%</button><button data-o="c">~60%</button></div><div class="fb"><b>Answer: A.</b> $2M ÷ $10M = 20% — a healthy pre-seed range.</div></div>
@@ -425,6 +574,23 @@
         <li>Prove the hard parts in 90 days before the pilot raise.</li>
         <li>Traction — real BOM, sites, and LOIs — is what earns a higher valuation.</li>
       </ul></div>
+      <details class="film"><summary>🎬 Film this — "What could kill this, and the 90-day plan" <span class="dur">~75 sec</span></summary>
+      <div class="film-body">
+        <div class="lbl">Script (read to camera)</div>
+        <div class="script">
+          <p>"Good founders don't hide the risks — they name them and go attack them. For us, the big two: getting <b>sites</b> with the right power, and the <b>hardware cost</b>. We de-risk the first by starting on commercial buildings that already have heavy electrical service. We de-risk the second by getting real vendor quotes instead of trusting a spreadsheet."</p>
+          <p>"And the whole thing runs on <b>offtake</b> — a signed buyer. No buyer, no business. That's exactly why we start with brokerage: it produces real, signed demand before we ever spend on steel."</p>
+          <p>"So the next ninety days has one job: turn the concept into something you could underwrite. A quoted hardware list. Three to five power-ready sites. Two or three signed buyers or LOIs. An electrical and permitting read in Austin. Clear those, and you've earned the right to raise at a higher number — honestly."</p>
+        </div>
+        <div class="lbl">On-screen text (captions)</div>
+        <span class="ost">Name the risks. Attack them.</span><span class="ost">#1 Sites + power</span><span class="ost">#2 Hardware cost → real quotes</span><span class="ost">No offtake = no business</span><span class="ost">90 days → an underwritable plan</span>
+        <div class="lbl">Visuals / B-roll</div>
+        <ul class="vis">
+          <li>A ranked risk list animating in, top to bottom.</li>
+          <li>Checklist of the 4 sprint deliverables ticking off one by one.</li>
+          <li>End on a "before / after" — "concept" crossed out, "underwritable plan" stamped in.</li>
+        </ul>
+      </div></details>
       <div class="quiz"><div class="quiz-h">Quick check</div>
         <div class="qq" data-a="a"><p class="qp">1. The single biggest execution risk is…</p><div class="opts"><button data-o="a">Site/host acquisition</button><button data-o="b">Choosing a font</button><button data-o="c">Too many customers</button></div><div class="fb"><b>Answer: A.</b> Securing power-ready sites at scale is the hardest part — start on commercial space to de-risk it.</div></div>
         <div class="qq" data-a="c"><p class="qp">2. Best response to the ~$220K hardware-cost assumption?</p><div class="opts"><button data-o="a">Ignore it</button><button data-o="b">Assume it will only go down</button><button data-o="c">Get real vendor quotes and stress-test the model</button></div><div class="fb"><b>Answer: C.</b> Ground-truth the BOM before committing capital — it's the biggest swing factor.</div></div>
@@ -432,9 +598,101 @@
       </div>
     </section>
 
-    <!-- ===== M8 ===== -->
+    <!-- ===== M8 — SALES & CLOSING ===== -->
     <section class="module" id="m8">
       <div class="mod-num">Module 08</div>
+      <h2>Sales &amp; closing — how we actually win the account</h2>
+      <p>Everything before this module is <em>why</em> Heliode is a business. This one is <em>how the revenue actually shows up.</em> No deal closes itself. You'll learn the motion end to end — find the right buyer, run the conversation, handle the objections you'll really hear, and ask for the business without flinching.</p>
+
+      <h3>Who you're selling to</h3>
+      <p>Our buyer is a team already <strong>spending on GPUs and feeling it</strong> — an AI startup, an ML team inside a larger company, an agency or studio running models in production. The person who signs is usually a <strong>founder, CTO, or head of engineering/ML</strong>. They don't need to be educated that GPUs are expensive — they live it. Your job isn't to convince them they have a problem; it's to show them a better way to solve one they already have.</p>
+      <div class="eg"><b>The qualifying question:</b> "Roughly what are you spending on GPU compute a month today, and where?" If they can answer that fast, they're a real prospect. If they shrug, they're early — keep them warm, don't burn cycles closing them.</div>
+
+      <h3>The motion, end to end</h3>
+      <table class="t"><thead><tr><th>Stage</th><th>Your job</th><th>What "done" looks like</th></tr></thead><tbody>
+        <tr><td><strong>1. Prospect</strong></td><td>Find teams visibly spending on compute (job posts mentioning CUDA/H100, AI product launches, model demos).</td><td class="n">A named human + how to reach them.</td></tr>
+        <tr><td><strong>2. Open</strong></td><td>Earn the meeting with one specific, relevant line — not a pitch.</td><td class="n">A 20–30 min call booked.</td></tr>
+        <tr><td><strong>3. Discover</strong></td><td>Find their stack, spend, pain, and timeline. Listen more than you talk.</td><td class="n">You can repeat their problem back better than they said it.</td></tr>
+        <tr><td><strong>4. Pitch</strong></td><td>Map our offer to <em>their</em> exact pain. Cheaper + managed + local + fast.</td><td class="n">They're nodding at the spread, not the slides.</td></tr>
+        <tr><td><strong>5. Quote</strong></td><td>Give a concrete, written number for their workload.</td><td class="n">A quote in their inbox same day.</td></tr>
+        <tr><td><strong>6. Close</strong></td><td>Handle objections, ask for the deal, set a start date.</td><td class="n">Signed / started — moved to "won" in the tracker.</td></tr>
+      </tbody></table>
+
+      <h3>Opening — earn the meeting</h3>
+      <p>Cold outreach works when it's <strong>specific and short.</strong> Reference something real about them, name the outcome, ask for a small slot. Never paste a brochure.</p>
+      <div class="eg"><b>Cold opener (DM / email):</b> "Saw you're hiring ML engineers and running [model] in production — usually means a real GPU bill. We get teams managed H100/H200 capacity under hyperscaler pricing, live in days, one endpoint and one bill. Worth a 20-minute look at what you'd save? I'll bring a number."</div>
+
+      <h3>Discovery — the questions that matter</h3>
+      <p>The best closers are mostly <strong>asking and listening.</strong> Run these, take notes, and shut up between them:</p>
+      <ul>
+        <li>"Walk me through your current setup — what are you running, and on whose GPUs?"</li>
+        <li>"What's the monthly spend look like, roughly?"</li>
+        <li>"What's the <em>most annoying</em> part — price, reliability, getting capacity, the bill, support?"</li>
+        <li>"If this were solved, what does that free you up to do?"</li>
+        <li>"Who else weighs in on a decision like this, and what's your timeline?"</li>
+      </ul>
+      <p>That last question surfaces the <strong>real decision-maker and the timeline</strong> — the two things that kill deals when you discover them too late.</p>
+
+      <h3>Pitch — sell the spread, not the speech</h3>
+      <p>Once you know their pain, the pitch is one sentence mapped to it: <strong>"You're paying [X] for [their setup]; we can do it managed for [Y], live in days, and you point at one endpoint."</strong> Then stop talking. The number does the work. Anchor on their <em>current</em> bill so the saving is concrete, not abstract.</p>
+
+      <h3>The four objections you'll actually hear</h3>
+      <table class="t"><thead><tr><th>They say…</th><th>You say…</th></tr></thead><tbody>
+        <tr><td>"How do I know you're reliable?"</td><td>"Fair — start with a paid pilot on one workload. You feel the uptime and support before you move anything critical. We earn the rest."</td></tr>
+        <tr><td>"It's cheaper to just use spot / DIY."</td><td>"On paper, sometimes. But you're paying an engineer to babysit it, and spot gets reclaimed mid-job. We hand you cheap <em>and</em> managed — your team ships instead of firefighting."</td></tr>
+        <tr><td>"We're already on AWS/GCP."</td><td>"Most of our customers were too — that's the point. Same or better GPUs, under their pricing, and you keep your stack. We're the endpoint, not a migration."</td></tr>
+        <tr><td>"Send me some info." (the brush-off)</td><td>"Happy to — and so it's actually useful, give me your rough monthly spend and what you're running, and I'll send a real number instead of a brochure." (Re-engages discovery.)</td></tr>
+      </tbody></table>
+      <p>An objection is a <strong>buying signal</strong>, not a rejection — it means they're imagining using you. Answer it calmly, then move back toward the close.</p>
+
+      <h3>Closing — ask, then go quiet</h3>
+      <p>Most deals die because nobody <strong>asks for them.</strong> After you've handled the objection, ask a direct, low-friction closing question and then say nothing until they answer:</p>
+      <ul>
+        <li><strong>The assumptive close:</strong> "I can have you running by Friday — want me to send the agreement?"</li>
+        <li><strong>The pilot close:</strong> "Let's prove it — one workload, 30 days, real number. If it's not better, you walk. Fair?"</li>
+        <li><strong>The choice close:</strong> "Do you want to start with the 8-GPU package or scale in from four?"</li>
+      </ul>
+      <div class="eg"><b>The rule:</b> after you ask the closing question, <b>the next person to talk loses.</b> Silence feels long; let it sit. They'll either say yes or tell you the real objection — both are wins.</div>
+
+      <h3>Follow-up &amp; the tracker</h3>
+      <p>Fortune is in the follow-up, but with discipline: <strong>two follow-ups max</strong>, each adding something (a number, a case, a deadline), then let it rest. Every prospect lives in the <strong>Kanban tracker</strong> — move them through the stages, log the next action, and never let a warm lead go cold because it fell off your mental list. A deal with no next step scheduled is a dead deal.</p>
+
+      <div class="take"><div class="t">Key takeaways</div><ul>
+        <li>Sell to teams already spending on GPUs — qualify on spend, don't educate the unaware.</li>
+        <li>Run the motion: prospect → open → discover → pitch → quote → close. Listen in discovery.</li>
+        <li>Anchor the pitch on their current bill; the spread does the selling.</li>
+        <li>Objections are buying signals — pilot, managed-not-just-cheap, keep-your-stack, real-number.</li>
+        <li>Always ask for the deal, then stay silent. Two follow-ups, tracked in Kanban.</li>
+      </ul></div>
+      <details class="film"><summary>🎬 Film this — "How we close" <span class="dur">~85 sec</span></summary>
+      <div class="film-body">
+        <div class="lbl">Script (read to camera)</div>
+        <div class="script">
+          <p>"Knowing the business is half of it. The other half is closing — because no deal closes itself. Here's the whole motion in 90 seconds."</p>
+          <p>"You're not selling to someone who needs convincing GPUs are expensive — you're selling to a team already paying that bill and feeling it. So you don't pitch first, you <b>ask</b>: what are you running, what's it costing, what's the most annoying part? You listen until you can say their problem back to them better than they did."</p>
+          <p>"Then the pitch is one sentence: 'You're paying this — we'll do it managed, under that, live in days, one endpoint.' Anchor on their real bill so the saving is concrete. You'll hear the same four objections — reliability, 'spot's cheaper,' 'we're on AWS,' and the 'just send info' brush-off. Each one is a buying signal. Answer it, then ask for the deal: 'I can have you running Friday — want the agreement?' And then? <b>You go quiet.</b> The next person to talk loses. Let the silence do the work."</p>
+        </div>
+        <div class="lbl">On-screen text (captions)</div>
+        <span class="ost">No deal closes itself.</span><span class="ost">Ask, don't pitch</span><span class="ost">Anchor on their real bill</span><span class="ost">Objection = buying signal</span><span class="ost">Always ask for the deal</span><span class="ost">Then go quiet 🤐</span>
+        <div class="lbl">Visuals / B-roll</div>
+        <ul class="vis">
+          <li>Show the 6-stage pipeline animating left to right (Prospect → Close).</li>
+          <li>Put the 4 objections up as flip cards: objection → response.</li>
+          <li>For the close, hold a beat of literal silence on camera — let the dead air land. Caption: "say nothing."</li>
+          <li>End on the Kanban board, a card sliding into the "Won" column.</li>
+        </ul>
+      </div></details>
+      <div class="quiz"><div class="quiz-h">Quick check</div>
+        <div class="qq" data-a="b"><p class="qp">1. Who is the right buyer to spend your time closing?</p><div class="opts"><button data-o="a">Anyone curious about AI</button><button data-o="b">A team already spending on GPUs who can tell you their monthly number</button><button data-o="c">Whoever replies fastest</button></div><div class="fb"><b>Answer: B.</b> Qualify on real spend. If they can't tell you what they spend, they're early — keep warm, don't burn cycles.</div></div>
+        <div class="qq" data-a="c"><p class="qp">2. What should you do <em>most</em> of during discovery?</p><div class="opts"><button data-o="a">Present the slides</button><button data-o="b">Quote a price</button><button data-o="c">Ask questions and listen</button></div><div class="fb"><b>Answer: C.</b> You can't map the pitch to their pain until you understand it. Ask, then listen — especially about decision-maker and timeline.</div></div>
+        <div class="qq" data-a="a"><p class="qp">3. What do you do right after asking the closing question?</p><div class="opts"><button data-o="a">Go silent and let them answer</button><button data-o="b">Immediately offer a bigger discount</button><button data-o="c">Keep listing features</button></div><div class="fb"><b>Answer: A.</b> The next person to talk loses. Silence pulls out either a yes or the real objection — both move you forward.</div></div>
+        <div class="qq" data-a="b"><p class="qp">4. A prospect says "it's cheaper to just use spot." That's…</p><div class="opts"><button data-o="a">A flat no — move on</button><button data-o="b">A buying signal — answer it (cheap AND managed; spot gets reclaimed) and move toward the close</button><button data-o="c">A reason to drop the price below cost</button></div><div class="fb"><b>Answer: B.</b> Objections mean they're picturing using you. Reframe: we're cheap <em>and</em> managed, so their team ships instead of babysitting spot.</div></div>
+      </div>
+    </section>
+
+    <!-- ===== M9 — GLOSSARY ===== -->
+    <section class="module" id="m9">
+      <div class="mod-num">Module 09</div>
       <h2>Glossary</h2>
       <dl class="gloss">
         <dt>GPU</dt><dd>The chip that runs AI's parallel math. Our product is access to GPUs.</dd>
@@ -443,7 +701,7 @@
         <dt>GPU-hour</dt><dd>One GPU running for one hour — the unit we buy wholesale and resell.</dd>
         <dt>Inference</dt><dd>Running a trained AI model in production. The steady, 24/7 load we target.</dd>
         <dt>Training</dt><dd>Building the model — a huge, one-time compute job (vs. continuous inference).</dd>
-        <dt>Node</dt><dd>One deployed unit of our hardware (a server with ~16 GPUs + battery) on a host site.</dd>
+        <dt>Node</dt><dd>One deployed unit of our hardware — an 8-GPU server (~$250K, ~10kW) on a power-ready site, with battery for backup.</dd>
         <dt>Hyperscaler / Neocloud / Marketplace</dt><dd>The price ladder of GPU supply — expensive/convenient (AWS) to cheap/spot (Vast.ai).</dd>
         <dt>Spot vs. reserved</dt><dd>Spot = cheap but reclaimable/variable; reserved = committed capacity you pay for whether used or not.</dd>
         <dt>MRR</dt><dd>Monthly Recurring Revenue — predictable monthly income.</dd>
@@ -466,6 +724,11 @@
         <dt>C-corp</dt><dd>The Delaware corporation structure investors expect for equity rounds.</dd>
         <dt>83(b) election</dt><dd>A tax filing (within 30 days of founder stock) that can save you a lot later.</dd>
         <dt>Reg D / Accredited investor</dt><dd>The private-placement rules; accredited investors meet income/net-worth thresholds.</dd>
+        <dt>Discovery</dt><dd>The part of a sales call where you ask and listen to learn the prospect's stack, spend, pain, decision-maker, and timeline.</dd>
+        <dt>Objection</dt><dd>A prospect's concern (price, reliability, switching). A buying signal to answer calmly — not a rejection.</dd>
+        <dt>Pilot</dt><dd>A short, paid trial on one workload that lets a prospect feel the service before committing fully.</dd>
+        <dt>Pipeline</dt><dd>All your active deals and their stages — tracked in the Kanban board so nothing warm goes cold.</dd>
+        <dt>Decision-maker</dt><dd>The person who can actually sign — usually a founder, CTO, or head of ML. Find them early.</dd>
       </dl>
       <p style="margin-top:22px;color:var(--faint);font-size:0.85rem;">End of course. Use <b>Save as PDF</b> (top right) for an offline copy. Educational material only — not legal, tax, or investment advice.</p>
     </section>
