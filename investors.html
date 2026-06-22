@@ -185,14 +185,14 @@
     </div>
 
     <div class="snap">
-      <div class="s"><div class="n">~$7,600</div><div class="k">Net profit / home / month<span class="info" tabindex="0" role="note" aria-label="Cash each deployed home-node earns per month after its running costs (power, bandwidth, host fee), before company overhead and taxes.">i<span class="tip">Cash each deployed home-node earns per month after its running costs (power, bandwidth, host fee), before company overhead and taxes.</span></span></div></div>
-      <div class="s"><div class="n">~$380K</div><div class="k">Pilot (50 homes) / month<span class="info" tabindex="0" role="note" aria-label="Total monthly net profit once the first 50-home Austin pilot is fully deployed (50 x per-home profit).">i<span class="tip">Total monthly net profit once the first 50-home Austin pilot is fully deployed (50 x per-home profit).</span></span></div></div>
-      <div class="s"><div class="n">~$7.6M</div><div class="k">At 1,000 homes / month<span class="info" tabindex="0" role="note" aria-label="Total monthly net profit once the network reaches 1,000 deployed home-nodes.">i<span class="tip">Total monthly net profit once the network reaches 1,000 deployed home-nodes.</span></span></div></div>
-      <div class="s"><div class="n">~$730M</div><div class="k">Illustrative value @ 1,000 homes<span class="info" tabindex="0" role="note" aria-label="A rough company worth at 1,000 homes: annual net profit times an assumed 8x multiple. Illustrative, not a guarantee.">i<span class="tip">A rough company worth at 1,000 homes: annual net profit times an assumed 8x multiple. Illustrative, not a guarantee.</span></span></div></div>
+      <div class="s"><div class="n">~$7,600</div><div class="k">Net profit / node / month<span class="info" tabindex="0" role="note" aria-label="Cash each deployed node earns per month after its running costs (power, bandwidth, host fee), before company overhead and taxes.">i<span class="tip">Cash each deployed node earns per month after its running costs (power, bandwidth, host fee), before company overhead and taxes.</span></span></div></div>
+      <div class="s"><div class="n">~$380K</div><div class="k">Pilot (50 nodes) / month<span class="info" tabindex="0" role="note" aria-label="Total monthly net profit once the first 50-node Austin pilot is fully deployed (50 x per-node profit).">i<span class="tip">Total monthly net profit once the first 50-node Austin pilot is fully deployed (50 x per-node profit).</span></span></div></div>
+      <div class="s"><div class="n">~$7.6M</div><div class="k">At 1,000 nodes / month<span class="info" tabindex="0" role="note" aria-label="Total monthly net profit once the network reaches 1,000 deployed nodes.">i<span class="tip">Total monthly net profit once the network reaches 1,000 deployed nodes.</span></span></div></div>
+      <div class="s"><div class="n">~$730M</div><div class="k">Illustrative value @ 1,000 nodes<span class="info" tabindex="0" role="note" aria-label="A rough company worth at 1,000 nodes: annual net profit times an assumed 8x multiple. Illustrative, not a guarantee.">i<span class="tip">A rough company worth at 1,000 nodes: annual net profit times an assumed 8x multiple. Illustrative, not a guarantee.</span></span></div></div>
     </div>
 
     <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin-bottom:4px;">Scale trajectory</h3>
-    <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">Per-home economics hold as the network grows across markets. Illustrative — at ~$7,600/home·mo net and an 8&times; multiple on annual net.</p>
+    <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">Per-node economics hold as the network grows across markets. Illustrative — at ~$7,600/node·mo net and an 8&times; multiple on annual net.</p>
     <table class="ramp">
       <thead><tr><th>Network<span class="info" tabindex="0" role="note" aria-label="Number of deployed home-nodes (GPUs installed on homes).">i<span class="tip">Number of deployed home-nodes (GPUs installed on homes).</span></span></th><th>Markets</th><th>Profit / mo<span class="info" tabindex="0" role="note" aria-label="Total network net profit per month at that size.">i<span class="tip">Total network net profit per month at that size.</span></span></th><th>Profit / yr<span class="info" tabindex="0" role="note" aria-label="Monthly profit times 12.">i<span class="tip">Monthly profit times 12.</span></span></th><th>Illustrative value<span class="info" tabindex="0" role="note" aria-label="Annual profit times an assumed multiple. Illustrative.">i<span class="tip">Annual profit times an assumed multiple. Illustrative.</span></span></th></tr></thead>
       <tbody>
@@ -212,20 +212,20 @@
         <div><label for="c-round">Investing at company valuation (post-money)<span class="info" tabindex="0" role="note" aria-label="What the company is agreed to be worth at the moment you invest, including your new money. Your ownership = investment divided by this number.">i<span class="tip">What the company is agreed to be worth at the moment you invest, including your new money. Your ownership = investment divided by this number.</span></span></label><input type="text" inputmode="numeric" id="c-round" value="$10,000,000"></div>
       </div>
       <div style="margin-top:14px;">
-        <label for="c-homes">Network size to model<span class="info" tabindex="0" role="note" aria-label="Drag to model the company at a given number of deployed home-nodes (GPUs).">i<span class="tip">Drag to model the company at a given number of deployed home-nodes (GPUs).</span></span>: <span class="range-val" id="c-homes-val">1,000 homes</span></label>
+        <label for="c-homes">Network size to model<span class="info" tabindex="0" role="note" aria-label="Drag to model the company at a given number of deployed nodes (GPUs on power-ready sites).">i<span class="tip">Drag to model the company at a given number of deployed nodes (GPUs on power-ready sites).</span></span>: <span class="range-val" id="c-homes-val">1,000 nodes</span></label>
         <input type="range" id="c-homes" min="50" max="10000" step="50" value="1000">
         <div class="range-mk" id="c-homes-mk"></div>
       </div>
       <details class="assump">
         <summary>Adjust economic assumptions</summary>
         <div class="calc-grid" style="margin-top:10px;">
-          <div><label for="c-net">Net profit / home / month<span class="info" tabindex="0" role="note" aria-label="Monthly profit assumed per home-node after running costs. Base case about $7,600. Editable.">i<span class="tip">Monthly profit assumed per home-node after running costs. Base case about $7,600. Editable.</span></span></label><input type="text" inputmode="numeric" id="c-net" value="$7,600"></div>
+          <div><label for="c-net">Net profit / node / month<span class="info" tabindex="0" role="note" aria-label="Monthly profit assumed per node after running costs. Base case about $7,600. Editable.">i<span class="tip">Monthly profit assumed per node after running costs. Base case about $7,600. Editable.</span></span></label><input type="text" inputmode="numeric" id="c-net" value="$7,600"></div>
           <div><label for="c-mult">Valuation multiple (&times; annual net)<span class="info" tabindex="0" role="note" aria-label="How many times annual net profit the company is valued at. Infrastructure companies often trade at several times; 8x is our illustrative default.">i<span class="tip">How many times annual net profit the company is valued at. Infrastructure companies often trade at several times; 8x is our illustrative default.</span></span></label><input type="number" id="c-mult" value="8" min="1" step="1"></div>
         </div>
       </details>
       <div class="calc-out">
         <div class="o"><div class="ok">Your equity stake<span class="info" tabindex="0" role="note" aria-label="The share of the company you would own = your investment divided by the post-money valuation.">i<span class="tip">The share of the company you would own = your investment divided by the post-money valuation.</span></span></div><div class="ov" id="o-stake">&mdash;</div></div>
-        <div class="o"><div class="ok">Company profit at this scale<span class="info" tabindex="0" role="note" aria-label="Total monthly net profit of the whole network at the modeled number of homes.">i<span class="tip">Total monthly net profit of the whole network at the modeled number of homes.</span></span></div><div class="ov" id="o-profit">&mdash;</div></div>
+        <div class="o"><div class="ok">Company profit at this scale<span class="info" tabindex="0" role="note" aria-label="Total monthly net profit of the whole network at the modeled number of nodes.">i<span class="tip">Total monthly net profit of the whole network at the modeled number of nodes.</span></span></div><div class="ov" id="o-profit">&mdash;</div></div>
         <div class="o"><div class="ok">Illustrative company valuation<span class="info" tabindex="0" role="note" aria-label="Modeled company worth at that scale = annual net profit times the multiple. Illustrative, not a guarantee.">i<span class="tip">Modeled company worth at that scale = annual net profit times the multiple. Illustrative, not a guarantee.</span></span></div><div class="ov" id="o-val">&mdash;</div></div>
         <div class="o hl"><div class="ok">Your stake value &middot; return<span class="info" tabindex="0" role="note" aria-label="What your ownership would be worth at that scale, and how many times your money that is (e.g. 73x). Before dilution and taxes.">i<span class="tip">What your ownership would be worth at that scale, and how many times your money that is (e.g. 73x). Before dilution and taxes.</span></span></div><div class="ov" id="o-return">&mdash;</div></div>
       </div>
@@ -337,7 +337,7 @@
   function num(id){ const el=$(id); return el?parseFloat(el.value.replace(/[^0-9.]/g,''))||0:0; }
   function calc(){
     const invest=num('c-invest'), round=num('c-round'), homes=+$('c-homes').value||0, net=num('c-net'), mult=+$('c-mult').value||0;
-    $('c-homes-val').textContent=homes.toLocaleString()+' homes';
+    $('c-homes-val').textContent=homes.toLocaleString()+' nodes';
     $('c-homes-mk').textContent=markets(homes);
     const monthly=homes*net, annual=monthly*12, valuation=annual*mult;
     const stakePct=round>0?invest/round:0;
@@ -354,11 +354,12 @@
     el.addEventListener('input', e=>{ const d=e.target.value.replace(/[^0-9]/g,''); e.target.value=d?'$'+(+d).toLocaleString():''; calc(); });
   });
   ['c-homes','c-mult'].forEach(id=>{ const el=$(id); if(el) el.addEventListener('input', calc); });
-  // tap/hover info tooltips
-  document.querySelectorAll('.info').forEach(el=>{
-    el.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); const open=el.classList.contains('open'); document.querySelectorAll('.info.open').forEach(x=>x.classList.remove('open')); if(!open) el.classList.add('open'); });
+  // tap/hover info tooltips (delegated so injected proposal content works too)
+  document.addEventListener('click', e=>{
+    const ic=e.target.closest('.info');
+    document.querySelectorAll('.info.open').forEach(x=>{ if(x!==ic) x.classList.remove('open'); });
+    if(ic){ e.preventDefault(); e.stopPropagation(); ic.classList.toggle('open'); }
   });
-  document.addEventListener('click', ()=>document.querySelectorAll('.info.open').forEach(el=>el.classList.remove('open')));
   if($('c-invest')) calc();
 
   route();
