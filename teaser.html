@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heliode Grid — Investor Teaser</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0d1320">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --ink:#0d1320;--mute:#555c66;--faint:#8a909a;--bg2:#f4f7fc;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-bright:#3b82f6;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+  }
+  body{background:var(--bg2);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;}
+  .sheet{max-width:840px;margin:24px auto;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(13,19,32,0.06);}
+
+  /* header */
+  .hd{background:linear-gradient(135deg,#0d1320,#15233f);color:#fff;padding:30px 36px;position:relative;overflow:hidden;}
+  .hd::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,0.35),transparent 65%);}
+  .brand{font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:9px;position:relative;z-index:1;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(249,115,22,0.18);}
+  .brand .tag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;color:#aeb6c6;text-transform:uppercase;margin-left:4px;}
+  .hd h1{font-size:1.78rem;line-height:1.08;margin:18px 0 10px;max-width:20ch;position:relative;z-index:1;}
+  .hd h1 em{font-style:normal;color:var(--accent);}
+  .hd p{color:#c7cdd9;font-size:0.98rem;max-width:60ch;position:relative;z-index:1;}
+
+  /* kpis */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);}
+  .kpi{background:#fff;padding:18px 16px;}
+  .kpi .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.4rem;color:var(--blue);line-height:1;}
+  .kpi .k{font-size:0.72rem;color:var(--mute);margin-top:6px;line-height:1.35;}
+
+  .body{padding:28px 36px 8px;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+  section{padding:16px 0;border-top:1px solid var(--line);}
+  section:first-child{border-top:none;padding-top:6px;}
+  .eye{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+  h2{font-size:1.05rem;margin-bottom:7px;}
+  h3{font-size:0.9rem;margin:10px 0 3px;}
+  p,li{font-size:0.88rem;color:var(--mute);}
+  ul{padding-left:18px;margin-top:4px;}
+  li{margin-bottom:4px;}
+  strong{color:var(--ink);}
+  .two-phase{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
+  .ph{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+  .ph .w{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:5px;}
+  .ph.next .w{color:var(--accent);}
+  .ph h3{margin:0 0 4px;font-size:0.92rem;color:var(--ink);}
+  .ph p{font-size:0.82rem;}
+
+  .ask{background:linear-gradient(180deg,var(--accent-dim),#fff);border:1px solid var(--accent-line);border-radius:14px;padding:20px 22px;margin-top:14px;}
+  .ask h2{margin-bottom:6px;}
+  .ask p{font-size:0.9rem;}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.88rem;border-radius:10px;padding:12px 20px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;}
+  .btn-p{background:var(--accent);color:#fff;}
+  .btn-g{background:#fff;color:var(--ink);border:1px solid var(--line2);}
+
+  .ft{padding:16px 36px 26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;}
+  .ft .c{font-family:'JetBrains Mono',monospace;font-size:0.74rem;color:var(--ink);}
+  .ft .d{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--faint);max-width:64ch;line-height:1.6;}
+
+  @media(max-width:680px){.kpis{grid-template-columns:repeat(2,1fr);}.row,.two-phase{grid-template-columns:1fr;}.body,.hd,.ft{padding-left:22px;padding-right:22px;}}
+  @media print{
+    body{background:#fff;}
+    .sheet{margin:0;border:none;border-radius:0;box-shadow:none;max-width:none;}
+    @page{margin:12mm;}
+    .btn{display:none;}
+    section,.body{padding-top:10px;padding-bottom:6px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="hd">
+    <div class="brand"><span class="dot"></span>HELIODE GRID<span class="tag">Confidential teaser · 2026</span></div>
+    <h1>Distributed AI compute — owned, and deployed <em>where the demand already is.</em></h1>
+    <p>Heliode brokers GPU compute today and is building the owned, distributed network that delivers it — close to demand, standing up in days, not the years a data center takes.</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">Days</div><div class="k">to deploy capacity — vs 5–7 yr grid queues</div></div>
+    <div class="kpi"><div class="n">~$7.6K</div><div class="k">net contribution / node / month</div></div>
+    <div class="kpi"><div class="n">~Yr 3</div><div class="k">payback per node (base case)</div></div>
+    <div class="kpi"><div class="n">~$91M</div><div class="k">illustrative net / yr @ 1,000 nodes</div></div>
+  </div>
+
+  <div class="body">
+    <div class="row">
+      <section>
+        <div class="eye">The problem</div>
+        <h2>Compute is the bottleneck — and power, not chips, is the constraint.</h2>
+        <p>Inference is overtaking training as the dominant AI workload: steady, 24/7, latency-sensitive, exploding. Meanwhile centralized supply can't keep up — grid interconnection runs 5–7 years and new data centers are multi-year, multi-billion-dollar builds.</p>
+      </section>
+      <section>
+        <div class="eye">The opening</div>
+        <h2>The power is already at the curb.</h2>
+        <p>Distributed compute sidesteps the bottleneck: deploy GPU nodes on power-ready sites, next to the teams that need them, in days. Big players (NVIDIA, others) are now testing distributed/home compute — the thesis is validating.</p>
+      </section>
+    </div>
+
+    <section>
+      <div class="eye">The model — two phases</div>
+      <div class="two-phase">
+        <div class="ph"><div class="w">Now · Phase 1</div><h3>Managed brokerage</h3><p>Source GPU capacity on the open market, run it as a managed service, and resell to inference teams with a <strong>rate-beat guarantee</strong>. Asset-light, revenue now — and it proves demand and signs the offtake that de-risks Phase 2.</p></div>
+        <div class="ph next"><div class="w">Next · Phase 2</div><h3>Owned distributed network</h3><p>Deploy owned, battery-first GPU nodes on power-ready sites (commercial first, homes later). We own the hardware and the customer relationship; hardware is financed against contracted compute, the way solar is financed against a PPA.</p></div>
+      </div>
+    </section>
+
+    <div class="row">
+      <section>
+        <div class="eye">Why it works</div>
+        <h2>The moat is distribution.</h2>
+        <p>A sales-and-install engine that puts compute where it's needed — and owns the host network and customer relationships. Compute will commoditize; being the one who can deploy it, fast, won't. <strong>Vivint's recurring-revenue engine × SolarCity's distributed-asset financing</strong>, pointed at AI's biggest constraint.</p>
+      </section>
+      <section>
+        <div class="eye">Economics &amp; upside</div>
+        <h2>Strong unit economics, financed against contracts.</h2>
+        <p>Base case per node: ~$9.8K/mo gross, <strong>~$7.6K/mo net</strong>, payback ~year 3, ~+$170K net over 5 years. Scaling to 1,000+ nodes across Austin, Dallas, Boston and California drives the network into nine figures of annual net. <span style="color:var(--faint)">(Illustrative; requires contracted offtake.)</span></p>
+      </section>
+    </div>
+
+    <section>
+      <div class="eye">Team &amp; what's next</div>
+      <p><strong>Founding strength is distribution</strong> — sales and install at scale. First critical hire: an infrastructure / compute lead (technical co-founder) for orchestration &amp; billing. <strong>Next 90 days — validation sprint:</strong> vendor-quoted hardware BOM, 3–5 power-ready test sites, 2–3 buyer LOIs via the brokerage trial, and an electrical/permitting read.</p>
+    </section>
+
+    <div class="ask">
+      <div class="eye">The ask</div>
+      <h2>Raising a pre-seed round to launch the brokerage and run the validation sprint.</h2>
+      <p>Targeting <strong>$[amount]</strong> on a SAFE to fund the team, software, brokerage launch, and a few proof nodes — sequencing the larger pilot raise behind signed offtake. Let's talk about whether the numbers and the plan hold up.</p>
+      <div class="cta">
+        <a class="btn btn-p" href="https://heliodegrid.com/investors.html">See the full proposal &amp; model →</a>
+        <a class="btn btn-g" href="mailto:hello@heliodegrid.com?subject=Heliode%20Grid%20—%20intro%20call">Book a call</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft">
+    <div class="c">hello@heliodegrid.com · heliodegrid.com</div>
+    <div class="d">Heliode Grid · ATMX Holdings · Concept-stage. All figures are preliminary estimates for discussion only and are not guarantees of performance. Nothing herein is an offer to sell or a solicitation to buy any security.</div>
+  </div>
+
+</div>
+</body>
+</html>
