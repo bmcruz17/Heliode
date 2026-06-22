@@ -102,6 +102,15 @@
   .vcard .vin:focus{border-color:var(--blue-line);box-shadow:0 0 0 2px var(--blue-dim);}
   select.vin{cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;}
   .vdel{border:none;background:none;color:#dc2626;cursor:pointer;font-size:0.78rem;line-height:1;}
+  .pgsec{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);margin:18px 0 8px;}
+  .pagegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  @media(max-width:760px){.pagegrid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:480px){.pagegrid{grid-template-columns:1fr;}}
+  .pagecard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);transition:.15s;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .pagecard:hover{border-color:var(--blue-line);transform:translateY(-2px);box-shadow:0 8px 18px rgba(13,19,32,0.06);}
+  .pagecard .pt{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.95rem;}
+  .pagecard .pu{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--blue);margin-top:2px;}
+  .pagecard .pd{font-size:0.78rem;color:var(--mute);margin-top:6px;}
   .hidden{display:none !important;}
 </style>
 </head>
@@ -142,6 +151,7 @@
       <button class="tab" id="tab-vendors">Vendors</button>
       <button class="tab" id="tab-reps">Reps</button>
       <button class="tab" id="tab-investors">Investors</button>
+      <button class="tab" id="tab-pages">Pages</button>
     </div>
 
     <div id="leads-view">
@@ -201,6 +211,28 @@
           <thead><tr><th>Name</th><th>Email</th><th>Firm</th><th>Status</th><th></th></tr></thead>
           <tbody id="rinv"></tbody>
         </table>
+      </div>
+    </div>
+
+    <div id="pages-view" style="display:none;">
+      <div class="pgsec">Public site</div>
+      <div class="pagegrid">
+        <a class="pagecard" href="index.html" target="_blank"><div class="pt">Homepage</div><div class="pu">/index.html</div><div class="pd">Customer GPU-cloud site + lead form &amp; calculator.</div></a>
+        <a class="pagecard" href="inference-cost.html" target="_blank"><div class="pt">GPU cost teardown</div><div class="pu">/inference-cost.html</div><div class="pd">Lead-magnet pricing breakdown.</div></a>
+        <a class="pagecard" href="join.html" target="_blank"><div class="pt">Recruit page</div><div class="pu">/join.html</div><div class="pd">Gold-rush sales recruiting pitch.</div></a>
+      </div>
+      <div class="pgsec">Investor</div>
+      <div class="pagegrid">
+        <a class="pagecard" href="investors.html" target="_blank"><div class="pt">Investor portal</div><div class="pu">/investors.html</div><div class="pd">Gated login + NDA + live proposal &amp; model.</div></a>
+        <a class="pagecard" href="opportunity.html" target="_blank"><div class="pt">Opportunity page</div><div class="pu">/opportunity.html</div><div class="pd">Full investor narrative + figures.</div></a>
+        <a class="pagecard" href="teaser.html" target="_blank"><div class="pt">One-page teaser</div><div class="pu">/teaser.html</div><div class="pd">Printable confidential teaser.</div></a>
+      </div>
+      <div class="pgsec">Internal / team</div>
+      <div class="pagegrid">
+        <a class="pagecard" href="admin.html" target="_blank"><div class="pt">Admin dashboard</div><div class="pu">/admin.html</div><div class="pd">This page — leads, vendors, reps, investors.</div></a>
+        <a class="pagecard" href="playbook.html" target="_blank"><div class="pt">Operator playbook</div><div class="pu">/playbook.html</div><div class="pd">Command center + scripts + comp.</div></a>
+        <a class="pagecard" href="rep.html" target="_blank"><div class="pt">Rep portal</div><div class="pu">/rep.html</div><div class="pd">Rep Kanban pipeline + commissions.</div></a>
+        <a class="pagecard" href="academy.html" target="_blank"><div class="pt">Founder's course</div><div class="pu">/academy.html</div><div class="pd">Training &amp; education.</div></a>
       </div>
     </div>
   </div>
@@ -362,7 +394,7 @@
   ];
   let vendors=[], vendorsReady=false;
 
-  const VIEWS=['leads','vendors','reps','investors'];
+  const VIEWS=['leads','vendors','reps','investors','pages'];
   VIEWS.forEach(v=> $('tab-'+v).addEventListener('click',()=>showView(v)));
   function showView(v){
     VIEWS.forEach(x=>{
