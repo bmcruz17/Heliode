@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1YHMWE0BG6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1YHMWE0BG6');
+</script>
+
 <!-- ── SEO ── -->
 <title>Heliode — GPU Compute & AI Inference for Austin, SF, Seattle & Boston</title>
 <meta name="description" content="Cheaper, managed GPU compute for AI inference. We source wholesale GPU capacity and run it for you — one bill, real uptime, real support. Serving startups in Austin, the Bay Area, Seattle, and Boston.">
@@ -532,7 +541,10 @@
       headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
       body:JSON.stringify(payload)
     }).then(function(r){
-      if(r.ok){ document.getElementById('form').style.display='none'; document.getElementById('ok').style.display='block'; }
+      if(r.ok){
+        if(window.gtag) gtag('event','generate_lead',{source:leadSource,city:payload.city||undefined});
+        document.getElementById('form').style.display='none'; document.getElementById('ok').style.display='block';
+      }
       else { throw new Error(); }
     }).catch(function(){
       btn.disabled=false; btn.textContent='Start my free trial →';
@@ -578,6 +590,7 @@
       var spend=num(), f=document.getElementById('f-spend');
       if(f && spend>0){ f.value='~$'+Math.round(spend).toLocaleString('en-US')+'/mo · '+LABEL[provEl.value]; }
       leadSource='calculator';
+      if(window.gtag) gtag('event','calculator_engaged',{provider:provEl.value,monthly_spend:spend||undefined});
     });
     render();
   })();
