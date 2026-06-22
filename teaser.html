@@ -40,6 +40,8 @@
   .hd h1{font-size:1.78rem;line-height:1.08;margin:18px 0 10px;max-width:20ch;position:relative;z-index:1;}
   .hd h1 em{font-style:normal;color:var(--accent);}
   .hd p{color:#c7cdd9;font-size:0.98rem;max-width:60ch;position:relative;z-index:1;}
+  .hd-art{position:absolute;right:10px;bottom:-16px;width:240px;opacity:0.45;z-index:0;pointer-events:none;}
+  .hd-art svg{width:100%;height:auto;display:block;}
 
   /* kpis */
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);}
@@ -77,7 +79,7 @@
   .ft .c{font-family:'JetBrains Mono',monospace;font-size:0.74rem;color:var(--ink);}
   .ft .d{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--faint);max-width:64ch;line-height:1.6;}
 
-  @media(max-width:680px){.kpis{grid-template-columns:repeat(2,1fr);}.row,.two-phase{grid-template-columns:1fr;}.body,.hd,.ft{padding-left:22px;padding-right:22px;}}
+  @media(max-width:680px){.kpis{grid-template-columns:repeat(2,1fr);}.row,.two-phase{grid-template-columns:1fr;}.body,.hd,.ft{padding-left:22px;padding-right:22px;}.hd-art{display:none;}}
   @media print{
     body{background:#fff;}
     .sheet{margin:0;border:none;border-radius:0;box-shadow:none;max-width:none;}
@@ -94,6 +96,18 @@
     <div class="brand"><span class="dot"></span>HELIODE GRID<span class="tag">Confidential teaser · 2026</span></div>
     <h1>Owned AI compute — deployed <em>where the demand already is.</em></h1>
     <p>Heliode brokers GPU compute today and is building the owned, regional capacity that delivers it — close to demand, standing up in days, not the years a data center takes.</p>
+    <div class="hd-art" aria-hidden="true">
+      <svg viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#3b82f6" stroke-width="2" stroke-linecap="round">
+          <line x1="140" y1="100" x2="208" y2="100"/><line x1="140" y1="100" x2="174" y2="159"/><line x1="140" y1="100" x2="106" y2="159"/><line x1="140" y1="100" x2="72" y2="100"/><line x1="140" y1="100" x2="106" y2="41"/><line x1="140" y1="100" x2="174" y2="41"/>
+        </g>
+        <g fill="#3b82f6">
+          <circle cx="208" cy="100" r="6"/><circle cx="174" cy="159" r="6"/><circle cx="106" cy="159" r="6"/><circle cx="72" cy="100" r="6"/><circle cx="106" cy="41" r="6"/><circle cx="174" cy="41" r="6"/>
+        </g>
+        <circle cx="140" cy="100" r="13" fill="#f97316"/>
+        <circle cx="140" cy="100" r="13" fill="none" stroke="#fb923c" stroke-width="2" opacity="0.55"><animate attributeName="r" values="13;19;13" dur="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.55;0;0.55" dur="3.5s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
   </div>
 
   <div class="kpis">
