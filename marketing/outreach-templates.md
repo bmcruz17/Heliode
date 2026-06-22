@@ -104,7 +104,8 @@ concrete "$X → $Y" beats everything else in the funnel.
 A one-time **onboarding fee** covers the migration/setup work we do for each
 client (standing up the endpoint, integration, configuration).
 
-- **Amount:** $[SET — e.g. $1,500] per client. Scale up for larger or custom integrations.
+- **Amount:** **$500–$3,000** per client — pick within the range by account size and
+  integration complexity (smaller/simpler → ~$500; larger/custom → toward $3,000).
 - **When to introduce it:** at **contract** — never at the quote stage. The
   quote stays free, no commitment. Bring up the fee only once they're ready to sign.
 - **Credit-back:** the onboarding fee is **fully credited against a 6–12 month
@@ -115,6 +116,6 @@ client (standing up the endpoint, integration, configuration).
   build case studies, then make it standard.
 
 **How to phrase it at contract:**
-> Setup is a one-time **$[amount]** onboarding fee — that covers us doing the full
+> Setup is a one-time **$[amount, $500–3,000]** onboarding fee — that covers us doing the full
 > migration so your team doesn't. If you commit to a 6–12 month term, we credit
 > that back in full, so the onboarding is effectively free.
