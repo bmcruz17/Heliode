@@ -96,3 +96,25 @@ to start, no images/links-only emails, and always give them an easy out.
 ## The one habit that matters
 **Reply to every inbound within 24h with an actual dollar number.** Speed + a
 concrete "$X → $Y" beats everything else in the funnel.
+
+---
+
+## Pricing — onboarding fee (internal; not on the public site)
+
+A one-time **onboarding fee** covers the migration/setup work we do for each
+client (standing up the endpoint, integration, configuration).
+
+- **Amount:** $[SET — e.g. $1,500] per client. Scale up for larger or custom integrations.
+- **When to introduce it:** at **contract** — never at the quote stage. The
+  quote stays free, no commitment. Bring up the fee only once they're ready to sign.
+- **Credit-back:** the onboarding fee is **fully credited against a 6–12 month
+  commitment** — i.e. commit to a 6–12 month term and the fee is waived/credited.
+  This rewards commitment and reads like a discount while still filtering
+  tire-kickers and offsetting acquisition cost.
+- **Early cohort:** optionally waive entirely for the first few customers to
+  build case studies, then make it standard.
+
+**How to phrase it at contract:**
+> Setup is a one-time **$[amount]** onboarding fee — that covers us doing the full
+> migration so your team doesn't. If you commit to a 6–12 month term, we credit
+> that back in full, so the onboarding is effectively free.
