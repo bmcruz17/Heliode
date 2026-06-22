@@ -231,7 +231,7 @@
       <h3>The real bottleneck</h3>
       <p>Modern AI runs on GPUs, and demand is exploding. But you can't conjure more capacity on demand: a GPU needs a building, and a building needs <strong>power</strong> — and power is the slow part. New grid hookups (interconnection) can take <strong>5–7 years</strong>; a new data center is a multi-year, multi-billion-dollar build. So the binding constraint on AI isn't only chips — it's <strong>power and time-to-build.</strong></p>
       <h3>The move</h3>
-      <p>If power and build-time are the constraint, don't fight the grid — go where power already exists. Commercial and light-industrial buildings already carry heavy electrical service (high-amperage, three-phase). Put GPU capacity there, next to the teams that need it, and stand up compute in <strong>days, not years.</strong> Proximity also helps inference, which is latency-sensitive — closer compute can mean faster responses.</p>
+      <p>If power and build-time are the constraint, don't fight the grid — go where power already exists, or bring it fast. <strong>Light-commercial</strong> buildings already carry heavy electrical service (high-amperage, three-phase). On <strong>residential</strong> sites, our own crew upgrades the home to 400A commercial-grade service and pairs the node with rooftop solar + battery. Either way we put GPU capacity next to the teams that need it and stand up compute in <strong>days, not years.</strong> Proximity also helps inference, which is latency-sensitive — closer compute can mean faster responses.</p>
       <h3>Where the moat is</h3>
       <p>The chips aren't the moat — anyone can buy those. The moat is <strong>distribution</strong>: sourcing sites, signing them, installing, and operating many locations as if they were one data center. That's the unglamorous work incumbents avoid, which is exactly why it's defensible. We own the <strong>site network and the customer relationships</strong> (the durable asset); the hardware is the <strong>wedge</strong> that rides on top and refreshes every ~5 years.</p>
       <h3>Two phases — de-risked on purpose</h3>
@@ -252,7 +252,7 @@
         <div class="lbl">Script (read to camera)</div>
         <div class="script">
           <p>"Everyone thinks the bottleneck for AI is chips. It's not. It's <b>power</b>. A GPU needs a building, and a building needs electricity — and getting new power to a site can take five to seven years. That's the real wall."</p>
-          <p>"So here's the move: instead of waiting years to build a new data center, we go where the power <i>already</i> exists — commercial and industrial buildings that already have heavy electrical service sitting there. We drop AI compute in, right next to the companies that need it, and we're live in days instead of years."</p>
+          <p>"So here's the move: instead of waiting years to build a new data center, we go where the power already exists — or we bring it. Light-commercial buildings already have heavy service. And in homes, we upgrade the service ourselves and add solar and a battery. Either way we drop AI compute in right next to the companies that need it, and we're live in days instead of years."</p>
           <p>"And the part nobody copies? The chips aren't the moat — anyone can buy a GPU. The moat is the <b>network</b>: the sites and the customer relationships. We're not just selling compute. We own the process behind it. That's Heliode."</p>
         </div>
         <div class="lbl">On-screen text (captions)</div>
@@ -644,7 +644,7 @@
       <h2>Risks &amp; the 90-day validation sprint</h2>
       <p>Honest founders name the risks and attack them. In order of how much they matter:</p>
       <ol>
-        <li><strong>Site/host acquisition — the hardest problem.</strong> Mitigate by starting on <strong>power-ready commercial/light-industrial</strong> sites (existing heavy service, fewer noise/zoning issues), not cold residential.</li>
+        <li><strong>Site/host acquisition — the hardest problem.</strong> We focus on <strong>residential and light-commercial</strong> sites and bring our own install crew: light-commercial already carries heavy service, and on homes we upgrade to 400A commercial-grade service and self-power with rooftop solar + battery (via a partner like Sunrun) — so the electrical work is never a landlord dependency.</li>
         <li><strong>Hardware cost.</strong> The ~$220K node is an estimate; get <strong>vendor quotes</strong> before committing capital, and carry it as a stress-tested input.</li>
         <li><strong>Offtake.</strong> No buyer, no business. The brokerage exists to produce signed demand and LOIs.</li>
         <li><strong>Financing.</strong> Hardware is financed against contracts — which requires real offtake first; sequence the raise behind signed demand.</li>
@@ -659,7 +659,7 @@
         <li>An Austin <strong>electrical &amp; permitting</strong> read.</li>
         <li>The model refreshed with real numbers.</li>
       </ul>
-      <p>Clearing these turns the pilot from a concept into an <strong>underwritable plan</strong> — and lets you raise at a higher number, honestly. If they <em>don't</em> clear, you narrow scope (commercial-only, or stay heavier on brokerage longer) rather than over-raise into a risky build.</p>
+      <p>Clearing these turns the pilot from a concept into an <strong>underwritable plan</strong> — and lets you raise at a higher number, honestly. If they <em>don't</em> clear, you narrow scope (tighten to whichever site type — residential or light-commercial — is converting, or stay heavier on brokerage longer) rather than over-raise into a risky build.</p>
       <div class="take"><div class="t">Key takeaways</div><ul>
         <li>Name the risks; site acquisition and hardware cost are the big two.</li>
         <li>Prove the hard parts in 90 days before the pilot raise.</li>
@@ -669,7 +669,7 @@
       <div class="film-body">
         <div class="lbl">Script (read to camera)</div>
         <div class="script">
-          <p>"Good founders don't hide the risks — they name them and go attack them. For us, the big two: getting <b>sites</b> with the right power, and the <b>hardware cost</b>. We de-risk the first by starting on commercial buildings that already have heavy electrical service. We de-risk the second by getting real vendor quotes instead of trusting a spreadsheet."</p>
+          <p>"Good founders don't hide the risks — they name them and go attack them. For us, the big two: getting <b>sites</b> with the right power, and the <b>hardware cost</b>. We de-risk the first by focusing on residential and light-commercial sites and bringing our own crew — light-commercial already has the power, and on homes we upgrade the service ourselves and add solar. We de-risk the second by getting real vendor quotes instead of trusting a spreadsheet."</p>
           <p>"And the whole thing runs on <b>offtake</b> — a signed buyer. No buyer, no business. That's exactly why we start with brokerage: it produces real, signed demand before we ever spend on steel."</p>
           <p>"So the next ninety days has one job: turn the concept into something you could underwrite. A quoted hardware list. Three to five power-ready sites. Two or three signed buyers or LOIs. An electrical and permitting read in Austin. Clear those, and you've earned the right to raise at a higher number — honestly."</p>
         </div>
@@ -683,7 +683,7 @@
         </ul>
       </div></details>
       <div class="quiz"><div class="quiz-h">Quick check</div>
-        <div class="qq" data-a="a"><p class="qp">1. The single biggest execution risk is…</p><div class="opts"><button data-o="a">Site/host acquisition</button><button data-o="b">Choosing a font</button><button data-o="c">Too many customers</button></div><div class="fb"><b>Answer: A.</b> Securing power-ready sites at scale is the hardest part — start on commercial space to de-risk it.</div></div>
+        <div class="qq" data-a="a"><p class="qp">1. The single biggest execution risk is…</p><div class="opts"><button data-o="a">Site/host acquisition</button><button data-o="b">Choosing a font</button><button data-o="c">Too many customers</button></div><div class="fb"><b>Answer: A.</b> Securing power-ready sites at scale is the hardest part — we focus on residential and light-commercial sites and bring our own crew to control the power.</div></div>
         <div class="qq" data-a="c"><p class="qp">2. Best response to the ~$220K hardware-cost assumption?</p><div class="opts"><button data-o="a">Ignore it</button><button data-o="b">Assume it will only go down</button><button data-o="c">Get real vendor quotes and stress-test the model</button></div><div class="fb"><b>Answer: C.</b> Ground-truth the BOM before committing capital — it's the biggest swing factor.</div></div>
         <div class="qq" data-a="b"><p class="qp">3. What does completing the 90-day sprint earn you?</p><div class="opts"><button data-o="a">Nothing</button><button data-o="b">An underwritable plan — and the right to raise at a higher number, honestly</button><button data-o="c">A guaranteed IPO</button></div><div class="fb"><b>Answer: B.</b> Traction converts a concept into something investors and lenders can actually back.</div></div>
       </div>
