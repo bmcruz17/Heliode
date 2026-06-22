@@ -6,6 +6,16 @@
 <title>Heliode Grid — Investor Teaser</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0d1320">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Heliode Grid — Investor Teaser">
+<meta property="og:description" content="Distributed AI compute, deployed where the demand is. Cheaper GPU-hours, managed for you.">
+<meta property="og:url" content="https://heliodegrid.com/teaser.html">
+<meta property="og:image" content="https://heliodegrid.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://heliodegrid.com/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -30,6 +40,8 @@
   .hd h1{font-size:1.78rem;line-height:1.08;margin:18px 0 10px;max-width:20ch;position:relative;z-index:1;}
   .hd h1 em{font-style:normal;color:var(--accent);}
   .hd p{color:#c7cdd9;font-size:0.98rem;max-width:60ch;position:relative;z-index:1;}
+  .hd-art{position:absolute;right:10px;bottom:-16px;width:240px;opacity:0.45;z-index:0;pointer-events:none;}
+  .hd-art svg{width:100%;height:auto;display:block;}
 
   /* kpis */
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);}
@@ -49,6 +61,8 @@
   li{margin-bottom:4px;}
   strong{color:var(--ink);}
   .two-phase{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
+  .flowdiag{margin:6px 0 14px;}
+  .flowdiag svg{width:100%;height:auto;display:block;}
   .ph{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
   .ph .w{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:5px;}
   .ph.next .w{color:var(--accent);}
@@ -67,7 +81,7 @@
   .ft .c{font-family:'JetBrains Mono',monospace;font-size:0.74rem;color:var(--ink);}
   .ft .d{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--faint);max-width:64ch;line-height:1.6;}
 
-  @media(max-width:680px){.kpis{grid-template-columns:repeat(2,1fr);}.row,.two-phase{grid-template-columns:1fr;}.body,.hd,.ft{padding-left:22px;padding-right:22px;}}
+  @media(max-width:680px){.kpis{grid-template-columns:repeat(2,1fr);}.row,.two-phase{grid-template-columns:1fr;}.body,.hd,.ft{padding-left:22px;padding-right:22px;}.hd-art{display:none;}}
   @media print{
     body{background:#fff;}
     .sheet{margin:0;border:none;border-radius:0;box-shadow:none;max-width:none;}
@@ -84,6 +98,18 @@
     <div class="brand"><span class="dot"></span>HELIODE GRID<span class="tag">Confidential teaser · 2026</span></div>
     <h1>Owned AI compute — deployed <em>where the demand already is.</em></h1>
     <p>Heliode brokers GPU compute today and is building the owned, regional capacity that delivers it — close to demand, standing up in days, not the years a data center takes.</p>
+    <div class="hd-art" aria-hidden="true">
+      <svg viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#3b82f6" stroke-width="2" stroke-linecap="round">
+          <line x1="140" y1="100" x2="208" y2="100"/><line x1="140" y1="100" x2="174" y2="159"/><line x1="140" y1="100" x2="106" y2="159"/><line x1="140" y1="100" x2="72" y2="100"/><line x1="140" y1="100" x2="106" y2="41"/><line x1="140" y1="100" x2="174" y2="41"/>
+        </g>
+        <g fill="#3b82f6">
+          <circle cx="208" cy="100" r="6"/><circle cx="174" cy="159" r="6"/><circle cx="106" cy="159" r="6"/><circle cx="72" cy="100" r="6"/><circle cx="106" cy="41" r="6"/><circle cx="174" cy="41" r="6"/>
+        </g>
+        <circle cx="140" cy="100" r="13" fill="#f97316"/>
+        <circle cx="140" cy="100" r="13" fill="none" stroke="#fb923c" stroke-width="2" opacity="0.55"><animate attributeName="r" values="13;19;13" dur="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.55;0;0.55" dur="3.5s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
   </div>
 
   <div class="kpis">
@@ -109,6 +135,24 @@
 
     <section>
       <div class="eye">The model — two phases</div>
+      <div class="flowdiag" aria-hidden="true">
+        <svg viewBox="0 0 600 96" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif">
+          <rect x="4" y="26" width="150" height="44" rx="11" fill="#f4f7fc" stroke="#dfe5ee"/>
+          <text x="79" y="45" text-anchor="middle" font-size="12.5" fill="#0d1320" font-weight="600">Open-market</text>
+          <text x="79" y="61" text-anchor="middle" font-size="11" fill="#555c66">GPU supply</text>
+          <line x1="160" y1="48" x2="216" y2="48" stroke="#d6dae1" stroke-width="2"/>
+          <line x1="160" y1="48" x2="210" y2="48" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 30" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="34" to="0" dur="1.6s" repeatCount="indefinite"/></line>
+          <path d="M210 43 L218 48 L210 53" fill="none" stroke="#f97316" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="224" y="18" width="152" height="60" rx="13" fill="#2563eb"/>
+          <text x="300" y="44" text-anchor="middle" font-size="15" fill="#ffffff" font-weight="700" font-family="'Space Grotesk',sans-serif">Heliode</text>
+          <text x="300" y="61" text-anchor="middle" font-size="10.5" fill="#cdddff">source · manage · resell</text>
+          <line x1="384" y1="48" x2="440" y2="48" stroke="#d6dae1" stroke-width="2"/>
+          <line x1="384" y1="48" x2="434" y2="48" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 30" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="34" to="0" dur="1.6s" repeatCount="indefinite"/></line>
+          <path d="M434 43 L442 48 L434 53" fill="none" stroke="#f97316" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="446" y="26" width="150" height="44" rx="11" fill="#f4f7fc" stroke="#dfe5ee"/>
+          <text x="521" y="52" text-anchor="middle" font-size="12.5" fill="#0d1320" font-weight="600">Inference teams</text>
+        </svg>
+      </div>
       <div class="two-phase">
         <div class="ph"><div class="w">Now · Phase 1</div><h3>Managed brokerage</h3><p>Source GPU capacity on the open market, run it as a managed service, and resell to inference teams at open-market rates that undercut the hyperscalers. Asset-light, revenue now — and it proves demand and signs the offtake that de-risks Phase 2.</p></div>
         <div class="ph next"><div class="w">Next · Phase 2</div><h3>Owned regional capacity</h3><p>Deploy owned GPU clusters in leased commercial &amp; light-industrial space with the heavy power dense compute needs; battery backup keeps them online through outages. We own the hardware and the customer relationship; hardware is financed against contracted compute (equipment financing against signed offtake).</p></div>
@@ -119,7 +163,7 @@
       <section>
         <div class="eye">Why it works</div>
         <h2>The moat is deployment.</h2>
-        <p>A sales-and-deployment engine that puts owned compute where it's needed — and owns the capacity and the customer relationship. Compute will commoditize; being the one who can stand it up fast, close to demand, won't. <strong>A Vivint-style recurring-revenue sales engine</strong>, pointed at AI's biggest constraint.</p>
+        <p>A sales-and-deployment engine that puts owned compute where it's needed — and owns the capacity and the customer relationship. Compute will commoditize; being the one who can stand it up fast, close to demand, won't. <strong>A proven recurring-revenue sales-and-install engine</strong>, pointed at AI's biggest constraint.</p>
       </section>
       <section>
         <div class="eye">Economics &amp; upside</div>
@@ -130,7 +174,7 @@
 
     <section>
       <div class="eye">Team &amp; what's next</div>
-      <p><strong>Founding strength is distribution</strong> — sales and install at scale. First critical hire: an infrastructure / compute lead (technical co-founder) for orchestration &amp; billing. <strong>Next 90 days — validation sprint:</strong> vendor-quoted hardware BOM, 3–5 commercial test sites, 2–3 buyer LOIs via the brokerage trial, and an electrical/permitting read.</p>
+      <p><strong>Founding strength is distribution</strong> — sales and install at scale. First critical hire: an infrastructure / compute lead (technical co-founder) for orchestration &amp; billing. <strong>Next 90 days — validation sprint:</strong> vendor-quoted hardware BOM, 3–5 commercial test sites, 2–3 buyer LOIs via the brokerage, and an electrical/permitting read.</p>
     </section>
 
     <div class="ask">

@@ -20,15 +20,20 @@
 <link rel="canonical" href="https://heliodegrid.com/">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Heliode — GPU Compute for AI Inference">
 <meta property="og:description" content="Wholesale-sourced GPU compute, managed for you. One bill, real uptime. Built for inference-heavy startups in Austin, SF, Seattle, and Boston.">
 <meta property="og:url" content="https://heliodegrid.com/">
 <meta property="og:site_name" content="Heliode">
+<meta property="og:image" content="https://heliodegrid.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Heliode — GPU Compute for AI Inference">
 <meta name="twitter:description" content="Wholesale-sourced GPU compute, managed for you. Serving Austin, SF, Seattle, and Boston.">
+<meta name="twitter:image" content="https://heliodegrid.com/og.png">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Heliode","url":"https://heliodegrid.com","description":"Managed GPU compute for AI inference, sourced wholesale and run for you.","areaServed":["Austin, TX","San Francisco Bay Area, CA","Seattle, WA","Boston, MA","United States"]}
@@ -57,7 +62,10 @@
   a{color:inherit;}
   h1,h2,h3,h4,.brand{font-family:'Space Grotesk',sans-serif;}
 
-  .bar{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(255,255,255,0.82);border-bottom:1px solid var(--line);}
+  .bar{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(13,19,32,0.85);border-bottom:1px solid rgba(255,255,255,0.08);}
+  .bar .brand{color:#fff;}
+  .bar .brand .logo{width:22px;height:22px;display:inline-flex;}
+  .bar .brand .logo svg{width:100%;height:100%;display:block;}
   .bar-in{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
   .brand{font-weight:700;font-size:1.02rem;letter-spacing:-0.01em;display:flex;align-items:center;gap:9px;}
   .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 0 4px var(--accent-dim);animation:pulse 2.6s ease-in-out infinite;}
@@ -65,7 +73,19 @@
   .bar a.cta{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.84rem;color:#fff;background:var(--accent);text-decoration:none;padding:9px 16px;border-radius:9px;transition:.2s;}
   .bar a.cta:hover{background:var(--accent-hover);}
 
-  .hero{position:relative;padding:80px 0 62px;border-bottom:1px solid var(--line);overflow:hidden;background:linear-gradient(180deg,#ffffff,var(--bg2));}
+  .hero{position:relative;padding:80px 0 62px;border-bottom:1px solid rgba(255,255,255,0.07);overflow:hidden;background:linear-gradient(140deg,#0d1320 0%,#15233f 62%,#1a2a47 100%);}
+  .hero .eyebrow{color:#7aa2f7;}
+  .hero .eyebrow::before{background:rgba(122,162,247,0.45);}
+  .hero h1{color:#fff;}
+  .hero h1 em{color:#60a5fa;}
+  .hero .lede{color:#c7cdd9;}
+  .hero .lede strong{color:#fff;}
+  .hero .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,0.25);}
+  .hero .btn-ghost:hover{background:transparent;border-color:#60a5fa;color:#60a5fa;}
+  .hero .guarantee{background:rgba(249,115,22,0.12);border-color:rgba(249,115,22,0.40);color:#f0d3bf;}
+  .hero .guarantee b{color:#fff;}
+  .hero .pill{color:#aeb6c6;border-color:rgba(255,255,255,0.16);background:rgba(255,255,255,0.04);}
+  .hero .pill b{color:#fff;}
   .hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0.6;}
   .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.04fr 0.96fr;gap:36px;align-items:center;}
   .hero-copy{min-width:0;}
@@ -95,6 +115,8 @@
   .cell{background:var(--bg);padding:26px 22px;}
   .cell .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;color:var(--blue);line-height:1;}
   .cell .k{font-size:0.84rem;color:var(--mute);margin-top:9px;}
+  .cell-ic{width:30px;height:30px;border-radius:8px;background:var(--blue-dim);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .cell-ic svg{width:17px;height:17px;}
   @media(max-width:680px){.strip-in{grid-template-columns:1fr;}}
 
   section.blk{padding:62px 0;border-bottom:1px solid var(--line);}
@@ -205,18 +227,19 @@
   .calc-save-v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.4rem;color:var(--blue);margin-top:5px;letter-spacing:-0.02em;}
   .calc-out .btn{margin-top:auto;width:100%;justify-content:center;}
 
-  footer{padding:48px 0 40px;background:var(--bg2);border-top:1px solid var(--line);}
+  footer{padding:48px 0 40px;background:linear-gradient(160deg,#0d1320,#16243f);border-top:1px solid rgba(255,255,255,0.08);}
+  footer .brand{color:#fff;}
   .foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start;}
-  .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:0.84rem;color:var(--mute);}
-  .foot-links a{text-decoration:none;}.foot-links a:hover{color:var(--blue);}
-  .legal{margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--faint);line-height:1.7;}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:0.84rem;color:#aeb6c6;}
+  .foot-links a{text-decoration:none;}.foot-links a:hover{color:#7aa2f7;}
+  .legal{margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:#828b9e;line-height:1.7;}
 </style>
 </head>
 <body>
 
 <div class="bar"><div class="bar-in">
-  <div class="brand"><span class="dot"></span>HELIODE</div>
-  <a class="cta" href="#contact">Start free trial</a>
+  <div class="brand"><span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><g stroke="#3b82f6" stroke-width="3" stroke-linecap="round"><line x1="32" y1="32" x2="51" y2="32"/><line x1="32" y1="32" x2="41.5" y2="48.5"/><line x1="32" y1="32" x2="22.5" y2="48.5"/><line x1="32" y1="32" x2="13" y2="32"/><line x1="32" y1="32" x2="22.5" y2="15.5"/><line x1="32" y1="32" x2="41.5" y2="15.5"/></g><g fill="#3b82f6"><circle cx="51" cy="32" r="4"/><circle cx="41.5" cy="48.5" r="4"/><circle cx="22.5" cy="48.5" r="4"/><circle cx="13" cy="32" r="4"/><circle cx="22.5" cy="15.5" r="4"/><circle cx="41.5" cy="15.5" r="4"/></g><circle cx="32" cy="32" r="9" fill="#f97316"/></svg></span>HELIODE</div>
+  <a class="cta" href="#contact">Get a quote</a>
 </div></div>
 
 <header class="hero">
@@ -225,12 +248,12 @@
     <div class="hero-copy">
     <div class="eyebrow">GPU compute · AI inference · US-based</div>
     <h1>Cut your GPU bill — <em>and let us run the whole thing.</em></h1>
-    <p class="lede">We buy GPU power on the open market and manage it end to end — cheaper GPU-hours, one bill, one endpoint, zero babysitting. <strong>Send your current bill and start a free two-week trial: see what the same workload costs on Heliode.</strong></p>
+    <p class="lede">We buy GPU power on the open market and manage it end to end — cheaper GPU-hours, one bill, one endpoint, zero babysitting. <strong>Send us your current bill and we'll come back with a quote for the same workload — free, no commitment.</strong></p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#contact">Start a free 2-week trial →</a>
+      <a class="btn btn-primary" href="#contact">Get my quote →</a>
       <a class="btn btn-ghost" href="#how">How it works</a>
     </div>
-    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>Bring your GPU bill:</b> we'll price the same workload at open-market rates.</span></div>
+    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>Free quote, no commitment.</b> Cheaper GPU-hours on the same workload — no lock-in.</span></div>
     <div class="cities">
       <span class="pill">Serving <b>Austin</b></span>
       <span class="pill"><b>San Francisco</b> Bay Area</span>
@@ -295,9 +318,9 @@
 </header>
 
 <div class="strip"><div class="wrap"><div class="strip-in">
-  <div class="cell"><div class="n">2–5×</div><div class="k">What hyperscalers charge over open-market GPU rates for comparable inference hardware.</div></div>
-  <div class="cell"><div class="n">One bill</div><div class="k">Managed capacity and support — instead of juggling five provider accounts.</div></div>
-  <div class="cell"><div class="n">Inference-first</div><div class="k">Built for the steady, 24/7, latency-sensitive workloads that dominate AI compute today.</div></div>
+  <div class="cell"><div class="cell-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 7 9 13 13 9 21 17"/><polyline points="21 12 21 17 16 17"/></svg></div><div class="n">2–5×</div><div class="k">What hyperscalers charge over open-market GPU rates for comparable inference hardware.</div></div>
+  <div class="cell"><div class="cell-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l3 3v15l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg></div><div class="n">One bill</div><div class="k">Managed capacity and support — instead of juggling five provider accounts.</div></div>
+  <div class="cell"><div class="cell-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></svg></div><div class="n">Inference-first</div><div class="k">Built for the steady, 24/7, latency-sensitive workloads that dominate AI compute today.</div></div>
 </div></div></div>
 
 <section class="blk" id="what">
@@ -456,7 +479,7 @@
   <div class="wrap">
     <div class="sec-eye">Get started</div>
     <h2>Send us your current GPU bill. We'll quote the same workload at open-market rates.</h2>
-    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll stand up a free two-week trial on the same workload.</p>
+    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll come back with a quote for the same workload — free, no commitment.</p>
     <div class="form" id="form">
       <div class="grid-2">
         <div><label class="fld" for="f-name">Name</label><input class="inp" id="f-name" type="text" placeholder="Your name"></div>
@@ -471,11 +494,11 @@
       <label class="fld" for="f-workload">Your workload</label>
       <textarea class="inp" id="f-workload" placeholder="Model(s) and rough GPU-hours or monthly throughput."></textarea>
       <div class="err" id="f-err"></div>
-      <button class="btn btn-primary" id="f-btn" onclick="submitLead()">Start my free trial →</button>
+      <button class="btn btn-primary" id="f-btn" onclick="submitLead()">Get my quote →</button>
     </div>
     <div class="ok" id="ok">
       <h4>Got it — talk soon.</h4>
-      <p>Your request is in. We'll follow up at the email you gave us to set up your free two-week trial and a rate for your region.</p>
+      <p>Your request is in. We'll follow up at the email you gave us with a quote for your workload.</p>
     </div>
   </div>
 </section>
@@ -535,7 +558,7 @@
       }
       else { throw new Error(); }
     }).catch(function(){
-      btn.disabled=false; btn.textContent='Start my free trial →';
+      btn.disabled=false; btn.textContent='Get my quote →';
       err.textContent='Something went wrong — email us directly at hello@heliodegrid.com.'; err.style.display='block';
     });
   }
@@ -592,8 +615,8 @@
       x.clearRect(0,0,W,H);
       for(var i=0;i<nodes.length;i++){var a=nodes[i];a.x+=a.vx;a.y+=a.vy;a.p+=0.03;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
         for(var j=i+1;j<nodes.length;j++){var b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
-          if(d<140){x.strokeStyle='rgba(37,99,235,'+(0.16*(1-d/140))+')';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}}}
-      for(var k=0;k<nodes.length;k++){var p=nodes[k];x.fillStyle='rgba(37,99,235,'+(0.45+Math.sin(p.p)*0.28)+')';x.beginPath();x.arc(p.x,p.y,1.6+Math.sin(p.p)*0.5,0,6.28);x.fill();}
+          if(d<140){x.strokeStyle='rgba(120,170,255,'+(0.22*(1-d/140))+')';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}}}
+      for(var k=0;k<nodes.length;k++){var p=nodes[k];x.fillStyle='rgba(140,180,255,'+(0.5+Math.sin(p.p)*0.3)+')';x.beginPath();x.arc(p.x,p.y,1.6+Math.sin(p.p)*0.5,0,6.28);x.fill();}
       requestAnimationFrame(tick);
     }
     if(!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)){window.addEventListener('resize',size);size();tick();}
