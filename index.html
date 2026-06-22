@@ -147,7 +147,10 @@
   .steps p{font-size:0.92rem;color:var(--mute);max-width:60ch;}
 
   .city-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px;}
-  .city{background:var(--panel);padding:24px 22px;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .city{background:var(--panel);padding:24px 22px;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(13,19,32,0.03);overflow:hidden;transition:.2s;}
+  .city:hover{transform:translateY(-3px);border-color:var(--blue-line);box-shadow:0 12px 26px rgba(13,19,32,0.07);}
+  .city-sky{margin:-24px -22px 18px;height:76px;background:linear-gradient(180deg,var(--blue-dim),#fff);border-bottom:1px solid var(--line);display:flex;align-items:flex-end;overflow:hidden;}
+  .city-sky svg{width:100%;height:74px;display:block;}
   .city h3{font-weight:600;font-size:1.1rem;margin-bottom:6px;letter-spacing:-0.01em;}
   .city .tag{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--blue);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
   .city p{font-size:0.88rem;color:var(--mute);}
@@ -402,10 +405,10 @@
     <h2>Built for the cities where inference teams actually are.</h2>
     <p class="body-lg" style="margin-bottom:20px;">We're onboarding inference-heavy startups in four metros first — the places with the highest concentration of teams shipping AI products and feeling the GPU squeeze.</p>
     <div class="city-grid">
-      <div class="city"><div class="tag">Austin, TX</div><h3>Austin GPU compute</h3><p>A fast-growing AI hub with cheap power and a deep startup bench. We help Austin teams cut inference cost without moving to a hyperscaler contract.</p></div>
-      <div class="city"><div class="tag">San Francisco Bay Area</div><h3>Bay Area AI compute</h3><p>The densest concentration of inference workloads in the country. We give Bay Area teams managed GPU capacity at marketplace prices.</p></div>
-      <div class="city"><div class="tag">Seattle, WA</div><h3>Seattle GPU cloud</h3><p>Cloud-native talent and heavy AI product work. We handle the compute layer so Seattle teams can focus on shipping.</p></div>
-      <div class="city"><div class="tag">Boston, MA</div><h3>Boston AI infrastructure</h3><p>Research-driven and enterprise-heavy. We give Boston teams cost-efficient, managed inference capacity with real support.</p></div>
+      <div class="city"><div class="city-sky" aria-hidden="true"><svg viewBox="0 0 300 74" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><g fill="#9bbdf6"><rect x="20" y="44" width="22" height="30"/><rect x="48" y="52" width="18" height="22"/><rect x="240" y="48" width="20" height="26"/><rect x="266" y="40" width="20" height="34"/></g><g fill="#2563eb"><rect x="80" y="34" width="26" height="40"/><rect x="112" y="46" width="16" height="28"/><rect x="150" y="24" width="30" height="50"/><path d="M150 24 L165 8 L180 24 Z"/><rect x="163" y="2" width="4" height="8"/><rect x="190" y="40" width="22" height="34"/><rect x="214" y="50" width="16" height="24"/></g></svg></div><div class="tag">Austin, TX</div><h3>Austin GPU compute</h3><p>A fast-growing AI hub with cheap power and a deep startup bench. We help Austin teams cut inference cost without moving to a hyperscaler contract.</p></div>
+      <div class="city"><div class="city-sky" aria-hidden="true"><svg viewBox="0 0 300 74" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><g fill="#9bbdf6"><rect x="18" y="50" width="18" height="24"/><rect x="252" y="46" width="20" height="28"/><rect x="276" y="52" width="14" height="22"/></g><g fill="#2563eb"><rect x="56" y="42" width="20" height="32"/><path d="M120 74 L134 22 L148 74 Z"/><rect x="132" y="14" width="4" height="10"/><rect x="170" y="36" width="24" height="38"/><rect x="200" y="48" width="16" height="26"/><rect x="226" y="30" width="4" height="44"/><rect x="244" y="30" width="4" height="44"/><path d="M210 54 Q228 38 246 54" stroke="#2563eb" stroke-width="2" fill="none"/></g></svg></div><div class="tag">San Francisco Bay Area</div><h3>Bay Area AI compute</h3><p>The densest concentration of inference workloads in the country. We give Bay Area teams managed GPU capacity at marketplace prices.</p></div>
+      <div class="city"><div class="city-sky" aria-hidden="true"><svg viewBox="0 0 300 74" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><g fill="#9bbdf6"><rect x="20" y="48" width="20" height="26"/><rect x="250" y="44" width="22" height="30"/></g><g fill="#2563eb"><rect x="60" y="40" width="22" height="34"/><rect x="88" y="50" width="14" height="24"/><rect x="150" y="30" width="4" height="44"/><ellipse cx="152" cy="28" rx="16" ry="6"/><rect x="150" y="13" width="4" height="11"/><rect x="190" y="38" width="24" height="36"/><rect x="218" y="48" width="16" height="26"/></g></svg></div><div class="tag">Seattle, WA</div><h3>Seattle GPU cloud</h3><p>Cloud-native talent and heavy AI product work. We handle the compute layer so Seattle teams can focus on shipping.</p></div>
+      <div class="city"><div class="city-sky" aria-hidden="true"><svg viewBox="0 0 300 74" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><g fill="#9bbdf6"><rect x="18" y="50" width="18" height="24"/><rect x="262" y="46" width="22" height="28"/></g><g fill="#2563eb"><rect x="60" y="40" width="18" height="34"/><rect x="120" y="20" width="20" height="54"/><rect x="150" y="34" width="24" height="40"/><path d="M150 34 L162 26 L174 34 Z"/><rect x="200" y="44" width="10" height="30"/><path d="M200 44 L205 32 L210 44 Z"/><rect x="222" y="48" width="18" height="26"/></g></svg></div><div class="tag">Boston, MA</div><h3>Boston AI infrastructure</h3><p>Research-driven and enterprise-heavy. We give Boston teams cost-efficient, managed inference capacity with real support.</p></div>
     </div>
   </div>
 </section>
@@ -456,7 +459,7 @@
   <div class="wrap">
     <div class="sec-eye">Get started</div>
     <h2>Send us your current GPU bill. We'll quote the same workload at open-market rates.</h2>
-    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll stand up a two-week trial that beats your current rate.</p>
+    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll stand up a free two-week trial on the same workload.</p>
     <div class="form" id="form">
       <div class="grid-2">
         <div><label class="fld" for="f-name">Name</label><input class="inp" id="f-name" type="text" placeholder="Your name"></div>
