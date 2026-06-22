@@ -239,7 +239,7 @@
 
 <div class="bar"><div class="bar-in">
   <div class="brand"><span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><g stroke="#3b82f6" stroke-width="3" stroke-linecap="round"><line x1="32" y1="32" x2="51" y2="32"/><line x1="32" y1="32" x2="41.5" y2="48.5"/><line x1="32" y1="32" x2="22.5" y2="48.5"/><line x1="32" y1="32" x2="13" y2="32"/><line x1="32" y1="32" x2="22.5" y2="15.5"/><line x1="32" y1="32" x2="41.5" y2="15.5"/></g><g fill="#3b82f6"><circle cx="51" cy="32" r="4"/><circle cx="41.5" cy="48.5" r="4"/><circle cx="22.5" cy="48.5" r="4"/><circle cx="13" cy="32" r="4"/><circle cx="22.5" cy="15.5" r="4"/><circle cx="41.5" cy="15.5" r="4"/></g><circle cx="32" cy="32" r="9" fill="#f97316"/></svg></span>HELIODE</div>
-  <a class="cta" href="#contact">Start free trial</a>
+  <a class="cta" href="#contact">Get a quote</a>
 </div></div>
 
 <header class="hero">
@@ -248,12 +248,12 @@
     <div class="hero-copy">
     <div class="eyebrow">GPU compute · AI inference · US-based</div>
     <h1>Cut your GPU bill — <em>and let us run the whole thing.</em></h1>
-    <p class="lede">We buy GPU power on the open market and manage it end to end — cheaper GPU-hours, one bill, one endpoint, zero babysitting. <strong>Send your current bill and start a free two-week trial: see what the same workload costs on Heliode.</strong></p>
+    <p class="lede">We buy GPU power on the open market and manage it end to end — cheaper GPU-hours, one bill, one endpoint, zero babysitting. <strong>Send us your current bill and we'll come back with a rate that beats it — a free quote, no commitment.</strong></p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#contact">Start a free 2-week trial →</a>
+      <a class="btn btn-primary" href="#contact">Beat my GPU bill →</a>
       <a class="btn btn-ghost" href="#how">How it works</a>
     </div>
-    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>Bring your GPU bill:</b> we'll price the same workload at open-market rates.</span></div>
+    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>Rate-beat guarantee:</b> send your bill, we'll beat your rate — free quote, no commitment.</span></div>
     <div class="cities">
       <span class="pill">Serving <b>Austin</b></span>
       <span class="pill"><b>San Francisco</b> Bay Area</span>
@@ -479,7 +479,7 @@
   <div class="wrap">
     <div class="sec-eye">Get started</div>
     <h2>Send us your current GPU bill. We'll quote the same workload at open-market rates.</h2>
-    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll stand up a free two-week trial on the same workload.</p>
+    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll come back with a rate that beats your current bill — free, no commitment.</p>
     <div class="form" id="form">
       <div class="grid-2">
         <div><label class="fld" for="f-name">Name</label><input class="inp" id="f-name" type="text" placeholder="Your name"></div>
@@ -494,11 +494,11 @@
       <label class="fld" for="f-workload">Your workload</label>
       <textarea class="inp" id="f-workload" placeholder="Model(s) and rough GPU-hours or monthly throughput."></textarea>
       <div class="err" id="f-err"></div>
-      <button class="btn btn-primary" id="f-btn" onclick="submitLead()">Start my free trial →</button>
+      <button class="btn btn-primary" id="f-btn" onclick="submitLead()">Beat my bill →</button>
     </div>
     <div class="ok" id="ok">
       <h4>Got it — talk soon.</h4>
-      <p>Your request is in. We'll follow up at the email you gave us to set up your free two-week trial and a rate for your region.</p>
+      <p>Your request is in. We'll follow up at the email you gave us with a rate that beats your current bill.</p>
     </div>
   </div>
 </section>
@@ -558,7 +558,7 @@
       }
       else { throw new Error(); }
     }).catch(function(){
-      btn.disabled=false; btn.textContent='Start my free trial →';
+      btn.disabled=false; btn.textContent='Beat my bill →';
       err.textContent='Something went wrong — email us directly at hello@heliodegrid.com.'; err.style.display='block';
     });
   }
