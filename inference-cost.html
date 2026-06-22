@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1YHMWE0BG6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1YHMWE0BG6');
+</script>
+
+<title>What AI inference actually costs in 2026 — and where the money goes | Heliode</title>
+<meta name="description" content="A plain-English teardown of GPU inference pricing: hyperscaler on-demand vs. neoclouds vs. marketplace/spot, why teams overpay 2–5×, and where a typical GPU bill leaks. Includes a free savings calculator.">
+<link rel="canonical" href="https://heliodegrid.com/inference-cost.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What AI inference actually costs in 2026">
+<meta property="og:description" content="GPU inference pricing, torn down: hyperscaler vs. neocloud vs. marketplace, and where your bill leaks.">
+<meta property="og:url" content="https://heliodegrid.com/inference-cost.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#ffffff;--bg2:#f4f7fc;--panel:#ffffff;
+    --ink:#0d1320;--mute:#555c66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:var(--blue);}
+  h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px;}
+
+  .bar{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(255,255,255,0.82);border-bottom:1px solid var(--line);}
+  .bar-in{max-width:780px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-weight:700;font-size:1.02rem;display:flex;align-items:center;gap:9px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);}
+  .brand a{text-decoration:none;color:inherit;}
+  .bar .cta{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.84rem;color:#fff;background:var(--accent);text-decoration:none;padding:9px 16px;border-radius:9px;}
+
+  .hero{padding:54px 0 30px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,var(--bg2));}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;}
+  h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.08;margin-bottom:16px;}
+  h1 em{font-style:normal;color:var(--blue);}
+  .lede{font-size:1.1rem;color:var(--mute);}
+
+  article{padding:36px 0 10px;}
+  article h2{font-size:1.4rem;margin:34px 0 12px;}
+  article h3{font-size:1.05rem;margin:22px 0 6px;}
+  article p{margin-bottom:14px;color:#2b3340;}
+  article ul{margin:0 0 14px 22px;}
+  article li{margin-bottom:7px;color:#2b3340;}
+  strong{color:var(--ink);}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:0.92rem;}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);}
+  th{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);background:var(--bg2);}
+  td.num{font-family:'JetBrains Mono',monospace;text-align:right;white-space:nowrap;}
+  tr.hl td{background:var(--accent-dim);}
+  tr.hl td:first-child{font-weight:600;}
+  .src{font-size:0.78rem;color:var(--faint);margin-top:4px;}
+
+  .callout{background:linear-gradient(180deg,var(--blue-dim),#fff);border:1px solid var(--blue-line);border-radius:14px;padding:18px 20px;margin:18px 0;}
+  .callout p{margin:0;color:var(--ink);}
+
+  .cta-box{margin:34px 0 10px;background:linear-gradient(180deg,var(--accent-dim),#fff);border:1px solid var(--accent-line);border-radius:16px;padding:26px 24px;text-align:center;}
+  .cta-box h2{margin:0 0 8px;}
+  .cta-box p{color:var(--mute);max-width:52ch;margin:0 auto 16px;}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.95rem;border-radius:11px;padding:14px 24px;text-decoration:none;display:inline-block;}
+  .btn-p{background:var(--accent);color:#fff;}
+  .btn-g{background:#fff;color:var(--ink);border:1px solid var(--line2);margin-left:8px;}
+
+  footer{padding:34px 0;border-top:1px solid var(--line);background:var(--bg2);margin-top:30px;}
+  .foot{font-size:0.84rem;color:var(--mute);display:flex;gap:20px;flex-wrap:wrap;}
+  .foot a{text-decoration:none;}
+  .disclaimer{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--faint);line-height:1.7;margin-top:16px;}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><a href="index.html"><span class="dot"></span>HELIODE</a></div>
+  <a class="cta" href="index.html#contact">Get a quote</a>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">GPU cost teardown · 2026</div>
+  <h1>What AI inference actually costs — <em>and where the money goes.</em></h1>
+  <p class="lede">If you run production inference on a hyperscaler's on-demand pricing, you're very likely paying 2–5× the open-market rate for the exact same GPUs. Here's the plain-English breakdown — and how to check your own bill in ten seconds.</p>
+</div></header>
+
+<article><div class="wrap">
+
+  <h2>The same H100, three very different prices</h2>
+  <p>A GPU-hour is a GPU-hour — an NVIDIA H100 is the same chip whether you rent it from a hyperscaler or a marketplace. What changes wildly is the markup. Rough per-GPU-hour ranges for H100-class hardware:</p>
+
+  <table>
+    <thead><tr><th>Where you buy</th><th class="num">~ $ / GPU-hour</th><th>Trade-off</th></tr></thead>
+    <tbody>
+      <tr><td>Hyperscaler on-demand<br><span class="src">AWS / GCP / Azure</span></td><td class="num">$8 – $13</td><td>Convenient, trusted — and the most expensive way to buy</td></tr>
+      <tr><td>Neocloud / committed<br><span class="src">Lambda, CoreWeave, Crusoe…</span></td><td class="num">$2.5 – $4</td><td>Much cheaper, but you commit and you run it</td></tr>
+      <tr><td>Marketplace / spot<br><span class="src">RunPod, Vast, TensorDock…</span></td><td class="num">$1.8 – $3</td><td>Cheapest — but variable supply and you own the uptime</td></tr>
+      <tr class="hl"><td>Heliode<br><span class="src">managed, open-market sourced</span></td><td class="num">marketplace-class</td><td>Marketplace pricing, run for you — one bill, real support</td></tr>
+    </tbody>
+  </table>
+  <p class="src">Illustrative ranges; GPU pricing moves fast — always check current rates. Hyperscaler figures derive from list 8×H100 instance pricing divided per GPU.</p>
+
+  <div class="callout"><p><strong>The gap is the story:</strong> the chip costs the same. Going from ~$10/GPU-hr on-demand to ~$2.5–3 on the open market is a <strong>60–75% cut</strong> on the single biggest line in most inference budgets.</p></div>
+
+  <h2>Where a typical inference bill leaks</h2>
+  <p>Beyond the raw rate, most bills bleed in predictable places:</p>
+  <ul>
+    <li><strong>On-demand instead of committed.</strong> Paying the most flexible (most expensive) rate for workloads that actually run 24/7.</li>
+    <li><strong>Over-specced GPUs.</strong> Serving models on H100s that an A100, L40S, or A10G would handle within the same latency budget for a fraction of the price.</li>
+    <li><strong>Low utilization.</strong> Reserved capacity sitting idle between traffic peaks — you pay for the hour whether it's busy or not.</li>
+    <li><strong>No batching.</strong> Skipping continuous batching (vLLM/TGI) leaves 2–4× throughput per GPU on the table.</li>
+    <li><strong>Egress &amp; surprise fees.</strong> Data-transfer and ancillary charges that don't show up until the invoice.</li>
+  </ul>
+
+  <h2>How to cut it — in order of impact</h2>
+  <ul>
+    <li><strong>Move off hyperscaler on-demand</strong> for steady workloads. Biggest single lever.</li>
+    <li><strong>Right-size the GPU</strong> to the model and your real latency target.</li>
+    <li><strong>Batch and quantize</strong> (vLLM/TGI, fp8/int8) to get more out of each card.</li>
+    <li><strong>Keep utilization high</strong> — or buy managed capacity so someone else carries that risk.</li>
+  </ul>
+
+  <div class="cta-box">
+    <h2>See what you'd save in 10 seconds</h2>
+    <p>Enter your monthly spend and where you buy today — our calculator ballparks what the same workload runs on Heliode. Then send your bill for an exact quote.</p>
+    <a class="btn btn-p" href="index.html#savings">Open the savings calculator →</a>
+    <a class="btn btn-g" href="index.html#contact">Send us your bill</a>
+  </div>
+
+</div></article>
+
+<footer><div class="wrap">
+  <div class="foot">
+    <a href="index.html">Home</a>
+    <a href="index.html#how">How it works</a>
+    <a href="index.html#savings">Savings calculator</a>
+    <a href="index.html#contact">Get a quote</a>
+  </div>
+  <div class="disclaimer">© 2026 Heliode. Pricing figures are illustrative estimates that vary by GPU type, region, commitment, and current market conditions; verify against live provider pricing. Not affiliated with the providers named, which are referenced for comparison only.</div>
+</div></footer>
+
+</body>
+</html>

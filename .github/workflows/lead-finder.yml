@@ -1,0 +1,30 @@
+name: Lead signal finder
+
+# Runs the public lead-signal finder and writes the report straight into the
+# workflow run's summary page — so you can read it on your phone with no setup.
+# Trigger it manually any time (Actions tab → "Lead signal finder" → "Run
+# workflow"), or let it run automatically every Monday morning.
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Look-back window (days)"
+        required: false
+        default: "14"
+  schedule:
+    - cron: "0 14 * * 1" # Mondays 14:00 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  signals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Find lead signals
+        run: python tools/lead_finder.py --days "${{ github.event.inputs.days || '14' }}" >> "$GITHUB_STEP_SUMMARY"
