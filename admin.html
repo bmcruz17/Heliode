@@ -28,21 +28,28 @@
   .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);}
   .brand small{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);}
   .bar-actions{display:flex;align-items:center;gap:10px;}
+  .who{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--mute);}
   .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.84rem;border-radius:9px;padding:9px 15px;cursor:pointer;border:1px solid var(--line2);background:#fff;color:var(--ink);transition:.15s;}
   .btn:hover{border-color:var(--blue-line);color:var(--blue);}
   .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
   .btn-primary:hover{background:var(--accent-hover);color:#fff;border-color:var(--accent-hover);}
+  .btn:disabled{opacity:.55;cursor:not-allowed;}
 
   /* Gate */
-  .gate{max-width:460px;margin:9vh auto 0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:32px 30px;box-shadow:0 12px 36px rgba(13,19,32,0.08);}
+  .gate{max-width:430px;margin:9vh auto 0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:32px 30px;box-shadow:0 12px 36px rgba(13,19,32,0.08);}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
   .gate h1{font-size:1.4rem;letter-spacing:-0.02em;margin-bottom:6px;}
-  .gate p{font-size:0.9rem;color:var(--mute);margin-bottom:20px;}
+  .gate p{font-size:0.9rem;color:var(--mute);margin-bottom:14px;}
   .fld{display:block;font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);margin:16px 0 7px;}
   .inp{width:100%;background:#fff;border:1px solid var(--line2);border-radius:10px;padding:11px 13px;color:var(--ink);font-family:'Inter',sans-serif;font-size:0.92rem;outline:none;transition:.15s;}
   .inp:focus{border-color:var(--blue-line);box-shadow:0 0 0 3px var(--blue-dim);}
   .gate .btn-primary{width:100%;margin-top:22px;padding:12px;font-size:0.92rem;}
   .gate-note{font-size:0.76rem;color:var(--faint);margin-top:16px;line-height:1.55;}
-  .gate-err{color:#dc2626;font-size:0.84rem;margin-top:14px;display:none;}
+  .gate-err{font-size:0.84rem;margin-top:14px;display:none;}
+  .gate-err.err{color:#dc2626;}
+  .gate-err.ok{color:#16a34a;}
+  .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;display:inline-block;animation:sp .7s linear infinite;vertical-align:-2px;}
+  @keyframes sp{to{transform:rotate(360deg);}}
 
   /* Dashboard */
   #dash{display:none;padding:26px 0 60px;}
@@ -60,7 +67,7 @@
   td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;}
   tr:last-child td{border-bottom:none;}
   tr:hover td{background:rgba(37,99,235,0.025);}
-  .who{font-weight:600;letter-spacing:-0.01em;}
+  .who-cell{font-weight:600;letter-spacing:-0.01em;}
   .sub{font-size:0.78rem;color:var(--faint);}
   .when{font-family:'JetBrains Mono',monospace;font-size:0.74rem;color:var(--mute);white-space:nowrap;}
   .spend{font-family:'JetBrains Mono',monospace;font-size:0.8rem;}
@@ -75,6 +82,7 @@
   .empty{padding:40px;text-align:center;color:var(--faint);font-size:0.9rem;}
   .stat-line{font-size:0.82rem;color:var(--mute);margin-bottom:16px;}
   .stat-line b{color:var(--ink);font-weight:600;}
+  .hidden{display:none !important;}
 </style>
 </head>
 <body>
@@ -82,22 +90,24 @@
 <div class="bar"><div class="bar-in">
   <div class="brand"><span class="dot"></span>HELIODE <small>Lead tracker</small></div>
   <div class="bar-actions" id="bar-actions" style="display:none;">
+    <span class="who" id="who-email"></span>
     <button class="btn" id="refresh">↻ Refresh</button>
-    <button class="btn" id="lock">Lock</button>
+    <button class="btn" id="lock">Sign out</button>
   </div>
 </div></div>
 
 <!-- Sign-in gate -->
 <div class="gate" id="gate">
+  <div class="eyebrow">Confidential · Authorized access only</div>
   <h1>Lead tracker</h1>
-  <p>Read &amp; manage <span class="mono">compute_leads</span> for the Heliode Supabase project.</p>
-  <label class="fld" for="g-url">Supabase project URL</label>
-  <input class="inp" id="g-url" type="text" autocomplete="off" value="https://pyosjuuvbxzyjtokfqfu.supabase.co">
-  <label class="fld" for="g-key">service_role key</label>
-  <input class="inp" id="g-key" type="password" autocomplete="off" placeholder="eyJhbGciOi…">
-  <button class="btn btn-primary" id="g-go">Open dashboard</button>
+  <p>Sign in to view and manage incoming leads.</p>
+  <label class="fld" for="g-email">Email</label>
+  <input class="inp" id="g-email" type="email" autocomplete="username" placeholder="you@heliodegrid.com">
+  <label class="fld" for="g-pass">Password</label>
+  <input class="inp" id="g-pass" type="password" autocomplete="current-password" placeholder="••••••••••">
+  <button class="btn btn-primary" id="g-go">Sign in</button>
   <div class="gate-err" id="g-err"></div>
-  <p class="gate-note">The <b>service_role</b> key (Supabase → Project Settings → API) is needed to read leads — the public form only has insert-only access. It's kept in this tab's memory only (cleared when you close the tab) and is <b>never</b> stored in the code. Don't share this page or run it on an untrusted machine.</p>
+  <p class="gate-note">Access is restricted to admin accounts on the allowlist. Need access? The project owner adds you in Supabase. © 2026 Heliode · ATMX Holdings.</p>
 </div>
 
 <!-- Dashboard -->
@@ -118,88 +128,102 @@
   </div>
 </div>
 
-<script>
-  var STAGES=['new','contacted','quoted','trial','won','lost'];
-  var COLORS={new:'#8a909a',contacted:'#2563eb',quoted:'#f97316',trial:'#a855f7',won:'#16a34a',lost:'#dc2626'};
-  var sb={url:'',key:''}, leads=[], filter='all';
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-  function $(id){return document.getElementById(id);}
-  function H(){return {apikey:sb.key,Authorization:'Bearer '+sb.key};}
-  function esc(s){return (s==null?'':String(s)).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-  function fmtDate(s){ if(!s) return '—'; var d=new Date(s); return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}); }
+  // Public anon key — same one the rest of the site uses. Safe to ship:
+  // row-level security only lets allowlisted admins read/manage leads.
+  const SB_URL = 'https://pyosjuuvbxzyjtokfqfu.supabase.co';
+  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5b3NqdXV2Ynh6eWp0b2tmcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjk4MTcsImV4cCI6MjA5NzY0NTgxN30.7bH19ZZJHxchfRVt3t-I20gJ44WvbR3al516QhwQpmw';
+  const sb = createClient(SB_URL, SB_KEY);
 
-  // ── Auth ──
-  (function restore(){
-    var u=sessionStorage.getItem('hel_url'), k=sessionStorage.getItem('hel_key');
-    if(u&&k){ sb.url=u; sb.key=k; load(); }
-  })();
+  const STAGES=['new','contacted','quoted','trial','won','lost'];
+  const COLORS={new:'#8a909a',contacted:'#2563eb',quoted:'#f97316',trial:'#a855f7',won:'#16a34a',lost:'#dc2626'};
+  let leads=[], filter='all';
+
+  const $ = id => document.getElementById(id);
+  const esc = s => (s==null?'':String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function fmtDate(s){ if(!s) return '—'; const d=new Date(s); return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}); }
+
+  function showGate(msg, ok){
+    $('dash').style.display='none';
+    $('bar-actions').style.display='none';
+    $('gate').classList.remove('hidden');
+    const e=$('g-err');
+    if(msg){ e.textContent=msg; e.className='gate-err '+(ok?'ok':'err'); e.style.display='block'; }
+    else { e.style.display='none'; }
+  }
+
+  // ── Auth / routing ──
+  async function route(){
+    const { data:{ session } } = await sb.auth.getSession();
+    if(!session){ showGate(); return; }
+    const { data:isAdmin, error } = await sb.rpc('is_admin');
+    if(error){ showGate('Could not verify access — please try again.'); return; }
+    if(!isAdmin){
+      await sb.auth.signOut();
+      showGate('Signed in, but this account isn’t an authorized admin. Ask the project owner to add you to the allowlist.');
+      return;
+    }
+    $('who-email').textContent = session.user.email;
+    await load();
+  }
 
   $('g-go').addEventListener('click', signIn);
-  $('g-key').addEventListener('keydown', function(e){ if(e.key==='Enter') signIn(); });
-  function signIn(){
-    var u=$('g-url').value.trim().replace(/\/+$/,''), k=$('g-key').value.trim(), err=$('g-err');
-    err.style.display='none';
-    if(!u||!k){ err.textContent='Enter both the project URL and the service_role key.'; err.style.display='block'; return; }
-    sb.url=u; sb.key=k; load();
+  $('g-pass').addEventListener('keydown', e => { if(e.key==='Enter') signIn(); });
+  async function signIn(){
+    const btn=$('g-go'); $('g-err').style.display='none';
+    const email=$('g-email').value.trim(), password=$('g-pass').value;
+    if(!email || !password){ showGate('Enter your email and password.'); return; }
+    btn.disabled=true; btn.innerHTML='<span class="spin"></span> Signing in…';
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    btn.disabled=false; btn.textContent='Sign in';
+    if(error){ showGate('Sign-in failed. Check your credentials or contact the project owner.'); return; }
+    $('g-pass').value='';
+    route();
   }
-  $('lock').addEventListener('click', function(){
-    sessionStorage.removeItem('hel_url'); sessionStorage.removeItem('hel_key');
-    sb={url:'',key:''}; leads=[];
-    $('dash').style.display='none'; $('bar-actions').style.display='none';
-    $('gate').style.display=''; $('g-key').value='';
-  });
+  $('lock').addEventListener('click', async () => { await sb.auth.signOut(); leads=[]; $('g-email').value=''; $('g-pass').value=''; route(); });
   $('refresh').addEventListener('click', load);
 
   // ── Data ──
-  function load(){
-    fetch(sb.url+'/rest/v1/compute_leads?select=*&order=created_at.desc',{headers:H()})
-      .then(function(r){ if(!r.ok) throw r.status; return r.json(); })
-      .then(function(rows){
-        leads=rows;
-        sessionStorage.setItem('hel_url',sb.url); sessionStorage.setItem('hel_key',sb.key);
-        $('gate').style.display='none'; $('dash').style.display='block'; $('bar-actions').style.display='flex';
-        render();
-      })
-      .catch(function(e){
-        var err=$('g-err');
-        err.textContent = (e===401||e===403) ? 'Key rejected — check you used the service_role key (not anon).' : 'Could not reach the project. Check the URL and your connection.';
-        err.style.display='block';
-      });
+  async function load(){
+    const { data, error } = await sb.from('compute_leads').select('*').order('created_at',{ascending:false});
+    if(error){ showGate('Could not load leads: '+(error.message||'unknown error')); return; }
+    leads = data || [];
+    $('gate').classList.add('hidden');
+    $('dash').style.display='block';
+    $('bar-actions').style.display='flex';
+    render();
   }
 
-  function patch(id, body, cb){
-    fetch(sb.url+'/rest/v1/compute_leads?id=eq.'+id,{
-      method:'PATCH',
-      headers:Object.assign({'Content-Type':'application/json','Prefer':'return=minimal'},H()),
-      body:JSON.stringify(body)
-    }).then(function(r){ cb(r.ok); }).catch(function(){ cb(false); });
+  async function patch(id, body){
+    const { error } = await sb.from('compute_leads').update(body).eq('id', id);
+    return !error;
   }
 
   // ── Render ──
   function render(){
-    // funnel chips
-    var counts={all:leads.length}; STAGES.forEach(function(s){counts[s]=0;});
-    leads.forEach(function(l){ var s=l.status||'new'; counts[s]=(counts[s]||0)+1; });
-    var chips='<div class="chip'+(filter==='all'?' on':'')+'" data-f="all"><div class="cn">'+counts.all+'</div><div class="ck">All leads</div></div>';
-    STAGES.forEach(function(s){
+    const counts={all:leads.length}; STAGES.forEach(s=>counts[s]=0);
+    leads.forEach(l=>{ const s=l.status||'new'; counts[s]=(counts[s]||0)+1; });
+    let chips='<div class="chip'+(filter==='all'?' on':'')+'" data-f="all"><div class="cn">'+counts.all+'</div><div class="ck">All leads</div></div>';
+    STAGES.forEach(s=>{
       chips+='<div class="chip'+(filter===s?' on':'')+'" data-f="'+s+'"><div class="cn">'+(counts[s]||0)+'</div><div class="ck"><span class="dotc" style="background:'+COLORS[s]+'"></span>'+s+'</div></div>';
     });
     $('funnel').innerHTML=chips;
-    Array.prototype.forEach.call($('funnel').querySelectorAll('.chip'),function(c){
-      c.addEventListener('click',function(){ filter=c.getAttribute('data-f'); render(); });
+    $('funnel').querySelectorAll('.chip').forEach(c=>{
+      c.addEventListener('click',()=>{ filter=c.getAttribute('data-f'); render(); });
     });
 
-    var won=leads.filter(function(l){return l.status==='won';}).length;
+    const won=leads.filter(l=>l.status==='won').length;
     $('stat').innerHTML='<b>'+leads.length+'</b> total leads · <b>'+won+'</b> won · showing <b>'+(filter==='all'?'all':filter)+'</b>';
 
-    // rows
-    var view = filter==='all' ? leads : leads.filter(function(l){return (l.status||'new')===filter;});
-    var html='';
-    view.forEach(function(l){
-      var opts=STAGES.map(function(s){return '<option value="'+s+'"'+((l.status||'new')===s?' selected':'')+'>'+s+'</option>';}).join('');
+    const view = filter==='all' ? leads : leads.filter(l=>(l.status||'new')===filter);
+    let html='';
+    view.forEach(l=>{
+      const opts=STAGES.map(s=>'<option value="'+s+'"'+((l.status||'new')===s?' selected':'')+'>'+s+'</option>').join('');
       html+='<tr data-id="'+esc(l.id)+'">'
         +'<td class="when">'+fmtDate(l.created_at)+'</td>'
-        +'<td><div class="who">'+esc(l.name||'—')+'</div><div class="sub">'+esc(l.company||'')+'</div>'
+        +'<td><div class="who-cell">'+esc(l.name||'—')+'</div><div class="sub">'+esc(l.company||'')+'</div>'
           +(l.email?'<div class="sub"><a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a></div>':'')+'</td>'
         +'<td class="sub">'+esc(l.city||'—')+'</td>'
         +'<td class="spend">'+esc(l.current_spend||'—')+'</td>'
@@ -216,26 +240,28 @@
     wireRows();
   }
 
-  function flash(tr){ var s=tr.querySelector('.saved'); s.classList.add('show'); setTimeout(function(){s.classList.remove('show');},1400); }
+  function flash(tr){ const s=tr.querySelector('.saved'); s.classList.add('show'); setTimeout(()=>s.classList.remove('show'),1400); }
 
   function wireRows(){
-    Array.prototype.forEach.call($('rows').querySelectorAll('tr'),function(tr){
-      var id=tr.getAttribute('data-id');
-      var lead=leads.filter(function(l){return String(l.id)===id;})[0];
-      var sel=tr.querySelector('.js-status');
-      sel.addEventListener('change',function(){
-        var body={status:sel.value}; sel.style.color=COLORS[sel.value]||'#0d1320';
+    $('rows').querySelectorAll('tr').forEach(tr=>{
+      const id=tr.getAttribute('data-id');
+      const lead=leads.find(l=>String(l.id)===id);
+      const sel=tr.querySelector('.js-status');
+      sel.addEventListener('change', async ()=>{
+        const body={status:sel.value}; sel.style.color=COLORS[sel.value]||'#0d1320';
         if(sel.value!=='new' && lead && !lead.contacted_at){ body.contacted_at=new Date().toISOString(); }
-        patch(id,body,function(ok){ if(ok){ if(lead){lead.status=sel.value; if(body.contacted_at)lead.contacted_at=body.contacted_at;} flash(tr); render(); } });
+        if(await patch(id,body)){ if(lead){ lead.status=sel.value; if(body.contacted_at) lead.contacted_at=body.contacted_at; } flash(tr); render(); }
       });
-      tr.querySelector('.js-quote').addEventListener('change',function(){
-        var v=this.value.trim(); patch(id,{quoted_amount:v},function(ok){ if(ok){ if(lead)lead.quoted_amount=v; flash(tr); } });
+      tr.querySelector('.js-quote').addEventListener('change', async function(){
+        const v=this.value.trim(); if(await patch(id,{quoted_amount:v})){ if(lead) lead.quoted_amount=v; flash(tr); }
       });
-      tr.querySelector('.js-notes').addEventListener('change',function(){
-        var v=this.value.trim(); patch(id,{notes:v},function(ok){ if(ok){ if(lead)lead.notes=v; flash(tr); } });
+      tr.querySelector('.js-notes').addEventListener('change', async function(){
+        const v=this.value.trim(); if(await patch(id,{notes:v})){ if(lead) lead.notes=v; flash(tr); }
       });
     });
   }
+
+  route();
 </script>
 </body>
 </html>
