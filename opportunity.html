@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Heliode Grid — Investment Opportunity</title>
+<meta name="description" content="Heliode Grid delivers cheaper managed GPU compute for AI inference today, and is building owned regional capacity — GPU clusters in commercial/light-industrial space, close to demand, standing up in days, not the years a data center takes." />
+<meta name="robots" content="noindex" />
+
+<meta property="og:title" content="Heliode Grid — Investment Opportunity" />
+<meta property="og:description" content="Managed GPU compute now; owned regional capacity next. Days, not years. Owned by us." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Light palette — matches index.html */
+    --bg: #ffffff;
+    --bg-2: #f4f7fc;
+    --panel: #ffffff;
+    --panel-2: #f4f7fc;
+    --line: rgba(13, 19, 32, 0.10);
+    --line-soft: rgba(13, 19, 32, 0.07);
+    --blue: #2563eb;
+    --blue-bright: #3b82f6;
+    --blue-dim: rgba(37, 99, 235, 0.08);
+    --blue-line: rgba(37, 99, 235, 0.28);
+    --accent: #f97316;
+    --accent-bright: #fb923c;
+    --accent-hover: #ea580c;
+    --accent-dim: rgba(249, 115, 22, 0.08);
+    --accent-line: rgba(249, 115, 22, 0.30);
+    --ink: #0d1320;
+    --text: #2b3340;
+    --muted: #555c66;
+    --dim: #8a909a;
+    --display: "Space Grotesk", system-ui, sans-serif;
+    --body: "Inter", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --maxw: 1120px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--blue-line); display: inline-block; }
+
+  h1, h2, h3 { font-family: var(--display); color: var(--ink); line-height: 1.08; font-weight: 700; letter-spacing: -0.02em; }
+
+  /* ---- top bar ---- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .brand-mark { width: 24px; height: 24px; flex: none; }
+  .brand-name { font-family: var(--display); font-weight: 700; font-size: 16px; letter-spacing: 0.01em; color: var(--ink); }
+  .brand-name span { color: var(--accent); }
+  .topbar-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); display: none; }
+  .btn {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 11px 18px; border-radius: 9px; border: 1px solid var(--accent); color: var(--accent-hover);
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease; white-space: nowrap;
+  }
+  .btn:hover { background: var(--accent); color: #fff; }
+  .btn-solid { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-solid:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-1px); }
+  .btn:focus-visible, a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+  /* ---- hero ---- */
+  .hero { position: relative; padding: 110px 0 86px; overflow: hidden; background: linear-gradient(180deg, #fff, var(--bg-2)); }
+  .hero::before {
+    content: ""; position: absolute; top: -260px; left: 50%; width: 900px; height: 900px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(37,99,235,0.10) 0%, rgba(37,99,235,0.03) 38%, transparent 66%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 0%, transparent 75%);
+    opacity: 0.7; pointer-events: none;
+  }
+  .hero-inner { position: relative; }
+  .hero h1 { font-size: clamp(38px, 6.4vw, 76px); margin: 22px 0 0; max-width: 17ch; }
+  .hero h1 em { font-style: normal; color: var(--blue); }
+  .hero-sub { margin-top: 26px; font-size: clamp(17px, 2vw, 20px); max-width: 62ch; color: var(--muted); }
+  .hero-cta { margin-top: 38px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .stat-row {
+    margin-top: 64px; display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+  }
+  .stat { background: var(--panel); padding: 22px 20px; }
+  .stat-num { font-family: var(--display); font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; color: var(--blue); letter-spacing: -0.02em; }
+  .stat-num small { font-size: 0.55em; color: var(--accent-hover); font-weight: 500; }
+  .stat-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+  .section { padding: 82px 0; border-top: 1px solid var(--line); }
+  .section.alt { background: var(--bg-2); }
+  .section-head { max-width: 64ch; }
+  .section-head h2 { font-size: clamp(28px, 4vw, 44px); margin-top: 16px; }
+  .section-head p { margin-top: 18px; color: var(--muted); font-size: 18px; }
+
+  .prob-grid { margin-top: 46px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .prob { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 26px 24px; box-shadow: 0 1px 2px rgba(13,19,32,0.03); }
+  .prob-k { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); }
+  .prob h3 { font-size: 21px; margin: 12px 0 8px; }
+  .prob p { font-size: 15.5px; color: var(--muted); line-height: 1.6; }
+
+  .figure { margin-top: 44px; }
+  .figure-frame {
+    background: linear-gradient(180deg, #fff 0%, var(--bg-2) 100%);
+    border: 1px solid var(--line); border-radius: 14px; padding: 16px; position: relative;
+  }
+  .figure-frame::before {
+    content: attr(data-tag); position: absolute; top: 14px; left: 18px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); z-index: 2;
+  }
+  .figure svg { width: 100%; height: auto; display: block; }
+  .figure-cap { margin-top: 16px; font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+  .figure-cap b { color: var(--blue); font-weight: 600; }
+
+  .phase-grid { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .phase { border: 1px solid var(--line); border-radius: 14px; padding: 30px 28px; background: var(--panel); box-shadow: 0 1px 2px rgba(13,19,32,0.03); }
+  .phase.next { background: linear-gradient(180deg, var(--accent-dim), #fff); border-color: var(--accent-line); }
+  .phase-tag { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 10px; }
+  .phase.next .phase-tag { color: var(--accent-hover); }
+  .pill { border: 1px solid currentColor; border-radius: 100px; padding: 2px 9px; font-size: 10px; }
+  .phase h3 { font-size: 24px; margin: 16px 0 12px; }
+  .phase p { font-size: 16px; color: var(--text); }
+  .phase ul { list-style: none; margin-top: 16px; }
+  .phase li { font-size: 15px; color: var(--muted); padding-left: 22px; position: relative; margin-bottom: 9px; }
+  .phase li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-family: var(--mono); }
+
+  .econ-grid { margin-top: 44px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 22px; align-items: start; }
+  .econ-table { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .econ-row { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; padding: 15px 22px; border-bottom: 1px solid var(--line-soft); align-items: baseline; }
+  .econ-row:last-child { border-bottom: none; }
+  .econ-row.head { background: var(--bg-2); font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+  .econ-row.total { background: var(--blue-dim); }
+  .econ-row .lbl { color: var(--text); font-size: 15.5px; }
+  .econ-row.total .lbl { color: var(--ink); font-weight: 600; font-family: var(--display); }
+  .econ-row .v { font-family: var(--mono); font-size: 15px; color: var(--ink); text-align: right; min-width: 80px; }
+  .econ-row .v.dim { color: var(--muted); }
+  .econ-row.total .v { color: var(--blue); }
+
+  .econ-side { border: 1px solid var(--line); border-radius: 14px; padding: 26px 24px; background: var(--panel); }
+  .econ-side h3 { font-size: 19px; margin-bottom: 14px; }
+  .horizon { display: flex; flex-direction: column; gap: 16px; }
+  .h-item { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line-soft); padding-bottom: 14px; }
+  .h-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .h-item .k { font-size: 14px; color: var(--muted); }
+  .h-item .val { font-family: var(--display); font-size: 22px; color: var(--blue); font-weight: 700; }
+  .econ-note { margin-top: 24px; font-size: 14.5px; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 16px; line-height: 1.6; }
+  .sens { margin-top: 22px; font-family: var(--mono); font-size: 13px; color: var(--muted); background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
+  .sens b { color: var(--blue); font-weight: 600; }
+
+  .honest-grid { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .honest-item { border: 1px solid var(--line); border-radius: 14px; padding: 26px 24px; background: var(--panel); }
+  .honest-item .n { font-family: var(--mono); font-size: 12px; color: var(--accent-hover); letter-spacing: 0.1em; }
+  .honest-item h3 { font-size: 19px; margin: 10px 0 8px; }
+  .honest-item p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .honest-item.primary { border-color: var(--accent-line); background: linear-gradient(180deg, var(--accent-dim), #fff); }
+
+  .edge-grid { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .edge-copy p { color: var(--text); margin-bottom: 16px; font-size: 16.5px; }
+  .edge-copy strong { color: var(--ink); font-weight: 600; }
+  .synth { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--panel); }
+  .synth-row { padding: 24px 26px; border-bottom: 1px solid var(--line-soft); }
+  .synth-row:last-child { border-bottom: none; }
+  .synth-row.eq { background: var(--bg-2); text-align: center; padding: 18px; }
+  .synth-name { font-family: var(--display); font-size: 18px; color: var(--ink); font-weight: 600; }
+  .synth-name span { color: var(--blue); }
+  .synth-desc { font-size: 14.5px; color: var(--muted); margin-top: 6px; }
+  .synth-eq { font-family: var(--mono); font-size: 14px; color: var(--accent-hover); letter-spacing: 0.04em; }
+
+  .cap-grid { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .cap-table { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .cap-r { display: flex; justify-content: space-between; padding: 15px 22px; border-bottom: 1px solid var(--line-soft); gap: 14px; }
+  .cap-r:last-child { border-bottom: none; }
+  .cap-r.tot { background: var(--blue-dim); }
+  .cap-r .lbl { font-size: 15px; color: var(--text); }
+  .cap-r.tot .lbl { color: var(--ink); font-weight: 600; font-family: var(--display); }
+  .cap-r .v { font-family: var(--mono); font-size: 14.5px; color: var(--ink); white-space: nowrap; }
+  .cap-r.tot .v { color: var(--blue); }
+  .miles { list-style: none; counter-reset: m; }
+  .miles li { counter-increment: m; position: relative; padding: 16px 0 16px 56px; border-bottom: 1px solid var(--line-soft); }
+  .miles li:last-child { border-bottom: none; }
+  .miles li::before {
+    content: "M" counter(m); position: absolute; left: 0; top: 16px;
+    font-family: var(--mono); font-size: 12px; color: #fff; background: var(--accent);
+    border-radius: 5px; padding: 3px 7px; font-weight: 600;
+  }
+  .miles .m-t { font-family: var(--display); color: var(--ink); font-size: 16px; font-weight: 600; }
+  .miles .m-d { font-size: 14px; color: var(--muted); margin-top: 3px; }
+  .cap-struct { margin-top: 22px; font-size: 14.5px; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 16px; }
+
+  .cta { text-align: center; padding: 96px 0; border-top: 1px solid var(--line); position: relative; overflow: hidden; background: var(--bg-2); }
+  .cta::before {
+    content: ""; position: absolute; bottom: -300px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px; background: radial-gradient(circle, rgba(249,115,22,0.10) 0%, transparent 65%); pointer-events: none;
+  }
+  .cta-inner { position: relative; }
+  .cta h2 { font-size: clamp(30px, 5vw, 52px); max-width: 18ch; margin: 18px auto 0; }
+  .cta p { margin: 20px auto 36px; max-width: 54ch; color: var(--muted); font-size: 18px; }
+
+  footer { border-top: 1px solid var(--line); padding: 44px 0; background: var(--bg-2); }
+  .foot-inner { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .foot-brand { font-family: var(--display); color: var(--ink); font-weight: 700; }
+  .foot-brand span { color: var(--accent); }
+  .disclaimer { margin-top: 22px; font-size: 12.5px; color: var(--dim); line-height: 1.6; max-width: 90ch; }
+
+  @media (min-width: 720px) { .topbar-tag { display: block; } }
+  @media (max-width: 860px) {
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .prob-grid { grid-template-columns: 1fr; }
+    .phase-grid, .econ-grid, .honest-grid, .edge-grid, .cap-grid { grid-template-columns: 1fr; }
+    .edge-grid { gap: 28px; }
+  }
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 20px; }
+    .section { padding: 60px 0; }
+    .hero { padding: 80px 0 60px; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top" aria-label="Heliode Grid home">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="6" fill="#f97316"/>
+        <g stroke="#2563eb" stroke-width="1.6" stroke-linecap="round">
+          <path d="M16 2.5V8"/><path d="M16 24V29.5"/>
+          <path d="M2.5 16H8"/><path d="M24 16H29.5"/>
+          <path d="M6.5 6.5L10.3 10.3"/><path d="M21.7 21.7L25.5 25.5"/>
+          <path d="M25.5 6.5L21.7 10.3"/><path d="M10.3 21.7L6.5 25.5"/>
+        </g>
+      </svg>
+      <span class="brand-name">Heliode<span>·</span>Grid</span>
+    </a>
+    <div class="topbar-tag">Investment opportunity · Confidential</div>
+    <a class="btn" href="investors.html">Request data room access</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">Managed GPU compute · owned next</span>
+      <h1>Compute, deployed in <em>days</em> — not years.</h1>
+      <p class="hero-sub">
+        Heliode delivers cheaper, managed GPU compute for AI inference today — sourced on the open market and run for
+        teams as a service. Next, we own the capacity: GPU clusters in leased commercial and light-industrial space,
+        close to demand, beginning with a 50-node pilot in Austin.
+      </p>
+      <div class="hero-cta">
+        <a class="btn-solid btn" href="investors.html">Request data room access</a>
+        <a class="btn" href="#economics">See the unit economics</a>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">days<small> vs 5–7 yr</small></div>
+          <div class="stat-label">Deploy time vs grid queue</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$9.8K<small>/mo</small></div>
+          <div class="stat-label">Gross compute MRR / node</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">~yr 3</div>
+          <div class="stat-label">Payback (6%/yr decline)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">50</div>
+          <div class="stat-label">Node Austin pilot</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE OPENING ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The opening</span>
+        <h2>Compute is the bottleneck. Power, not chips alone, is the binding constraint.</h2>
+        <p>
+          Inference is overtaking training as the dominant AI load — steady, 24/7, latency-sensitive, growing fast.
+          Centralized supply can't keep up. Leasing commercial space that already carries heavy power sidesteps the
+          bottleneck: the power is already in the building, and deployment is measured in days.
+        </p>
+      </div>
+      <div class="prob-grid">
+        <div class="prob">
+          <div class="prob-k">Demand</div>
+          <h3>Inference, everywhere</h3>
+          <p>Running models in production is a steady, round-the-clock load that's growing faster than anyone can build for.</p>
+        </div>
+        <div class="prob">
+          <div class="prob-k">Supply</div>
+          <h3>5–7 year grid queues</h3>
+          <p>New data centers are multi-year, multi-billion-dollar builds gated by interconnection and permitting.</p>
+        </div>
+        <div class="prob">
+          <div class="prob-k">The edge</div>
+          <h3>Deployment nobody wants to own</h3>
+          <p>A sales-and-deployment engine that secures power-ready commercial sites and stands compute up fast — our core competency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FIGURE 1: WHAT WE DEPLOY AT A SITE ============ -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The node</span>
+        <h2>What we deploy at a site</h2>
+        <p>
+          A GPU server installed in leased commercial / light-industrial space that already has the heavy electrical
+          service dense compute needs. No new construction, no grid queue — battery backup carries it through outages.
+          The unit constraint isn't floor space; it's power and cooling.
+        </p>
+      </div>
+
+      <div class="figure">
+        <div class="figure-frame" data-tag="Fig. 01 — Site schematic · commercial / light-industrial">
+          <svg viewBox="0 0 880 540" role="img" aria-labelledby="fig1title fig1desc">
+            <title id="fig1title">GPU node deployed in a commercial building</title>
+            <desc id="fig1desc">A commercial building cross-section showing a GPU server rack with high-amperage power, battery backup, cooling, and a network uplink.</desc>
+
+            <defs>
+              <linearGradient id="rack-g" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#eef3fb"/><stop offset="1" stop-color="#dfe9f8"/>
+              </linearGradient>
+              <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="8" stroke="#d6dae1" stroke-width="1"/>
+              </pattern>
+            </defs>
+
+            <!-- ground -->
+            <line x1="40" y1="452" x2="840" y2="452" stroke="#cdd4df" stroke-width="1.5"/>
+            <rect x="40" y="452" width="800" height="14" fill="url(#hatch)" opacity="0.7"/>
+
+            <!-- utility pole + high-amp service drop -->
+            <line x1="788" y1="210" x2="788" y2="452" stroke="#cdd4df" stroke-width="3"/>
+            <line x1="768" y1="226" x2="808" y2="226" stroke="#cdd4df" stroke-width="3"/>
+            <path d="M788 230 C 720 250, 660 256, 584 262" stroke="#f97316" stroke-width="2" fill="none"/>
+
+            <!-- commercial building (flat roof) -->
+            <rect x="220" y="200" width="364" height="252" fill="#ffffff" stroke="#cdd4df" stroke-width="2"/>
+            <rect x="210" y="188" width="384" height="16" fill="#eef3fb" stroke="#cdd4df" stroke-width="2"/>
+            <!-- roof units (HVAC) -->
+            <rect x="250" y="166" width="48" height="22" rx="2" fill="#eef3fb" stroke="#cdd4df" stroke-width="1.4"/>
+            <rect x="320" y="166" width="48" height="22" rx="2" fill="#eef3fb" stroke="#cdd4df" stroke-width="1.4"/>
+            <text x="298" y="160" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8a909a">rooftop cooling</text>
+            <!-- bay door + window strip -->
+            <rect x="470" y="360" width="96" height="92" fill="#f4f7fc" stroke="#cdd4df" stroke-width="1.4"/>
+            <line x1="470" y1="384" x2="566" y2="384" stroke="#cdd4df" stroke-width="1"/>
+            <line x1="470" y1="408" x2="566" y2="408" stroke="#cdd4df" stroke-width="1"/>
+            <line x1="470" y1="430" x2="566" y2="430" stroke="#cdd4df" stroke-width="1"/>
+
+            <!-- SERVER RACK -->
+            <rect x="262" y="250" width="120" height="180" rx="4" fill="url(#rack-g)" stroke="#2563eb" stroke-width="1.8"/>
+            <!-- GPU servers in rack -->
+            <g>
+              <rect x="274" y="262" width="96" height="30" rx="2" fill="#ffffff" stroke="#3b82f6" stroke-width="1.3"/>
+              <rect x="274" y="298" width="96" height="30" rx="2" fill="#ffffff" stroke="#3b82f6" stroke-width="1.3"/>
+              <rect x="274" y="334" width="96" height="30" rx="2" fill="#ffffff" stroke="#3b82f6" stroke-width="1.3"/>
+              <rect x="274" y="370" width="96" height="30" rx="2" fill="#ffffff" stroke="#3b82f6" stroke-width="1.3"/>
+            </g>
+            <g fill="#f97316">
+              <circle cx="282" cy="277" r="2.4"/><circle cx="282" cy="313" r="2.4"/>
+              <circle cx="282" cy="349" r="2.4"/><circle cx="282" cy="385" r="2.4"/>
+            </g>
+            <g stroke="#cdd4df" stroke-width="4" stroke-linecap="round">
+              <line x1="296" y1="277" x2="360" y2="277"/><line x1="296" y1="313" x2="360" y2="313"/>
+              <line x1="296" y1="349" x2="360" y2="349"/><line x1="296" y1="385" x2="360" y2="385"/>
+            </g>
+
+            <!-- BATTERY / UPS -->
+            <rect x="396" y="372" width="58" height="58" rx="3" fill="#fff" stroke="#fb923c" stroke-width="1.6"/>
+            <rect x="406" y="404" width="38" height="12" rx="2" fill="#f4f7fc" stroke="#cdd4df" stroke-width="1"/>
+            <rect x="406" y="404" width="26" height="12" rx="2" fill="#f97316"/>
+            <text x="425" y="392" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#8a909a">UPS</text>
+
+            <!-- uplink -->
+            <line x1="382" y1="320" x2="470" y2="320" stroke="#3b82f6" stroke-width="1.4"/>
+            <rect x="470" y="306" width="58" height="34" rx="3" fill="#fff" stroke="#cdd4df" stroke-width="1.4"/>
+            <circle cx="499" cy="323" r="3" fill="#2563eb"/>
+            <text x="499" y="356" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#8a909a">UPLINK</text>
+
+            <!-- ===== Callout labels ===== -->
+            <g font-family="JetBrains Mono, monospace" font-size="12.5" fill="#2b3340">
+              <!-- GPU node -->
+              <line x1="262" y1="300" x2="150" y2="300" stroke="#cdd4df" stroke-width="1"/>
+              <circle cx="262" cy="300" r="2.5" fill="#2563eb"/>
+              <text x="40" y="284" fill="#2563eb">GPU NODE</text>
+              <text x="40" y="302" font-size="11" fill="#555c66">8 NVIDIA-class GPUs</text>
+              <text x="40" y="317" font-size="11" fill="#8a909a">~10 kW · 6–8U · ~$250K</text>
+
+              <!-- battery -->
+              <line x1="396" y1="400" x2="150" y2="400" stroke="#cdd4df" stroke-width="1"/>
+              <circle cx="396" cy="400" r="2.5" fill="#2563eb"/>
+              <text x="40" y="394" fill="#2563eb">BATTERY BACKUP</text>
+              <text x="40" y="412" font-size="11" fill="#555c66">ride-through during outages</text>
+
+              <!-- high-amp power -->
+              <line x1="700" y1="252" x2="712" y2="196" stroke="#cdd4df" stroke-width="1"/>
+              <circle cx="700" cy="252" r="2.5" fill="#f97316"/>
+              <text x="660" y="178" fill="#ea580c">HIGH-AMP POWER</text>
+              <text x="660" y="195" font-size="11" fill="#555c66">400A / 3-phase · ~$10–12K/yr</text>
+
+              <!-- network -->
+              <line x1="528" y1="323" x2="640" y2="372" stroke="#cdd4df" stroke-width="1"/>
+              <circle cx="528" cy="323" r="2.5" fill="#2563eb"/>
+              <text x="612" y="402" fill="#2563eb">FIBER / NET</text>
+              <text x="612" y="419" font-size="11" fill="#555c66">business transit</text>
+            </g>
+
+            <text x="402" y="442" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" fill="#8a909a">leased commercial space — no permitting queue</text>
+          </svg>
+        </div>
+        <div class="figure-cap">
+          <b>Site deal:</b>
+          <span>a commercial lease where the power already exists. Heliode owns the node and the multi-year customer relationship.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FIGURE 2: WHAT WE DO FOR COMPANIES ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The service</span>
+        <h2>What we do for companies that need compute</h2>
+        <p>
+          Inference teams get one bill, uptime, and support — at a price below their current cloud spend.
+          We source on the open market today; we deliver from owned site nodes next, regional to the buyer.
+        </p>
+      </div>
+
+      <div class="figure">
+        <div class="figure-frame" data-tag="Fig. 02 — Compute delivery flow">
+          <svg viewBox="0 0 880 440" role="img" aria-labelledby="fig2title fig2desc">
+            <title id="fig2title">How Heliode delivers compute to inference teams</title>
+            <desc id="fig2desc">A flow from companies needing compute, through Heliode's managed service, to delivered compute — fed by marketplace supply now and owned site nodes next.</desc>
+
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#f97316"/>
+              </marker>
+              <marker id="arrow-dim" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#3b82f6"/>
+              </marker>
+            </defs>
+
+            <!-- LEFT: companies -->
+            <rect x="28" y="120" width="216" height="150" rx="8" fill="#ffffff" stroke="#cdd4df" stroke-width="1.6"/>
+            <text x="48" y="150" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#2563eb">COMPANIES THAT NEED COMPUTE</text>
+            <g font-family="Inter, sans-serif" font-size="13" fill="#2b3340">
+              <text x="48" y="182">Vertical AI SaaS</text>
+              <text x="48" y="206">Seed–Series A teams</text>
+              <text x="48" y="230">Running inference at volume</text>
+            </g>
+            <text x="48" y="256" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8a909a">pain: high bills · scarce capacity</text>
+
+            <!-- CENTER: heliode managed -->
+            <rect x="332" y="104" width="216" height="182" rx="8" fill="#eef3fb" stroke="#2563eb" stroke-width="2"/>
+            <text x="440" y="138" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="18" fill="#0d1320">Heliode Grid</text>
+            <text x="440" y="158" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1" fill="#555c66">MANAGED COMPUTE</text>
+            <g font-family="Inter, sans-serif" font-size="13.5" fill="#2b3340" text-anchor="middle">
+              <text x="440" y="194">One bill</text>
+              <text x="440" y="220">Uptime &amp; SLA</text>
+              <text x="440" y="246">Support</text>
+            </g>
+
+            <!-- RIGHT: delivered -->
+            <rect x="636" y="120" width="216" height="150" rx="8" fill="#ffffff" stroke="#cdd4df" stroke-width="1.6"/>
+            <text x="656" y="150" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#2563eb">COMPUTE DELIVERED</text>
+            <g font-family="Inter, sans-serif" font-size="13" fill="#2b3340">
+              <text x="656" y="182">Beats current bill</text>
+              <text x="656" y="206">Managed simplicity</text>
+              <text x="656" y="230">Regional — on the roadmap</text>
+            </g>
+
+            <!-- arrows L->C and C->R -->
+            <line x1="248" y1="195" x2="326" y2="195" stroke="#f97316" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="287" y="184" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#8a909a">demand</text>
+            <line x1="552" y1="195" x2="630" y2="195" stroke="#f97316" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="591" y="184" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#8a909a">delivered</text>
+
+            <!-- supply feeds from below into center -->
+            <rect x="250" y="346" width="172" height="62" rx="6" fill="#ffffff" stroke="#3b82f6" stroke-width="1.4"/>
+            <text x="266" y="370" font-family="JetBrains Mono, monospace" font-size="11" fill="#2563eb">NOW</text>
+            <text x="266" y="390" font-family="Inter, sans-serif" font-size="12.5" fill="#555c66">Marketplace + spot</text>
+            <text x="266" y="404" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#8a909a">Vast · RunPod · Lambda</text>
+
+            <rect x="458" y="346" width="172" height="62" rx="6" fill="#f4f7fc" stroke="#3b82f6" stroke-width="1.4" stroke-dasharray="5 4"/>
+            <text x="474" y="370" font-family="JetBrains Mono, monospace" font-size="11" fill="#555c66">NEXT</text>
+            <text x="474" y="390" font-family="Inter, sans-serif" font-size="12.5" fill="#555c66">Owned site nodes</text>
+            <text x="474" y="404" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#8a909a">Austin 50-node pilot</text>
+
+            <line x1="336" y1="344" x2="380" y2="290" stroke="#3b82f6" stroke-width="1.6" marker-end="url(#arrow-dim)"/>
+            <line x1="544" y1="344" x2="500" y2="290" stroke="#3b82f6" stroke-width="1.6" marker-end="url(#arrow-dim)"/>
+            <text x="440" y="330" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#8a909a">supply</text>
+          </svg>
+        </div>
+        <div class="figure-cap">
+          <b>The motion:</b>
+          <span>a free 2-week trial on a slice of their traffic, converted to a contract. Sell price + simplicity now; regional latency is the roadmap.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TWO PHASES ============ -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The model</span>
+        <h2>Two phases. Prove demand first, then own the network.</h2>
+      </div>
+      <div class="phase-grid">
+        <div class="phase">
+          <div class="phase-tag">Phase 1 <span class="pill">Now · asset-light</span></div>
+          <h3>Managed brokerage</h3>
+          <p>Source GPU capacity on the open market, wrap it in a managed service, and resell to inference teams across four launch metros.</p>
+          <ul>
+            <li>Near-immediate revenue, no hardware</li>
+            <li>Proves demand and secures the buyers</li>
+            <li>De-risks every node before it ships</li>
+          </ul>
+        </div>
+        <div class="phase next">
+          <div class="phase-tag">Phase 2 <span class="pill">Next</span></div>
+          <h3>Owned regional capacity</h3>
+          <p>Deploy owned GPU clusters in leased commercial / light-industrial space — starting with the 50-node Austin pilot. We own the hardware and the relationship.</p>
+          <ul>
+            <li>Cheaper, and regional to the buyer</li>
+            <li>Hardware refreshes every ~5 years</li>
+            <li>Customer + site relationship is the durable asset</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ECONOMICS ============ -->
+  <section class="section" id="economics">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Unit economics</span>
+        <h2>Per node, base case — Austin</h2>
+        <p>Current-generation snapshot. The multi-year view assumes a deliberately conservative 6%/yr compute-price decline and a full hardware refresh at year 5. Figures are preliminary and require contracted offtake.</p>
+      </div>
+
+      <div class="econ-grid">
+        <div class="econ-table">
+          <div class="econ-row head"><div class="lbl">Metric (base case)</div><div class="v">Monthly</div><div class="v">Annual</div></div>
+          <div class="econ-row"><div class="lbl">Gross compute revenue</div><div class="v">~$9,800</div><div class="v dim">~$118K</div></div>
+          <div class="econ-row"><div class="lbl">Direct operating costs <span style="color:var(--dim)">(power, site lease, bandwidth)</span></div><div class="v">~$2,200</div><div class="v dim">~$26K</div></div>
+          <div class="econ-row total"><div class="lbl">Net contribution</div><div class="v">~$7,600</div><div class="v">~$91K</div></div>
+        </div>
+
+        <div class="econ-side">
+          <h3>Horizon (6%/yr decline)</h3>
+          <div class="horizon">
+            <div class="h-item"><span class="k">Payback</span><span class="val">~year 3</span></div>
+            <div class="h-item"><span class="k">5-year cumulative</span><span class="val">~+$170K</span></div>
+            <div class="h-item"><span class="k">10-year cumulative</span><span class="val">~+$201K</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sens">
+        <b>Sensitivity:</b> driven by realized $/GPU-hr × utilization. Across conservative–to–upside, gross MRR runs <b>~$5,800–$14,300/mo</b> and net contribution <b>~$3,600–$12,100/mo</b>.
+      </div>
+      <p class="econ-note">
+        The conservative case only just clears hardware amortization — which is exactly why a contracted buyer comes before a single node goes on a rack.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ HONEST CONSTRAINTS ============ -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Straight talk</span>
+        <h2>The constraints we manage on purpose</h2>
+        <p>We'd rather you know the weak spots. Here are the dependencies the whole model rests on.</p>
+      </div>
+      <div class="honest-grid">
+        <div class="honest-item primary">
+          <div class="n">DEPENDENCY 01</div>
+          <h3>Offtake comes first</h3>
+          <p>A node is a ~$250K brick without a contracted buyer. Compute revenue is the business. "Build it and they'll come" is the failure mode — the brokerage exists to prove and secure demand before we deploy.</p>
+        </div>
+        <div class="honest-item">
+          <div class="n">DEPENDENCY 02</div>
+          <h3>Hardware is financed, not bought</h3>
+          <p>Equity funds the company, team, software, and a few proof nodes. Node hardware is financed against contracted compute revenue — equipment financing secured by signed offtake.</p>
+        </div>
+        <div class="honest-item">
+          <div class="n">DEPENDENCY 03</div>
+          <h3>Deployment is the moat — not price</h3>
+          <p>Compute will commoditize; we plan for a 6%/yr price decline. What won't commoditize is securing power-ready space and standing compute up fast. The durable asset is the customer and site network.</p>
+        </div>
+        <div class="honest-item">
+          <div class="n">DEPENDENCY 04</div>
+          <h3>GPU supply favors large buyers</h3>
+          <p>Top-class GPUs are supply-constrained. Sourcing and allocation must be solved early; a partner relationship can help, without becoming a single point of failure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE EDGE ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Why us</span>
+        <h2>A proven sales-and-install engine, pointed at AI compute</h2>
+      </div>
+      <div class="edge-grid">
+        <div class="edge-copy">
+          <p>The founding strength is <strong>deployment</strong> — sales and install at scale. Founder Brandon Cruz built Ryzen Recruit, a door-to-door fiber sales and install organization in Hawaii. That muscle — closing deals and coordinating physical installs — is the part nobody else wants to own, and it's exactly what securing sites and standing up compute requires.</p>
+          <p>The first critical hire is an <strong>infrastructure / compute lead</strong> who owns the orchestration-and-billing software that makes many sites behave like one cloud.</p>
+        </div>
+        <div class="synth">
+          <div class="synth-row">
+            <div class="synth-name">Todd Pedersen <span>· Vivint</span></div>
+            <div class="synth-desc">A recurring-revenue, door-to-door empire. Hardware is the wedge; the durable asset is the multi-year customer relationship.</div>
+          </div>
+          <div class="synth-row eq"><span class="synth-eq">×</span></div>
+          <div class="synth-row">
+            <div class="synth-name">Fast, owned <span>· infrastructure</span></div>
+            <div class="synth-desc">Vertically integrated capacity, deployed close to demand and financed against long-term contracts.</div>
+          </div>
+          <div class="synth-row eq"><span class="synth-eq">= Heliode → AI compute</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAPITAL ============ -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Capital &amp; milestones</span>
+        <h2>The 50-node Austin pilot</h2>
+        <p>A ~$2.0M pre-seed funds the company — team, software, brokerage launch, and a few proof nodes — while the full pilot's node hardware is financed against contracted compute revenue. Raise amount and structure are being set with advisors.</p>
+      </div>
+      <div class="cap-grid">
+        <div>
+          <div class="cap-table">
+            <div class="cap-r"><span class="lbl">Pre-seed: brokerage, team, software, proof nodes</span><span class="v">~$2.0M</span></div>
+            <div class="cap-r"><span class="lbl">Pilot node hardware (financed)</span><span class="v">~$12–14M</span></div>
+            <div class="cap-r"><span class="lbl">Site fit-out, install, ops, contingency</span><span class="v">~$1.5–2.5M</span></div>
+            <div class="cap-r tot"><span class="lbl">Full pilot total</span><span class="v">~$14–16M</span></div>
+          </div>
+          <p class="cap-struct">Structure: equity for the company + proof nodes; hardware financed against contracted revenue. Legal, tax, and financing structure deferred to qualified advisors.</p>
+        </div>
+        <div>
+          <ul class="miles">
+            <li><div class="m-t">Launch brokerage</div><div class="m-d">Sign first compute pilot contracts (90 days).</div></li>
+            <li><div class="m-t">Secure offtake</div><div class="m-d">Compute-offtake commitment + infrastructure hire.</div></li>
+            <li><div class="m-t">Deploy first nodes</div><div class="m-d">Stand up owned nodes at the first site; scale to the 50-node pilot.</div></li>
+            <li><div class="m-t">Prove the unit</div><div class="m-d">Validate pilot economics; raise to scale the network.</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <span class="eyebrow">The bet</span>
+      <h2>Compute can't be built fast enough in the centralized model.</h2>
+      <p>Heliode puts a proven sales-and-install engine behind the fastest way to add capacity — one leased site at a time. Prove it in Austin, then scale it across the markets where the demand already lives.</p>
+      <a class="btn-solid btn" href="investors.html">Request data room access</a>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">Heliode<span>·</span>Grid</div>
+      <div style="font-family: var(--mono); font-size: 12px; color: var(--dim);">hello@heliodegrid.com · Confidential · June 2026</div>
+    </div>
+    <p class="disclaimer">
+      Concept-stage. All figures are preliminary estimates for discussion only and are not guarantees of performance.
+      Nothing herein is an offer to sell or a solicitation to buy any security. Legal, tax, and financing structures
+      are subject to advice from qualified professionals.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
