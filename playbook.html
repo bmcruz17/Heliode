@@ -352,21 +352,28 @@
 <!-- COMPANY FORMATION -->
 <section id="company">
   <div class="tag">Set up the company</div>
-  <h2>Incorporate the right way — Delaware C-corp + SAFE</h2>
+  <h2>Incorporate the right way — Heliode, Inc. + ATMX (your holdco) + SAFE</h2>
   <p>The standard path investors expect. Do it in order. <strong>Use a startup lawyer or an incorporation service — this is a checklist, not legal advice.</strong></p>
 
-  <h3>1 · Incorporate a Delaware C-corp</h3>
+  <h3>Your structure (decided)</h3>
   <ul>
-    <li>The default for startups raising money — SAFEs and VCs expect it (not an LLC).</li>
-    <li>Use <strong>Clerky, Stripe Atlas, or Firstbase</strong> (or a startup lawyer). ~$500 + Delaware franchise fees.</li>
-    <li>Decide the entity name and how <strong>ATMX Holdings</strong> relates (parent vs. the operating co).</li>
+    <li><strong>Heliode, Inc.</strong> — Delaware <strong>C-corp</strong>, the operating company. It raises the SAFE, signs contracts, and issues equity.</li>
+    <li><strong>ATMX Holdings, LLC</strong> (Wyoming) — your personal holding company. Your founder shares are issued <strong>to ATMX, LLC</strong>, not to you personally. On the cap table, ATMX shows up as the founder holder.</li>
+    <li><strong>Keep ATMX a pass-through</strong> (single-member LLC = "disregarded"). This preserves <strong>QSBS</strong> — up to $10M+ of gains potentially federal-tax-free after a 5-year hold. <em>Do not</em> elect to tax ATMX as a corporation — that would kill QSBS. Confirm with a CPA before issuing shares.</li>
   </ul>
 
-  <h3>2 · Issue founder shares + protect them</h3>
+  <h3>1 · Incorporate Heliode, Inc. (Delaware C-corp)</h3>
   <ul>
-    <li>Authorize ~<strong>10,000,000 shares</strong>; issue founders <strong>restricted stock</strong>.</li>
+    <li>The default for startups raising money — SAFEs and VCs expect a C-corp (not an LLC).</li>
+    <li>Use <strong>Clerky, Stripe Atlas, or Firstbase</strong> (or a startup lawyer). ~$500 + Delaware franchise fees.</li>
+    <li>Investors invest <strong>directly into Heliode, Inc.</strong> — ATMX sits on the cap table as your holding vehicle, not on top of the company.</li>
+  </ul>
+
+  <h3>2 · Issue founder shares (to ATMX) + protect them</h3>
+  <ul>
+    <li>Authorize ~<strong>10,000,000 shares</strong>; issue founders <strong>restricted stock</strong> — name <strong>ATMX Holdings, LLC</strong> as the stockholder (Clerky/Atlas default to individuals, so specify this).</li>
     <li>Put <strong>4-year vesting, 1-year cliff</strong> on founder shares — yes, on yourself; investors require it.</li>
-    <li><strong>File your 83(b) election within 30 days</strong> of issuance. Miss this deadline and you're taxed badly — non-negotiable.</li>
+    <li><strong>File the 83(b) election within 30 days</strong> of issuance — filed by the stockholder (ATMX), signed by you as authorized member. Miss this deadline and you're taxed badly — non-negotiable.</li>
     <li>Sign <strong>IP assignment</strong> agreements so all founder work belongs to the company.</li>
   </ul>
 
