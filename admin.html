@@ -113,6 +113,20 @@
   .pagecard .pt{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.95rem;}
   .pagecard .pu{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--blue);margin-top:2px;}
   .pagecard .pd{font-size:0.78rem;color:var(--mute);margin-top:6px;}
+  /* overview KPIs */
+  .ov-h{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);margin:4px 0 10px;}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:8px;}
+  @media(max-width:760px){.kpis{grid-template-columns:1fr 1fr;}}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .kpi .kv{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.9rem;color:var(--blue);line-height:1;letter-spacing:-0.02em;}
+  .kpi .kk{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);margin-top:9px;}
+  .kpi .ks{font-size:0.8rem;color:var(--faint);margin-top:6px;}
+  .kpi .ks b{color:var(--accent-hover);font-weight:600;}
+  .funnel{display:flex;gap:7px;flex-wrap:wrap;margin:4px 0 18px;}
+  .fchip{font-family:'JetBrains Mono',monospace;font-size:0.72rem;border:1px solid var(--line2);border-radius:999px;padding:6px 12px;color:var(--ink);background:#fff;}
+  .fchip b{color:var(--blue);}
+  .lnk{display:block;background:none;border:none;color:var(--blue);font-family:'Inter',sans-serif;font-size:0.82rem;cursor:pointer;margin-top:12px;padding:0;}
+  .lnk:hover{text-decoration:underline;}
   .hidden{display:none !important;}
 </style>
 </head>
@@ -141,22 +155,36 @@
   <label class="fld" for="g-pass">Password</label>
   <input class="inp" id="g-pass" type="password" autocomplete="current-password" placeholder="••••••••••">
   <button class="btn btn-primary" id="g-go">Sign in</button>
+  <button class="lnk" id="g-signup">First time? Create your password →</button>
   <div class="gate-err" id="g-err"></div>
-  <p class="gate-note">Access is restricted to admin accounts on the allowlist. Need access? The project owner adds you in Supabase. © 2026 Heliode · ATMX Holdings.</p>
+  <p class="gate-note">Access is restricted to accounts on the allowlist. If the owner added your email, use "Create your password" once to activate. © 2026 Heliode · ATMX Holdings.</p>
 </div>
 
 <!-- Dashboard -->
 <div id="dash">
   <div class="wrap">
     <div class="tabs">
-      <button class="tab on" id="tab-leads">Clients / Leads</button>
+      <button class="tab on" id="tab-overview">Dashboard</button>
+      <button class="tab" id="tab-leads">Clients / Leads</button>
       <button class="tab" id="tab-vendors">Vendors</button>
       <button class="tab" id="tab-reps">Reps</button>
       <button class="tab" id="tab-investors">Investors</button>
+      <button class="tab" id="tab-team">Team</button>
       <button class="tab" id="tab-pages">Pages</button>
     </div>
 
-    <div id="leads-view">
+    <div id="overview-view">
+      <div class="ov-h">Key metrics</div>
+      <div class="kpis" id="kpis"></div>
+      <div class="ov-h" style="margin-top:22px;">Lead pipeline</div>
+      <div class="funnel" id="lead-funnel"></div>
+      <div class="ov-h">Vendor pipeline</div>
+      <div class="funnel" id="vendor-funnel"></div>
+      <div class="ov-h" style="margin-top:22px;">Jump to a page</div>
+      <div class="pagegrid" id="ov-pages"></div>
+    </div>
+
+    <div id="leads-view" style="display:none;">
       <div class="stat-line" id="stat"></div>
       <div class="vboard" id="lboard"></div>
       <div class="empty" id="empty" style="display:none;">No leads yet.</div>
@@ -203,6 +231,22 @@
         <table>
           <thead><tr><th>Name</th><th>Email</th><th>Firm</th><th>Status</th><th></th></tr></thead>
           <tbody id="rinv"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="team-view" style="display:none;">
+      <div class="stat-line" id="tstat"></div>
+      <div class="add-vform" style="grid-template-columns:1.4fr 1fr auto;">
+        <input class="vin inp" id="t-email" type="email" placeholder="Email (their login)">
+        <input class="vin inp" id="t-name" placeholder="Name (e.g. Debbie Nixon)">
+        <button class="btn btn-primary" id="t-add">+ Add full-access login</button>
+      </div>
+      <p class="stat-line" style="margin:-6px 0 14px;">Full visibility — they see every tab and page. They activate by creating a password at <b>/admin.html</b> with this email; it links automatically.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Status</th><th></th></tr></thead>
+          <tbody id="rteam"></tbody>
         </table>
       </div>
     </div>
@@ -286,6 +330,16 @@
     $('g-pass').value='';
     route();
   }
+  $('g-signup').addEventListener('click', async ()=>{
+    $('g-err').style.display='none';
+    const email=$('g-email').value.trim(), password=$('g-pass').value;
+    if(!email||!password){ showGate('Enter your email and choose a password.'); return; }
+    if(password.length<6){ showGate('Password must be at least 6 characters.'); return; }
+    const { data, error } = await sb.auth.signUp({ email, password });
+    if(error){ showGate('Could not create account: '+error.message); return; }
+    if(data.session){ route(); }
+    else { showGate('Account created — check your email to confirm, then sign in.', true); }
+  });
   $('lock').addEventListener('click', async () => { await sb.auth.signOut(); leads=[]; $('g-email').value=''; $('g-pass').value=''; route(); });
   $('refresh').addEventListener('click', load);
 
@@ -298,9 +352,8 @@
     $('dash').style.display='block';
     $('bar-actions').style.display='flex';
     render();
-    loadVendors();
-    loadReps();
-    loadInvestors();
+    await Promise.all([loadVendors(), loadReps(), loadInvestors(), loadTeam()]);
+    renderOverview();
   }
 
   async function patch(id, body){
@@ -336,6 +389,7 @@
     $('lboard').innerHTML=html;
     $('empty').style.display = leads.length ? 'none' : 'block';
     wireRows();
+    renderOverview();
   }
 
   function flash(card){ const s=card.querySelector('.saved'); if(s){ s.classList.add('show'); setTimeout(()=>s.classList.remove('show'),1300); } }
@@ -379,7 +433,7 @@
   ];
   let vendors=[], vendorsReady=false;
 
-  const VIEWS=['leads','vendors','reps','investors','pages'];
+  const VIEWS=['overview','leads','vendors','reps','investors','team','pages'];
   VIEWS.forEach(v=> $('tab-'+v).addEventListener('click',()=>showView(v)));
   function showView(v){
     VIEWS.forEach(x=>{
@@ -391,7 +445,7 @@
   async function loadVendors(){
     const { data, error } = await sb.from('vendors').select('*').order('created_at',{ascending:true});
     if(error){ vendors=[]; vendorsReady=false; $('vstat').textContent='Vendors not enabled yet — run vendors.sql in Supabase.'; renderVendors(); return; }
-    vendors = data||[]; vendorsReady=true; renderVendors();
+    vendors = data||[]; vendorsReady=true; renderVendors(); renderOverview();
   }
   async function vpatch(id, body){ const { error } = await sb.from('vendors').update(body).eq('id', id); return !error; }
 
@@ -442,7 +496,7 @@
   async function loadReps(){
     const { data, error } = await sb.from('reps').select('*').order('created_at',{ascending:true});
     if(error){ reps=[]; $('rstat').textContent='Reps not enabled yet — run rep_portal.sql in Supabase.'; renderReps(); return; }
-    reps=data||[]; renderReps();
+    reps=data||[]; renderReps(); renderOverview();
   }
   $('r-add').addEventListener('click', async ()=>{
     const email=$('r-email').value.trim().toLowerCase(); if(!email){ alert('Enter the rep\'s email.'); return; }
@@ -479,7 +533,7 @@
   async function loadInvestors(){
     const { data, error } = await sb.from('investors').select('*').order('created_at',{ascending:true});
     if(error){ investors=[]; $('istat').textContent='Investor access not enabled yet — run investors_access.sql in Supabase.'; renderInvestors(); return; }
-    investors=data||[]; renderInvestors();
+    investors=data||[]; renderInvestors(); renderOverview();
   }
   $('i-add').addEventListener('click', async ()=>{
     const email=$('i-email').value.trim().toLowerCase(); if(!email){ alert('Enter the investor\'s email.'); return; }
@@ -503,6 +557,69 @@
       const { error } = await sb.from('investors').delete().eq('id', id);
       if(!error){ investors=investors.filter(x=>String(x.id)!==id); renderInvestors(); }
     }));
+  }
+
+  // ── Team (full-visibility logins, created by email) ──
+  let admins=[];
+  async function loadTeam(){
+    const { data, error } = await sb.from('admins').select('*').order('added_at',{ascending:true});
+    if(error){ admins=[]; $('tstat').textContent='Team table not upgraded yet — re-run SETUP.sql in Supabase.'; renderTeam(); return; }
+    admins=data||[]; renderTeam(); renderOverview();
+  }
+  $('t-add').addEventListener('click', async ()=>{
+    const email=$('t-email').value.trim().toLowerCase(); if(!email){ alert('Enter an email.'); return; }
+    const { error } = await sb.from('admins').insert({ email, name:$('t-name').value.trim() });
+    if(error){ alert('Could not add (re-run SETUP.sql first?): '+error.message); return; }
+    $('t-email').value=$('t-name').value=''; loadTeam();
+  });
+  function renderTeam(){
+    if(!$('tstat').textContent.startsWith('Team table not upgraded')) $('tstat').innerHTML='<b>'+admins.length+'</b> full-access logins';
+    let html='';
+    admins.forEach(a=>{
+      const active=!!a.user_id;
+      html+='<tr><td class="who-cell">'+esc(a.name||'—')+'</td><td class="sub"><a href="mailto:'+esc(a.email)+'">'+esc(a.email)+'</a></td>'
+        +'<td>'+(active?'<span style="color:#16a34a;font-weight:600">● Active</span>':'<span style="color:#f97316;font-weight:600">○ Pending signup</span>')+'</td>'
+        +'<td><button class="del js-tdel" data-id="'+esc(a.id)+'" title="Remove login">✕</button></td></tr>';
+    });
+    $('rteam').innerHTML = html || '<tr><td colspan="4" class="sub" style="padding:22px;text-align:center">No team logins yet — add one above.</td></tr>';
+    $('rteam').querySelectorAll('.js-tdel').forEach(b=> b.addEventListener('click', async ()=>{
+      if(!confirm('Remove this full-access login? (Their Supabase Auth user stays; this unlinks their access.)')) return;
+      const id=b.getAttribute('data-id');
+      const { error } = await sb.from('admins').delete().eq('id', id);
+      if(!error){ admins=admins.filter(x=>String(x.id)!==id); loadTeam(); }
+    }));
+  }
+
+  // ── Overview / metrics dashboard ──
+  const OV_PAGES=[
+    ['Homepage','index.html'],['GPU cost teardown','inference-cost.html'],['Recruit page','join.html'],
+    ['Investor portal','investors.html'],['Opportunity','opportunity.html'],['Teaser','teaser.html'],
+    ['Business plan','business-plan.html'],['Playbook','playbook.html'],['Rep portal','rep.html'],
+    ["Founder's course",'academy.html']
+  ];
+  function ovPct(a,b){ return b>0 ? Math.round(a/b*100)+'%' : '—'; }
+  function renderOverview(){
+    const total=leads.length;
+    const won=leads.filter(l=>l.status==='won').length;
+    const engaged=leads.filter(l=>l.status && l.status!=='new').length;
+    const repAccts=leads.filter(l=>l.rep_id).length;
+    const repsTotal=reps.length, repsActive=reps.filter(r=>r.user_id).length;
+    const vTotal=vendors.length, vActive=vendors.filter(v=>v.stage==='active').length;
+    const vReached=vendors.filter(v=>v.stage && v.stage!=='to_contact').length;
+    const invTotal=investors.length, invActive=investors.filter(i=>i.user_id).length;
+    const team=admins.length;
+    const cards=[
+      ['Leads created', total, '<b>'+won+'</b> won · '+ovPct(won,total)+' conversion'],
+      ['Leads engaged', engaged, ovPct(engaged,total)+' contacted or further'],
+      ['Reps recruited', repsTotal, '<b>'+repsActive+'</b> active · '+repAccts+' rep accounts'],
+      ['Vendor contacts', vTotal, '<b>'+vActive+'</b> active · '+ovPct(vActive,vReached)+' of reached converted'],
+      ['Investors', invTotal, '<b>'+invActive+'</b> activated'],
+      ['Team logins', team, 'full-visibility access'],
+    ];
+    if($('kpis')) $('kpis').innerHTML = cards.map(c=>'<div class="kpi"><div class="kv">'+c[1]+'</div><div class="kk">'+c[0]+'</div><div class="ks">'+c[2]+'</div></div>').join('');
+    if($('lead-funnel')) $('lead-funnel').innerHTML = STAGES.map(s=>'<span class="fchip"><b>'+leads.filter(l=>(l.status||'new')===s).length+'</b> '+s+'</span>').join('');
+    if($('vendor-funnel')) $('vendor-funnel').innerHTML = VSTAGES.map(s=>'<span class="fchip"><b>'+vendors.filter(v=>(v.stage||'to_contact')===s.k).length+'</b> '+s.label+'</span>').join('');
+    if($('ov-pages') && !$('ov-pages').childElementCount) $('ov-pages').innerHTML = OV_PAGES.map(p=>'<a class="pagecard" href="'+p[1]+'" target="_blank"><div class="pt">'+p[0]+'</div><div class="pu">/'+p[1]+'</div></a>').join('');
   }
 
   route();

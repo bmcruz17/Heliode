@@ -194,6 +194,63 @@ update public.proposal set content = replace(content,
 <p>The full ~50-node Austin pilot is a larger, later raise sequenced <strong>behind signed customer offtake</strong> and financed mostly against those contracts (equipment/debt), so this round isn''t buying all the hardware up front.</p>')
 where id = 1;
 
+-- ░░ 6. FULL-VISIBILITY LOGINS (email-managed admin allowlist) ░░░░░░░░
+-- Upgrade the admin allowlist so full-access logins can be created by
+-- email from the dashboard (Team tab) and self-activate on first signup —
+-- same pattern as reps/investors. In-place migration: no data loss, and
+-- it does NOT drop the table or is_admin() (so dependent policies survive).
+alter table public.admins add column if not exists id   uuid default gen_random_uuid();
+alter table public.admins add column if not exists name text;
+update public.admins set id = gen_random_uuid() where id is null;
+alter table public.admins alter column id      set not null;
+alter table public.admins alter column user_id drop not null;
+alter table public.admins alter column email   set not null;
+
+do $$
+begin
+  -- if the primary key is still on user_id (old schema), move it to id
+  if exists (
+    select 1 from pg_constraint con
+    join pg_attribute a on a.attrelid = con.conrelid and a.attnum = any(con.conkey)
+    where con.conrelid = 'public.admins'::regclass and con.contype = 'p' and a.attname = 'user_id'
+  ) then
+    alter table public.admins drop constraint admins_pkey;
+  end if;
+  if not exists (select 1 from pg_constraint where conrelid = 'public.admins'::regclass and contype = 'p') then
+    alter table public.admins add constraint admins_pkey primary key (id);
+  end if;
+end $$;
+
+alter table public.admins drop constraint if exists admins_email_uniq;
+alter table public.admins add  constraint admins_email_uniq unique (email);
+alter table public.admins drop constraint if exists admins_user_id_uniq;
+alter table public.admins add  constraint admins_user_id_uniq unique (user_id);
+
+-- Admins can read & manage the allowlist (powers the Team tab)
+drop policy if exists "admins read admins"   on public.admins;
+create policy "admins read admins"   on public.admins for select to authenticated using (public.is_admin());
+drop policy if exists "admins manage admins" on public.admins;
+create policy "admins manage admins" on public.admins for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
+-- Link admins (as well as reps/investors) to their auth user on signup
+create or replace function public.link_accounts_on_signup()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  update public.admins    set user_id = new.id where lower(email) = lower(new.email) and user_id is null;
+  update public.reps      set user_id = new.id where lower(email) = lower(new.email) and user_id is null;
+  update public.investors set user_id = new.id where lower(email) = lower(new.email) and user_id is null;
+  return new;
+end; $$;
+
+-- Owner + any standing full-access logins (self-activate by setting a password)
+insert into public.admins (email, user_id, name)
+values ('brandonmcruz@mac.com', 'ada0f047-f5d1-4b38-aae8-919ec22da230', 'Brandon Cruz')
+on conflict (email) do update set user_id = excluded.user_id;
+insert into public.admins (email, name)
+values ('debbie.nixon@heliodegrid.com', 'Debbie Nixon')
+on conflict (email) do nothing;
+
+
 -- ════════════════════════════════════════════════════════════════════
 -- Done. Old per-file scripts (compute_leads.sql, lead_tracker.sql,
 -- rep_portal.sql, vendors.sql) are now all captured here.

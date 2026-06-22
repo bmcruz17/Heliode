@@ -148,7 +148,7 @@
   const ACTIVE = ['signed','onboarding','live']; // commission counts here
   const COLOR = Object.fromEntries(STAGES.map(s=>[s.k,s.c]));
 
-  let deals=[], pct=17.5;
+  let deals=[], pct=17.5, isAdmin=false, repPct={};
   const $=id=>document.getElementById(id);
   const esc=s=>(s==null?'':String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const money=n=>'$'+Math.round(+n||0).toLocaleString('en-US');
@@ -161,14 +161,31 @@
   async function route(){
     const { data:{ session } } = await sb.auth.getSession();
     if(!session){ showGate(); return; }
-    const { data:isRep, error } = await sb.rpc('is_rep');
-    if(error){ showGate('Could not verify access — try again.'); return; }
-    if(!isRep){ await sb.auth.signOut(); showGate('This account isn’t set up as a rep. Ask the owner to add you.'); return; }
-    const { data:me } = await sb.from('reps').select('name,override_pct').eq('user_id', session.user.id).maybeSingle();
-    pct = (me && me.override_pct) || 17.5;
-    $('who').textContent = (me && me.name) ? me.name : session.user.email;
-    $('rate-note').textContent = 'Your override: '+pct+'% of monthly margin';
+    const [repRes, admRes] = await Promise.all([sb.rpc('is_rep'), sb.rpc('is_admin')]);
+    const isRep = !!(repRes && repRes.data);
+    isAdmin = !!(admRes && admRes.data);
+    if(!isRep && !isAdmin){ await sb.auth.signOut(); showGate('This account isn’t set up as a rep. Ask the owner to add you.'); return; }
+    if(isAdmin && !isRep){
+      // Owner / full-visibility view — see every rep's pipeline
+      const { data:rmap } = await sb.from('reps').select('user_id,override_pct');
+      repPct = Object.fromEntries((rmap||[]).filter(r=>r.user_id).map(r=>[r.user_id, (+r.override_pct||17.5)]));
+      pct = 17.5;
+      $('who').textContent = session.user.email + ' · owner';
+      $('rate-note').textContent = 'Owner view — full visibility across all reps';
+      relabelOwner();
+    } else {
+      const { data:me } = await sb.from('reps').select('name,override_pct').eq('user_id', session.user.id).maybeSingle();
+      pct = (me && me.override_pct) || 17.5;
+      $('who').textContent = (me && me.name) ? me.name : session.user.email;
+      $('rate-note').textContent = 'Your override: '+pct+'% of monthly margin';
+    }
     await load();
+  }
+  function relabelOwner(){
+    const ks=document.querySelectorAll('.summary .stat .k');
+    if(ks[0]) ks[0].textContent='All accounts';
+    if(ks[2]) ks[2].textContent='Total override (all reps)';
+    if(ks[3]) ks[3].textContent='Onboarding (all)';
   }
 
   $('g-go').addEventListener('click', signIn);
@@ -215,7 +232,11 @@
     $('a-company').value=$('a-name').value=$('a-email').value=''; $('add-form').classList.remove('show'); load();
   });
 
-  function overrideOf(d){ return ACTIVE.includes(d.stage) ? (+d.monthly_margin||0)*pct/100 : 0; }
+  function overrideOf(d){
+    if(!ACTIVE.includes(d.stage)) return 0;
+    const rate = isAdmin ? (repPct[d.rep_id] || pct) : pct;
+    return (+d.monthly_margin||0)*rate/100;
+  }
 
   function render(){
     // summary
