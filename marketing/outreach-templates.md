@@ -32,15 +32,16 @@ number, make the ask tiny (just their bill).
 > We source GPU capacity on the open market and run it managed — cheaper
 > GPU-hours, one bill, someone to call. — {your name}
 
-### C. Warm follow-up to a free-trial / calculator lead
+### C. Warm follow-up to a calculator / quote lead
 **Subject:** your Heliode estimate
 
 > Thanks for running the numbers, {first name}. Based on what you entered
 > (~${spend}/mo on {provider}), here's a real quote: **{$X}/mo** for the same
 > workload — about **{$Y}/mo** saved.
 >
-> Easiest next step is a free 2-week trial on a slice of your traffic; we stand
-> up the endpoint, you don't touch a console. Want me to set it up?
+> Easiest next step is to move a slice of your traffic over so you see the price
+> and uptime for real — we stand up the endpoint, you don't touch a console.
+> Want me to set it up?
 
 ### D. Re-engage a quiet lead (1–2 weeks later)
 **Subject:** still want that quote?
