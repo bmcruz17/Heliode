@@ -89,3 +89,33 @@ often quote fastest):
 Once two or three come back, send them to me and I'll drop the real number into
 the per-node economics, the scale ramp, and the raise across the teaser,
 proposal, and opportunity page.
+
+---
+
+## How to talk to vendors (sound like you've done this)
+
+**Opener (phone or email):**
+> "Hi — I'm sourcing **8-GPU HGX H100 servers** for an **AI inference** deployment.
+> HGX-class, **8× H100 SXM5 80GB**, similar to a Dell XE9680, but I want to compare
+> integrators. We're an **operator standing up regional GPU capacity** — looking at
+> **~50 units, phased**, more to follow. I'd like a quote on a flagship **H100** build
+> and a cost-efficient **L40S** build."
+
+**Terms to drop (and what they mean):**
+- **HGX H100 (8-GPU baseboard)** — the standard 8-GPU platform = the "node."
+- **SXM5 vs PCIe** — SXM = GPUs on a high-bandwidth board with NVLink between them
+  (best for big models); PCIe = cards in slots (cheaper). "SXM5 unless PCIe pencils out."
+- **NVLink / NVSwitch** — the fast interconnect tying the 8 GPUs together.
+- **Inference, not training** — "steady 24/7, latency-sensitive."
+- **Independent nodes, no fabric** — "independent inference nodes, so no InfiniBand
+  fabric needed — dual 100GbE per node is fine." (signals expertise + saves money)
+- **L40S / A100** — cost-efficient inference alternatives to H100.
+
+**What they'll ask you (have answers ready):**
+- *Workload?* "LLM inference, mixed model sizes, steady production traffic."
+- *Single node or cluster?* "Independent inference nodes — no training fabric."
+- *Power-ready site?* "Leased commercial/light-industrial, high-amp 3-phase; confirming sites now."
+- *Timeline?* "Pilot ~50 nodes, phased; gathering quotes to lock the build."
+- *Reselling?* "No — we own and operate, and sell managed compute."
+
+Don't commit on the call: **"Send the written quote and I'll review with the team."**

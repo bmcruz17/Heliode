@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Heliode — Operator Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#f4f7fc;--panel:#ffffff;--ink:#0d1320;--mute:#555c66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+  }
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 18px;}
+  a{color:var(--blue);}
+
+  .bar{background:rgba(13,19,32,0.92);position:sticky;top:0;z-index:30;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .bar-in{max-width:780px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .brand{font-weight:700;color:#fff;font-size:1rem;display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+  .bar a{color:#cdd4df;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.74rem;}
+  .bar a:hover{color:#fff;}
+
+  /* jump nav */
+  .jump{position:sticky;top:49px;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;}
+  .jump-in{max-width:780px;margin:0 auto;padding:10px 18px;display:flex;gap:8px;}
+  .jump a{font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--mute);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;flex:0 0 auto;}
+  .jump a:hover{border-color:var(--blue-line);color:var(--blue);}
+
+  section{padding:30px 0;border-bottom:1px solid var(--line);}
+  .eye{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+  h1{font-size:1.5rem;margin:18px 0 4px;}
+  h2{font-size:1.2rem;margin-bottom:10px;}
+  h3{font-size:0.95rem;margin:16px 0 5px;color:var(--ink);}
+  p{margin-bottom:10px;color:#2b3340;font-size:0.95rem;}
+  ul,ol{margin:0 0 12px 20px;}
+  li{margin-bottom:5px;color:#2b3340;font-size:0.93rem;}
+  strong{color:var(--ink);}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:10px 0;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .script{background:var(--blue-dim);border:1px solid var(--blue-line);border-radius:12px;padding:14px 16px;margin:10px 0;font-size:0.93rem;color:var(--ink);}
+  .script .lbl{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:6px;}
+  .term{margin-bottom:8px;font-size:0.92rem;}
+  .term b{color:var(--ink);}
+  .tag{display:inline-block;background:var(--accent-dim);border:1px solid var(--accent-line);color:var(--accent-hover);border-radius:999px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-size:0.66rem;margin-bottom:8px;}
+  .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:10px 0;}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .kpi .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue);}
+  .kpi .k{font-size:0.72rem;color:var(--mute);margin-top:4px;}
+  .note{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--faint);}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>HELIODE · Playbook</div>
+  <a href="admin.html">← Lead tracker</a>
+</div></div>
+
+<div class="jump"><div class="jump-in">
+  <a href="#week">This week</a>
+  <a href="#vendors">Hardware vendors</a>
+  <a href="#supply">Wholesale supply</a>
+  <a href="#clients">Client outreach</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#team">Team</a>
+  <a href="#node">Node reference</a>
+</div></div>
+
+<div class="wrap">
+
+<!-- THIS WEEK -->
+<section id="week">
+  <div class="eye">Focus</div>
+  <h1>Operator playbook</h1>
+  <p>Everything you need on the phone and in the inbox. Two engines run in parallel: <strong>supply</strong> (cheap GPU capacity to resell) and <strong>demand</strong> (clients to sell it to). The brokerage makes money now; the owned hardware is Phase 2.</p>
+  <div class="card">
+    <h3>🎯 Goal: onboard 2 clients this week</h3>
+    <p><strong>Close motion (repeat per client):</strong> get their bill → quote that beats it → agree price + onboarding fee (credited on 6–12mo) → point their endpoint at your sourced capacity → live.</p>
+    <p><strong>Gate:</strong> stand up a RunPod/Lambda account so you can actually deliver this week. Don't wait on reseller deals.</p>
+    <p><strong>Work warm first</strong> — your network closes in days; cold rarely does. Rough math: ~8–12 conversations → ~3–4 quotes → ~2 closes. Lever = volume of bills requested.</p>
+  </div>
+
+  <div class="card">
+    <h3>🚀 30-day push — funding · office · operations</h3>
+    <p><strong>The unlock:</strong> paying clients are your best fundraising asset. Traction (revenue + signed offtake) is what closes the round — so the brokerage push and the raise reinforce each other. Run both at once.</p>
+    <ul>
+      <li><strong>Week 1 — operate:</strong> supply accounts live; first 2 clients; finalize raise materials (teaser/opportunity/proposal); build investor list (warm + angels); open team conversations.</li>
+      <li><strong>Week 2 — traction + pipeline:</strong> first clients live (revenue); start investor pitches; verbal offers to co-founder / first hires; scout office + a power-ready pilot site.</li>
+      <li><strong>Week 3 — commitments:</strong> more clients; investor meetings → soft commits; LOI on office/site; finalize SAFE terms with a lawyer.</li>
+      <li><strong>Week 4 — close:</strong> first checks / strong commits in; sign office; team onboarded; operations running.</li>
+    </ul>
+    <p class="note">Office (cheap team space) ≠ pilot site (needs high-amp power). Can be the same building if it has the service.</p>
+  </div>
+</section>
+
+<!-- HARDWARE VENDORS -->
+<section id="vendors">
+  <div class="tag">Phase 2 · owned hardware</div>
+  <h2>Talking to hardware vendors</h2>
+  <p class="note">Dell · Supermicro · Thinkmate · Exxact · CDW/SHI</p>
+
+  <div class="script">
+    <span class="lbl">Opener (phone or email)</span>
+    "Hi — I'm sourcing <b>8-GPU HGX H100 servers</b> for an <b>AI inference</b> deployment. HGX-class, <b>8× H100 SXM5 80GB</b>, similar to a Dell XE9680, but I want to compare integrators. We're an <b>operator standing up regional GPU capacity</b> — looking at <b>~50 units, phased</b>, more to follow. I'd like a quote on a flagship <b>H100</b> build and a cost-efficient <b>L40S</b> build."
+  </div>
+
+  <h3>Terms to drop (so you speak the language)</h3>
+  <div class="term"><b>HGX H100 (8-GPU baseboard)</b> — the standard 8-GPU platform = the "node."</div>
+  <div class="term"><b>SXM5 vs PCIe</b> — SXM = GPUs on a high-bandwidth board with NVLink between them (best for big models); PCIe = cards in slots (cheaper). Say "SXM5 unless PCIe pencils out for our model sizes."</div>
+  <div class="term"><b>NVLink / NVSwitch</b> — the fast interconnect tying the 8 GPUs together.</div>
+  <div class="term"><b>Inference, not training</b> — "steady 24/7, latency-sensitive."</div>
+  <div class="term"><b>Independent nodes, no fabric</b> — "independent inference nodes, so no InfiniBand fabric needed — dual 100GbE per node is fine." (signals expertise + saves money)</div>
+  <div class="term"><b>L40S / A100</b> — cost-efficient inference alternatives to H100.</div>
+
+  <h3>What to ask</h3>
+  <ol>
+    <li>All-in <strong>price per node</strong> + the <strong>per-GPU</strong> portion.</li>
+    <li><strong>Lead time / allocation</strong> — weeks to ship? Are H100s allocation-constrained?</li>
+    <li><strong>SXM5 vs PCIe</strong> — price + what they'd recommend for inference.</li>
+    <li>Quote a <strong>cost-efficient build</strong> too — 8× L40S (and/or A100).</li>
+    <li><strong>Volume pricing</strong> at 1 / 5 / 10 / 50 units.</li>
+    <li><strong>Power</strong>: max draw/node, 208/240V <strong>three-phase</strong>? PSU redundancy.</li>
+    <li><strong>Rack U height + weight</strong>, airflow/cooling.</li>
+    <li><strong>Warranty + support</strong> — next-business-day onsite?</li>
+    <li><strong>Burn-in / rack integration / drop-ship</strong> to a site?</li>
+    <li><strong>Financing / lease-to-own.</strong></li>
+    <li><strong>Written quote by email</strong> + their direct contact.</li>
+  </ol>
+
+  <h3>What they'll ask you</h3>
+  <ul>
+    <li><b>Workload?</b> "LLM inference, mixed model sizes, steady production traffic."</li>
+    <li><b>Single node or cluster?</b> "Independent inference nodes — no training fabric."</li>
+    <li><b>Power-ready site?</b> "Leased commercial/light-industrial, high-amp 3-phase; confirming sites now."</li>
+    <li><b>Timeline?</b> "Pilot ~50 nodes, phased; gathering quotes to lock the build."</li>
+    <li><b>Reselling?</b> "No — we own and operate, and sell managed compute."</li>
+  </ul>
+  <p class="note">Don't commit on the call: "Send the written quote and I'll review with the team."</p>
+</section>
+
+<!-- WHOLESALE SUPPLY -->
+<section id="supply">
+  <div class="tag">Phase 1 · revenue now</div>
+  <h2>Wholesale GPU supply</h2>
+  <p>Get cheap committed capacity to resell managed. The spread = the business.</p>
+
+  <div class="script">
+    <span class="lbl">Outreach email</span>
+    "Hi {name} — we run a managed GPU service for AI-inference teams and are aggregating demand across multiple customers. We want to place <b>committed capacity</b> with a few strong providers and resell it managed. Could you share your <b>reserved/committed $/GPU-hr</b> for H100, A100, and L40S; <b>minimum commitment</b>; whether you have a <b>partner/reseller program</b>; and how fast we can scale up/down? Looking to start now."
+  </div>
+
+  <h3>Who to contact</h3>
+  <ul>
+    <li><strong>Neoclouds (committed; ask reseller terms):</strong> Lambda, CoreWeave, Crusoe, Together AI, Fluidstack, Nebius, Voltage Park, Hyperstack/NexGen</li>
+    <li><strong>Marketplace/spot (cheap burst):</strong> RunPod, Vast.ai, TensorDock</li>
+    <li>Start with 3–4 neoclouds + RunPod/Vast for burst.</li>
+  </ul>
+
+  <h3>What to lock from each</h3>
+  <ul>
+    <li>$/GPU-hr committed vs on-demand (H100, A100, L40S)</li>
+    <li>Minimum commitment (term + quantity)</li>
+    <li>Reseller / partner program?</li>
+    <li>Scale up/down terms + overage pricing</li>
+    <li>Uptime/SLA, regions, spot pre-emption rules</li>
+    <li>How fast capacity can be live for a customer</li>
+  </ul>
+  <p><strong>Margin check:</strong> sell price must beat the client's bill <em>and</em> clear source cost + ops + buffer + margin. Easy win: clients on hyperscaler on-demand (~$8–13/GPU-hr). Thin margin: clients already on raw marketplace (~$2–3) — qualify out.</p>
+</section>
+
+<!-- CLIENT OUTREACH -->
+<section id="clients">
+  <div class="tag">Phase 1 · demand</div>
+  <h2>Client outreach</h2>
+  <p>Buyer = technical founder / ML / infra lead with a steady inference bill that hurts. Lead with their number; make the ask tiny (just the bill).</p>
+
+  <div class="script">
+    <span class="lbl">Warm (your network — fastest close)</span>
+    "Hey {name} — quick one. You (or someone you know) running AI in production? I'm doing managed GPU compute that usually comes in well under AWS/GCP. Send me a recent GPU bill and I'll tell you exactly what you'd save — no pitch."
+  </div>
+  <div class="script">
+    <span class="lbl">Cold</span>
+    "Hi {first} — saw {company} is shipping {product}, so you're running steady inference. Most teams your size pay 2–5× the open-market rate for it. Send me last month's GPU bill and I'll send back what it'd cost on us. No call needed. — {you}, Heliode"
+  </div>
+  <div class="script">
+    <span class="lbl">Community reply (help first)</span>
+    "Biggest levers: leave hyperscaler on-demand (marketplace/neocloud is 50–80% cheaper), right-size the GPU, batch with vLLM, quantize. (Disclosure: I run Heliode — we do the first one as a managed service — but the rest save you money regardless.)"
+  </div>
+  <p><strong>The habit that matters:</strong> reply to every inbound within an hour with a real "$X → $Y" number.</p>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="tag">Internal · not on the site</div>
+  <h2>Pricing — onboarding fee</h2>
+  <ul>
+    <li><strong>Amount:</strong> $500–$3,000 per client — by account size / integration complexity.</li>
+    <li><strong>When:</strong> introduce at <strong>contract</strong>, never at quote (quote stays free).</li>
+    <li><strong>Credit-back:</strong> fully credited against a <strong>6–12 month commitment</strong> — rewards commitment, reads like a discount, still filters tire-kickers.</li>
+    <li><strong>Early cohort:</strong> optionally waive for the first few to build case studies.</li>
+  </ul>
+  <div class="script">
+    <span class="lbl">How to phrase it (at contract)</span>
+    "Setup is a one-time <b>$[amount]</b> onboarding fee — that covers us doing the full migration so your team doesn't. Commit to a 6–12 month term and we credit it back in full, so onboarding is effectively free."
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="tag">Build the team</div>
+  <h2>Recruiting & equity</h2>
+  <p>Hire for the gaps you can't cover. Equity from day one; salaries kick in after the raise. Find the talent first, then shape the role around their superpower.</p>
+
+  <h3>Roles to fill (in order)</h3>
+  <ul>
+    <li><strong>1. Technical co-founder / infra &amp; compute lead</strong> — owns the orchestration + billing software that makes many nodes act like one cloud, plus deploy/ops. The single most important hire.</li>
+    <li><strong>2. Founding engineer (full-stack)</strong> — product, customer dashboard, billing, monitoring. Can overlap with #1 early.</li>
+    <li><strong>3. GTM / sales</strong> — you lead; add reps for outbound as volume grows.</li>
+    <li><strong>4. Ops / deployment lead</strong> (Phase 2) — site sourcing, electrical, install, vendor management.</li>
+    <li><strong>Advisors</strong> — one with GPU/cloud-infra depth, one who's raised before.</li>
+  </ul>
+
+  <h3>Talent → role (run on each person)</h3>
+  <ul>
+    <li>What's their <strong>superpower</strong> — the thing they're clearly great at?</li>
+    <li>What <strong>energizes</strong> them vs. drains them?</li>
+    <li>Which of <strong>your</strong> gaps do they fill?</li>
+    <li>Would you work with them <strong>daily, for years</strong>?</li>
+    <li>The <strong>one role</strong> where they move the company most — shape it around that.</li>
+  </ul>
+
+  <h3>Equity (directional — confirm with a startup lawyer)</h3>
+  <ul>
+    <li><strong>Co-founder:</strong> meaningful — high single digits to tens of %, by contribution + timing.</li>
+    <li><strong>First ~5 employees:</strong> ~0.5–2% each, by role/seniority.</li>
+    <li><strong>Advisors:</strong> ~0.1–1%.</li>
+    <li><strong>Vesting:</strong> standard 4 years, 1-year cliff — protects everyone if someone leaves early.</li>
+    <li>Create an <strong>option pool</strong> (~10–15%) for early hires.</li>
+    <li>Grants are <strong>securities</strong> — use a lawyer; clean cap table + 83(b) elections from day one.</li>
+  </ul>
+
+  <div class="script">
+    <span class="lbl">Vision pitch (recruiting)</span>
+    "AI is exploding and the bottleneck isn't chips — it's power and the ability to deploy compute fast. Heliode sells cheaper managed GPU compute today, and we're building owned regional capacity in commercial space — standing up in days, not the years a data center takes. I'm building the founding team now: <b>equity from day one</b>, salaries once we close the raise. I think you'd be great at <b>{role}</b> — want to hear the full picture?"
+  </div>
+</section>
+
+<!-- NODE REFERENCE -->
+<section id="node">
+  <div class="tag">Reference</div>
+  <h2>The node</h2>
+  <p>One <strong>node = one 8-GPU server</strong> (8× H100-class), the standard HGX building block.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="n">~$250K</div><div class="k">all-in capex / node</div></div>
+    <div class="kpi"><div class="n">~10 kW</div><div class="k">power draw / node (6–8U)</div></div>
+    <div class="kpi"><div class="n">~$9.8K</div><div class="k">gross MRR / node / mo</div></div>
+    <div class="kpi"><div class="n">~$7.6K</div><div class="k">net contribution / node / mo</div></div>
+  </div>
+  <p>Power, not floor space, is the constraint: a 400A/3-phase service ≈ ~77 kW usable ≈ ~7 nodes. Payback ~year 3 at base case. 50-node pilot ≈ ~$12–14M hardware (financed against offtake; $2.0M pre-seed funds brokerage + team + a few proof nodes).</p>
+  <p class="note">All figures preliminary — to be replaced with real vendor BOMs.</p>
+</section>
+
+</div>
+</body>
+</html>
