@@ -203,9 +203,8 @@ alter table public.admins add column if not exists id   uuid default gen_random_
 alter table public.admins add column if not exists name text;
 update public.admins set id = gen_random_uuid() where id is null;
 alter table public.admins alter column id      set not null;
-alter table public.admins alter column user_id drop not null;
-alter table public.admins alter column email   set not null;
 
+-- Move the primary key off user_id FIRST (can't drop NOT NULL while it's a PK)
 do $$
 begin
   -- if the primary key is still on user_id (old schema), move it to id
@@ -220,6 +219,10 @@ begin
     alter table public.admins add constraint admins_pkey primary key (id);
   end if;
 end $$;
+
+-- Now safe to relax user_id and require email
+alter table public.admins alter column user_id drop not null;
+alter table public.admins alter column email   set not null;
 
 alter table public.admins drop constraint if exists admins_email_uniq;
 alter table public.admins add  constraint admins_email_uniq unique (email);
