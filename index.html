@@ -175,6 +175,24 @@
   .ok p{color:var(--mute);font-size:0.9rem;}
   .err{color:#dc2626;font-size:0.84rem;margin-top:12px;display:none;}
 
+  /* Savings calculator */
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px;align-items:stretch;}
+  @media(max-width:760px){.calc{grid-template-columns:1fr;}}
+  .calc-controls{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 22px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .calc-controls .fld:first-child{margin-top:0;}
+  .calc-money{position:relative;}
+  .calc-money .cur{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:0.94rem;pointer-events:none;}
+  .calc-money .inp{padding-left:27px;}
+  select.inp{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a909a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;}
+  .calc-note{font-size:0.78rem;color:var(--faint);margin-top:14px;line-height:1.5;}
+  .calc-out{background:linear-gradient(180deg,var(--blue-dim),#fff);border:1px solid var(--blue-line);border-radius:16px;padding:24px 22px;display:flex;flex-direction:column;}
+  .calc-out-k{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);}
+  .calc-out-v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.55rem;color:var(--ink);margin-top:6px;letter-spacing:-0.02em;}
+  .calc-save{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;padding-top:18px;border-top:1px solid var(--blue-line);}
+  .calc-save-k{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);}
+  .calc-save-v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.4rem;color:var(--blue);margin-top:5px;letter-spacing:-0.02em;}
+  .calc-out .btn{margin-top:auto;width:100%;justify-content:center;}
+
   footer{padding:48px 0 40px;background:var(--bg2);border-top:1px solid var(--line);}
   .foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start;}
   .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:0.84rem;color:var(--mute);}
@@ -195,12 +213,12 @@
     <div class="hero-copy">
     <div class="eyebrow">GPU compute · AI inference · US-based</div>
     <h1>Inference compute that costs less — <em>and someone actually runs it for you.</em></h1>
-    <p class="lede">Hyperscaler GPU pricing is brutal and capacity is hard to get. We source GPU power on the open market, run it for you, and hand you one bill and a real person to call — cheaper GPU-hours on a reliable base layer, without you babysitting the metal. <strong>Send us your current GPU bill — we'll beat it, guaranteed.</strong></p>
+    <p class="lede">Hyperscaler GPU pricing is brutal and capacity is hard to get. We source GPU power on the open market, run it for you, and hand you one bill and a real person to call — cheaper GPU-hours on a reliable base layer, without you babysitting the metal. <strong>Send us your current GPU bill and we'll show you what the same workload costs on Heliode.</strong></p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#contact">Start a free 2-week trial →</a>
       <a class="btn btn-ghost" href="#how">How it works</a>
     </div>
-    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>Rate-beat guarantee:</b> send us your current GPU bill and we'll beat your rate.</span></div>
+    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>Bring your GPU bill:</b> we'll price the same workload at open-market rates.</span></div>
     <div class="cities">
       <span class="pill">Serving <b>Austin</b></span>
       <span class="pill"><b>San Francisco</b> Bay Area</span>
@@ -404,10 +422,40 @@
   </div>
 </section>
 
-<section class="blk" id="contact">
+<section class="blk" id="savings">
+  <div class="wrap">
+    <div class="sec-eye">Estimate your savings</div>
+    <h2>See roughly what you'd save — before you send a single email.</h2>
+    <p class="body-lg" style="margin-bottom:22px;">Enter what you spend on GPU compute today and where you buy it. We'll ballpark what the same workload runs on Heliode. Send us the actual bill and we'll turn this into an exact quote.</p>
+    <div class="calc">
+      <div class="calc-controls">
+        <label class="fld" for="c-spend">Current GPU spend / month</label>
+        <div class="calc-money"><span class="cur">$</span><input class="inp" id="c-spend" type="text" inputmode="numeric" autocomplete="off" placeholder="8,000" value="8,000"></div>
+        <label class="fld" for="c-prov">Where you buy it today</label>
+        <select class="inp" id="c-prov">
+          <option value="hyper">Hyperscaler on-demand — AWS, GCP, Azure</option>
+          <option value="neo">Neocloud / committed — Lambda, CoreWeave, Crusoe…</option>
+          <option value="market">Marketplace / spot — RunPod, Vast, TensorDock…</option>
+        </select>
+        <p class="calc-note">Estimate only, based on typical open-market vs. list pricing. The further you are from raw marketplace rates, the more we save you. Your real number comes from your actual bill.</p>
+      </div>
+      <div class="calc-out">
+        <div class="calc-out-k">Estimated Heliode cost / month</div>
+        <div class="calc-out-v" id="c-new">—</div>
+        <div class="calc-save">
+          <div><div class="calc-save-k">You keep / month</div><div class="calc-save-v" id="c-save">—</div></div>
+          <div><div class="calc-save-k">Per year</div><div class="calc-save-v" id="c-year">—</div></div>
+        </div>
+        <a class="btn btn-primary" id="c-cta" href="#contact">Get my exact quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk alt" id="contact">
   <div class="wrap">
     <div class="sec-eye">Get started</div>
-    <h2>Send us your current GPU bill. We'll beat your rate — guaranteed.</h2>
+    <h2>Send us your current GPU bill. We'll quote the same workload at open-market rates.</h2>
     <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll stand up a two-week trial that beats your current rate.</p>
     <div class="form" id="form">
       <div class="grid-2">
@@ -440,6 +488,7 @@
       <a href="#how">How it works</a>
       <a href="#markets">Markets</a>
       <a href="#vision">Roadmap</a>
+      <a href="#savings">Savings calculator</a>
       <a href="#contact">Request capacity</a>
       <a href="investors.html">Investors</a>
     </div>
@@ -456,6 +505,8 @@
   var SB_URL = 'https://pyosjuuvbxzyjtokfqfu.supabase.co';
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5b3NqdXV2Ynh6eWp0b2tmcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjk4MTcsImV4cCI6MjA5NzY0NTgxN30.7bH19ZZJHxchfRVt3t-I20gJ44WvbR3al516QhwQpmw';
 
+  var leadSource = 'index';
+
   function submitLead(){
     var err=document.getElementById('f-err'), btn=document.getElementById('f-btn');
     var email=document.getElementById('f-email').value.trim();
@@ -470,7 +521,7 @@
       city:document.getElementById('f-city').value.trim(),
       workload:document.getElementById('f-workload').value.trim(),
       current_spend:document.getElementById('f-spend').value.trim(),
-      source:'index'
+      source:leadSource
     };
     fetch(SB_URL+'/rest/v1/compute_leads',{
       method:'POST',
@@ -484,6 +535,48 @@
       err.textContent='Something went wrong — email us directly at hello@heliodegrid.com.'; err.style.display='block';
     });
   }
+
+  // ── Savings calculator ──────────────────────────────────────────────
+  (function(){
+    var spendEl=document.getElementById('c-spend'),
+        provEl=document.getElementById('c-prov'),
+        newEl=document.getElementById('c-new'),
+        saveEl=document.getElementById('c-save'),
+        yearEl=document.getElementById('c-year'),
+        cta=document.getElementById('c-cta');
+    if(!spendEl) return;
+
+    // Typical share of spend Heliode saves vs. each source. Conservative ranges:
+    // the closer a buyer already is to raw marketplace pricing, the thinner the gap.
+    var RATES={hyper:[0.35,0.55], neo:[0.15,0.30], market:[0.05,0.15]};
+    var LABEL={hyper:'Hyperscaler (AWS/GCP/Azure)', neo:'Neocloud / committed', market:'Marketplace / spot'};
+
+    function money(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
+    function perYear(n){
+      var a=n*12;
+      if(a>=1000) return '$'+Math.round(a/1000).toLocaleString('en-US')+'k';
+      return '$'+Math.round(a).toLocaleString('en-US');
+    }
+    function num(){ return parseFloat((spendEl.value||'').replace(/[^0-9.]/g,'')); }
+
+    function render(){
+      var spend=num(), r=RATES[provEl.value]||RATES.hyper;
+      if(!spend||spend<=0){ newEl.textContent=saveEl.textContent=yearEl.textContent='—'; return; }
+      var loSave=spend*r[0], hiSave=spend*r[1];
+      newEl.textContent=money(spend-hiSave)+' – '+money(spend-loSave);
+      saveEl.textContent=money(loSave)+' – '+money(hiSave);
+      yearEl.textContent=perYear(loSave)+' – '+perYear(hiSave);
+    }
+
+    spendEl.addEventListener('input',render);
+    provEl.addEventListener('change',render);
+    cta.addEventListener('click',function(){
+      var spend=num(), f=document.getElementById('f-spend');
+      if(f && spend>0){ f.value='~$'+Math.round(spend).toLocaleString('en-US')+'/mo · '+LABEL[provEl.value]; }
+      leadSource='calculator';
+    });
+    render();
+  })();
 
   (function(){
     var c=document.getElementById('net'); if(!c) return;
