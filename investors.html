@@ -121,6 +121,17 @@
   .chart{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:18px 18px 12px;margin:6px 0 18px;}
   .chart svg{width:100%;height:auto;display:block;}
   .chart-cap{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--faint);line-height:1.6;margin-top:10px;text-align:center;}
+  /* horizontal bar chart (readable scale ramp) */
+  .barchart{display:flex;flex-direction:column;gap:11px;margin:2px 0;}
+  .bc-row{display:grid;grid-template-columns:122px 1fr 84px;align-items:center;gap:14px;}
+  @media(max-width:560px){.bc-row{grid-template-columns:84px 1fr 60px;gap:9px;}}
+  .bc-lab b{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.98rem;}
+  .bc-lab span{display:block;font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--faint);text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;}
+  .bc-track{height:24px;background:#fff;border:1px solid var(--line);border-radius:7px;overflow:hidden;}
+  .bc-fill{height:100%;background:linear-gradient(90deg,#60a5fa,#2563eb);border-radius:6px 0 0 6px;}
+  .bc-row.hl .bc-fill{background:linear-gradient(90deg,#fb923c,#f97316);}
+  .bc-val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.98rem;text-align:right;}
+  .bc-row.hl .bc-val{color:var(--accent-hover);}
   /* calculator visuals */
   .calc-vis{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;margin-top:18px;border-top:1px dashed var(--line2);padding-top:18px;}
   @media(max-width:560px){.calc-vis{grid-template-columns:1fr;gap:18px;}}
@@ -258,53 +269,14 @@
     <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">Per-node economics hold as the network grows across markets. Illustrative — at ~$7,600/node·mo net and an 8&times; multiple on annual net.</p>
 
     <div class="chart">
-      <svg viewBox="0 0 720 280" role="img" aria-label="Illustrative company valuation rising with network size, from $37M at 50 nodes to $7.3B at 10,000 nodes.">
-        <defs>
-          <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.28"/>
-            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.02"/>
-          </linearGradient>
-        </defs>
-        <!-- gridlines + y labels ($B) -->
-        <g stroke="#e5e9f0" stroke-width="1">
-          <line x1="52" y1="246" x2="704" y2="246"/>
-          <line x1="52" y1="183.5" x2="704" y2="183.5"/>
-          <line x1="52" y1="121" x2="704" y2="121"/>
-          <line x1="52" y1="58.6" x2="704" y2="58.6"/>
-        </g>
-        <g font-family="'JetBrains Mono', monospace" font-size="10" fill="#8a909a" text-anchor="end">
-          <text x="46" y="249">$0</text>
-          <text x="46" y="187">$2B</text>
-          <text x="46" y="124">$4B</text>
-          <text x="46" y="62">$6B</text>
-        </g>
-        <!-- area + trend line through the five milestones -->
-        <path d="M55.3,244.8 L68.3,240.3 L117.2,223.2 L378,133.6 L704,18 L704,246 L55.3,246 Z" fill="url(#area)"/>
-        <path d="M55.3,244.8 L68.3,240.3 L117.2,223.2 L378,133.6 L704,18" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- milestone dots -->
-        <g fill="#2563eb">
-          <circle cx="55.3" cy="244.8" r="3.4"/>
-          <circle cx="68.3" cy="240.3" r="3.4"/>
-          <circle cx="378" cy="133.6" r="4.2"/>
-          <circle cx="704" cy="18" r="4.6"/>
-        </g>
-        <circle cx="117.2" cy="223.2" r="5.4" fill="#fff" stroke="#f97316" stroke-width="3"/>
-        <!-- value callouts -->
-        <g font-family="'Space Grotesk', sans-serif" font-weight="700">
-          <text x="126" y="218" font-size="12" fill="#ea580c">$730M · 1,000 nodes</text>
-          <text x="378" y="123" font-size="12" fill="#2563eb" text-anchor="middle">$3.6B</text>
-          <text x="702" y="33" font-size="13" fill="#2563eb" text-anchor="end">$7.3B</text>
-        </g>
-        <!-- x labels (network size) -->
-        <g font-family="'JetBrains Mono', monospace" font-size="10" fill="#8a909a" text-anchor="middle">
-          <text x="55.3" y="264">50</text>
-          <text x="117.2" y="264">1k</text>
-          <text x="378" y="264">5k</text>
-          <text x="704" y="264">10k</text>
-          <text x="378" y="278" fill="#b3b8c2" font-size="9" letter-spacing="0.5">DEPLOYED NODES →</text>
-        </g>
-      </svg>
-      <div class="chart-cap">Illustrative company value vs. network size — linear per-node scaling at ~$7,600/node·mo net × 8× multiple. The orange marker is the 1,000-node milestone. Not a forecast or guarantee.</div>
+      <div class="barchart">
+        <div class="bc-row"><div class="bc-lab"><b>50</b><span>Austin pilot</span></div><div class="bc-track"><div class="bc-fill" style="width:7%"></div></div><div class="bc-val">$37M</div></div>
+        <div class="bc-row"><div class="bc-lab"><b>250</b><span>Austin</span></div><div class="bc-track"><div class="bc-fill" style="width:16%"></div></div><div class="bc-val">$182M</div></div>
+        <div class="bc-row hl"><div class="bc-lab"><b>1,000</b><span>+ Dallas</span></div><div class="bc-track"><div class="bc-fill" style="width:32%"></div></div><div class="bc-val">$730M</div></div>
+        <div class="bc-row"><div class="bc-lab"><b>5,000</b><span>+ Boston, CA</span></div><div class="bc-track"><div class="bc-fill" style="width:70%"></div></div><div class="bc-val">$3.6B</div></div>
+        <div class="bc-row"><div class="bc-lab"><b>10,000</b><span>multi-market</span></div><div class="bc-track"><div class="bc-fill" style="width:100%"></div></div><div class="bc-val">$7.3B</div></div>
+      </div>
+      <div class="chart-cap">Illustrative company value by network size (bar length scaled for readability — dollar figures are exact). ~$7,600/node·mo net × 8× multiple; the highlighted row is the near-term 1,000-node milestone. Not a forecast or guarantee.</div>
     </div>
 
     <table class="ramp">
