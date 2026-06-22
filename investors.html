@@ -70,8 +70,13 @@
   .prop .lede{font-size:1rem;color:var(--mute);margin-bottom:26px;}
   .prop section{padding:22px 0;border-top:1px solid var(--line);}
   .prop section:first-of-type{border-top:none;}
-  .prop h3{font-size:1.12rem;letter-spacing:-0.01em;margin-bottom:10px;display:flex;align-items:baseline;gap:10px;}
-  .prop h3 .nx{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--accent);}
+  .prop h3{font-size:1.12rem;letter-spacing:-0.01em;margin-bottom:10px;display:flex;align-items:center;gap:11px;}
+  .prop h3 .nx{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--blue-dim);color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:0.64rem;font-weight:500;flex:0 0 26px;}
+  .prop-banner{position:relative;overflow:hidden;background:linear-gradient(135deg,#0d1320,#15233f);border-radius:14px;padding:22px 24px;margin-bottom:14px;color:#fff;}
+  .prop-banner .pb-eye{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:#fbbf80;position:relative;z-index:1;}
+  .prop-banner .pb-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.45rem;letter-spacing:-0.02em;margin-top:5px;position:relative;z-index:1;}
+  .prop-banner .pb-art{position:absolute;right:10px;bottom:-26px;width:158px;opacity:0.4;z-index:0;}
+  .prop-banner .pb-art svg{width:100%;height:auto;display:block;}
   .prop h4{font-size:0.96rem;margin:14px 0 4px;}
   .prop p{font-size:0.92rem;color:var(--mute);margin-bottom:10px;max-width:70ch;}
   .prop ul{margin:0 0 10px 0;padding-left:20px;}
@@ -215,8 +220,12 @@
 <div class="wrap hidden" id="screen-proposal">
   <div class="wm" id="wm" aria-hidden="true"><div class="wm-inner" id="wm-inner"></div></div>
   <div class="card" style="position:relative;z-index:6;">
+    <div class="prop-banner">
+      <div class="pb-art" aria-hidden="true"><svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><line x1="115" y1="80" x2="170" y2="80"/><line x1="115" y1="80" x2="143" y2="128"/><line x1="115" y1="80" x2="87" y2="128"/><line x1="115" y1="80" x2="60" y2="80"/><line x1="115" y1="80" x2="87" y2="32"/><line x1="115" y1="80" x2="143" y2="32"/></g><g fill="#3b82f6"><circle cx="170" cy="80" r="5"/><circle cx="143" cy="128" r="5"/><circle cx="87" cy="128" r="5"/><circle cx="60" cy="80" r="5"/><circle cx="87" cy="32" r="5"/><circle cx="143" cy="32" r="5"/></g><circle cx="115" cy="80" r="11" fill="#f97316"/></svg></div>
+      <div class="pb-eye">Confidential · Investment proposal</div>
+      <div class="pb-title">Heliode Grid</div>
+    </div>
     <div class="prop-head">
-      <div><div class="eyebrow" style="margin-bottom:8px;">Confidential investment proposal</div></div>
       <div class="stamp" id="prop-stamp"></div>
     </div>
 
