@@ -205,49 +205,56 @@
     </div>
     </div>
     <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 520 470" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Distributed GPU compute on homes">
+      <svg viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heliode aggregates wholesale GPU compute into one managed endpoint for your inference">
         <defs>
-          <radialGradient id="sun" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#fb923c" stop-opacity="0.85"/><stop offset="45%" stop-color="#f97316" stop-opacity="0.30"/><stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#eef2f9"/><stop offset="100%" stop-color="#e0e7f2"/></linearGradient>
+          <radialGradient id="warm" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fb923c" stop-opacity="0.22"/><stop offset="60%" stop-color="#f97316" stop-opacity="0.06"/><stop offset="100%" stop-color="#f97316" stop-opacity="0"/></radialGradient>
           <linearGradient id="hub" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
         </defs>
-        <circle cx="402" cy="104" r="150" fill="url(#sun)"/>
-        <circle cx="402" cy="104" r="30" fill="#f97316" opacity="0.92"/>
-        <circle cx="402" cy="104" r="30" fill="none" stroke="#fb923c" stroke-width="1.5"><animate attributeName="r" values="30;40;30" dur="4.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.55;0;0.55" dur="4.5s" repeatCount="indefinite"/></circle>
-        <g stroke-linecap="round" fill="none">
-          <path d="M260 214 C 192 240 150 280 110 320" stroke="#d6dae1" stroke-width="2"/>
-          <path d="M260 214 L 260 320" stroke="#d6dae1" stroke-width="2"/>
-          <path d="M260 214 C 328 240 370 280 410 320" stroke="#d6dae1" stroke-width="2"/>
-          <path d="M260 214 C 192 240 150 280 110 320" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 70"><animate attributeName="stroke-dashoffset" from="74" to="0" dur="2.4s" repeatCount="indefinite"/></path>
-          <path d="M260 214 L 260 320" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 70"><animate attributeName="stroke-dashoffset" from="74" to="0" dur="2s" repeatCount="indefinite"/></path>
-          <path d="M260 214 C 328 240 370 280 410 320" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 70"><animate attributeName="stroke-dashoffset" from="74" to="0" dur="2.6s" repeatCount="indefinite"/></path>
+        <circle cx="300" cy="205" r="150" fill="url(#warm)"/>
+        <g fill="none" stroke-linecap="round">
+          <path d="M112 130 C 168 130 176 202 230 202" stroke="#d6dae1" stroke-width="2"/>
+          <path d="M112 215 L 230 215" stroke="#d6dae1" stroke-width="2"/>
+          <path d="M112 300 C 168 300 176 228 230 228" stroke="#d6dae1" stroke-width="2"/>
+          <path d="M290 215 L 400 215" stroke="#d6dae1" stroke-width="2.5"/>
+          <path d="M112 130 C 168 130 176 202 230 202" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 60"><animate attributeName="stroke-dashoffset" from="64" to="0" dur="2.2s" repeatCount="indefinite"/></path>
+          <path d="M112 215 L 230 215" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 60"><animate attributeName="stroke-dashoffset" from="64" to="0" dur="1.9s" repeatCount="indefinite"/></path>
+          <path d="M112 300 C 168 300 176 228 230 228" stroke="#f97316" stroke-width="2.4" stroke-dasharray="4 60"><animate attributeName="stroke-dashoffset" from="64" to="0" dur="2.4s" repeatCount="indefinite"/></path>
+          <path d="M290 215 L 400 215" stroke="#f97316" stroke-width="3" stroke-dasharray="5 50"><animate attributeName="stroke-dashoffset" from="55" to="0" dur="1.5s" repeatCount="indefinite"/></path>
         </g>
-        <rect x="232" y="158" width="56" height="56" rx="13" fill="url(#hub)"/>
+        <g>
+          <rect x="34" y="105" width="78" height="50" rx="10" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
+          <rect x="46" y="117" width="20" height="26" rx="3" fill="url(#hub)"/>
+          <line x1="50" y1="112" x2="50" y2="117" stroke="#cdd4df" stroke-width="2"/><line x1="58" y1="112" x2="58" y2="117" stroke="#cdd4df" stroke-width="2"/>
+          <line x1="74" y1="122" x2="98" y2="122" stroke="#e0e7f2" stroke-width="3" stroke-linecap="round"/><line x1="74" y1="130" x2="98" y2="130" stroke="#e0e7f2" stroke-width="3" stroke-linecap="round"/><line x1="74" y1="138" x2="90" y2="138" stroke="#e0e7f2" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="101" cy="138" r="3" fill="#f97316"/>
+        </g>
+        <g>
+          <rect x="34" y="190" width="78" height="50" rx="10" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
+          <rect x="46" y="202" width="20" height="26" rx="3" fill="url(#hub)"/>
+          <line x1="50" y1="197" x2="50" y2="202" stroke="#cdd4df" stroke-width="2"/><line x1="58" y1="197" x2="58" y2="202" stroke="#cdd4df" stroke-width="2"/>
+          <line x1="74" y1="207" x2="98" y2="207" stroke="#e0e7f2" stroke-width="3" stroke-linecap="round"/><line x1="74" y1="215" x2="98" y2="215" stroke="#e0e7f2" stroke-width="3" stroke-linecap="round"/><line x1="74" y1="223" x2="90" y2="223" stroke="#e0e7f2" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="101" cy="223" r="3" fill="#f97316"/>
+        </g>
+        <g>
+          <rect x="34" y="275" width="78" height="50" rx="10" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
+          <rect x="46" y="287" width="20" height="26" rx="3" fill="url(#hub)"/>
+          <line x1="50" y1="282" x2="50" y2="287" stroke="#cdd4df" stroke-width="2"/><line x1="58" y1="282" x2="58" y2="287" stroke="#cdd4df" stroke-width="2"/>
+          <line x1="74" y1="292" x2="98" y2="292" stroke="#e0e7f2" stroke-width="3" stroke-linecap="round"/><line x1="74" y1="300" x2="98" y2="300" stroke="#e0e7f2" stroke-width="3" stroke-linecap="round"/><line x1="74" y1="308" x2="90" y2="308" stroke="#e0e7f2" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="101" cy="308" r="3" fill="#f97316"/>
+        </g>
+        <rect x="230" y="185" width="60" height="60" rx="15" fill="url(#hub)"/>
+        <rect x="230" y="185" width="60" height="60" rx="15" fill="none" stroke="#fb923c" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite"/></rect>
         <g stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round">
-          <rect x="248" y="174" width="24" height="24" rx="4"/><rect x="256" y="182" width="8" height="8" rx="1.5" fill="#fff" stroke="none"/>
-          <line x1="255" y1="168" x2="255" y2="174"/><line x1="265" y1="168" x2="265" y2="174"/><line x1="255" y1="198" x2="255" y2="204"/><line x1="265" y1="198" x2="265" y2="204"/>
+          <rect x="247" y="202" width="26" height="26" rx="4"/><rect x="256" y="211" width="8" height="8" rx="1.5" fill="#fff" stroke="none"/>
+          <line x1="254" y1="196" x2="254" y2="202"/><line x1="266" y1="196" x2="266" y2="202"/><line x1="254" y1="228" x2="254" y2="234"/><line x1="266" y1="228" x2="266" y2="234"/>
         </g>
-        <g>
-          <polygon points="64,362 110,326 156,362" fill="url(#roof)" stroke="#cdd4df" stroke-width="1.5" stroke-linejoin="round"/>
-          <rect x="76" y="362" width="68" height="76" rx="3" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
-          <rect x="100" y="402" width="20" height="36" rx="2" fill="#e7edf6"/><rect x="84" y="374" width="14" height="14" rx="2" fill="#e7edf6"/><rect x="122" y="374" width="14" height="14" rx="2" fill="#e7edf6"/>
-          <circle cx="110" cy="320" r="7" fill="url(#hub)"/><circle cx="110" cy="320" r="7" fill="none" stroke="#f97316" stroke-width="2"><animate attributeName="r" values="7;13;7" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0;0.8" dur="3s" repeatCount="indefinite"/></circle>
-        </g>
-        <g>
-          <polygon points="214,362 260,326 306,362" fill="url(#roof)" stroke="#cdd4df" stroke-width="1.5" stroke-linejoin="round"/>
-          <rect x="226" y="362" width="68" height="76" rx="3" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
-          <rect x="250" y="402" width="20" height="36" rx="2" fill="#e7edf6"/><rect x="234" y="374" width="14" height="14" rx="2" fill="#e7edf6"/><rect x="272" y="374" width="14" height="14" rx="2" fill="#e7edf6"/>
-          <circle cx="260" cy="320" r="7" fill="url(#hub)"/><circle cx="260" cy="320" r="7" fill="none" stroke="#f97316" stroke-width="2"><animate attributeName="r" values="7;13;7" dur="3.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0;0.8" dur="3.4s" repeatCount="indefinite"/></circle>
-        </g>
-        <g>
-          <polygon points="364,362 410,326 456,362" fill="url(#roof)" stroke="#cdd4df" stroke-width="1.5" stroke-linejoin="round"/>
-          <rect x="376" y="362" width="68" height="76" rx="3" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
-          <rect x="400" y="402" width="20" height="36" rx="2" fill="#e7edf6"/><rect x="384" y="374" width="14" height="14" rx="2" fill="#e7edf6"/><rect x="422" y="374" width="14" height="14" rx="2" fill="#e7edf6"/>
-          <circle cx="410" cy="320" r="7" fill="url(#hub)"/><circle cx="410" cy="320" r="7" fill="none" stroke="#f97316" stroke-width="2"><animate attributeName="r" values="7;13;7" dur="2.7s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0;0.8" dur="2.7s" repeatCount="indefinite"/></circle>
-        </g>
-        <line x1="40" y1="438" x2="480" y2="438" stroke="#d6dae1" stroke-width="1.5"/>
+        <rect x="400" y="183" width="84" height="64" rx="13" fill="#fff" stroke="#cdd4df" stroke-width="1.5"/>
+        <circle cx="412" cy="196" r="2.5" fill="#e0e7f2"/><circle cx="421" cy="196" r="2.5" fill="#e0e7f2"/>
+        <path d="M442 201 L447 215 L461 220 L447 225 L442 239 L437 225 L423 220 L437 215 Z" fill="#f97316"/>
+        <path d="M464 202 L466 209 L473 211 L466 213 L464 220 L462 213 L455 211 L462 209 Z" fill="#fb923c" opacity="0.85"><animate attributeName="opacity" values="0.85;0.3;0.85" dur="2.5s" repeatCount="indefinite"/></path>
+        <text x="34" y="80" font-family="'JetBrains Mono', monospace" font-size="11" letter-spacing="1.5" fill="#8a909a">GPU SUPPLY</text>
+        <text x="260" y="272" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" letter-spacing="2" fill="#2563eb">HELIODE</text>
+        <text x="442" y="272" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10.5" letter-spacing="1" fill="#8a909a">YOUR INFERENCE</text>
       </svg>
     </div>
   </div>
