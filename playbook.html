@@ -55,6 +55,46 @@
   .kpi .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue);}
   .kpi .k{font-size:0.72rem;color:var(--mute);margin-top:4px;}
   .note{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--faint);}
+  /* command center */
+  .cc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .clocks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+  @media(max-width:560px){.clocks{grid-template-columns:1fr;}}
+  .clock{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;}
+  .clock .z{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);}
+  .clock .t{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;color:var(--ink);line-height:1.1;margin-top:3px;}
+  .clock .d{font-size:0.74rem;color:var(--mute);margin-top:1px;}
+  .prog-wrap{margin-bottom:16px;}
+  .prog-lbl{display:flex;justify-content:space-between;font-size:0.8rem;color:var(--mute);margin-bottom:6px;}
+  .prog-lbl b{color:var(--ink);font-family:'Space Grotesk',sans-serif;}
+  .prog{height:10px;background:var(--bg2);border:1px solid var(--line);border-radius:999px;overflow:hidden;}
+  .prog-fill{height:100%;background:linear-gradient(90deg,#fb923c,#f97316);width:0;border-radius:999px;transition:width .3s;}
+  .views{display:flex;gap:6px;margin-bottom:14px;}
+  .vbtn{font-family:'JetBrains Mono',monospace;font-size:0.66rem;text-transform:uppercase;letter-spacing:0.05em;padding:7px 13px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--mute);cursor:pointer;}
+  .vbtn.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .nav-row .lbl{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.95rem;color:var(--ink);}
+  .nav-row button{background:#fff;border:1px solid var(--line);border-radius:8px;width:32px;height:32px;cursor:pointer;color:var(--mute);font-size:1rem;}
+  .task{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);}
+  .task:last-child{border-bottom:none;}
+  .task input{margin-top:2px;width:18px;height:18px;accent-color:var(--accent);flex:0 0 auto;cursor:pointer;}
+  .task .tx{font-size:0.92rem;color:#2b3340;}
+  .task.done .tx{text-decoration:line-through;color:var(--faint);}
+  .task .del{margin-left:auto;background:none;border:none;color:var(--faint);cursor:pointer;font-size:0.8rem;}
+  .add-task{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+  .add-task input[type=text]{flex:1;min-width:150px;border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-family:'Inter',sans-serif;font-size:0.86rem;}
+  .add-task input[type=date]{border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-family:'Inter',sans-serif;font-size:0.86rem;}
+  .add-task button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.84rem;cursor:pointer;}
+  .week-day{margin-bottom:12px;}
+  .week-day .wd-h{font-family:'JetBrains Mono',monospace;font-size:0.64rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--blue);margin-bottom:2px;}
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .cal .dow{font-family:'JetBrains Mono',monospace;font-size:0.56rem;text-transform:uppercase;color:var(--faint);text-align:center;padding:4px 0;}
+  .cal .cell{min-height:52px;border:1px solid var(--line);border-radius:8px;padding:4px 5px;font-size:0.74rem;cursor:pointer;display:flex;flex-direction:column;}
+  .cal .cell.empty{border:none;cursor:default;}
+  .cal .cell.today{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);}
+  .cal .cell .dn{color:var(--mute);}
+  .cal .cell .badge{margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:0.56rem;color:var(--accent-hover);}
+  .cal .cell .badge.done{color:#16a34a;}
+  .empty-note{font-size:0.86rem;color:var(--faint);padding:14px 0;}
 </style>
 </head>
 <body>
@@ -65,6 +105,7 @@
 </div></div>
 
 <div class="jump"><div class="jump-in">
+  <a href="#today">Today</a>
   <a href="#week">This week</a>
   <a href="#vendors">Hardware vendors</a>
   <a href="#supply">Wholesale supply</a>
@@ -75,6 +116,36 @@
 </div></div>
 
 <div class="wrap">
+
+<!-- COMMAND CENTER -->
+<section id="today">
+  <div class="eye">Command center</div>
+  <h1 style="margin-top:6px;">Today</h1>
+  <div class="cc">
+    <div class="clocks">
+      <div class="clock"><div class="z" id="cz0">You</div><div class="t" id="ct0">—</div><div class="d" id="cd0"></div></div>
+      <div class="clock"><div class="z">Austin · Central</div><div class="t" id="ct1">—</div><div class="d" id="cd1"></div></div>
+      <div class="clock"><div class="z">Honolulu · Hawaii</div><div class="t" id="ct2">—</div><div class="d" id="cd2"></div></div>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-lbl"><span id="prog-text">—</span><b id="prog-pct">0%</b></div>
+      <div class="prog"><div class="prog-fill" id="prog-fill"></div></div>
+    </div>
+    <div class="views">
+      <button class="vbtn on" data-v="day">Day</button>
+      <button class="vbtn" data-v="week">Week</button>
+      <button class="vbtn" data-v="month">Month</button>
+    </div>
+    <div class="nav-row"><button id="nav-prev" aria-label="Previous">‹</button><span class="lbl" id="nav-lbl"></span><button id="nav-next" aria-label="Next">›</button></div>
+    <div id="task-area"></div>
+    <div class="add-task">
+      <input type="text" id="nt-text" placeholder="Add a task…">
+      <input type="date" id="nt-date">
+      <button id="nt-add">Add</button>
+    </div>
+  </div>
+  <p class="note" style="margin-top:8px;">Tasks save on this device. Tap a day in Month view to jump to it.</p>
+</section>
 
 <!-- THIS WEEK -->
 <section id="week">
@@ -293,5 +364,107 @@
 </section>
 
 </div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const pad=n=>String(n).padStart(2,'0');
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const ds=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+
+  // ── live clocks ──
+  const ZONES=[[ '', null ],[ '', 'America/Chicago' ],[ '', 'Pacific/Honolulu' ]];
+  function ticks(){
+    const now=new Date();
+    ZONES.forEach((z,i)=>{
+      $('ct'+i).textContent=new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true,timeZone:z[1]||undefined}).format(now);
+      $('cd'+i).textContent=new Intl.DateTimeFormat('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:z[1]||undefined}).format(now);
+    });
+    try{ $('cz0').textContent=Intl.DateTimeFormat().resolvedOptions().timeZone.split('/').pop().replace(/_/g,' ')+' · You'; }catch(e){ $('cz0').textContent='You'; }
+  }
+  ticks(); setInterval(ticks,1000);
+
+  // ── tasks ──
+  const KEY='heliode_tasks_v1';
+  function todayD(){ return new Date(); }
+  function seed(){
+    const t=todayD(), tm=new Date(t.getTime()+864e5);
+    const T=ds(t), TM=ds(tm);
+    return [
+      {id:1,date:T,done:false,text:'Stand up RunPod / Lambda so we can deliver'},
+      {id:2,date:T,done:false,text:'Email 3 neoclouds for committed rates (Lambda, CoreWeave, Crusoe)'},
+      {id:3,date:T,done:false,text:'List 10 warm prospects'},
+      {id:4,date:T,done:false,text:'Send warm "send me your bill" messages'},
+      {id:5,date:T,done:false,text:'Run SETUP.sql in Supabase'},
+      {id:6,date:TM,done:false,text:'Pitch Carl & Drew (comp + equity)'},
+      {id:7,date:TM,done:false,text:'Quote any bills that came in — same day'},
+    ];
+  }
+  let tasks; try{ tasks=JSON.parse(localStorage.getItem(KEY)); }catch(e){ tasks=null; }
+  if(!Array.isArray(tasks)){ tasks=seed(); }
+  const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(tasks)); }catch(e){} };
+  save();
+
+  let view='day', cursor=new Date();
+  const sow=d=>{ const x=new Date(d); x.setDate(x.getDate()-x.getDay()); x.setHours(0,0,0,0); return x; };
+
+  document.querySelectorAll('.vbtn').forEach(b=>b.addEventListener('click',()=>{
+    view=b.dataset.v; document.querySelectorAll('.vbtn').forEach(x=>x.classList.toggle('on',x===b)); render();
+  }));
+  $('nav-prev').addEventListener('click',()=>shift(-1));
+  $('nav-next').addEventListener('click',()=>shift(1));
+  function shift(dir){
+    if(view==='day') cursor.setDate(cursor.getDate()+dir);
+    else if(view==='week') cursor.setDate(cursor.getDate()+7*dir);
+    else cursor.setMonth(cursor.getMonth()+dir);
+    render();
+  }
+  $('nt-add').addEventListener('click',()=>{
+    const text=$('nt-text').value.trim(); if(!text) return;
+    tasks.push({id:Date.now(),date:$('nt-date').value||ds(cursor),done:false,text}); save();
+    $('nt-text').value=''; render();
+  });
+
+  const row=t=>'<div class="task'+(t.done?' done':'')+'"><input type="checkbox" '+(t.done?'checked':'')+' data-id="'+t.id+'"><span class="tx">'+esc(t.text)+'</span><button class="del" data-del="'+t.id+'">✕</button></div>';
+  function setProg(list){ const tot=list.length,done=list.filter(t=>t.done).length,p=tot?Math.round(done/tot*100):0;
+    $('prog-fill').style.width=p+'%'; $('prog-pct').textContent=p+'%'; $('prog-text').textContent=done+' of '+tot+' done'; }
+
+  function render(){
+    const area=$('task-area');
+    if(view==='day'){
+      $('nav-lbl').textContent=new Intl.DateTimeFormat('en-US',{weekday:'long',month:'long',day:'numeric'}).format(cursor);
+      const k=ds(cursor), list=tasks.filter(t=>t.date===k);
+      area.innerHTML=list.length?list.map(row).join(''):'<div class="empty-note">Nothing scheduled. Add a task below.</div>';
+      setProg(list);
+    } else if(view==='week'){
+      const s=sow(cursor), days=[...Array(7)].map((_,i)=>{const d=new Date(s);d.setDate(d.getDate()+i);return d;});
+      const f=d=>new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric'}).format(d);
+      $('nav-lbl').textContent=f(days[0])+' – '+f(days[6]);
+      let html='',wk=[];
+      days.forEach(d=>{ const list=tasks.filter(t=>t.date===ds(d)); wk=wk.concat(list);
+        html+='<div class="week-day"><div class="wd-h">'+new Intl.DateTimeFormat('en-US',{weekday:'long',month:'short',day:'numeric'}).format(d)+'</div>'+(list.length?list.map(row).join(''):'<div class="empty-note" style="padding:4px 0">—</div>')+'</div>'; });
+      area.innerHTML=html; setProg(wk);
+    } else {
+      const y=cursor.getFullYear(), m=cursor.getMonth();
+      $('nav-lbl').textContent=new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric'}).format(cursor);
+      const startDow=new Date(y,m,1).getDay(), dim=new Date(y,m+1,0).getDate(), tk=ds(new Date());
+      let html='<div class="cal">'+['S','M','T','W','T','F','S'].map(d=>'<div class="dow">'+d+'</div>').join('');
+      for(let i=0;i<startDow;i++) html+='<div class="cell empty"></div>';
+      let mk=[];
+      for(let day=1;day<=dim;day++){
+        const k=y+'-'+pad(m+1)+'-'+pad(day), list=tasks.filter(t=>t.date===k), done=list.filter(t=>t.done).length; mk=mk.concat(list);
+        const badge=list.length?'<span class="badge'+(done===list.length?' done':'')+'">'+done+'/'+list.length+'</span>':'';
+        html+='<div class="cell'+(k===tk?' today':'')+'" data-day="'+k+'"><span class="dn">'+day+'</span>'+badge+'</div>';
+      }
+      area.innerHTML=html+'</div>'; setProg(mk);
+      area.querySelectorAll('.cell[data-day]').forEach(c=>c.addEventListener('click',()=>{ cursor=new Date(c.dataset.day+'T00:00:00'); view='day'; document.querySelectorAll('.vbtn').forEach(x=>x.classList.toggle('on',x.dataset.v==='day')); render(); }));
+    }
+    area.querySelectorAll('input[type=checkbox]').forEach(c=>c.addEventListener('change',()=>{ const t=tasks.find(x=>String(x.id)===c.dataset.id); if(t){t.done=!t.done;save();render();} }));
+    area.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{ tasks=tasks.filter(x=>String(x.id)!==b.dataset.del); save(); render(); }));
+  }
+  if($('nt-date')) $('nt-date').value=ds(new Date());
+  render();
+})();
+</script>
 </body>
 </html>
