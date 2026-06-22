@@ -97,6 +97,8 @@
   .vcard{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-bottom:9px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
   .vcard .vn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.9rem;display:flex;justify-content:space-between;align-items:center;gap:6px;}
   .vcard .vcat{font-family:'JetBrains Mono',monospace;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--blue);margin-bottom:4px;}
+  .vcard .vsub{font-size:0.74rem;color:var(--faint);margin-bottom:3px;line-height:1.4;}
+  .vcard .vsub a{color:var(--blue);}
   .vcard label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.56rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--faint);margin:7px 0 3px;}
   .vcard .vin{width:100%;border:1px solid var(--line2);border-radius:7px;padding:6px 8px;font-family:'Inter',sans-serif;font-size:0.8rem;background:#fff;outline:none;}
   .vcard .vin:focus{border-color:var(--blue-line);box-shadow:0 0 0 2px var(--blue-dim);}
@@ -156,17 +158,8 @@
 
     <div id="leads-view">
       <div class="stat-line" id="stat"></div>
-      <div class="funnel" id="funnel"></div>
-      <div class="tablewrap">
-        <table>
-          <thead><tr>
-            <th>When</th><th>Lead</th><th>City</th><th>Paying now</th><th>Workload</th>
-            <th>Source</th><th>Status</th><th>Quoted</th><th>Notes</th><th></th>
-          </tr></thead>
-          <tbody id="rows"></tbody>
-        </table>
-        <div class="empty" id="empty" style="display:none;">No leads yet for this view.</div>
-      </div>
+      <div class="vboard" id="lboard"></div>
+      <div class="empty" id="empty" style="display:none;">No leads yet.</div>
     </div>
 
     <div id="vendors-view" style="display:none;">
@@ -314,65 +307,56 @@
     return !error;
   }
 
-  // ── Render ──
+  // ── Render (Kanban) ──
   function render(){
-    const counts={all:leads.length}; STAGES.forEach(s=>counts[s]=0);
-    leads.forEach(l=>{ const s=l.status||'new'; counts[s]=(counts[s]||0)+1; });
-    let chips='<div class="chip'+(filter==='all'?' on':'')+'" data-f="all"><div class="cn">'+counts.all+'</div><div class="ck">All leads</div></div>';
-    STAGES.forEach(s=>{
-      chips+='<div class="chip'+(filter===s?' on':'')+'" data-f="'+s+'"><div class="cn">'+(counts[s]||0)+'</div><div class="ck"><span class="dotc" style="background:'+COLORS[s]+'"></span>'+s+'</div></div>';
-    });
-    $('funnel').innerHTML=chips;
-    $('funnel').querySelectorAll('.chip').forEach(c=>{
-      c.addEventListener('click',()=>{ filter=c.getAttribute('data-f'); render(); });
-    });
-
     const won=leads.filter(l=>l.status==='won').length;
-    $('stat').innerHTML='<b>'+leads.length+'</b> total leads · <b>'+won+'</b> won · showing <b>'+(filter==='all'?'all':filter)+'</b>';
-
-    const view = filter==='all' ? leads : leads.filter(l=>(l.status||'new')===filter);
+    $('stat').innerHTML='<b>'+leads.length+'</b> leads · <b>'+won+'</b> won';
     let html='';
-    view.forEach(l=>{
-      const opts=STAGES.map(s=>'<option value="'+s+'"'+((l.status||'new')===s?' selected':'')+'>'+s+'</option>').join('');
-      html+='<tr data-id="'+esc(l.id)+'">'
-        +'<td class="when">'+fmtDate(l.created_at)+'</td>'
-        +'<td><div class="who-cell">'+esc(l.name||'—')+'</div><div class="sub">'+esc(l.company||'')+'</div>'
-          +(l.email?'<div class="sub"><a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a></div>':'')+'</td>'
-        +'<td class="sub">'+esc(l.city||'—')+'</td>'
-        +'<td class="spend">'+esc(l.current_spend||'—')+'</td>'
-        +'<td class="work">'+esc(l.workload||'—')+'</td>'
-        +'<td><span class="src">'+esc(l.source||'—')+'</span></td>'
-        +'<td><select class="cell-in js-status" style="color:'+(COLORS[l.status||'new'])+'">'+opts+'</select></td>'
-        +'<td><input class="cell-in q js-quote" type="text" value="'+esc(l.quoted_amount||'')+'" placeholder="$/mo"></td>'
-        +'<td><input class="cell-in js-notes" type="text" value="'+esc(l.notes||'')+'" placeholder="Add a note…"></td>'
-        +'<td><button class="del js-del" title="Delete this lead">✕</button><span class="saved">✓ saved</span></td>'
-        +'</tr>';
+    STAGES.forEach(st=>{
+      const cards=leads.filter(l=>(l.status||'new')===st);
+      html+='<div class="vcol"><div class="vcol-h"><span><span class="vdotc" style="background:'+COLORS[st]+'"></span>'+st+'</span><span class="ct">'+cards.length+'</span></div>';
+      cards.forEach(l=>{
+        const opts=STAGES.map(s=>'<option value="'+s+'"'+((l.status||'new')===s?' selected':'')+'>'+s+'</option>').join('');
+        const meta=[l.city,l.current_spend].filter(Boolean).map(esc).join(' · ');
+        html+='<div class="vcard" data-id="'+esc(l.id)+'">'
+          +'<div class="vn">'+esc(l.company||l.name||'—')+'<button class="vdel js-del" title="Delete">✕</button></div>'
+          +(((l.name&&l.company)||l.email)?'<div class="vsub">'+(l.name&&l.company?esc(l.name):'')+(l.email?((l.name&&l.company)?' · ':'')+'<a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a>':'')+'</div>':'')
+          +(meta?'<div class="vsub">'+meta+'</div>':'')
+          +(l.workload?'<div class="vsub">'+esc(l.workload)+'</div>':'')
+          +(l.source?'<div class="vcat">'+esc(l.source)+'</div>':'')
+          +'<label>Stage</label><select class="vin js-status" style="color:'+COLORS[st]+'">'+opts+'</select>'
+          +'<label>Quoted</label><input class="vin js-quote" value="'+esc(l.quoted_amount||'')+'" placeholder="$/mo">'
+          +'<label>Notes</label><input class="vin js-notes" value="'+esc(l.notes||'')+'" placeholder="note…">'
+          +'<span class="saved">✓ saved</span>'
+          +'</div>';
+      });
+      html+='</div>';
     });
-    $('rows').innerHTML=html;
-    $('empty').style.display = view.length ? 'none' : 'block';
+    $('lboard').innerHTML=html;
+    $('empty').style.display = leads.length ? 'none' : 'block';
     wireRows();
   }
 
-  function flash(tr){ const s=tr.querySelector('.saved'); s.classList.add('show'); setTimeout(()=>s.classList.remove('show'),1400); }
+  function flash(card){ const s=card.querySelector('.saved'); if(s){ s.classList.add('show'); setTimeout(()=>s.classList.remove('show'),1300); } }
 
   function wireRows(){
-    $('rows').querySelectorAll('tr').forEach(tr=>{
-      const id=tr.getAttribute('data-id');
+    $('lboard').querySelectorAll('.vcard').forEach(card=>{
+      const id=card.getAttribute('data-id');
       const lead=leads.find(l=>String(l.id)===id);
-      const sel=tr.querySelector('.js-status');
+      const sel=card.querySelector('.js-status');
       sel.addEventListener('change', async ()=>{
-        const body={status:sel.value}; sel.style.color=COLORS[sel.value]||'#0d1320';
+        const body={status:sel.value};
         if(sel.value!=='new' && lead && !lead.contacted_at){ body.contacted_at=new Date().toISOString(); }
-        if(await patch(id,body)){ if(lead){ lead.status=sel.value; if(body.contacted_at) lead.contacted_at=body.contacted_at; } flash(tr); render(); }
+        if(await patch(id,body)){ if(lead){ lead.status=sel.value; if(body.contacted_at) lead.contacted_at=body.contacted_at; } render(); }
       });
-      tr.querySelector('.js-quote').addEventListener('change', async function(){
-        const v=this.value.trim(); if(await patch(id,{quoted_amount:v})){ if(lead) lead.quoted_amount=v; flash(tr); }
+      card.querySelector('.js-quote').addEventListener('change', async function(){
+        const v=this.value.trim(); if(await patch(id,{quoted_amount:v})){ if(lead) lead.quoted_amount=v; flash(card); }
       });
-      tr.querySelector('.js-notes').addEventListener('change', async function(){
-        const v=this.value.trim(); if(await patch(id,{notes:v})){ if(lead) lead.notes=v; flash(tr); }
+      card.querySelector('.js-notes').addEventListener('change', async function(){
+        const v=this.value.trim(); if(await patch(id,{notes:v})){ if(lead) lead.notes=v; flash(card); }
       });
-      tr.querySelector('.js-del').addEventListener('click', async ()=>{
-        const who = lead && (lead.name || lead.email) || 'this lead';
+      card.querySelector('.js-del').addEventListener('click', async ()=>{
+        const who = (lead && (lead.company || lead.name || lead.email)) || 'this lead';
         if(!confirm('Delete "'+who+'"? This permanently removes the lead and cannot be undone.')) return;
         const { error } = await sb.from('compute_leads').delete().eq('id', id);
         if(error){ alert('Could not delete: '+(error.message||'unknown error')); return; }
