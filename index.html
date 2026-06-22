@@ -248,12 +248,12 @@
     <div class="hero-copy">
     <div class="eyebrow">GPU compute · AI inference · US-based</div>
     <h1>Cut your GPU bill — <em>and let us run the whole thing.</em></h1>
-    <p class="lede">We buy GPU power on the open market and manage it end to end — cheaper GPU-hours, one bill, one endpoint, zero babysitting. <strong>Send us your current bill and we'll come back with a rate that beats it — a free quote, no commitment.</strong></p>
+    <p class="lede">We buy GPU power on the open market and manage it end to end — cheaper GPU-hours, one bill, one endpoint, zero babysitting. <strong>Send us your current bill and we'll come back with a quote for the same workload — free, no commitment.</strong></p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#contact">Beat my GPU bill →</a>
+      <a class="btn btn-primary" href="#contact">Get my quote →</a>
       <a class="btn btn-ghost" href="#how">How it works</a>
     </div>
-    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>Rate-beat guarantee:</b> send your bill, we'll beat your rate — free quote, no commitment.</span></div>
+    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span><b>Free quote, no commitment.</b> Cheaper GPU-hours on the same workload — no lock-in.</span></div>
     <div class="cities">
       <span class="pill">Serving <b>Austin</b></span>
       <span class="pill"><b>San Francisco</b> Bay Area</span>
@@ -479,7 +479,7 @@
   <div class="wrap">
     <div class="sec-eye">Get started</div>
     <h2>Send us your current GPU bill. We'll quote the same workload at open-market rates.</h2>
-    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll come back with a rate that beats your current bill — free, no commitment.</p>
+    <p class="body-lg" style="margin-bottom:8px;">No sales gauntlet. Tell us what you're running and what you're paying now, and we'll come back with a quote for the same workload — free, no commitment.</p>
     <div class="form" id="form">
       <div class="grid-2">
         <div><label class="fld" for="f-name">Name</label><input class="inp" id="f-name" type="text" placeholder="Your name"></div>
@@ -494,11 +494,11 @@
       <label class="fld" for="f-workload">Your workload</label>
       <textarea class="inp" id="f-workload" placeholder="Model(s) and rough GPU-hours or monthly throughput."></textarea>
       <div class="err" id="f-err"></div>
-      <button class="btn btn-primary" id="f-btn" onclick="submitLead()">Beat my bill →</button>
+      <button class="btn btn-primary" id="f-btn" onclick="submitLead()">Get my quote →</button>
     </div>
     <div class="ok" id="ok">
       <h4>Got it — talk soon.</h4>
-      <p>Your request is in. We'll follow up at the email you gave us with a rate that beats your current bill.</p>
+      <p>Your request is in. We'll follow up at the email you gave us with a quote for your workload.</p>
     </div>
   </div>
 </section>
@@ -558,7 +558,7 @@
       }
       else { throw new Error(); }
     }).catch(function(){
-      btn.disabled=false; btn.textContent='Beat my bill →';
+      btn.disabled=false; btn.textContent='Get my quote →';
       err.textContent='Something went wrong — email us directly at hello@heliodegrid.com.'; err.style.display='block';
     });
   }
