@@ -84,6 +84,24 @@
   .empty{padding:40px;text-align:center;color:var(--faint);font-size:0.9rem;}
   .stat-line{font-size:0.82rem;color:var(--mute);margin-bottom:16px;}
   .stat-line b{color:var(--ink);font-weight:600;}
+  .tabs{display:flex;gap:8px;margin-bottom:16px;}
+  .tab{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.84rem;padding:8px 16px;border-radius:9px;border:1px solid var(--line2);background:#fff;color:var(--mute);cursor:pointer;}
+  .tab.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .add-vform{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px;}
+  @media(max-width:640px){.add-vform{grid-template-columns:1fr;}}
+  .vboard{display:flex;gap:12px;overflow-x:auto;padding-bottom:14px;}
+  .vcol{flex:0 0 244px;background:rgba(13,19,32,0.025);border:1px solid var(--line);border-radius:14px;padding:10px;}
+  .vcol-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding:2px 4px;font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.06em;text-transform:uppercase;}
+  .vcol-h .ct{color:var(--faint);}
+  .vdotc{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle;}
+  .vcard{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-bottom:9px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .vcard .vn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.9rem;display:flex;justify-content:space-between;align-items:center;gap:6px;}
+  .vcard .vcat{font-family:'JetBrains Mono',monospace;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--blue);margin-bottom:4px;}
+  .vcard label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.56rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--faint);margin:7px 0 3px;}
+  .vcard .vin{width:100%;border:1px solid var(--line2);border-radius:7px;padding:6px 8px;font-family:'Inter',sans-serif;font-size:0.8rem;background:#fff;outline:none;}
+  .vcard .vin:focus{border-color:var(--blue-line);box-shadow:0 0 0 2px var(--blue-dim);}
+  select.vin{cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;}
+  .vdel{border:none;background:none;color:#dc2626;cursor:pointer;font-size:0.78rem;line-height:1;}
   .hidden{display:none !important;}
 </style>
 </head>
@@ -118,17 +136,34 @@
 <!-- Dashboard -->
 <div id="dash">
   <div class="wrap">
-    <div class="stat-line" id="stat"></div>
-    <div class="funnel" id="funnel"></div>
-    <div class="tablewrap">
-      <table>
-        <thead><tr>
-          <th>When</th><th>Lead</th><th>City</th><th>Paying now</th><th>Workload</th>
-          <th>Source</th><th>Status</th><th>Quoted</th><th>Notes</th><th></th>
-        </tr></thead>
-        <tbody id="rows"></tbody>
-      </table>
-      <div class="empty" id="empty" style="display:none;">No leads yet for this view.</div>
+    <div class="tabs">
+      <button class="tab on" id="tab-leads">Clients / Leads</button>
+      <button class="tab" id="tab-vendors">Vendors</button>
+    </div>
+
+    <div id="leads-view">
+      <div class="stat-line" id="stat"></div>
+      <div class="funnel" id="funnel"></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr>
+            <th>When</th><th>Lead</th><th>City</th><th>Paying now</th><th>Workload</th>
+            <th>Source</th><th>Status</th><th>Quoted</th><th>Notes</th><th></th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="empty" style="display:none;">No leads yet for this view.</div>
+      </div>
+    </div>
+
+    <div id="vendors-view" style="display:none;">
+      <div class="stat-line" id="vstat"></div>
+      <div class="add-vform">
+        <input class="vin inp" id="v-name" placeholder="Vendor name (e.g. Lambda)">
+        <input class="vin inp" id="v-cat" placeholder="Category (neocloud / hardware / marketplace)">
+        <button class="btn btn-primary" id="v-add">+ Add vendor</button>
+      </div>
+      <div class="vboard" id="vboard"></div>
     </div>
   </div>
 </div>
@@ -199,6 +234,7 @@
     $('dash').style.display='block';
     $('bar-actions').style.display='flex';
     render();
+    loadVendors();
   }
 
   async function patch(id, body){
@@ -271,6 +307,76 @@
         leads = leads.filter(l=>String(l.id)!==id);
         render();
       });
+    });
+  }
+
+  // ── Vendors pipeline ──
+  const VSTAGES=[
+    {k:'to_contact',label:'To contact',c:'#8a909a'},
+    {k:'contacted',label:'Contacted',c:'#2563eb'},
+    {k:'in_discussion',label:'In discussion',c:'#0ea5e9'},
+    {k:'quote',label:'Quote received',c:'#f97316'},
+    {k:'negotiating',label:'Negotiating',c:'#a855f7'},
+    {k:'active',label:'Active',c:'#16a34a'},
+    {k:'passed',label:'Passed',c:'#dc2626'},
+  ];
+  let vendors=[], vendorsReady=false;
+
+  $('tab-leads').addEventListener('click',()=>showView('leads'));
+  $('tab-vendors').addEventListener('click',()=>showView('vendors'));
+  function showView(v){
+    $('tab-leads').classList.toggle('on',v==='leads');
+    $('tab-vendors').classList.toggle('on',v==='vendors');
+    $('leads-view').style.display = v==='leads'?'block':'none';
+    $('vendors-view').style.display = v==='vendors'?'block':'none';
+  }
+
+  async function loadVendors(){
+    const { data, error } = await sb.from('vendors').select('*').order('created_at',{ascending:true});
+    if(error){ vendors=[]; vendorsReady=false; $('vstat').textContent='Vendors not enabled yet — run vendors.sql in Supabase.'; renderVendors(); return; }
+    vendors = data||[]; vendorsReady=true; renderVendors();
+  }
+  async function vpatch(id, body){ const { error } = await sb.from('vendors').update(body).eq('id', id); return !error; }
+
+  $('v-add').addEventListener('click', async ()=>{
+    const name=$('v-name').value.trim(); if(!name){ alert('Vendor name?'); return; }
+    const { error } = await sb.from('vendors').insert({ name, category:$('v-cat').value.trim(), stage:'to_contact' });
+    if(error){ alert('Could not add (run vendors.sql first?): '+error.message); return; }
+    $('v-name').value=$('v-cat').value=''; loadVendors();
+  });
+
+  function renderVendors(){
+    if(vendorsReady) $('vstat').innerHTML='<b>'+vendors.length+'</b> vendors tracked';
+    let html='';
+    for(const st of VSTAGES){
+      const cards=vendors.filter(v=>(v.stage||'to_contact')===st.k);
+      html+='<div class="vcol"><div class="vcol-h"><span><span class="vdotc" style="background:'+st.c+'"></span>'+st.label+'</span><span class="ct">'+cards.length+'</span></div>';
+      for(const v of cards){
+        html+='<div class="vcard" data-id="'+esc(v.id)+'">'
+          +'<div class="vn">'+esc(v.name||'—')+'<button class="vdel js-vdel" title="Delete">✕</button></div>'
+          +(v.category?'<div class="vcat">'+esc(v.category)+'</div>':'')
+          +'<label>Stage</label><select class="vin js-vstage" style="color:'+st.c+'">'+VSTAGES.map(s=>'<option value="'+s.k+'"'+(s.k===v.stage?' selected':'')+'>'+s.label+'</option>').join('')+'</select>'
+          +'<label>Contact</label><input class="vin js-vcontact" value="'+esc(v.contact||'')+'" placeholder="person / email">'
+          +'<label>Quote / terms</label><input class="vin js-vterms" value="'+esc(v.terms||'')+'" placeholder="$/GPU-hr, lead time…">'
+          +'<label>Notes</label><input class="vin js-vnotes" value="'+esc(v.notes||'')+'" placeholder="notes">'
+          +'<span class="saved">✓ saved</span>'
+          +'</div>';
+      }
+      html+='</div>';
+    }
+    $('vboard').innerHTML=html;
+    wireVendors();
+  }
+  function vflash(card){ const s=card.querySelector('.saved'); if(s){ s.classList.add('show'); setTimeout(()=>s.classList.remove('show'),1200); } }
+  function wireVendors(){
+    $('vboard').querySelectorAll('.vcard').forEach(card=>{
+      const id=card.getAttribute('data-id');
+      const v=vendors.find(x=>String(x.id)===id);
+      card.querySelector('.js-vstage').addEventListener('change', async function(){ if(await vpatch(id,{stage:this.value})){ if(v)v.stage=this.value; renderVendors(); } });
+      card.querySelector('.js-vcontact').addEventListener('change', async function(){ if(await vpatch(id,{contact:this.value.trim()})){ if(v)v.contact=this.value.trim(); vflash(card); } });
+      card.querySelector('.js-vterms').addEventListener('change', async function(){ if(await vpatch(id,{terms:this.value.trim()})){ if(v)v.terms=this.value.trim(); vflash(card); } });
+      card.querySelector('.js-vnotes').addEventListener('change', async function(){ if(await vpatch(id,{notes:this.value.trim()})){ if(v)v.notes=this.value.trim(); vflash(card); } });
+      card.querySelector('.js-vdel').addEventListener('click', async ()=>{ if(!confirm('Delete '+((v&&v.name)||'this vendor')+'?')) return; const { error }=await sb.from('vendors').delete().eq('id',id); if(!error){ vendors=vendors.filter(x=>String(x.id)!==id); renderVendors(); } });
     });
   }
 
