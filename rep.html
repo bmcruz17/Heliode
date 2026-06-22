@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Heliode — Rep Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#f4f7fc;--panel:#fff;--ink:#0d1320;--mute:#555c66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+    --green:#16a34a;
+  }
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;}
+  a{color:var(--blue);}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .bar{background:rgba(13,19,32,0.92);position:sticky;top:0;z-index:30;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .bar-in{padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .brand{color:#fff;font-weight:700;display:flex;align-items:center;gap:8px;font-size:1rem;}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+  .brand small{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:#aeb6c6;}
+  .bar-actions{display:flex;align-items:center;gap:10px;}
+  .who{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#cdd4df;}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.82rem;border-radius:9px;padding:9px 14px;cursor:pointer;border:1px solid rgba(255,255,255,0.25);background:transparent;color:#fff;transition:.15s;}
+  .btn:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .btn-primary:hover{background:var(--accent-hover);color:#fff;border-color:var(--accent-hover);}
+  .btn:disabled{opacity:.55;cursor:not-allowed;}
+
+  /* Gate */
+  .gate{max-width:420px;margin:9vh auto 0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:32px 30px;box-shadow:0 12px 36px rgba(13,19,32,0.08);}
+  .gate .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .gate h1{font-size:1.4rem;margin-bottom:6px;}
+  .gate p{font-size:0.9rem;color:var(--mute);margin-bottom:8px;}
+  .fld{display:block;font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);margin:14px 0 6px;}
+  .inp{width:100%;background:#fff;border:1px solid var(--line2);border-radius:10px;padding:11px 13px;color:var(--ink);font-family:'Inter',sans-serif;font-size:0.92rem;outline:none;transition:.15s;}
+  .inp:focus{border-color:var(--blue-line);box-shadow:0 0 0 3px var(--blue-dim);}
+  .gate .btn{width:100%;margin-top:20px;color:#fff;background:var(--accent);border-color:var(--accent);padding:12px;}
+  .gate .btn:hover{background:var(--accent-hover);}
+  .gate-err{font-size:0.84rem;margin-top:12px;display:none;color:#dc2626;}
+
+  /* Dashboard */
+  #dash{display:none;}
+  .wrap{padding:18px;}
+  .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+  @media(max-width:640px){.summary{grid-template-columns:repeat(2,1fr);}}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+  .stat .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.4rem;color:var(--ink);line-height:1;}
+  .stat.hl .n{color:var(--green);}
+  .stat .k{font-size:0.7rem;color:var(--mute);margin-top:6px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.04em;}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+  .toolbar .t{font-size:0.82rem;color:var(--mute);}
+  .add-form{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px;display:none;gap:8px;grid-template-columns:1fr 1fr 1fr auto;}
+  .add-form.show{display:grid;}
+  @media(max-width:640px){.add-form.show{grid-template-columns:1fr;}}
+  .add-form .inp{font-size:0.86rem;padding:9px 11px;}
+
+  .board{display:flex;gap:12px;overflow-x:auto;padding-bottom:14px;}
+  .col{flex:0 0 250px;background:rgba(13,19,32,0.025);border:1px solid var(--line);border-radius:14px;padding:10px;}
+  .col-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding:2px 4px;}
+  .col-h .nm{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:500;display:flex;align-items:center;gap:6px;}
+  .col-h .ct{font-size:0.7rem;color:var(--faint);font-family:'JetBrains Mono',monospace;}
+  .dotc{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-bottom:9px;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .card .co{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.9rem;letter-spacing:-0.01em;}
+  .card .sub{font-size:0.74rem;color:var(--faint);margin-bottom:8px;}
+  .card label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.56rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--faint);margin:7px 0 3px;}
+  .card .cin{width:100%;border:1px solid var(--line2);border-radius:7px;padding:6px 8px;font-family:'Inter',sans-serif;font-size:0.8rem;background:#fff;outline:none;}
+  .card .cin:focus{border-color:var(--blue-line);box-shadow:0 0 0 2px var(--blue-dim);}
+  select.cin{cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;}
+  .ovr{margin-top:8px;background:var(--accent-dim);border:1px solid var(--accent-line);border-radius:7px;padding:6px 9px;font-size:0.78rem;color:var(--accent-hover);font-family:'JetBrains Mono',monospace;}
+  .ovr b{font-family:'Space Grotesk',sans-serif;}
+  .saved{font-size:0.6rem;color:var(--green);font-family:'JetBrains Mono',monospace;opacity:0;transition:.2s;}
+  .saved.show{opacity:1;}
+  .hidden{display:none!important;}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>HELIODE <small>Rep Portal</small></div>
+  <div class="bar-actions" id="bar-actions" style="display:none;">
+    <span class="who" id="who"></span>
+    <button class="btn" id="lock">Sign out</button>
+  </div>
+</div></div>
+
+<!-- Gate -->
+<div class="gate" id="gate">
+  <div class="eyebrow">Rep access</div>
+  <h1>Rep portal</h1>
+  <p>Sign in to manage your accounts and track your commission.</p>
+  <label class="fld" for="g-email">Email</label>
+  <input class="inp" id="g-email" type="email" autocomplete="username" placeholder="you@email.com">
+  <label class="fld" for="g-pass">Password</label>
+  <input class="inp" id="g-pass" type="password" autocomplete="current-password" placeholder="••••••••">
+  <button class="btn" id="g-go">Sign in</button>
+  <div class="gate-err" id="g-err"></div>
+</div>
+
+<!-- Dashboard -->
+<div id="dash"><div class="wrap">
+  <div class="summary">
+    <div class="stat"><div class="n" id="s-accts">0</div><div class="k">My accounts</div></div>
+    <div class="stat"><div class="n" id="s-active">0</div><div class="k">Active (live)</div></div>
+    <div class="stat hl"><div class="n" id="s-override">$0</div><div class="k">Monthly override</div></div>
+    <div class="stat hl"><div class="n" id="s-onboard">$0</div><div class="k">Onboarding earned</div></div>
+  </div>
+  <div class="toolbar">
+    <div class="t mono" id="rate-note"></div>
+    <button class="btn btn-primary" id="add-btn">+ Add account</button>
+  </div>
+  <div class="add-form" id="add-form">
+    <input class="inp" id="a-company" placeholder="Company">
+    <input class="inp" id="a-name" placeholder="Contact name">
+    <input class="inp" id="a-email" placeholder="Email">
+    <button class="btn btn-primary" id="a-save">Add</button>
+  </div>
+  <div class="board" id="board"></div>
+</div></div>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  const SB_URL = 'https://pyosjuuvbxzyjtokfqfu.supabase.co';
+  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5b3NqdXV2Ynh6eWp0b2tmcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjk4MTcsImV4cCI6MjA5NzY0NTgxN30.7bH19ZZJHxchfRVt3t-I20gJ44WvbR3al516QhwQpmw';
+  const sb = createClient(SB_URL, SB_KEY);
+
+  const STAGES = [
+    {k:'prospect',   label:'Prospect',   c:'#8a909a'},
+    {k:'contacted',  label:'Contacted',  c:'#2563eb'},
+    {k:'quoted',     label:'Quoted',     c:'#f97316'},
+    {k:'signed',     label:'Signed',     c:'#a855f7'},
+    {k:'onboarding', label:'Onboarding', c:'#0ea5e9'},
+    {k:'live',       label:'Live',       c:'#16a34a'},
+    {k:'lost',       label:'Lost',       c:'#dc2626'},
+  ];
+  const ACTIVE = ['signed','onboarding','live']; // commission counts here
+  const COLOR = Object.fromEntries(STAGES.map(s=>[s.k,s.c]));
+
+  let deals=[], pct=17.5;
+  const $=id=>document.getElementById(id);
+  const esc=s=>(s==null?'':String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const money=n=>'$'+Math.round(+n||0).toLocaleString('en-US');
+
+  function showGate(msg){
+    $('dash').style.display='none'; $('bar-actions').style.display='none'; $('gate').classList.remove('hidden');
+    const e=$('g-err'); if(msg){e.textContent=msg;e.style.display='block';} else e.style.display='none';
+  }
+
+  async function route(){
+    const { data:{ session } } = await sb.auth.getSession();
+    if(!session){ showGate(); return; }
+    const { data:isRep, error } = await sb.rpc('is_rep');
+    if(error){ showGate('Could not verify access — try again.'); return; }
+    if(!isRep){ await sb.auth.signOut(); showGate('This account isn’t set up as a rep. Ask the owner to add you.'); return; }
+    const { data:me } = await sb.from('reps').select('name,override_pct').eq('user_id', session.user.id).maybeSingle();
+    pct = (me && me.override_pct) || 17.5;
+    $('who').textContent = (me && me.name) ? me.name : session.user.email;
+    $('rate-note').textContent = 'Your override: '+pct+'% of monthly margin';
+    await load();
+  }
+
+  $('g-go').addEventListener('click', signIn);
+  $('g-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') signIn(); });
+  async function signIn(){
+    const btn=$('g-go'); $('g-err').style.display='none';
+    const email=$('g-email').value.trim(), password=$('g-pass').value;
+    if(!email||!password){ showGate('Enter your email and password.'); return; }
+    btn.disabled=true; btn.textContent='Signing in…';
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    btn.disabled=false; btn.textContent='Sign in';
+    if(error){ showGate('Sign-in failed. Check your credentials.'); return; }
+    $('g-pass').value=''; route();
+  }
+  $('lock').addEventListener('click', async ()=>{ await sb.auth.signOut(); deals=[]; $('g-email').value=''; $('g-pass').value=''; route(); });
+
+  async function load(){
+    const { data, error } = await sb.from('compute_leads').select('*').order('created_at',{ascending:false});
+    if(error){ showGate('Could not load your accounts: '+(error.message||'')); return; }
+    deals = data || [];
+    $('gate').classList.add('hidden'); $('dash').style.display='block'; $('bar-actions').style.display='flex';
+    render();
+  }
+
+  async function patch(id, body){ const { error } = await sb.from('compute_leads').update(body).eq('id', id); return !error; }
+
+  $('add-btn').addEventListener('click', ()=> $('add-form').classList.toggle('show'));
+  $('a-save').addEventListener('click', async ()=>{
+    const { data:{ session } } = await sb.auth.getSession();
+    const company=$('a-company').value.trim(), name=$('a-name').value.trim(), email=$('a-email').value.trim();
+    if(!company && !name){ alert('Add a company or contact name.'); return; }
+    const { error } = await sb.from('compute_leads').insert({ company, name, email, rep_id: session.user.id, stage:'prospect', source:'rep' });
+    if(error){ alert('Could not add: '+error.message); return; }
+    $('a-company').value=$('a-name').value=$('a-email').value=''; $('add-form').classList.remove('show'); load();
+  });
+
+  function overrideOf(d){ return ACTIVE.includes(d.stage) ? (+d.monthly_margin||0)*pct/100 : 0; }
+
+  function render(){
+    // summary
+    const active = deals.filter(d=>d.stage==='live').length;
+    const monthly = deals.reduce((s,d)=>s+overrideOf(d),0);
+    const onboard = deals.filter(d=>ACTIVE.includes(d.stage)).reduce((s,d)=>s+(+d.onboarding_fee||0),0);
+    $('s-accts').textContent=deals.length;
+    $('s-active').textContent=active;
+    $('s-override').textContent=money(monthly);
+    $('s-onboard').textContent=money(onboard);
+
+    // board
+    let html='';
+    for(const st of STAGES){
+      const cards = deals.filter(d=>(d.stage||'prospect')===st.k);
+      html+='<div class="col"><div class="col-h"><span class="nm"><span class="dotc" style="background:'+st.c+'"></span>'+st.label+'</span><span class="ct">'+cards.length+'</span></div>';
+      for(const d of cards){
+        const post = (d.stage==='onboarding'||d.stage==='live');
+        const ov = overrideOf(d);
+        html+='<div class="card" data-id="'+esc(d.id)+'">'
+          +'<div class="co">'+esc(d.company||d.name||'—')+'</div>'
+          +'<div class="sub">'+esc(d.name&&d.company?d.name:'')+(d.email?(d.name&&d.company?' · ':'')+esc(d.email):'')+'</div>'
+          +'<label>Stage</label><select class="cin js-stage" style="color:'+st.c+'">'+STAGES.map(s=>'<option value="'+s.k+'"'+(s.k===d.stage?' selected':'')+'>'+s.label+'</option>').join('')+'</select>'
+          +'<label>Monthly margin ($)</label><input class="cin js-margin" type="number" inputmode="numeric" value="'+(d.monthly_margin!=null?esc(d.monthly_margin):'')+'" placeholder="0">'
+          +'<label>Onboarding fee ($)</label><input class="cin js-fee" type="number" inputmode="numeric" value="'+(d.onboarding_fee!=null?esc(d.onboarding_fee):'')+'" placeholder="0">'
+          +(post?'<label>Customer feedback</label><input class="cin js-fb" type="text" value="'+esc(d.feedback||'')+'" placeholder="How are they doing?">':'')
+          +'<div class="ovr">Your override: <b>'+money(ov)+'/mo</b></div>'
+          +'<span class="saved">✓ saved</span>'
+          +'</div>';
+      }
+      html+='</div>';
+    }
+    $('board').innerHTML=html;
+    wire();
+  }
+
+  function flash(card){ const s=card.querySelector('.saved'); s.classList.add('show'); setTimeout(()=>s.classList.remove('show'),1200); }
+
+  function wire(){
+    $('board').querySelectorAll('.card').forEach(card=>{
+      const id=card.getAttribute('data-id');
+      const d=deals.find(x=>String(x.id)===id);
+      card.querySelector('.js-stage').addEventListener('change', async function(){
+        if(await patch(id,{stage:this.value})){ if(d)d.stage=this.value; render(); }
+      });
+      card.querySelector('.js-margin').addEventListener('change', async function(){
+        const v=this.value===''?null:+this.value; if(await patch(id,{monthly_margin:v})){ if(d)d.monthly_margin=v; flash(card); render(); }
+      });
+      card.querySelector('.js-fee').addEventListener('change', async function(){
+        const v=this.value===''?null:+this.value; if(await patch(id,{onboarding_fee:v})){ if(d)d.onboarding_fee=v; flash(card); render(); }
+      });
+      const fb=card.querySelector('.js-fb');
+      if(fb) fb.addEventListener('change', async function(){ if(await patch(id,{feedback:this.value.trim()})){ if(d)d.feedback=this.value.trim(); flash(card); } });
+    });
+  }
+
+  route();
+</script>
+</body>
+</html>
