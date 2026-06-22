@@ -278,6 +278,7 @@
 
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  import { requireNda } from './nda.js';
 
   // Public anon key — same one the rest of the site uses. Safe to ship:
   // row-level security only lets allowlisted admins read/manage leads.
@@ -314,6 +315,7 @@
       return;
     }
     $('who-email').textContent = session.user.email;
+    await requireNda(sb, session, { exempt:['brandonmcruz@mac.com'] });
     await load();
   }
 

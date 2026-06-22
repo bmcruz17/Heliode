@@ -208,6 +208,10 @@
     <div class="nda-body" id="nda-text"><!-- injected --></div>
     <label class="fld" for="legalname">Type your full legal name to sign</label>
     <input class="inp" id="legalname" type="text" placeholder="Full legal name">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div><label class="fld" for="nda-email">Personal email (for your copy)</label><input class="inp" id="nda-email" type="email" placeholder="you@personal.com"></div>
+      <div><label class="fld" for="nda-phone">Phone</label><input class="inp" id="nda-phone" type="tel" placeholder="(555) 555-5555"></div>
+    </div>
     <label class="agree-row" style="margin-top:14px;">
       <input type="checkbox" id="agree-box">
       <span>I have read, understood, and agree to be bound by the Confidentiality Agreement above. I am accessing these materials on behalf of myself and/or the entity I represent.</span>
@@ -358,6 +362,7 @@
 
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  import { generateNdaPdf, emailNda, NDA_VERSION } from './nda.js';
 
   const SB_URL = 'https://pyosjuuvbxzyjtokfqfu.supabase.co';
   const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5b3NqdXV2Ynh6eWp0b2tmcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjk4MTcsImV4cCI6MjA5NzY0NTgxN30.7bH19ZZJHxchfRVt3t-I20gJ44WvbR3al516QhwQpmw';
@@ -398,8 +403,9 @@
       const m=$('login-msg'); m.textContent='This account isn’t authorized for the investor room — contact hello@heliodegrid.com for access.'; m.style.display='block';
       show('login'); return;
     }
+    const isOwner = (session.user.email||'').toLowerCase() === 'brandonmcruz@mac.com';
     const { data:acc } = await sb.from('nda_acceptances').select('user_id').eq('user_id', session.user.id).maybeSingle();
-    if(acc){ await loadProposal(session.user); show('proposal'); }
+    if(acc || isOwner){ await loadProposal(session.user); show('proposal'); }
     else { show('nda'); }
   }
 
@@ -430,16 +436,30 @@
   }
 
   // ---- NDA ----
-  function ndaReady(){ $('nda-btn').disabled = !($('agree-box').checked && $('legalname').value.trim().length>1); }
+  function ndaReady(){
+    $('nda-btn').disabled = !($('agree-box').checked && $('legalname').value.trim().length>1
+      && /\S+@\S+\.\S+/.test($('nda-email').value.trim()) && $('nda-phone').value.trim().length>=7);
+  }
   $('agree-box').addEventListener('change', ndaReady);
-  $('legalname').addEventListener('input', ndaReady);
+  ['legalname','nda-email','nda-phone'].forEach(id=> $(id).addEventListener('input', ndaReady));
   $('nda-btn').addEventListener('click', async () => {
     const btn=$('nda-btn'), msg=$('nda-msg'); msg.style.display='none';
     const { data:{ session } } = await sb.auth.getSession();
     if(!session){ show('login'); return; }
     btn.disabled=true; btn.innerHTML='<span class="spin"></span> Recording…';
-    const { error } = await sb.from('nda_acceptances').insert({ user_id: session.user.id, full_name: $('legalname').value.trim() });
+    const data = {
+      user_id: session.user.id,
+      full_name: $('legalname').value.trim(),
+      personal_email: $('nda-email').value.trim(),
+      phone: $('nda-phone').value.trim(),
+      nda_version: NDA_VERSION,
+      user_agent: navigator.userAgent,
+    };
+    const { error } = await sb.from('nda_acceptances').insert(data);
     if(error){ btn.disabled=false; btn.textContent='Agree & continue'; msg.textContent='Could not record acceptance — please retry.'; msg.style.display='block'; return; }
+    const signed_at = new Date().toISOString();
+    let b64=null; try { b64 = generateNdaPdf({ ...data, signed_at }); } catch(_){}
+    if(b64) emailNda(sb, { to: data.personal_email, full_name: data.full_name, pdf_base64: b64 });
     await loadProposal(session.user); show('proposal');
   });
 

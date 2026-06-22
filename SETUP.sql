@@ -251,7 +251,37 @@ values ('debbie.nixon@heliodegrid.com', 'Debbie Nixon')
 on conflict (email) do nothing;
 
 
+-- ░░ 7. NDA ACCEPTANCES (first-login signature + contact capture) ░░░░░
+-- Every first-time login signs the NDA and gives a personal email + phone.
+-- A signed PDF is emailed via the send-nda edge function (Resend).
+create table if not exists public.nda_acceptances (
+  user_id        uuid primary key references auth.users(id) on delete cascade,
+  full_name      text,
+  personal_email text,
+  phone          text,
+  nda_version    text default 'v1-2026-06',
+  signed_at      timestamptz not null default now(),
+  user_agent     text
+);
+alter table public.nda_acceptances add column if not exists personal_email text;
+alter table public.nda_acceptances add column if not exists phone          text;
+alter table public.nda_acceptances add column if not exists nda_version    text default 'v1-2026-06';
+alter table public.nda_acceptances add column if not exists signed_at      timestamptz not null default now();
+alter table public.nda_acceptances add column if not exists user_agent     text;
+alter table public.nda_acceptances enable row level security;
+
+drop policy if exists "user inserts own nda" on public.nda_acceptances;
+create policy "user inserts own nda" on public.nda_acceptances
+  for insert to authenticated with check (user_id = auth.uid());
+drop policy if exists "user reads own nda" on public.nda_acceptances;
+create policy "user reads own nda" on public.nda_acceptances
+  for select to authenticated using (user_id = auth.uid() or public.is_admin());
+
+
 -- ════════════════════════════════════════════════════════════════════
 -- Done. Old per-file scripts (compute_leads.sql, lead_tracker.sql,
 -- rep_portal.sql, vendors.sql) are now all captured here.
+--
+-- For the emailed NDA PDF: deploy supabase/functions/send-nda and set the
+-- RESEND_API_KEY secret in your Supabase project (see that file's header).
 -- ════════════════════════════════════════════════════════════════════
