@@ -64,6 +64,8 @@
 
   .bar{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(13,19,32,0.85);border-bottom:1px solid rgba(255,255,255,0.08);}
   .bar .brand{color:#fff;}
+  .bar .brand .logo{width:22px;height:22px;display:inline-flex;}
+  .bar .brand .logo svg{width:100%;height:100%;display:block;}
   .bar-in{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
   .brand{font-weight:700;font-size:1.02rem;letter-spacing:-0.01em;display:flex;align-items:center;gap:9px;}
   .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 0 4px var(--accent-dim);animation:pulse 2.6s ease-in-out infinite;}
@@ -113,6 +115,8 @@
   .cell{background:var(--bg);padding:26px 22px;}
   .cell .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;color:var(--blue);line-height:1;}
   .cell .k{font-size:0.84rem;color:var(--mute);margin-top:9px;}
+  .cell-ic{width:30px;height:30px;border-radius:8px;background:var(--blue-dim);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .cell-ic svg{width:17px;height:17px;}
   @media(max-width:680px){.strip-in{grid-template-columns:1fr;}}
 
   section.blk{padding:62px 0;border-bottom:1px solid var(--line);}
@@ -223,17 +227,18 @@
   .calc-save-v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.4rem;color:var(--blue);margin-top:5px;letter-spacing:-0.02em;}
   .calc-out .btn{margin-top:auto;width:100%;justify-content:center;}
 
-  footer{padding:48px 0 40px;background:var(--bg2);border-top:1px solid var(--line);}
+  footer{padding:48px 0 40px;background:linear-gradient(160deg,#0d1320,#16243f);border-top:1px solid rgba(255,255,255,0.08);}
+  footer .brand{color:#fff;}
   .foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start;}
-  .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:0.84rem;color:var(--mute);}
-  .foot-links a{text-decoration:none;}.foot-links a:hover{color:var(--blue);}
-  .legal{margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--faint);line-height:1.7;}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:0.84rem;color:#aeb6c6;}
+  .foot-links a{text-decoration:none;}.foot-links a:hover{color:#7aa2f7;}
+  .legal{margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:#828b9e;line-height:1.7;}
 </style>
 </head>
 <body>
 
 <div class="bar"><div class="bar-in">
-  <div class="brand"><span class="dot"></span>HELIODE</div>
+  <div class="brand"><span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><g stroke="#3b82f6" stroke-width="3" stroke-linecap="round"><line x1="32" y1="32" x2="51" y2="32"/><line x1="32" y1="32" x2="41.5" y2="48.5"/><line x1="32" y1="32" x2="22.5" y2="48.5"/><line x1="32" y1="32" x2="13" y2="32"/><line x1="32" y1="32" x2="22.5" y2="15.5"/><line x1="32" y1="32" x2="41.5" y2="15.5"/></g><g fill="#3b82f6"><circle cx="51" cy="32" r="4"/><circle cx="41.5" cy="48.5" r="4"/><circle cx="22.5" cy="48.5" r="4"/><circle cx="13" cy="32" r="4"/><circle cx="22.5" cy="15.5" r="4"/><circle cx="41.5" cy="15.5" r="4"/></g><circle cx="32" cy="32" r="9" fill="#f97316"/></svg></span>HELIODE</div>
   <a class="cta" href="#contact">Start free trial</a>
 </div></div>
 
@@ -313,9 +318,9 @@
 </header>
 
 <div class="strip"><div class="wrap"><div class="strip-in">
-  <div class="cell"><div class="n">2–5×</div><div class="k">What hyperscalers charge over open-market GPU rates for comparable inference hardware.</div></div>
-  <div class="cell"><div class="n">One bill</div><div class="k">Managed capacity and support — instead of juggling five provider accounts.</div></div>
-  <div class="cell"><div class="n">Inference-first</div><div class="k">Built for the steady, 24/7, latency-sensitive workloads that dominate AI compute today.</div></div>
+  <div class="cell"><div class="cell-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 7 9 13 13 9 21 17"/><polyline points="21 12 21 17 16 17"/></svg></div><div class="n">2–5×</div><div class="k">What hyperscalers charge over open-market GPU rates for comparable inference hardware.</div></div>
+  <div class="cell"><div class="cell-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l3 3v15l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg></div><div class="n">One bill</div><div class="k">Managed capacity and support — instead of juggling five provider accounts.</div></div>
+  <div class="cell"><div class="cell-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></svg></div><div class="n">Inference-first</div><div class="k">Built for the steady, 24/7, latency-sensitive workloads that dominate AI compute today.</div></div>
 </div></div></div>
 
 <section class="blk" id="what">
