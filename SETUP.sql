@@ -55,7 +55,8 @@ alter table public.admins enable row level security;
 
 create or replace function public.is_admin()
 returns boolean language sql security definer stable set search_path = public as $$
-  select exists (select 1 from public.admins where user_id = auth.uid());
+  select exists (select 1 from public.admins
+    where user_id = auth.uid() or lower(email) = lower(coalesce(auth.jwt() ->> 'email','')));
 $$;
 grant execute on function public.is_admin() to authenticated;
 
@@ -96,7 +97,8 @@ create policy "admins manage reps" on public.reps for all to authenticated using
 
 create or replace function public.is_rep()
 returns boolean language sql security definer stable set search_path = public as $$
-  select exists (select 1 from public.reps where user_id = auth.uid());
+  select exists (select 1 from public.reps
+    where user_id = auth.uid() or lower(email) = lower(coalesce(auth.jwt() ->> 'email','')));
 $$;
 grant execute on function public.is_rep() to authenticated;
 
@@ -170,7 +172,8 @@ drop policy if exists "admins manage investors" on public.investors;
 create policy "admins manage investors" on public.investors for all to authenticated using (public.is_admin()) with check (public.is_admin());
 create or replace function public.is_investor()
 returns boolean language sql security definer stable set search_path = public as $$
-  select exists (select 1 from public.investors where user_id = auth.uid());
+  select exists (select 1 from public.investors
+    where user_id = auth.uid() or lower(email) = lower(coalesce(auth.jwt() ->> 'email','')));
 $$;
 grant execute on function public.is_investor() to authenticated;
 
