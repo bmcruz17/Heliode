@@ -191,6 +191,7 @@
       <button class="tab" id="tab-quotes">Quotes</button>
       <button class="tab" id="tab-ndas">NDAs</button>
       <button class="tab" id="tab-pages">Pages</button>
+      <button class="tab" id="tab-secdocs">Secure docs</button>
     </div>
 
     <div id="overview-view">
@@ -327,6 +328,19 @@
         <a class="pagecard" href="rep.html" target="_blank"><div class="pt">Rep portal</div><div class="pu">/rep.html</div><div class="pd">Rep Kanban pipeline + commissions.</div></a>
         <a class="pagecard" href="academy.html" target="_blank"><div class="pt">Founder's course</div><div class="pu">/academy.html</div><div class="pd">Training &amp; education.</div></a>
         <a class="pagecard" href="outreach.html" target="_blank"><div class="pt">Outreach</div><div class="pu">/outreach.html</div><div class="pd">Copy-ready hardware, reseller &amp; customer emails.</div></a>
+      </div>
+    </div>
+
+    <div id="secdocs-view" style="display:none;">
+      <div class="pgsec">Secure documents</div>
+      <p class="sub" style="margin-bottom:14px;max-width:700px;">Publish the full <b>business plan</b> into the protected store so it can only be viewed after an investor/admin login + NDA — not in the page source. One-time: <b>Load current business plan</b>, then <b>Publish</b>. Once you confirm it's published, the inline copy is removed from the public file so the plan lives only in the database.</p>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;max-width:780px;">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+          <button class="btn" id="sd-load">Load current business plan</button>
+          <button class="btn btn-primary" id="sd-pub" disabled>Publish to secure store</button>
+        </div>
+        <textarea id="sd-content" class="inp" style="width:100%;min-height:220px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;line-height:1.45;" placeholder="Click “Load current business plan” to pull the current content, review it, then Publish."></textarea>
+        <div class="sub" id="sd-msg" style="margin-top:10px;min-height:1.2em;"></div>
       </div>
     </div>
   </div>
@@ -491,7 +505,7 @@
   ];
   let vendors=[], vendorsReady=false;
 
-  const VIEWS=['overview','leads','vendors','reps','investors','team','quotes','ndas','pages'];
+  const VIEWS=['overview','leads','vendors','reps','investors','team','quotes','ndas','pages','secdocs'];
   VIEWS.forEach(v=> $('tab-'+v).addEventListener('click',()=>showView(v)));
   function showView(v){
     VIEWS.forEach(x=>{
@@ -499,6 +513,28 @@
       $(x+'-view').style.display = x===v ? 'block' : 'none';
     });
   }
+
+  // ---- Secure docs: publish the business plan into private_docs (RLS-protected) ----
+  $('sd-load')?.addEventListener('click', async ()=>{
+    const msg=$('sd-msg'); msg.textContent='Loading current business plan…';
+    try{
+      const html = await (await fetch('business-plan.html?ts='+Date.now())).text();
+      const doc = new DOMParser().parseFromString(html,'text/html');
+      const node = doc.querySelector('#bp-content, .doc');
+      if(!node || !node.innerHTML.trim()){ msg.textContent='Could not find plan content in business-plan.html (already moved to the DB?).'; return; }
+      $('sd-content').value = node.innerHTML.trim();
+      $('sd-pub').disabled = false;
+      msg.textContent = 'Loaded '+$('sd-content').value.length.toLocaleString()+' characters. Review, then Publish.';
+    }catch(e){ msg.textContent='Load failed: '+e; }
+  });
+  $('sd-pub')?.addEventListener('click', async ()=>{
+    const msg=$('sd-msg'); const content=$('sd-content').value.trim();
+    if(content.length<200){ msg.textContent='Content looks too short — load it first.'; return; }
+    $('sd-pub').disabled=true; msg.textContent='Publishing…';
+    const { error } = await sb.from('private_docs').upsert({ slug:'business-plan', content, updated_at:new Date().toISOString() });
+    if(error){ $('sd-pub').disabled=false; msg.textContent='Publish failed (did you run the SQL?): '+error.message; return; }
+    msg.textContent='✓ Published to the secure store. Tell Claude “published” and the inline copy will be stripped from the public file.';
+  });
 
   async function loadVendors(){
     const { data, error } = await sb.from('vendors').select('*').order('created_at',{ascending:true});

@@ -315,3 +315,27 @@ create policy "admins manage quotes" on public.quotes
 -- For the emailed NDA PDF: deploy supabase/functions/send-nda and set the
 -- RESEND_API_KEY secret in your Supabase project (see that file's header).
 -- ════════════════════════════════════════════════════════════════════
+
+-- ░░ 9. SECURE DOCUMENTS (business plan, etc. — investor/admin only) ░░░░
+-- The full business plan is stored here instead of in the static HTML, so it
+-- can't be read from page source. RLS lets only investors/admins SELECT it;
+-- only admins can write. Publish it from Admin → Secure docs.
+create table if not exists public.private_docs (
+  slug        text primary key,
+  content     text,
+  updated_at  timestamptz not null default now()
+);
+alter table public.private_docs enable row level security;
+
+drop policy if exists "investors or admins read private_docs" on public.private_docs;
+create policy "investors or admins read private_docs" on public.private_docs
+  for select to authenticated
+  using ( public.is_investor() or public.is_admin() );
+
+drop policy if exists "admins insert private_docs" on public.private_docs;
+create policy "admins insert private_docs" on public.private_docs
+  for insert to authenticated with check ( public.is_admin() );
+
+drop policy if exists "admins update private_docs" on public.private_docs;
+create policy "admins update private_docs" on public.private_docs
+  for update to authenticated using ( public.is_admin() ) with check ( public.is_admin() );

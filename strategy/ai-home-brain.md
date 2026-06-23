@@ -7,9 +7,9 @@
 We are **not** pivoting to the "AI Home Brain" box. Heliode's thesis stands: managed GPU compute now
 (asset-light brokerage) → owned, self-powered GPU nodes next. From the advisor's input we keep only the
 on-thesis takeaways:
-- **Warm channel (the one new, actionable takeaway we're folding in):** prioritize **existing solar +
-  battery homeowners — especially the Sunrun installed base** — as node-host targets. They're
-  pre-qualified, energy-forward, and faster to convert than a cold home.
+- **Warm candidates (the one new, actionable takeaway we're folding in):** prioritize **homes that
+  already have solar + battery** as node-host targets — the energy investment is already made, so
+  there's less to build and they convert faster. (Not tied to any one installer's customer base.)
 - **Validates timing:** the home-as-external-inference-node is 3–5 years out → confirms our 2027+
   owned-node rollout.
 - **Validates monetization:** the VPP / demand-response / energy-network layer is real and already in
