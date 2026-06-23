@@ -1,6 +1,6 @@
 -- ════════════════════════════════════════════════════════════════════
 -- Heliode — lead funnel tracking + admin gate (extends compute_leads)
--- Run this in the Heliode (ATMX Holdings) Supabase project, AFTER
+-- Run this in the Heliode Supabase project, AFTER
 -- compute_leads.sql:
 --   pyosjuuvbxzyjtokfqfu   ← canonical Heliode project (atmxholdings@gmail.com)
 --

@@ -1,6 +1,6 @@
 -- ════════════════════════════════════════════════════════════════════
 -- Heliode — buyer lead capture table (compute_leads)
--- Run this in the Heliode (ATMX Holdings) Supabase project:
+-- Run this in the Heliode Supabase project:
 --   pyosjuuvbxzyjtokfqfu   ← canonical Heliode project (atmxholdings@gmail.com)
 --
 -- NOTE: viinhpdufvtjxovdsrra is a DIFFERENT account's project (risenrecruit /

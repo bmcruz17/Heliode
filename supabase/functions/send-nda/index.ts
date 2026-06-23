@@ -56,7 +56,7 @@ Deno.serve(async (req: Request) => {
           `<p>Hi ${full_name || "there"},</p>` +
           `<p>Thank you for signing the Heliode confidentiality agreement (version ${nda_version || "current"}). ` +
           `A signed PDF copy is attached for your records.</p>` +
-          `<p>Welcome aboard.<br>— Heliode · ATMX Holdings</p>`,
+          `<p>Welcome aboard.<br>— Heliode, Inc.</p>`,
         attachments: [{ filename: "Heliode-NDA.pdf", content: pdf_base64 }],
       }),
     });

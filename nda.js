@@ -9,11 +9,11 @@ export const NDA_VERSION = 'v1-2026-06';
 // Plain-text NDA clauses (used for both on-screen display and the PDF).
 export const NDA_CLAUSES = [
   ['1. Confidential Information',
-   'In connection with your relationship with Heliode (a brand of ATMX Holdings) you may receive non-public information — including business plans, financial models, pricing, customer and vendor lists, supplier terms, technology, deployment methods, and strategy ("Confidential Information").'],
+   'In connection with your relationship with Heliode, Inc. you may receive non-public information — including business plans, financial models, pricing, customer and vendor lists, supplier terms, technology, deployment methods, and strategy ("Confidential Information").'],
   ['2. Your obligations',
    'You agree to keep all Confidential Information strictly confidential, to use it only to evaluate or carry out your relationship with Heliode, and not to disclose, copy, publish, or share it with any third party without Heliode\'s prior written consent.'],
   ['3. No license',
-   'Nothing here grants you any ownership, license, or right in Heliode\'s Confidential Information or intellectual property. All materials remain the property of Heliode / ATMX Holdings.'],
+   'Nothing here grants you any ownership, license, or right in Heliode\'s Confidential Information or intellectual property. All materials remain the property of Heliode, Inc.'],
   ['4. Term',
    'These obligations continue for three (3) years from the date below, and indefinitely for any information that constitutes a trade secret under applicable law.'],
   ['5. Return / deletion',
@@ -62,7 +62,7 @@ export function generateNdaPdf({ full_name, personal_email, phone, signed_at }){
   doc.text('Heliode — Confidentiality Agreement', M, y); y += 10;
   doc.setDrawColor(249,115,22); doc.setLineWidth(2); doc.line(M, y, M+60, y); y += 24;
   doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(90,90,90);
-  doc.text('ATMX Holdings · Confidential · Version '+NDA_VERSION, M, y); y += 22;
+  doc.text('Heliode, Inc. · Confidential · Version '+NDA_VERSION, M, y); y += 22;
   doc.setTextColor(40,40,40);
   for(const [h,b] of NDA_CLAUSES){
     doc.setFont('helvetica','bold'); doc.setFontSize(10.5);
