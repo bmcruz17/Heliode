@@ -8,52 +8,90 @@ The live, copy-button version of this is at **/outreach.html** (linked from the 
 
 # 1 · Hardware quotes — buy nodes (later)
 
-For owned-node economics. The returned unit price is the real-world check on the ~$250K node assumption.
-**Config:** 8× NVIDIA H100 SXM 80GB (also quote H200 141GB) · HGX 8-GPU baseboard, NVLink/NVSwitch ·
-dual CPU · ~1–2TB RAM · ~15–30TB NVMe · 400G IB/Ethernet. Dell platform = PowerEdge XE9680.
+Goal: a clean, **line-item BOM** you can compare across vendors — it resolves both the real node
+cost and the GPU-class decision (flagship vs. cost-efficient). Ask every vendor to quote the **same
+three configs** in the **same table**.
+
+**Quote three 8-GPU configs, each as a full BOM:**
+- A) 8× NVIDIA H100 SXM 80GB — HGX-8, NVLink/NVSwitch (flagship inference)
+- B) 8× NVIDIA H200 141GB — HGX-8, NVLink/NVSwitch (largest models)
+- C) 8× NVIDIA L40S 48GB — PCIe (cost-efficient inference)
+
+**Break out per config:** GPUs ($/card × qty) · server/baseboard · CPU · RAM · NVMe · networking
+(400G IB/Eth) · cooling + rated kW · rack/rails · 3-yr support · → **total per node**. Plus volume at
+1/4/16 nodes, lead time, financing/lease (term · residual · $/mo).
 
 ## 1a. Dell — follow-up (warm; already inquired)
 
-**Subject:** Following up — PowerEdge XE9680 quote (Heliode)
+**Subject:** Following up — itemized quote, 8-GPU node (Heliode)
 
 Hi [name / Dell team],
 
 I submitted an inquiry recently and wanted to follow up directly. I'm Brandon Cruz, founder of
-Heliode (heliode.ai) — we're standing up managed GPU capacity for AI inference and are speccing
-our first deployment.
+Heliode (heliode.ai) — we're standing up managed GPU capacity for AI inference and are speccing our
+first node. I'm comparing vendors, so I need an itemized quote I can line up side by side.
 
-Could you put together a quote for a PowerEdge XE9680 with 8× NVIDIA H100 SXM (80GB) — and a parallel
-option with 8× H200 (141GB)? Rough config: dual CPU, ~2TB RAM, ~15–30TB NVMe, 400G IB/Ethernet.
+Please quote three configs as a full line-item BOM:
+- A) PowerEdge XE9680 — 8× H100 SXM 80GB
+- B) PowerEdge XE9680 — 8× H200 141GB
+- C) PowerEdge R760xa — 8× L40S 48GB
 
-Specifically: unit pricing (H100 vs H200), volume pricing (one unit now, scaling), lead time,
-warranty/ProSupport, and any Dell Financial Services leasing options.
+For each, break out unit price by line: GPUs (model, qty, $/card), server/baseboard, CPU (×2), RAM,
+NVMe, networking (400G IB/Ethernet), cooling + rated continuous draw (kW), rack/rails, and 3-yr
+ProSupport — then a total per node. Also: volume pricing at 1 / 4 / 16 nodes, lead time per config,
+and Dell Financial Services lease options (term, residual, $/mo).
 
-Best reply address is brandon@heliode.ai. Happy to hop on a call.
+Best reply address is brandon@heliode.ai; happy to hop on a call.
 
 Brandon Cruz · Founder, Heliode, Inc. · heliode.ai
 
 ## 1b. RFQ — Supermicro / Thinkmate / Exxact (competing quotes)
 
-**Subject:** RFQ — 8×H100/H200 HGX server (Heliode)
+**Subject:** RFQ — itemized BOM, 8-GPU server, 3 configs (Heliode)
 
 Hi [vendor] team,
 
-I'm Brandon Cruz, founder of Heliode (heliode.ai) — managed GPU capacity for AI inference.
-Requesting a quote on an 8-GPU HGX server:
+I'm Brandon Cruz, founder of Heliode (heliode.ai) — managed GPU compute for AI inference. We're
+speccing our first node and comparing vendors, so I need quotes I can line up side by side.
 
-- GPUs: 8× NVIDIA H100 SXM 80GB (please also quote an H200 141GB option)
-- Platform: HGX 8-GPU baseboard, NVLink/NVSwitch
-- CPU: dual current-gen (Xeon or EPYC)
-- Memory: ~1–2TB · Storage: ~15–30TB NVMe · Networking: 400G IB/Ethernet
+Please quote THREE 8-GPU configurations, each as a full line-item BOM:
+- A) 8× NVIDIA H100 SXM 80GB — HGX-8 baseboard, NVLink/NVSwitch
+- B) 8× NVIDIA H200 141GB — HGX-8 baseboard, NVLink/NVSwitch
+- C) 8× NVIDIA L40S 48GB — PCIe
 
-Please include unit price (H100 & H200), volume/scaling pricing, lead time, warranty & support, and
-financing options. Starting with one unit, scaling to multiple.
+For EACH config, itemize: GPUs (model, qty, $/card, subtotal); GPU server/baseboard; CPU (dual
+current-gen); RAM (~1–2TB); NVMe (~15–30TB); networking (NIC/switch + 400G IB/Eth); cooling
+(air/liquid) + rated continuous draw (kW) + PSU/redundancy; rack/chassis + rails; 3-yr
+warranty/support; → TOTAL PER NODE (all-in). Plus volume at 1/4/16 nodes, lead time per config, and
+financing/lease (term, residual, $/mo).
 
 Reply to brandon@heliode.ai. Thanks!
 
 Brandon Cruz · Founder, Heliode, Inc. · heliode.ai
 
----
+## 1c. BOM template (paste under the email — one table per config A/B/C)
+
+```
+CONFIG: [ A 8xH100 SXM | B 8xH200 | C 8xL40S ]
+
+Line item                          | Spec / model      | Qty | Unit $ | Subtotal
+GPUs                               |                   |     |        |
+GPU server / baseboard (HGX/PCIe)  |                   |     |        |
+CPU                                |                   |     |        |
+RAM                                |                   |     |        |
+Storage (NVMe)                     |                   |     |        |
+Networking (NIC/switch, 400G)      |                   |     |        |
+Cooling (air/liquid)               |                   |     |        |
+Rack / chassis + rails             |                   |     |        |
+Warranty / support (3-yr)          |                   |     |        |
+---------------------------------------------------------------------------
+TOTAL PER NODE (all-in)            |                   |     |        | $______
+
+Rated continuous power draw: ______ kW
+Lead time: ______ weeks
+Volume price:  @4 nodes $______   |   @16 nodes $______
+Financing/lease:  term ____   residual ____   $______/mo
+```
 
 # 2 · Supply / reseller — rent capacity to resell (now)
 

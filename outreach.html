@@ -105,22 +105,29 @@
 
   <!-- ============ 1 · HARDWARE QUOTES ============ -->
   <div class="sec-h"><span class="n">1</span>Hardware quotes <span style="font-weight:400;color:var(--mute);font-size:0.85rem;">— buy nodes (later)</span></div>
-  <p class="sec-sub">For owned-node economics. The returned unit price is your real-world check on the ~$250K assumption.</p>
-  <div class="spec"><b>Config:</b> 8× NVIDIA H100 SXM 80GB (also quote H200 141GB) · HGX 8-GPU baseboard, NVLink/NVSwitch · dual CPU · ~1–2TB RAM · ~15–30TB NVMe · 400G IB/Ethernet. Dell platform = PowerEdge XE9680.</div>
+  <p class="sec-sub">For owned-node economics. Goal: a clean, line-item BOM you can compare across vendors — it resolves both the real node cost and the GPU-class decision (flagship vs. cost-efficient). Ask every vendor to quote the <b>same three configs</b> in the <b>same table</b>.</p>
+  <div class="spec"><b>Quote three 8-GPU configs, each as a full BOM:</b>
+A) 8× NVIDIA H100 SXM 80GB — HGX-8, NVLink/NVSwitch  (flagship inference)
+B) 8× NVIDIA H200 141GB — HGX-8, NVLink/NVSwitch  (largest models)
+C) 8× NVIDIA L40S 48GB — PCIe  (cost-efficient inference)
+<b>Break out:</b> GPUs ($/card × qty) · server/baseboard · CPU · RAM · NVMe · networking (400G IB/Eth) · cooling + rated kW · rack/rails · 3-yr support · → <b>total per node</b>. Plus: volume at 1/4/16, lead time, financing/lease (term · residual · $/mo).</div>
 
   <div class="card">
     <div class="card-h"><h2>Dell — follow-up</h2><span class="tag warm">Warm · already inquired</span></div>
     <div class="who">Your one existing lead.</div>
-    <div class="subj"><span>Subject:</span> Following up — PowerEdge XE9680 quote (Heliode)</div>
+    <div class="subj"><span>Subject:</span> Following up — itemized quote, 8-GPU node (Heliode)</div>
     <pre class="mail" id="m1">Hi [name / Dell team],
 
-I submitted an inquiry recently and wanted to follow up directly. I'm Brandon Cruz, founder of Heliode (heliode.ai) — we're standing up managed GPU capacity for AI inference and are speccing our first deployment.
+I submitted an inquiry recently and wanted to follow up directly. I'm Brandon Cruz, founder of Heliode (heliode.ai) — we're standing up managed GPU capacity for AI inference and are speccing our first node. I'm comparing vendors, so I need an itemized quote I can line up side by side.
 
-Could you put together a quote for a PowerEdge XE9680 with 8× NVIDIA H100 SXM (80GB) — and a parallel option with 8× H200 (141GB)? Rough config: dual CPU, ~2TB RAM, ~15–30TB NVMe, 400G IB/Ethernet.
+Please quote three configs as a full line-item BOM:
+  A) PowerEdge XE9680 — 8× H100 SXM 80GB
+  B) PowerEdge XE9680 — 8× H200 141GB
+  C) PowerEdge R760xa — 8× L40S 48GB
 
-Specifically: unit pricing (H100 vs H200), volume pricing (one unit now, scaling), lead time, warranty/ProSupport, and any Dell Financial Services leasing options.
+For each, break out unit price by line: GPUs (model, qty, $/card), server/baseboard, CPU (×2), RAM, NVMe, networking (400G IB/Ethernet), cooling + rated continuous draw (kW), rack/rails, and 3-yr ProSupport — then a total per node. Also: volume pricing at 1 / 4 / 16 nodes, lead time per config, and Dell Financial Services lease options (term, residual, $/mo).
 
-Best reply address is brandon@heliode.ai. Happy to hop on a call.
+A filled-in table is ideal — I can send a template. Best reply address is brandon@heliode.ai; happy to hop on a call.
 
 Brandon Cruz · Founder, Heliode, Inc. · heliode.ai</pre>
     <button class="copy" data-t="m1">Copy email</button>
@@ -128,22 +135,59 @@ Brandon Cruz · Founder, Heliode, Inc. · heliode.ai</pre>
 
   <div class="card">
     <div class="card-h"><h2>RFQ — Supermicro / Thinkmate / Exxact</h2><span class="tag cold">Cold · competing quotes</span></div>
-    <div class="subj"><span>Subject:</span> RFQ — 8×H100/H200 HGX server (Heliode)</div>
+    <div class="who">Send the same ask to each so the quotes are directly comparable.</div>
+    <div class="subj"><span>Subject:</span> RFQ — itemized BOM, 8-GPU server, 3 configs (Heliode)</div>
     <pre class="mail" id="m2">Hi [vendor] team,
 
-I'm Brandon Cruz, founder of Heliode (heliode.ai) — managed GPU capacity for AI inference. Requesting a quote on an 8-GPU HGX server:
+I'm Brandon Cruz, founder of Heliode (heliode.ai) — managed GPU compute for AI inference. We're speccing our first node and comparing vendors, so I need quotes I can line up side by side.
 
-- GPUs: 8× NVIDIA H100 SXM 80GB (please also quote an H200 141GB option)
-- Platform: HGX 8-GPU baseboard, NVLink/NVSwitch
-- CPU: dual current-gen (Xeon or EPYC)
-- Memory: ~1–2TB · Storage: ~15–30TB NVMe · Networking: 400G IB/Ethernet
+Please quote THREE 8-GPU configurations, each as a full line-item BOM:
+  A) 8× NVIDIA H100 SXM 80GB — HGX-8 baseboard, NVLink/NVSwitch
+  B) 8× NVIDIA H200 141GB — HGX-8 baseboard, NVLink/NVSwitch
+  C) 8× NVIDIA L40S 48GB — PCIe
 
-Please include unit price (H100 & H200), volume/scaling pricing, lead time, warranty & support, and financing options. Starting with one unit, scaling to multiple.
+For EACH config, itemize so I can compare like-for-like:
+  - GPUs: model, qty, $/card, subtotal
+  - GPU server / baseboard (HGX-8 or PCIe chassis)
+  - CPU: model, qty (dual current-gen Xeon/EPYC)
+  - RAM (~1–2TB) · NVMe storage (~15–30TB)
+  - Networking: NIC/switch + port speed (400G IB or Ethernet)
+  - Cooling: air or liquid; rated continuous power draw (kW) + PSU/redundancy
+  - Rack/chassis + rails
+  - 3-yr warranty / support tier
+  - ——— TOTAL PER NODE (all-in) ———
 
-Reply to brandon@heliode.ai. Thanks!
+Also: volume pricing at 1 / 4 / 16 nodes, lead time per config, and any financing/lease (term, residual, $/mo).
+
+A filled-in table is perfect — template below if useful. Reply to brandon@heliode.ai. Thanks!
 
 Brandon Cruz · Founder, Heliode, Inc. · heliode.ai</pre>
     <button class="copy" data-t="m2">Copy email</button>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h2>BOM template — paste into the RFQ</h2><span class="tag cold">Forces comparable replies</span></div>
+    <div class="who">Drop this under the email so every vendor returns the same structure. One table per config (A/B/C).</div>
+    <pre class="mail" id="m-bom">CONFIG: [ A 8×H100 SXM | B 8×H200 | C 8×L40S ]
+
+Line item                          | Spec / model      | Qty | Unit $ | Subtotal
+GPUs                               |                   |     |        |
+GPU server / baseboard (HGX/PCIe)  |                   |     |        |
+CPU                                |                   |     |        |
+RAM                                |                   |     |        |
+Storage (NVMe)                     |                   |     |        |
+Networking (NIC/switch, 400G)      |                   |     |        |
+Cooling (air/liquid)               |                   |     |        |
+Rack / chassis + rails             |                   |     |        |
+Warranty / support (3-yr)          |                   |     |        |
+---------------------------------------------------------------------------
+TOTAL PER NODE (all-in)            |                   |     |        | $______
+
+Rated continuous power draw: ______ kW
+Lead time: ______ weeks
+Volume price:  @4 nodes $______   |   @16 nodes $______
+Financing/lease:  term ____   residual ____   $______/mo</pre>
+    <button class="copy" data-t="m-bom">Copy template</button>
   </div>
 
   <!-- ============ 2 · SUPPLY / RESELLER ============ -->
