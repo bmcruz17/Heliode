@@ -213,14 +213,15 @@
 
     <div id="reps-view" style="display:none;">
       <div class="stat-line" id="rstat"></div>
-      <div class="add-vform" style="grid-template-columns:1.4fr 1fr 1fr 0.7fr auto;">
+      <div class="add-vform" style="grid-template-columns:1.4fr 1fr 1fr 0.7fr 1fr auto;">
         <input class="vin inp" id="r-email" type="email" placeholder="Rep email (their login)">
         <input class="vin inp" id="r-name" placeholder="Name">
         <input class="vin inp" id="r-phone" placeholder="Phone">
         <input class="vin inp" id="r-pct" type="number" placeholder="Override %">
+        <input class="vin inp" id="r-pass" type="text" placeholder="Temp password (optional)">
         <button class="btn btn-primary" id="r-add">+ Add rep</button>
       </div>
-      <p class="stat-line" style="margin:-6px 0 14px;">They activate by signing up at <b>/rep.html</b> with this email — it links automatically.</p>
+      <p class="stat-line" style="margin:-6px 0 14px;">Set a temp password to create their login instantly, or leave blank and they self-activate by signing up at <b>/rep.html</b>.</p>
       <div class="tablewrap">
         <table>
           <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Override</th><th>Status</th><th></th></tr></thead>
@@ -231,13 +232,14 @@
 
     <div id="investors-view" style="display:none;">
       <div class="stat-line" id="istat"></div>
-      <div class="add-vform" style="grid-template-columns:1.4fr 1fr 1fr auto;">
+      <div class="add-vform" style="grid-template-columns:1.4fr 1fr 1fr 1fr auto;">
         <input class="vin inp" id="i-email" type="email" placeholder="Investor email (their login)">
         <input class="vin inp" id="i-name" placeholder="Name">
         <input class="vin inp" id="i-firm" placeholder="Firm">
+        <input class="vin inp" id="i-pass" type="text" placeholder="Temp password (optional)">
         <button class="btn btn-primary" id="i-add">+ Grant access</button>
       </div>
-      <p class="stat-line" style="margin:-6px 0 14px;">They get in by signing up at <b>/investors.html</b> with this email — then NDA → proposal.</p>
+      <p class="stat-line" style="margin:-6px 0 14px;">Set a temp password to create their login instantly, or leave blank and they self-activate at <b>/investors.html</b> — then NDA → proposal.</p>
       <div class="tablewrap">
         <table>
           <thead><tr><th>Name</th><th>Email</th><th>Firm</th><th>Status</th><th></th></tr></thead>
@@ -248,9 +250,10 @@
 
     <div id="team-view" style="display:none;">
       <div class="stat-line" id="tstat"></div>
-      <div class="add-vform" style="grid-template-columns:1.4fr 1fr auto;">
+      <div class="add-vform" style="grid-template-columns:1.4fr 1fr 1fr auto;">
         <input class="vin inp" id="t-email" type="email" placeholder="Email (their login)">
         <input class="vin inp" id="t-name" placeholder="Name (e.g. Debbie Nixon)">
+        <input class="vin inp" id="t-pass" type="text" placeholder="Temp password (optional)">
         <button class="btn btn-primary" id="t-add">+ Add full-access login</button>
       </div>
       <p class="stat-line" style="margin:-6px 0 14px;">Full visibility — they see every tab and page. They activate by creating a password at <b>/admin.html</b> with this email; it links automatically.</p>
@@ -511,12 +514,25 @@
     if(error){ reps=[]; $('rstat').textContent='Reps not enabled yet — run rep_portal.sql in Supabase.'; renderReps(); return; }
     reps=data||[]; renderReps(); renderOverview();
   }
+  // Create a real auto-confirmed login via the admin-create-user edge function.
+  async function createLogin(payload){
+    const { data, error } = await sb.functions.invoke('admin-create-user', { body: payload });
+    if(error){ let m=error.message||'request failed'; try{ const j=await error.context.json(); if(j&&j.error) m=j.error; }catch(_){ } return { ok:false, msg:m }; }
+    if(data && data.error) return { ok:false, msg:data.error };
+    return { ok:true };
+  }
   $('r-add').addEventListener('click', async ()=>{
     const email=$('r-email').value.trim().toLowerCase(); if(!email){ alert('Enter the rep\'s email.'); return; }
     const override_pct = parseFloat($('r-pct').value) || 17.5;
-    const { error } = await sb.from('reps').insert({ email, name:$('r-name').value.trim(), phone:$('r-phone').value.trim(), override_pct });
-    if(error){ alert('Could not add (run rep_portal.sql first?): '+error.message); return; }
-    $('r-email').value=$('r-name').value=$('r-phone').value=$('r-pct').value=''; loadReps();
+    const pass=$('r-pass').value.trim();
+    if(pass){
+      const r=await createLogin({ email, password:pass, role:'rep', name:$('r-name').value.trim(), phone:$('r-phone').value.trim(), override_pct });
+      if(!r.ok){ alert('Could not create login: '+r.msg); return; }
+    } else {
+      const { error } = await sb.from('reps').insert({ email, name:$('r-name').value.trim(), phone:$('r-phone').value.trim(), override_pct });
+      if(error){ alert('Could not add (run rep_portal.sql first?): '+error.message); return; }
+    }
+    $('r-email').value=$('r-name').value=$('r-phone').value=$('r-pct').value=$('r-pass').value=''; loadReps();
   });
   function renderReps(){
     if(reps.length!==undefined && !$('rstat').textContent.startsWith('Reps not enabled')) $('rstat').innerHTML='<b>'+reps.length+'</b> reps';
@@ -550,9 +566,15 @@
   }
   $('i-add').addEventListener('click', async ()=>{
     const email=$('i-email').value.trim().toLowerCase(); if(!email){ alert('Enter the investor\'s email.'); return; }
-    const { error } = await sb.from('investors').insert({ email, name:$('i-name').value.trim(), firm:$('i-firm').value.trim() });
-    if(error){ alert('Could not add (run investors_access.sql first?): '+error.message); return; }
-    $('i-email').value=$('i-name').value=$('i-firm').value=''; loadInvestors();
+    const pass=$('i-pass').value.trim();
+    if(pass){
+      const r=await createLogin({ email, password:pass, role:'investor', name:$('i-name').value.trim(), firm:$('i-firm').value.trim() });
+      if(!r.ok){ alert('Could not create login: '+r.msg); return; }
+    } else {
+      const { error } = await sb.from('investors').insert({ email, name:$('i-name').value.trim(), firm:$('i-firm').value.trim() });
+      if(error){ alert('Could not add (run investors_access.sql first?): '+error.message); return; }
+    }
+    $('i-email').value=$('i-name').value=$('i-firm').value=$('i-pass').value=''; loadInvestors();
   });
   function renderInvestors(){
     if(!$('istat').textContent.startsWith('Investor access not enabled')) $('istat').innerHTML='<b>'+investors.length+'</b> investors with access';
@@ -581,9 +603,15 @@
   }
   $('t-add').addEventListener('click', async ()=>{
     const email=$('t-email').value.trim().toLowerCase(); if(!email){ alert('Enter an email.'); return; }
-    const { error } = await sb.from('admins').insert({ email, name:$('t-name').value.trim() });
-    if(error){ alert('Could not add (re-run SETUP.sql first?): '+error.message); return; }
-    $('t-email').value=$('t-name').value=''; loadTeam();
+    const pass=$('t-pass').value.trim();
+    if(pass){
+      const r=await createLogin({ email, password:pass, role:'admin', name:$('t-name').value.trim() });
+      if(!r.ok){ alert('Could not create login: '+r.msg); return; }
+    } else {
+      const { error } = await sb.from('admins').insert({ email, name:$('t-name').value.trim() });
+      if(error){ alert('Could not add (re-run SETUP.sql first?): '+error.message); return; }
+    }
+    $('t-email').value=$('t-name').value=$('t-pass').value=''; loadTeam();
   });
   function renderTeam(){
     if(!$('tstat').textContent.startsWith('Team table not upgraded')) $('tstat').innerHTML='<b>'+admins.length+'</b> full-access logins';
