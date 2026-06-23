@@ -749,6 +749,16 @@
 
       <div class="eg"><b>Why this matters to the business:</b> the energy assets aren't a cost we tolerate to power the node — they're a <b>profit center we own.</b> The §48E credit (up to ~50%), 100% bonus depreciation, and VPP/demand-response revenue together can offset a large share of the system's cost, while the solar offsets the node's biggest operating expense. Owning the power is what turns a residential site into an asset with three stacked returns: compute margin, energy-cost offset, and tax/grid value.</div>
 
+      <h3>Put real numbers on it — one site, back-of-envelope</h3>
+      <p>Let's run a single site so the stack is concrete. Say the ~20+ kW solar + battery system costs <strong>$80,000</strong> installed, and Heliode pays the <strong>21% federal corporate tax rate</strong>. Take the conservative <strong>30% base case</strong> (no adders yet):</p>
+      <ul>
+        <li><strong>§48E credit @ 30% of $80,000 = $24,000.</strong> This is a <em>credit</em> — it comes straight off the tax bill dollar-for-dollar, not just off income.</li>
+        <li><strong>Depreciation.</strong> When you take a credit, the IRS makes you reduce the asset's depreciable basis by <em>half</em> the credit. So basis = $80,000 − $12,000 = <strong>$68,000</strong>. With 100% bonus depreciation you deduct that whole $68,000 in year one; at a 21% rate that deduction is worth <strong>~$14,300</strong> in saved tax.</li>
+        <li><strong>Add them up:</strong> $24,000 + $14,300 = <strong>≈ $38,000 of first-year tax benefit</strong> on an $80,000 system — so the net first-year cost is <strong>≈ $42,000, roughly half.</strong></li>
+      </ul>
+      <p>Now the upside case. If the site earns both <strong>+10% adders</strong> (domestic content + energy community), the credit is 50% = <strong>$40,000</strong>, the basis drops to $60,000 (a ~$12,600 depreciation shield), and the first-year benefit climbs to <strong>~$53,000 — netting the system down to ~$27,000, about a third of sticker.</strong> And none of that counts the grid power the solar offsets every month, or the VPP / demand-response revenue the battery can earn on top.</p>
+      <div class="eg"><b>The lesson in one line:</b> owning an ~$80k energy system, you can get roughly <b>$38k–$53k of it back in year one</b> through the credit + depreciation — so the asset that powers your node, adds resilience, and can sell power back to the grid effectively costs you <b>half to a third</b> of its sticker price. (One caveat: bonus depreciation only helps if you have taxable income — or a carryforward — to absorb it.)</div>
+
       <h3>Glossary — the terms in this module</h3>
       <dl class="gloss">
         <dt>ITC (Investment Tax Credit)</dt><dd>A credit that reduces tax owed by a percentage of the cost of an energy asset placed in service. Here, the credit Heliode claims on the solar + battery.</dd>
