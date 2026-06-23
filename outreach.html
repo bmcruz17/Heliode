@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Heliode — Vendor Outreach</title>
+<meta property="og:title" content="Heliode — Vendor Outreach">
+<meta property="og:image" content="https://heliode.ai/og/og-admin.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://heliode.ai/og/og-admin.png">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#f4f7fc;--panel:#fff;--ink:#0d1320;--mute:#525a66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+    --green:#16a34a;--body:#39414d;
+  }
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+  a{color:var(--blue);}
+  .bar{background:rgba(13,19,32,0.92);position:sticky;top:0;z-index:30;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .bar-in{max-width:840px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .brand{color:#fff;font-weight:700;display:flex;align-items:center;gap:8px;font-size:1rem;}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+  .bar a{color:#cdd4df;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.74rem;}
+  .bar a:hover{color:#fff;}
+  .bar-actions{display:flex;gap:16px;align-items:center;}
+  .wrap{max-width:840px;margin:0 auto;padding:32px 22px 80px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);}
+  h1{font-size:1.8rem;margin:8px 0 8px;}
+  .lead{color:var(--mute);font-size:1rem;margin-bottom:8px;}
+  .flag{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:13px 16px;margin:16px 0;font-size:0.9rem;color:var(--body);}
+  .flag b{color:var(--ink);}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:18px 0;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .card-h{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+  .card-h h2{font-size:1.15rem;}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;}
+  .tag.warm{background:var(--accent-dim);border:1px solid var(--accent-line);color:var(--accent-hover);}
+  .tag.cold{background:var(--blue-dim);border:1px solid var(--blue-line);color:var(--blue);}
+  .who{font-size:0.85rem;color:var(--mute);margin-bottom:12px;}
+  .who b{color:var(--ink);}
+  .subj{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-bottom:10px;}
+  .subj span{color:var(--faint);}
+  pre.mail{white-space:pre-wrap;font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--body);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px;line-height:1.6;}
+  .copy{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.8rem;border:none;border-radius:8px;padding:8px 14px;background:var(--accent);color:#fff;cursor:pointer;}
+  .copy:hover{background:var(--accent-hover);}
+  .copy.done{background:var(--green);}
+  .spec{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--body);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+  .spec b{color:var(--ink);}
+  @media print{.bar,.copy{display:none!important;}body{background:#fff;}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>HELIODE · Vendor Outreach</div>
+  <div class="bar-actions">
+    <a href="admin.html">Dashboard</a>
+    <a href="playbook.html">Playbook</a>
+  </div>
+</div></div>
+
+<div class="wrap">
+  <div class="eyebrow">Procurement · hardware quotes</div>
+  <h1>Vendor outreach</h1>
+  <p class="lead">Copy-ready emails to get node quotes for the <b>H100/H200 flagship</b>. Send from <b>brandon@heliode.ai</b>.</p>
+  <div class="flag"><div style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-hover);margin-bottom:5px;">Before sending</div>Send only once DKIM is authenticating (so it lands in inbox, not spam). Hardware vendors below = quotes to <b>buy</b> nodes; the returned prices are your real-world check on the ~$250K node assumption.</div>
+
+  <div class="spec">
+    <b>Node config being quoted:</b><br>
+    8× NVIDIA H100 SXM 80GB (also quote H200 141GB) · HGX 8-GPU baseboard, NVLink/NVSwitch ·
+    dual CPU · ~1–2TB RAM · ~15–30TB NVMe · 400G IB/Ethernet. Dell platform = PowerEdge XE9680.
+  </div>
+
+  <!-- DELL -->
+  <div class="card">
+    <div class="card-h"><h2>1 · Dell — follow-up</h2><span class="tag warm">Warm · already inquired</span></div>
+    <div class="who">To your Dell contact / sales team. <b>Your one existing lead.</b></div>
+    <div class="subj"><span>Subject:</span> Following up — PowerEdge XE9680 quote (Heliode)</div>
+    <pre class="mail" id="m1">Hi [name / Dell team],
+
+I submitted an inquiry recently and wanted to follow up directly. I'm Brandon Cruz, founder of Heliode (heliode.ai) — we're standing up managed GPU capacity for AI inference and are speccing our first deployment.
+
+Could you put together a quote for a PowerEdge XE9680 configured with 8× NVIDIA H100 SXM (80GB) — and a parallel option with 8× H200 (141GB) so I can compare? Rough config: dual CPU, ~2TB RAM, ~15–30TB NVMe, and high-speed networking (400G IB/Ethernet).
+
+Specifically I'd like:
+- Unit pricing (H100 vs H200), and volume pricing — starting with one unit, scaling to multiple nodes.
+- Lead time to ship.
+- Warranty / ProSupport options.
+- Any Dell Financial Services leasing/financing options (we'll finance hardware against contracts).
+
+Best reply address is brandon@heliode.ai. Happy to hop on a call.
+
+Brandon Cruz · Founder, Heliode (Heliode, Inc.) · heliode.ai</pre>
+    <div style="margin-top:10px;"><button class="copy" data-t="m1">Copy email</button></div>
+  </div>
+
+  <!-- RFQ -->
+  <div class="card">
+    <div class="card-h"><h2>2 · RFQ — Supermicro / Thinkmate / Exxact</h2><span class="tag cold">Cold · competing quotes</span></div>
+    <div class="who">Send to each hardware vendor to get prices to compare against Dell.</div>
+    <div class="subj"><span>Subject:</span> RFQ — 8×H100/H200 HGX server (Heliode)</div>
+    <pre class="mail" id="m2">Hi [vendor] team,
+
+I'm Brandon Cruz, founder of Heliode (heliode.ai) — managed GPU capacity for AI inference. I'm requesting a quote on an 8-GPU HGX server:
+
+- GPUs: 8× NVIDIA H100 SXM 80GB (please also quote an H200 141GB option)
+- Platform: HGX 8-GPU baseboard, NVLink/NVSwitch
+- CPU: dual current-gen (Xeon or EPYC)
+- Memory: ~1–2TB
+- Storage: ~15–30TB NVMe
+- Networking: high-speed (400G InfiniBand or Ethernet)
+
+Please include: unit price (H100 & H200), volume/scaling pricing, lead time, warranty & support, and any financing/leasing options. Starting with one unit, scaling to multiple.
+
+Reply to brandon@heliode.ai. Thanks!
+
+Brandon Cruz · Founder, Heliode · heliode.ai</pre>
+    <div style="margin-top:10px;"><button class="copy" data-t="m2">Copy email</button></div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{
+    const t=document.getElementById(b.getAttribute('data-t')).innerText;
+    try{ await navigator.clipboard.writeText(t); }catch(_){ }
+    const o=b.textContent; b.textContent='✓ Copied'; b.classList.add('done');
+    setTimeout(()=>{ b.textContent=o; b.classList.remove('done'); },1500);
+  }));
+</script>
+</body>
+</html>
