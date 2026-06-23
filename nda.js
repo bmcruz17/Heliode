@@ -92,11 +92,16 @@ export function generateNdaPdf({ full_name, personal_email, phone, signed_at }){
 // Best-effort: email the signed PDF to the personal address via the edge fn.
 export async function emailNda(sb, { to, full_name, pdf_base64 }){
   try {
-    const { error } = await sb.functions.invoke('send-nda', {
+    const { data, error } = await sb.functions.invoke('send-nda', {
       body: { to, full_name, pdf_base64, nda_version: NDA_VERSION }
     });
-    return !error;
-  } catch(_){ return false; }
+    if(error){
+      let m = error.message || 'request failed';
+      try { const j = await error.context.json(); if(j && j.error) m = j.error; } catch(_){}
+      console.error('[NDA email]', m); return { ok:false, msg:m };
+    }
+    return { ok:true, data };
+  } catch(e){ console.error('[NDA email]', e); return { ok:false, msg:String(e) }; }
 }
 
 // Main gate. Resolves once the user has a recorded NDA (or is exempt).
@@ -154,7 +159,10 @@ export async function requireNda(sb, session, opts = {}){
       const signed_at = new Date().toISOString();
       let b64 = null;
       try { b64 = generateNdaPdf({ ...data, signed_at }); } catch(_){}
-      if(b64) emailNda(sb, { to: data.personal_email, full_name: data.full_name, pdf_base64: b64 });
+      if(b64){
+        const r = await emailNda(sb, { to: data.personal_email, full_name: data.full_name, pdf_base64: b64 });
+        if(!r.ok) alert('Signed ✓ and your PDF downloaded — but the email copy didn’t send:\n\n' + r.msg + '\n\n(This doesn’t block you.)');
+      }
       ov.remove();
       resolve();
     });
