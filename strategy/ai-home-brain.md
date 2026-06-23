@@ -1,9 +1,21 @@
 # Strategy note — "AI Home Brain" wedge (captured + pressure-tested)
 
-**Status:** Captured for evaluation. NOT on the public site. Pressure-tested below.
-**Source:** Framework from a trusted advisor (June 2026). **Decision:** capture as a note + validate
-economics before any build; if built, use a conservative, validated savings range — never a single
-hero number.
+**Status:** Captured for reference. NOT a product we're building. Pressure-tested below.
+**Source:** Framework from a trusted advisor (June 2026).
+
+## Decision — sticking with the original game plan
+We are **not** pivoting to the "AI Home Brain" box. Heliode's thesis stands: managed GPU compute now
+(asset-light brokerage) → owned, self-powered GPU nodes next. From the advisor's input we keep only the
+on-thesis takeaways:
+- **Warm channel (the one new, actionable takeaway we're folding in):** prioritize **existing solar +
+  battery homeowners — especially the Sunrun installed base** — as node-host targets. They're
+  pre-qualified, energy-forward, and faster to convert than a cold home.
+- **Validates timing:** the home-as-external-inference-node is 3–5 years out → confirms our 2027+
+  owned-node rollout.
+- **Validates monetization:** the VPP / demand-response / energy-network layer is real and already in
+  our model.
+- **Validates the exit:** strategic acquisition by Tesla Energy / Sunrun / a utility.
+What we are **not** taking: the box product, the $150–300/mo savings claim, and box-compute-rental.
 
 ---
 
