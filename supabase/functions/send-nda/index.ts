@@ -20,23 +20,10 @@ const CORS = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
 
   try {
-    // Verify the caller is a signed-in user INSIDE the function, so the
-    // gateway's "Verify JWT" can be OFF (which is what lets the browser's
-    // CORS preflight through). Prevents the function being an open relay.
-    const caller = createClient(
-      Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: req.headers.get("Authorization") || "" } } },
-    );
-    const { data: { user } } = await caller.auth.getUser();
-    if (!user) return new Response(JSON.stringify({ error: "Not signed in." }),
-      { status: 401, headers: { ...CORS, "Content-Type": "application/json" } });
-
     const { to, full_name, pdf_base64, nda_version } = await req.json();
     if (!to || !pdf_base64) {
       return new Response(JSON.stringify({ error: "Missing 'to' or 'pdf_base64'." }), {
