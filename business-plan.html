@@ -118,8 +118,43 @@
   }
 </style>
 </head>
-<body>
+<body class="locked">
 <div class="prog" id="prog"></div>
+
+<style>
+  body.locked{overflow:hidden;height:100vh;}
+  body.locked .bar,body.locked .doc,body.locked #prog{display:none!important;}
+  #bp-gate{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(140deg,#0d1320 0%,#15233f 62%,#1a2a47 100%);font-family:'Inter',sans-serif;}
+  #bp-gate.hidden{display:none;}
+  .bpg-card{width:100%;max-width:420px;background:#fff;border-radius:18px;padding:30px 28px;box-shadow:0 24px 70px rgba(0,0,0,.45);}
+  .bpg-eye{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px;}
+  .bpg-card h2{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;letter-spacing:-0.02em;margin-bottom:6px;color:#0d1320;}
+  .bpg-card p{font-size:0.9rem;color:#525a66;margin-bottom:6px;}
+  .bpg-card label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.05em;text-transform:uppercase;color:#8a909a;margin:14px 0 5px;}
+  .bpg-in{width:100%;border:1px solid rgba(13,19,32,.16);border-radius:10px;padding:11px 13px;font-size:0.94rem;outline:none;font-family:'Inter',sans-serif;}
+  .bpg-in:focus{border-color:rgba(37,99,235,.45);box-shadow:0 0 0 3px rgba(37,99,235,.10);}
+  .bpg-btn{width:100%;margin-top:18px;border:none;border-radius:11px;background:var(--grad);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.95rem;padding:13px;cursor:pointer;box-shadow:0 8px 22px rgba(124,58,237,.26);}
+  .bpg-btn:disabled{opacity:.55;cursor:not-allowed;}
+  .bpg-msg{font-size:0.82rem;color:#dc2626;margin-top:12px;min-height:1em;}
+  .bpg-foot{font-size:0.76rem;color:#8a909a;margin-top:16px;line-height:1.55;}
+  .bpg-foot a{color:#2563eb;}
+  .bpg-spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;display:inline-block;animation:bpgsp .7s linear infinite;vertical-align:-2px;}
+  @keyframes bpgsp{to{transform:rotate(360deg);}}
+</style>
+<div id="bp-gate">
+  <div class="bpg-card">
+    <div class="bpg-eye">Confidential · investor access</div>
+    <h2>Heliode — Business Plan</h2>
+    <p>This document is confidential. Sign in with the investor credentials you were given, then accept the confidentiality agreement to continue.</p>
+    <label>Email</label>
+    <input id="bpg-email" class="bpg-in" type="email" autocomplete="email" placeholder="you@firm.com">
+    <label>Password</label>
+    <input id="bpg-pass" class="bpg-in" type="password" autocomplete="current-password" placeholder="••••••••">
+    <button id="bpg-go" class="bpg-btn">Sign in</button>
+    <div class="bpg-msg" id="bpg-msg"></div>
+    <div class="bpg-foot">No access yet? Email <a href="mailto:brandon@heliode.ai">brandon@heliode.ai</a> for an investor login — or view the open <a href="pitch.html">investor pitch</a> and <a href="opportunity.html">opportunity brief</a>.</div>
+  </div>
+</div>
 
 <div class="bar"><div class="bar-in">
   <div class="brand"><span class="logo"><svg viewBox="0 0 64 64" fill="none"><g stroke="#3b82f6" stroke-width="3" stroke-linecap="round"><line x1="32" y1="32" x2="51" y2="32"/><line x1="32" y1="32" x2="41.5" y2="48.5"/><line x1="32" y1="32" x2="22.5" y2="48.5"/><line x1="32" y1="32" x2="13" y2="32"/><line x1="32" y1="32" x2="22.5" y2="15.5"/><line x1="32" y1="32" x2="41.5" y2="15.5"/></g><g fill="#3b82f6"><circle cx="51" cy="32" r="4"/><circle cx="41.5" cy="48.5" r="4"/><circle cx="22.5" cy="48.5" r="4"/><circle cx="13" cy="32" r="4"/><circle cx="22.5" cy="15.5" r="4"/><circle cx="41.5" cy="15.5" r="4"/></g><circle cx="32" cy="32" r="9" fill="#f97316"/></svg></span>HELIODE <small>Business Plan</small></div>
@@ -236,7 +271,7 @@
       <li><strong>§48E Clean Electricity Investment Tax Credit — 30% base</strong> on the solar + storage cost (projects under 1&nbsp;MW auto-qualify for the full rate), with stackable <strong>+10% domestic-content</strong> and <strong>+10% energy-community</strong> adders — up to roughly <strong>50%</strong> back.</li>
       <li><strong>100% first-year bonus depreciation</strong> (5-year MACRS), restored for assets placed in service after Jan&nbsp;2025 — a second tax shield stacked on the credit.</li>
       <li><strong>Battery storage</strong> retains the full §48E through <strong>~2033</strong> (beyond the tighter solar deadlines) and can export to the grid / participate in <strong>VPP &amp; demand-response</strong> programs — a secondary revenue line, not just resilience.</li>
-      <li><strong>Timing:</strong> begin construction <strong>before July&nbsp;4,&nbsp;2026</strong> to lock the full 30% with a four-year placed-in-service window; deadlines tighten sharply afterward.</li>
+      <li><strong>Timing — long runway:</strong> battery storage keeps the full §48E <strong>through ~2033</strong>, so our owned-node rollout (~2027+) sits well inside the credit; the solar ITC tightens after mid-2026 and is treated as optimizable upside, not a deadline we race.</li>
     </ul>
 
     <h3 style="margin-top:22px;">Back-of-envelope — one site's energy stack</h3>
@@ -390,6 +425,42 @@
     const p=h.scrollTop/((h.scrollHeight-h.clientHeight)||1);
     prog.style.width=Math.min(100,p*100)+'%';
   },{passive:true});
+</script>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  import { requireNda } from './nda.js?v=2';
+  const SB_URL='https://pyosjuuvbxzyjtokfqfu.supabase.co';
+  const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5b3NqdXV2Ynh6eWp0b2tmcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjk4MTcsImV4cCI6MjA5NzY0NTgxN30.7bH19ZZJHxchfRVt3t-I20gJ44WvbR3al516QhwQpmw';
+  const sb=createClient(SB_URL,SB_KEY);
+  const $=id=>document.getElementById(id);
+  const EXEMPT=['brandonmcruz@mac.com'];
+  async function unlock(session){
+    const { data:okInv }=await sb.rpc('is_investor');
+    const { data:okAdm }=await sb.rpc('is_admin');
+    if(!okInv && !okAdm){
+      await sb.auth.signOut();
+      $('bpg-msg').textContent='This account isn’t authorized to view the business plan — email brandon@heliode.ai for access.';
+      return;
+    }
+    try { await requireNda(sb, session, { exempt: EXEMPT }); } catch(_){}
+    document.body.classList.remove('locked');
+    $('bp-gate').classList.add('hidden');
+  }
+  async function login(){
+    const btn=$('bpg-go'), msg=$('bpg-msg'); msg.textContent='';
+    const email=$('bpg-email').value.trim(), password=$('bpg-pass').value;
+    if(!email||!password){ msg.textContent='Enter your email and password.'; return; }
+    btn.disabled=true; btn.innerHTML='<span class="bpg-spin"></span> Signing in…';
+    const { error }=await sb.auth.signInWithPassword({ email, password });
+    btn.disabled=false; btn.textContent='Sign in';
+    if(error){ msg.textContent='Sign-in failed — check your credentials or email brandon@heliode.ai.'; return; }
+    const { data:{ session } }=await sb.auth.getSession();
+    if(session) await unlock(session);
+  }
+  $('bpg-go').addEventListener('click', login);
+  $('bpg-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
+  (async()=>{ const { data:{ session } }=await sb.auth.getSession(); if(session) await unlock(session); })();
 </script>
 </body>
 </html>
