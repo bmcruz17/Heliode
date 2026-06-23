@@ -126,6 +126,53 @@
   .body-lg{font-size:1.04rem;color:var(--mute);max-width:62ch;}
   .body-lg + .body-lg{margin-top:14px;}
 
+  /* ════ visual richness layer ════ */
+  :root{
+    --violet:#7c3aed;--violet-bright:#8b5cf6;
+    --grad:linear-gradient(110deg,#2563eb 0%,#7c3aed 52%,#f97316 100%);
+    --grad-bv:linear-gradient(120deg,#2563eb,#7c3aed);
+  }
+  /* soft aurora behind the whole page so it's not flat white */
+  body{
+    background:
+      radial-gradient(820px 460px at 8% -4%, rgba(37,99,235,0.07), transparent 60%),
+      radial-gradient(760px 460px at 102% 2%, rgba(124,58,237,0.06), transparent 58%),
+      radial-gradient(700px 500px at 50% 108%, rgba(249,115,22,0.05), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+  }
+  /* gradient section eyebrows */
+  .sec-eye{background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  /* gradient emphasis on section headings */
+  .blk h2 em{font-style:normal;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  /* tinted, glowing alternate sections instead of flat gray */
+  .blk{position:relative;}
+  .blk.alt{background:linear-gradient(180deg,#f3f1ff 0%,#eaf1fc 100%);}
+  .blk.alt::before{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(540px 300px at 88% 12%, rgba(124,58,237,0.10), transparent 60%);
+  }
+  .blk .wrap{position:relative;z-index:1;}
+  /* vivid gradient primary button */
+  .btn-primary{background:var(--grad);background-size:170% 100%;background-position:0% 50%;box-shadow:0 8px 22px rgba(124,58,237,0.26);transition:.25s;}
+  .btn-primary:hover{background-position:100% 50%;transform:translateY(-1px);box-shadow:0 12px 30px rgba(124,58,237,0.34);}
+  /* dark dramatic stats band right under the hero */
+  .strip{background:linear-gradient(120deg,#0d1320,#15233f 70%,#211a3d);border-bottom:1px solid rgba(255,255,255,0.07);}
+  .strip-in{background:rgba(255,255,255,0.08);}
+  .strip .cell{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);}
+  .strip .cell .n{background:linear-gradient(110deg,#60a5fa,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .strip .cell .k{color:#aeb6c6;}
+  .strip .cell-ic{background:rgba(124,58,237,0.16);color:#a78bfa;}
+  /* cards: gradient top accent + lift/glow on hover */
+  .gpu,.feat{position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;}
+  .gpu::after,.feat::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);opacity:.85;}
+  .gpu:hover,.feat:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(37,99,235,0.16);border-color:var(--violet-bright);}
+  .feat .feat-ic{background:var(--grad-bv);color:#fff;}
+  /* calculator result panel → premium dark gradient */
+  .calc-out{background:linear-gradient(150deg,#0d1320,#15233f 60%,#26194a);color:#fff;border:none;}
+  .calc-out .calc-out-k,.calc-out .calc-save-k{color:#aeb6c6;}
+  .calc-out .calc-out-v,.calc-out .calc-save-v{background:linear-gradient(110deg,#60a5fa,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
   .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;}
   .feat{background:var(--panel);padding:24px 20px;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(13,19,32,0.03);transition:.2s;}
   .feat:hover{transform:translateY(-3px);border-color:var(--blue-line);box-shadow:0 12px 26px rgba(13,19,32,0.07);}
@@ -358,7 +405,7 @@
   <div class="wrap">
     <div class="sec-eye">What we do</div>
     <h2>You need GPU-hours. You don't need another cloud to babysit.</h2>
-    <p class="body-lg" style="margin-bottom:26px;">Most teams buying inference compute are stuck between two bad options: pay hyperscaler prices for convenience, or stitch together cheap marketplace capacity yourself and own the uptime headaches. We sit in the middle — sourcing capacity at open-market rates and running it as a managed service, so you get marketplace pricing with someone actually running it for you.</p>
+    <p class="body-lg" style="margin-bottom:26px;">Hyperscalers are convenient but overpriced. Marketplaces are cheap but you babysit them. We're the middle — <strong>open-market rates, run for you</strong>.</p>
     <div class="feats">
       <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 7 9 13 13 9 21 17"/><polyline points="21 12 21 17 16 17"/></svg></div><div class="ic">// price</div><h4>Open-market sourcing</h4><p>We buy capacity where it's cheapest — marketplace and spot supply well under hyperscaler on-demand — and pass the savings through.</p></div>
       <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="ic">// managed</div><h4>We handle the babysitting</h4><p>Provisioning, monitoring, and support are ours, on a reliable base layer. You get one endpoint to point at, not a pile of marketplace accounts.</p></div>
