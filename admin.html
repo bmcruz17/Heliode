@@ -556,6 +556,8 @@
   $('sd-load')?.addEventListener('click', async ()=>{
     const msg=$('sd-msg'); msg.textContent='Loading current business plan…';
     try{
+      // 1) pending edited draft (bp-update.html) takes priority for a one-time republish
+      try{ const u=await fetch('bp-update.html?ts='+Date.now()); if(u.ok){ const txt=(await u.text()).trim(); if(txt.length>200){ $('sd-content').value=txt; $('sd-pub').disabled=false; msg.textContent='Loaded pending update ('+txt.length.toLocaleString()+' chars). Review, then Publish.'; return; } } }catch(_){ }
       const html = await (await fetch('business-plan.html?ts='+Date.now())).text();
       const doc = new DOMParser().parseFromString(html,'text/html');
       const node = doc.querySelector('#bp-content, .doc');
