@@ -168,13 +168,13 @@
   const sb = createClient(SB_URL, SB_KEY);
 
   const STAGES = [
-    {k:'prospect',   label:'Prospect',   c:'#8a909a'},
-    {k:'contacted',  label:'Contacted',  c:'#2563eb'},
-    {k:'quoted',     label:'Quoted',     c:'#f97316'},
-    {k:'signed',     label:'Signed',     c:'#a855f7'},
-    {k:'onboarding', label:'Onboarding', c:'#0ea5e9'},
-    {k:'live',       label:'Live',       c:'#16a34a'},
-    {k:'lost',       label:'Lost',       c:'#dc2626'},
+    {k:'prospect',   label:'Prospect',   c:'#9aa3b5'},
+    {k:'contacted',  label:'Contacted',  c:'#60a5fa'},
+    {k:'quoted',     label:'Quoted',     c:'#fb923c'},
+    {k:'signed',     label:'Signed',     c:'#c084fc'},
+    {k:'onboarding', label:'Onboarding', c:'#38bdf8'},
+    {k:'live',       label:'Live',       c:'#34d399'},
+    {k:'lost',       label:'Lost',       c:'#f87171'},
   ];
   const ACTIVE = ['signed','onboarding','live']; // commission counts here
   const COLOR = Object.fromEntries(STAGES.map(s=>[s.k,s.c]));
