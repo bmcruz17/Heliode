@@ -200,6 +200,7 @@
       const { data } = await sb.from('private_docs').select('content').eq('slug','business-plan').maybeSingle();
       bpc.innerHTML = (data && data.content) ? data.content
         : '<p style="padding:48px 0;color:var(--mute);">The full plan is being finalized — contact brandon@heliode.ai.</p>';
+      bpc.querySelectorAll('.info').forEach(function(n){ n.remove(); });
     }
     document.body.classList.remove('locked');
     $('bp-gate').classList.add('hidden');
@@ -219,6 +220,5 @@
   $('bpg-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
   (async()=>{ const { data:{ session } }=await sb.auth.getSession(); if(session) await unlock(session); })();
 </script>
-<script type="module" src="tooltips.js?v=1"></script>
 </body>
 </html>
