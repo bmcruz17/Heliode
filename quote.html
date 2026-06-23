@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- META PIXEL: replace YOUR_PIXEL_ID with your Pixel ID from Meta Events Manager -->
+<script>
+  const META_PIXEL_ID = 'YOUR_PIXEL_ID'; // <-- replace with real ID
+  (function(){
+    if(META_PIXEL_ID && META_PIXEL_ID !== 'YOUR_PIXEL_ID'){
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', META_PIXEL_ID);
+      fbq('track', 'PageView');
+    }
+  })();
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+<!-- end Meta Pixel -->
+
+<title>Heliode — Get a GPU compute quote</title>
+<meta name="description" content="Managed H100/H200 capacity at open-market rates — usually under hyperscaler on-demand. One endpoint, one bill, uptime and support handled. Send your current GPU bill and get a quote for the same workload.">
+<link rel="canonical" href="https://heliode.ai/quote.html">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#f4f7fc">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Heliode — Get a GPU compute quote">
+<meta property="og:description" content="Managed H100/H200 capacity at open-market rates, usually under hyperscaler on-demand. One endpoint, one bill, uptime and support handled.">
+<meta property="og:url" content="https://heliode.ai/quote.html">
+<meta property="og:site_name" content="Heliode">
+<meta property="og:image" content="https://heliode.ai/og/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Heliode — Get a GPU compute quote">
+<meta name="twitter:description" content="Managed H100/H200 capacity at open-market rates. One endpoint, one bill, uptime and support handled.">
+<meta name="twitter:image" content="https://heliode.ai/og/og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#f4f7fc;--panel:#ffffff;
+    --ink:#0d1320;--mute:#555c66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-bright:#fb923c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+    --violet:#7c3aed;--violet-bright:#8b5cf6;
+    --grad:linear-gradient(110deg,#2563eb 0%,#7c3aed 52%,#f97316 100%);
+    --grad-bv:linear-gradient(120deg,#2563eb,#7c3aed);
+  }
+  html{scroll-behavior:smooth;}
+  body{
+    color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background:
+      radial-gradient(820px 460px at 8% -4%, rgba(37,99,235,0.07), transparent 60%),
+      radial-gradient(760px 460px at 102% 2%, rgba(124,58,237,0.06), transparent 58%),
+      radial-gradient(700px 500px at 50% 108%, rgba(249,115,22,0.05), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;}
+  h1,h2,h3,h4,.brand{font-family:'Space Grotesk',sans-serif;}
+
+  .bar{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(13,19,32,0.85);border-bottom:1px solid rgba(255,255,255,0.08);}
+  .bar-in{max-width:720px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-weight:700;font-size:1.02rem;letter-spacing:-0.01em;display:flex;align-items:center;gap:9px;color:#fff;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 0 4px var(--accent-dim);animation:pulse 2.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--accent-dim);}50%{box-shadow:0 0 0 7px rgba(251,146,60,0.06);}}
+  .bar .tagm{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.08em;color:#aeb6c6;text-transform:uppercase;}
+
+  .hero{padding:54px 0 40px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--blue-line);}
+  h1{font-weight:700;font-size:clamp(2rem,5.6vw,3.1rem);line-height:1.05;letter-spacing:-0.03em;max-width:18ch;margin-bottom:20px;}
+  h1 em{font-style:normal;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .lede{font-size:clamp(1rem,2.3vw,1.16rem);color:var(--mute);max-width:60ch;margin-bottom:26px;}
+  .lede strong{color:var(--ink);font-weight:600;}
+
+  .bullets{list-style:none;display:flex;flex-direction:column;gap:12px;margin:4px 0 30px;}
+  .bullets li{display:flex;gap:12px;align-items:flex-start;font-size:0.96rem;color:var(--mute);}
+  .bullets b{color:var(--ink);font-weight:600;}
+  .bullets .ck{flex:0 0 22px;width:22px;height:22px;border-radius:7px;background:var(--grad-bv);color:#fff;display:flex;align-items:center;justify-content:center;}
+  .bullets .ck svg{width:13px;height:13px;}
+
+  .how{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:34px;box-shadow:0 1px 2px rgba(13,19,32,0.03);position:relative;overflow:hidden;}
+  .how::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);opacity:.85;}
+  .how-k{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:14px;}
+  .how-steps{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .how-step{display:flex;align-items:center;gap:9px;font-size:0.9rem;color:var(--ink);}
+  .how-step .num{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--blue);font-size:0.95rem;width:24px;height:24px;border-radius:50%;background:var(--blue-dim);display:flex;align-items:center;justify-content:center;flex:0 0 24px;}
+  .how-arrow{color:var(--faint);font-size:1rem;}
+  @media(max-width:560px){.how-arrow{display:none;}.how-steps{flex-direction:column;align-items:flex-start;gap:10px;}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:30px 28px;box-shadow:0 14px 40px rgba(13,19,32,0.06);position:relative;overflow:hidden;margin-bottom:46px;}
+  .card::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);opacity:.9;}
+  .card h2{font-weight:700;font-size:clamp(1.4rem,3.4vw,1.85rem);letter-spacing:-0.025em;margin-bottom:8px;}
+  .card .sub{font-size:0.95rem;color:var(--mute);margin-bottom:8px;}
+
+  .form{margin-top:8px;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:520px){.grid-2{grid-template-columns:1fr;}}
+  .fld{display:block;font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);margin:14px 0 7px;}
+  .req{color:var(--accent);}
+  .inp{width:100%;background:#fff;border:1px solid var(--line2);border-radius:11px;padding:14px 14px;color:var(--ink);font-family:'Inter',sans-serif;font-size:1rem;outline:none;transition:.2s;}
+  .inp:focus{border-color:var(--blue-line);box-shadow:0 0 0 3px var(--blue-dim);}
+  .inp::placeholder{color:var(--faint);}
+  textarea.inp{min-height:92px;resize:vertical;}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;border-radius:12px;padding:16px 22px;cursor:pointer;border:none;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.25s;}
+  .btn-primary{background:var(--grad);background-size:170% 100%;background-position:0% 50%;color:#fff;box-shadow:0 8px 22px rgba(124,58,237,0.26);}
+  .btn-primary:hover{background-position:100% 50%;transform:translateY(-1px);box-shadow:0 12px 30px rgba(124,58,237,0.34);}
+  .form .btn{margin-top:20px;width:100%;}
+  .form .legal{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--faint);margin-top:14px;text-align:center;line-height:1.6;}
+  .err{color:#dc2626;font-size:0.84rem;margin-top:12px;display:none;}
+  .ok{display:none;text-align:center;padding:14px 4px;}
+  .ok .ok-ic{width:54px;height:54px;border-radius:16px;background:var(--grad-bv);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+  .ok .ok-ic svg{width:26px;height:26px;}
+  .ok h2{margin-bottom:8px;}
+  .ok p{color:var(--mute);font-size:1rem;max-width:42ch;margin:0 auto;}
+
+  footer{padding:30px 0 44px;}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;}
+  .foot-l{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--faint);}
+  .foot-l a{color:var(--blue);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>HELIODE</div>
+  <span class="tagm">Managed GPU compute</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Managed GPU compute</div>
+  <h1>Cut your GPU bill — <em>without babysitting another cloud.</em></h1>
+  <p class="lede">Managed H100 / H200 capacity at open-market rates — usually under hyperscaler on-demand. <strong>One endpoint, one bill, uptime and support handled.</strong> Send us your current bill and we'll quote the same workload, free.</p>
+
+  <ul class="bullets">
+    <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Open-market pricing.</b> We source capacity where it's cheapest and pass the savings through — typically well under hyperscaler on-demand.</span></li>
+    <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Fully managed.</b> Provisioning, monitoring, uptime, and support are ours — you point at one endpoint, not a pile of accounts.</span></li>
+    <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>One invoice, no lock-in.</b> Predictable monthly cost, scale up or down anytime, no surprise egress math.</span></li>
+  </ul>
+
+  <div class="how">
+    <div class="how-k">How it works</div>
+    <div class="how-steps">
+      <div class="how-step"><span class="num">1</span><span>Send your current GPU bill</span></div>
+      <span class="how-arrow">→</span>
+      <div class="how-step"><span class="num">2</span><span>We quote the same workload</span></div>
+      <span class="how-arrow">→</span>
+      <div class="how-step"><span class="num">3</span><span>Go live</span></div>
+    </div>
+  </div>
+</div></header>
+
+<div class="wrap">
+  <div class="card">
+    <div class="form" id="form">
+      <h2>Get your quote</h2>
+      <p class="sub">Tell us what you're running and what you pay now. We'll come back with a quote for the same workload — free, no commitment.</p>
+      <div class="grid-2">
+        <div><label class="fld" for="f-name">Name</label><input class="inp" id="f-name" type="text" placeholder="Your name"></div>
+        <div><label class="fld" for="f-company">Company</label><input class="inp" id="f-company" type="text" placeholder="Company"></div>
+      </div>
+      <label class="fld" for="f-email">Work email <span class="req">*</span></label>
+      <input class="inp" id="f-email" type="email" placeholder="you@company.com" required>
+      <label class="fld" for="f-spend">Current monthly GPU spend</label>
+      <input class="inp" id="f-spend" type="text" placeholder="e.g. ~$8k/mo on AWS, or ~3,000 GPU-hrs on Lambda">
+      <label class="fld" for="f-workload">What are you running? (models / current provider)</label>
+      <textarea class="inp" id="f-workload" placeholder="Model(s), rough GPU-hours or monthly throughput, and where you run it today."></textarea>
+      <div class="err" id="f-err"></div>
+      <button class="btn btn-primary" id="f-btn" onclick="submitLead()">Get my quote →</button>
+      <div class="legal">Free quote, no commitment. We'll only use your details to send the quote.</div>
+    </div>
+    <div class="ok" id="ok">
+      <div class="ok-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>Got it.</h2>
+      <p id="ok-msg">We'll send your quote shortly.</p>
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <div class="brand" style="color:var(--ink);"><span class="dot"></span>HELIODE</div>
+  <div class="foot-l">Managed GPU compute for AI inference · <a href="mailto:hello@heliode.ai">hello@heliode.ai</a></div>
+</div></footer>
+
+<script>
+  var SB_URL = 'https://pyosjuuvbxzyjtokfqfu.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5b3NqdXV2Ynh6eWp0b2tmcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjk4MTcsImV4cCI6MjA5NzY0NTgxN30.7bH19ZZJHxchfRVt3t-I20gJ44WvbR3al516QhwQpmw';
+
+  function submitLead(){
+    var err=document.getElementById('f-err'), btn=document.getElementById('f-btn');
+    var email=document.getElementById('f-email').value.trim();
+    err.style.display='none';
+    if(!email){ err.textContent='Add a work email so we can send the quote.'; err.style.display='block'; return; }
+    btn.disabled=true; btn.textContent='Sending…';
+    var payload={
+      name:document.getElementById('f-name').value.trim(),
+      company:document.getElementById('f-company').value.trim(),
+      email:email,
+      current_spend:document.getElementById('f-spend').value.trim(),
+      workload:document.getElementById('f-workload').value.trim(),
+      source:'meta-ads'
+    };
+    fetch(SB_URL+'/rest/v1/compute_leads',{
+      method:'POST',
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(payload)
+    }).then(function(r){
+      if(r.ok){
+        if(window.fbq) fbq('track','Lead');
+        document.getElementById('ok-msg').textContent="Got it — we'll send your quote to "+email+" shortly.";
+        document.getElementById('form').style.display='none';
+        document.getElementById('ok').style.display='block';
+      } else { throw new Error(); }
+    }).catch(function(){
+      btn.disabled=false; btn.textContent='Get my quote →';
+      err.textContent='Something went wrong — email us directly at hello@heliode.ai.'; err.style.display='block';
+    });
+  }
+</script>
+</body>
+</html>
