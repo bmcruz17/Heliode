@@ -27,10 +27,17 @@
     --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
     --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
     --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+    --violet:#7c3aed;--violet-bright:#8b5cf6;
+    --grad:linear-gradient(110deg,#2563eb 0%,#7c3aed 52%,#f97316 100%);
+    --grad-bv:linear-gradient(120deg,#2563eb,#7c3aed);
     --body:#39414d;
   }
   html{scroll-behavior:smooth;}
-  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  body{background:
+    radial-gradient(820px 460px at 8% -4%, rgba(37,99,235,0.07), transparent 60%),
+    radial-gradient(760px 460px at 102% 2%, rgba(124,58,237,0.06), transparent 58%),
+    radial-gradient(700px 500px at 50% 108%, rgba(249,115,22,0.05), transparent 60%),
+    var(--bg);background-attachment:fixed;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;}
   h1,h2,h3,h4,.brand{font-family:'Space Grotesk',sans-serif;}
   a{color:var(--blue);}
   .prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--blue));z-index:60;transition:width .1s;}
@@ -61,7 +68,7 @@
   .toc a:hover{color:var(--blue);}
 
   section.s{padding:34px 0;border-top:1px solid var(--line);scroll-margin-top:70px;}
-  .s-num{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);}
+  .s-num{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;}
   .s h2{font-size:1.5rem;letter-spacing:-0.02em;margin:6px 0 14px;}
   .s h3{font-size:1.06rem;margin:22px 0 7px;letter-spacing:-0.01em;}
   .s p{margin-bottom:12px;color:var(--body);}
@@ -218,10 +225,20 @@
     <h3>Site archetypes</h3>
     <p>A node is an 8-GPU server (~10&nbsp;kW, ~$250K). The site only needs <strong>power</strong> — and we bring our own install crew so electrical work is never a landlord dependency.</p>
     <ul>
-      <li><strong>Archetype A — leased commercial / light-industrial (now):</strong> buildings already carrying heavy 3-phase service. Lease, install, go live in days; fewer noise/zoning frictions; fastest path to first owned nodes.</li>
-      <li><strong>Archetype B — service-upgraded residential, self-generating (expansion):</strong> our crew upgrades a home to <strong>400A service</strong> (making it a commercial-grade power customer), deploys the node, and pairs it with <strong>max-fit rooftop solar + battery</strong> via a solar partner (e.g. Sunrun). The homeowner gets solar and backup; we get a power-ready site and a distribution channel competitors can't easily assemble.</li>
+      <li><strong>Archetype A — service-upgraded residential, self-generating (priority):</strong> our crew upgrades a home to <strong>400A service</strong> (making it a commercial-grade power customer), deploys the node, and pairs it with a <strong>~20+ kW rooftop solar array + battery</strong>. The homeowner gets solar and backup; we get a power-ready, self-generating site and a distribution channel competitors can't easily assemble.</li>
+      <li><strong>Archetype B — power-ready commercial / light-industrial (secondary):</strong> buildings already carrying heavy 3-phase service. Lease, install, go live in days; fewer noise/zoning frictions; larger nodes where demand concentrates.</li>
     </ul>
-    <div class="flag"><div class="fl">Honesty note — solar</div>A node runs 24/7 (~240&nbsp;kWh/day); ~20&nbsp;kW of rooftop solar yields on the order of 100&nbsp;kWh/day. On-site solar + battery is a meaningful <em>energy-cost offset and resilience layer, not a full off-grid supply</em>. The upgraded utility service remains the primary feed; we underwrite to grid power and treat self-generation as upside, with the partner carrying solar/storage capital and install.</div>
+    <div class="flag"><div class="fl">Honesty note — solar</div>A node runs 24/7 (~240&nbsp;kWh/day); ~20&nbsp;kW of rooftop solar yields on the order of 100&nbsp;kWh/day. On-site solar + battery is a meaningful <em>energy-cost offset and resilience layer, not a full off-grid supply</em>. The upgraded utility service remains the primary feed; we underwrite to grid power and treat self-generation as upside.</div>
+
+    <h3 style="margin-top:24px;">The energy system as a credit-backed asset</h3>
+    <p>Because <strong>Heliode owns</strong> the solar + battery as a business asset (not the homeowner), the residential-priority model unlocks the <em>commercial</em> clean-energy incentive stack — not the now-expired residential homeowner credit. This materially lowers the net cost of the energy system that offsets a node's single largest operating cost: power.</p>
+    <ul>
+      <li><strong>§48E Clean Electricity Investment Tax Credit — 30% base</strong> on the solar + storage cost (projects under 1&nbsp;MW auto-qualify for the full rate), with stackable <strong>+10% domestic-content</strong> and <strong>+10% energy-community</strong> adders — up to roughly <strong>50%</strong> back.</li>
+      <li><strong>100% first-year bonus depreciation</strong> (5-year MACRS), restored for assets placed in service after Jan&nbsp;2025 — a second tax shield stacked on the credit.</li>
+      <li><strong>Battery storage</strong> retains the full §48E through <strong>~2033</strong> (beyond the tighter solar deadlines) and can export to the grid / participate in <strong>VPP &amp; demand-response</strong> programs — a secondary revenue line, not just resilience.</li>
+      <li><strong>Timing:</strong> begin construction <strong>before July&nbsp;4,&nbsp;2026</strong> to lock the full 30% with a four-year placed-in-service window; deadlines tighten sharply afterward.</li>
+    </ul>
+    <div class="flag"><div class="fl">Not tax advice</div>Credit eligibility, "begin-construction" safe-harbor mechanics, and the third-party-ownership structure must be confirmed with a CPA / tax attorney before relying on these figures.</div>
   </section>
 
   <!-- 6 -->
@@ -314,7 +331,7 @@
     <h2>Risks &amp; dependencies</h2>
     <ul>
       <li><strong>Offtake first.</strong> A node is a ~$250K brick without a contracted buyer. The brokerage exists to prove and secure demand before deployment.</li>
-      <li><strong>Site/host acquisition.</strong> The hardest problem; mitigated by starting on power-ready commercial sites and bringing our own install crew.</li>
+      <li><strong>Site/host acquisition.</strong> The hardest problem; mitigated by leading with service-upgraded homes (a repeatable, channel-friendly motion), falling back to power-ready commercial sites, and bringing our own install crew.</li>
       <li><strong>Hardware cost.</strong> ~$250K is a planning number — ground-truth with vendor quotes before committing capital.</li>
       <li><strong>Financing.</strong> Hardware is financed against contracts; sequence the build behind signed demand.</li>
       <li><strong>Price decline / GPU supply.</strong> Plan for ~6%/yr decline; solve sourcing and allocation early without a single point of failure.</li>

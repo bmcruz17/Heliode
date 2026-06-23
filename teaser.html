@@ -26,8 +26,9 @@
     --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
     --blue:#2563eb;--blue-bright:#3b82f6;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
     --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+    --violet:#7c3aed;--violet-bright:#8b5cf6;--grad:linear-gradient(110deg,#2563eb 0%,#7c3aed 52%,#f97316 100%);--grad-bv:linear-gradient(120deg,#2563eb,#7c3aed);
   }
-  body{background:var(--bg2);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  body{background:radial-gradient(820px 460px at 8% -4%, rgba(37,99,235,0.07), transparent 60%),radial-gradient(760px 460px at 102% 2%, rgba(124,58,237,0.06), transparent 58%),radial-gradient(700px 500px at 50% 108%, rgba(249,115,22,0.05), transparent 60%),var(--bg2);background-attachment:fixed;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
   h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;}
   .sheet{max-width:840px;margin:24px auto;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(13,19,32,0.06);}
 
@@ -53,7 +54,7 @@
   .row{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
   section{padding:16px 0;border-top:1px solid var(--line);}
   section:first-child{border-top:none;padding-top:6px;}
-  .eye{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+  .eye{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:transparent;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;margin-bottom:8px;}
   h2{font-size:1.05rem;margin-bottom:7px;}
   h3{font-size:0.9rem;margin:10px 0 3px;}
   p,li{font-size:0.88rem;color:var(--mute);}
@@ -74,7 +75,7 @@
   .ask p{font-size:0.9rem;}
   .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;}
   .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.88rem;border-radius:10px;padding:12px 20px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;}
-  .btn-p{background:var(--accent);color:#fff;}
+  .btn-p{background:var(--grad);color:#fff;box-shadow:0 8px 22px rgba(124,58,237,0.26);}
   .btn-g{background:#fff;color:var(--ink);border:1px solid var(--line2);}
 
   .ft{padding:16px 36px 26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;}
@@ -155,7 +156,7 @@
       </div>
       <div class="two-phase">
         <div class="ph"><div class="w">Now · Phase 1</div><h3>Managed brokerage</h3><p>Source GPU capacity on the open market, run it as a managed service, and resell to inference teams at open-market rates that undercut the hyperscalers. Asset-light, revenue now — and it proves demand and signs the offtake that de-risks Phase 2.</p></div>
-        <div class="ph next"><div class="w">Next · Phase 2</div><h3>Owned regional capacity</h3><p>Deploy owned GPU clusters in leased commercial &amp; light-industrial space with the heavy power dense compute needs; battery backup keeps them online through outages. We own the hardware and the customer relationship; hardware is financed against contracted compute (equipment financing against signed offtake).</p></div>
+        <div class="ph next"><div class="w">Next · Phase 2</div><h3>Owned regional capacity</h3><p>Deploy owned GPU clusters in leased commercial &amp; light-industrial space with the heavy power dense compute needs; battery backup keeps them online through outages. We own the hardware and the customer relationship; hardware is financed against contracted compute (equipment financing against signed offtake). Priority sites are service-upgraded homes — 400A panel, GPU node, and an owned 20+ kW solar-plus-battery array — so the §48E clean-energy credit (30%+) turns the node's biggest cost, power, into a credit-backed asset.</p></div>
       </div>
     </section>
 
