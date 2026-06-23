@@ -149,3 +149,44 @@ I'll bring a number.
 - Send once DKIM is authenticating so it lands in inbox, not spam.
 - Hardware vendors (Dell, Supermicro, Thinkmate, Exxact) = quotes to *buy* nodes.
   Compute/marketplace (RunPod, Lambda, CoreWeave, Crusoe) = capacity to *rent / resell* now.
+
+---
+
+# 4 · Paid ads — Meta (QUEUED) — target: AI inference teams
+
+**Reality check:** Meta can't target "ML engineer" / "AI founder" by job title (LinkedIn can).
+For this niche B2B buyer Meta is the harder channel — run it, but lean on what Meta is good at
+(retargeting, lookalikes, conversion optimization) and pair it with LinkedIn/X prospecting (§3),
+which will likely beat Meta on cost-per-qualified-lead for this audience.
+
+## Targeting (priority order)
+1. **Retargeting** — install the Meta Pixel on heliode.ai; show ads to site / savings-calculator
+   visitors who didn't request a quote. Highest intent.
+2. **Lookalike** — upload your lead + customer list (even 50–100 emails) → 1% Lookalike.
+3. **Interest stack** (cold) — PyTorch, TensorFlow, Hugging Face, NVIDIA, CUDA, AWS, Google Cloud,
+   MLOps, AI, Y Combinator + behaviors (small-biz owners, tech early adopters). Keep broad.
+
+## Setup
+- Objective: Leads / Sales (conversion), optimize for a **Quote Request** event. Not "Boost".
+- Funnel: ad → savings calculator / quote LP → form → lead in dashboard.
+- Budget: ~$20–40/day × 7–10 days per audience; cut losers, scale winners.
+- Creative: 3–4 variations; measure cost per quote request, then cost per closed customer.
+
+## Ad copy — primary (pain-led)
+**Headline:** Cut your GPU bill — managed
+Paying too much for GPU compute? Heliode gets AI teams managed H100/H200 capacity under what
+they're paying on hyperscalers — one endpoint, one bill, we handle uptime and support.
+Send your current monthly spend and we'll quote the same workload for less. No commitment.
+→ Get a quote at heliode.ai
+
+## Ad copy — short / story
+**Headline:** Your inference bill, cut
+Running AI in production? Your GPU bill is probably your second-biggest cost. We manage H100/H200
+capacity for teams at open-market rates — usually well under hyperscaler on-demand. One bill,
+fully run for you. See what you'd save → heliode.ai
+
+## Pre-launch checklist
+- Install the Meta Pixel before launching (no pixel = no retargeting / no conversion optimization).
+- Seed the lookalike from your dashboard lead export.
+- One landing page, one action (quote/calculator).
+- Run LinkedIn/X in parallel.
