@@ -318,7 +318,7 @@
         <a class="pagecard" href="playbook.html" target="_blank"><div class="pt">Operator playbook</div><div class="pu">/playbook.html</div><div class="pd">Command center + scripts + comp.</div></a>
         <a class="pagecard" href="rep.html" target="_blank"><div class="pt">Rep portal</div><div class="pu">/rep.html</div><div class="pd">Rep Kanban pipeline + commissions.</div></a>
         <a class="pagecard" href="academy.html" target="_blank"><div class="pt">Founder's course</div><div class="pu">/academy.html</div><div class="pd">Training &amp; education.</div></a>
-        <a class="pagecard" href="outreach.html" target="_blank"><div class="pt">Vendor outreach</div><div class="pu">/outreach.html</div><div class="pd">Copy-ready Dell follow-up + hardware RFQ.</div></a>
+        <a class="pagecard" href="outreach.html" target="_blank"><div class="pt">Outreach</div><div class="pu">/outreach.html</div><div class="pd">Copy-ready hardware, reseller &amp; customer emails.</div></a>
       </div>
     </div>
   </div>
@@ -670,7 +670,7 @@
     ['Homepage','index.html'],['GPU cost teardown','inference-cost.html'],['Recruit page','join.html'],
     ['Investor portal','investors.html'],['Opportunity','opportunity.html'],['Teaser','teaser.html'],
     ['Business plan','business-plan.html'],['Playbook','playbook.html'],['Rep portal','rep.html'],
-    ["Founder's course",'academy.html'],['Vendor outreach','outreach.html']
+    ["Founder's course",'academy.html'],['Outreach','outreach.html']
   ];
   function ovPct(a,b){ return b>0 ? Math.round(a/b*100)+'%' : '—'; }
   function renderOverview(){
@@ -730,7 +730,7 @@
         +'<td><button class="del q-del" title="Delete">✕</button></td>'
         +'</tr>';
     });
-    $('rquotes').innerHTML = html || '<tr><td colspan="8" class="sub" style="padding:22px;text-align:center">No quotes yet — add one above, or send the Vendor outreach emails.</td></tr>';
+    $('rquotes').innerHTML = html || '<tr><td colspan="8" class="sub" style="padding:22px;text-align:center">No quotes yet — add one above, or send the Outreach emails.</td></tr>';
     $('rquotes').querySelectorAll('tr[data-id]').forEach(tr=>{
       const id=tr.getAttribute('data-id'); const q=quotes.find(x=>String(x.id)===id);
       tr.querySelector('.q-uprice').addEventListener('change', async function(){ const v=this.value===''?null:+this.value; if(await qpatch(id,{unit_price:v})){ if(q)q.unit_price=v; } });

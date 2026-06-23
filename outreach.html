@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Heliode — Vendor Outreach</title>
-<meta property="og:title" content="Heliode — Vendor Outreach">
+<title>Heliode — Outreach</title>
+<meta property="og:title" content="Heliode — Outreach">
 <meta property="og:image" content="https://heliode.ai/og/og-admin.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://heliode.ai/og/og-admin.png">
@@ -20,46 +20,52 @@
     --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
     --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
     --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
-    --green:#16a34a;--body:#39414d;
+    --violet:#7c3aed;--green:#16a34a;--body:#39414d;
   }
   body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
   h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
   a{color:var(--blue);}
   .bar{background:rgba(13,19,32,0.92);position:sticky;top:0;z-index:30;border-bottom:1px solid rgba(255,255,255,0.08);}
-  .bar-in{max-width:840px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .bar-in{max-width:860px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
   .brand{color:#fff;font-weight:700;display:flex;align-items:center;gap:8px;font-size:1rem;}
   .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
   .bar a{color:#cdd4df;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.74rem;}
   .bar a:hover{color:#fff;}
   .bar-actions{display:flex;gap:16px;align-items:center;}
-  .wrap{max-width:840px;margin:0 auto;padding:32px 22px 80px;}
+  .wrap{max-width:860px;margin:0 auto;padding:32px 22px 80px;}
   .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);}
   h1{font-size:1.8rem;margin:8px 0 8px;}
   .lead{color:var(--mute);font-size:1rem;margin-bottom:8px;}
   .flag{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:13px 16px;margin:16px 0;font-size:0.9rem;color:var(--body);}
   .flag b{color:var(--ink);}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:18px 0;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
-  .card-h{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
-  .card-h h2{font-size:1.15rem;}
-  .tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;}
+  .sec-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.15rem;color:var(--ink);margin:34px 0 4px;padding-top:18px;border-top:2px solid var(--line);display:flex;align-items:center;gap:10px;}
+  .sec-h .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;font-family:'JetBrains Mono',monospace;font-size:0.8rem;}
+  .sec-sub{font-size:0.88rem;color:var(--mute);margin-bottom:6px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:14px 0;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .card-h{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px;}
+  .card-h h2{font-size:1.05rem;}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;}
   .tag.warm{background:var(--accent-dim);border:1px solid var(--accent-line);color:var(--accent-hover);}
   .tag.cold{background:var(--blue-dim);border:1px solid var(--blue-line);color:var(--blue);}
-  .who{font-size:0.85rem;color:var(--mute);margin-bottom:12px;}
+  .who{font-size:0.84rem;color:var(--mute);margin-bottom:10px;}
   .who b{color:var(--ink);}
-  .subj{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-bottom:10px;}
+  .subj{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-bottom:10px;}
   .subj span{color:var(--faint);}
   pre.mail{white-space:pre-wrap;font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--body);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px;line-height:1.6;}
-  .copy{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.8rem;border:none;border-radius:8px;padding:8px 14px;background:var(--accent);color:#fff;cursor:pointer;}
+  .copy{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.8rem;border:none;border-radius:8px;padding:8px 14px;background:var(--accent);color:#fff;cursor:pointer;margin-top:10px;}
   .copy:hover{background:var(--accent-hover);}
   .copy.done{background:var(--green);}
-  .spec{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--body);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+  .spec{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--body);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:8px 0;}
   .spec b{color:var(--ink);}
+  .note{background:var(--blue-dim);border:1px solid var(--blue-line);border-radius:12px;padding:14px 16px;margin:14px 0;font-size:0.9rem;color:var(--body);}
+  .note b{color:var(--blue);}
+  .note ul{margin:8px 0 0 18px;}.note li{margin-bottom:5px;}
   @media print{.bar,.copy{display:none!important;}body{background:#fff;}}
 </style>
 </head>
 <body>
 <div class="bar"><div class="bar-in">
-  <div class="brand"><span class="dot"></span>HELIODE · Vendor Outreach</div>
+  <div class="brand"><span class="dot"></span>HELIODE · Outreach</div>
   <div class="bar-actions">
     <a href="admin.html">Dashboard</a>
     <a href="playbook.html">Playbook</a>
@@ -67,62 +73,138 @@
 </div></div>
 
 <div class="wrap">
-  <div class="eyebrow">Procurement · hardware quotes</div>
-  <h1>Vendor outreach</h1>
-  <p class="lead">Copy-ready emails to get node quotes for the <b>H100/H200 flagship</b>. Send from <b>brandon@heliode.ai</b>.</p>
-  <div class="flag"><div style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-hover);margin-bottom:5px;">Before sending</div>Send only once DKIM is authenticating (so it lands in inbox, not spam). Hardware vendors below = quotes to <b>buy</b> nodes; the returned prices are your real-world check on the ~$250K node assumption.</div>
+  <div class="eyebrow">Supply · hardware · customers</div>
+  <h1>Outreach</h1>
+  <p class="lead">Copy-ready emails for every conversation. Send from <b>brandon@heliode.ai</b> once DKIM is green; log replies in <b>Quotes</b> / <b>Leads</b>.</p>
+  <div class="flag"><b>Two motions, every day:</b> send a couple <b>supply</b> asks (cheap capacity to resell) and a couple <b>customer</b> asks (teams to onboard). Supply + demand is the whole game in Phase 1.</div>
 
-  <div class="spec">
-    <b>Node config being quoted:</b><br>
-    8× NVIDIA H100 SXM 80GB (also quote H200 141GB) · HGX 8-GPU baseboard, NVLink/NVSwitch ·
-    dual CPU · ~1–2TB RAM · ~15–30TB NVMe · 400G IB/Ethernet. Dell platform = PowerEdge XE9680.
-  </div>
+  <!-- ============ 1 · HARDWARE QUOTES ============ -->
+  <div class="sec-h"><span class="n">1</span>Hardware quotes <span style="font-weight:400;color:var(--mute);font-size:0.85rem;">— buy nodes (later)</span></div>
+  <p class="sec-sub">For owned-node economics. The returned unit price is your real-world check on the ~$250K assumption.</p>
+  <div class="spec"><b>Config:</b> 8× NVIDIA H100 SXM 80GB (also quote H200 141GB) · HGX 8-GPU baseboard, NVLink/NVSwitch · dual CPU · ~1–2TB RAM · ~15–30TB NVMe · 400G IB/Ethernet. Dell platform = PowerEdge XE9680.</div>
 
-  <!-- DELL -->
   <div class="card">
-    <div class="card-h"><h2>1 · Dell — follow-up</h2><span class="tag warm">Warm · already inquired</span></div>
-    <div class="who">To your Dell contact / sales team. <b>Your one existing lead.</b></div>
+    <div class="card-h"><h2>Dell — follow-up</h2><span class="tag warm">Warm · already inquired</span></div>
+    <div class="who">Your one existing lead.</div>
     <div class="subj"><span>Subject:</span> Following up — PowerEdge XE9680 quote (Heliode)</div>
     <pre class="mail" id="m1">Hi [name / Dell team],
 
 I submitted an inquiry recently and wanted to follow up directly. I'm Brandon Cruz, founder of Heliode (heliode.ai) — we're standing up managed GPU capacity for AI inference and are speccing our first deployment.
 
-Could you put together a quote for a PowerEdge XE9680 configured with 8× NVIDIA H100 SXM (80GB) — and a parallel option with 8× H200 (141GB) so I can compare? Rough config: dual CPU, ~2TB RAM, ~15–30TB NVMe, and high-speed networking (400G IB/Ethernet).
+Could you put together a quote for a PowerEdge XE9680 with 8× NVIDIA H100 SXM (80GB) — and a parallel option with 8× H200 (141GB)? Rough config: dual CPU, ~2TB RAM, ~15–30TB NVMe, 400G IB/Ethernet.
 
-Specifically I'd like:
-- Unit pricing (H100 vs H200), and volume pricing — starting with one unit, scaling to multiple nodes.
-- Lead time to ship.
-- Warranty / ProSupport options.
-- Any Dell Financial Services leasing/financing options (we'll finance hardware against contracts).
+Specifically: unit pricing (H100 vs H200), volume pricing (one unit now, scaling), lead time, warranty/ProSupport, and any Dell Financial Services leasing options.
 
 Best reply address is brandon@heliode.ai. Happy to hop on a call.
 
-Brandon Cruz · Founder, Heliode (Heliode, Inc.) · heliode.ai</pre>
-    <div style="margin-top:10px;"><button class="copy" data-t="m1">Copy email</button></div>
+Brandon Cruz · Founder, Heliode, Inc. · heliode.ai</pre>
+    <button class="copy" data-t="m1">Copy email</button>
   </div>
 
-  <!-- RFQ -->
   <div class="card">
-    <div class="card-h"><h2>2 · RFQ — Supermicro / Thinkmate / Exxact</h2><span class="tag cold">Cold · competing quotes</span></div>
-    <div class="who">Send to each hardware vendor to get prices to compare against Dell.</div>
+    <div class="card-h"><h2>RFQ — Supermicro / Thinkmate / Exxact</h2><span class="tag cold">Cold · competing quotes</span></div>
     <div class="subj"><span>Subject:</span> RFQ — 8×H100/H200 HGX server (Heliode)</div>
     <pre class="mail" id="m2">Hi [vendor] team,
 
-I'm Brandon Cruz, founder of Heliode (heliode.ai) — managed GPU capacity for AI inference. I'm requesting a quote on an 8-GPU HGX server:
+I'm Brandon Cruz, founder of Heliode (heliode.ai) — managed GPU capacity for AI inference. Requesting a quote on an 8-GPU HGX server:
 
 - GPUs: 8× NVIDIA H100 SXM 80GB (please also quote an H200 141GB option)
 - Platform: HGX 8-GPU baseboard, NVLink/NVSwitch
 - CPU: dual current-gen (Xeon or EPYC)
-- Memory: ~1–2TB
-- Storage: ~15–30TB NVMe
-- Networking: high-speed (400G InfiniBand or Ethernet)
+- Memory: ~1–2TB · Storage: ~15–30TB NVMe · Networking: 400G IB/Ethernet
 
-Please include: unit price (H100 & H200), volume/scaling pricing, lead time, warranty & support, and any financing/leasing options. Starting with one unit, scaling to multiple.
+Please include unit price (H100 & H200), volume/scaling pricing, lead time, warranty & support, and financing options. Starting with one unit, scaling to multiple.
 
 Reply to brandon@heliode.ai. Thanks!
 
+Brandon Cruz · Founder, Heliode, Inc. · heliode.ai</pre>
+    <button class="copy" data-t="m2">Copy email</button>
+  </div>
+
+  <!-- ============ 2 · SUPPLY / RESELLER ============ -->
+  <div class="sec-h"><span class="n">2</span>Supply / reseller <span style="font-weight:400;color:var(--mute);font-size:0.85rem;">— rent capacity to resell (now)</span></div>
+  <p class="sec-sub">Lock in cheap, reliable capacity you mark up with management. This is what lets you onboard a customer this month — no hardware needed.</p>
+
+  <div class="card">
+    <div class="card-h"><h2>RunPod — volume / partner</h2><span class="tag warm">Start here</span></div>
+    <div class="who">Cheapest, flexible, already in your pipeline. Just start using it + ask about volume.</div>
+    <div class="subj"><span>Subject:</span> Volume / reseller pricing — Heliode (managed GPU)</div>
+    <pre class="mail" id="m3">Hi RunPod team,
+
+I'm Brandon Cruz, founder of Heliode (heliode.ai). We run managed GPU compute for AI inference teams and source capacity on RunPod. We're scaling and want to talk volume / committed-use pricing and whether you have a partner or reseller program.
+
+Who's the right person for that? Reply to brandon@heliode.ai — thanks!
+
+Brandon Cruz · Founder, Heliode, Inc.</pre>
+    <button class="copy" data-t="m3">Copy email</button>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h2>Neocloud reseller inquiry</h2><span class="tag cold">Lambda · CoreWeave · Crusoe · Voltage Park · Hyperstack</span></div>
+    <div class="who">For reliable, reserved capacity with an SLA. Send to each provider's partnerships/sales.</div>
+    <div class="subj"><span>Subject:</span> Reseller / partner pricing — Heliode</div>
+    <pre class="mail" id="m4">Hi [provider] partnerships team,
+
+I'm Brandon Cruz, founder of Heliode (heliode.ai) — we deliver managed GPU compute to AI inference teams and resell capacity from providers like you. I'm looking to lock in a reliable primary supply partner.
+
+Could you share:
+- Reseller / partner pricing or committed-use discounts on H100 / H200 / L40S / A100
+- Whether you support managed resellers (we wrap capacity in our own service + support)
+- Minimums and lead time
+
+We're signing customers now and want to route volume to the right partner. Best person to talk to? brandon@heliode.ai.
+
+Brandon Cruz · Founder, Heliode, Inc. · heliode.ai</pre>
+    <button class="copy" data-t="m4">Copy email</button>
+  </div>
+
+  <!-- ============ 3 · CUSTOMER OUTREACH ============ -->
+  <div class="sec-h"><span class="n">3</span>Customer outreach <span style="font-weight:400;color:var(--mute);font-size:0.85rem;">— demand</span></div>
+  <p class="sec-sub">Inference-heavy seed–Series A teams already paying a GPU bill. The offer: "send me your current bill, I'll quote it cheaper, managed." Quote-first, low friction.</p>
+
+  <div class="card">
+    <div class="card-h"><h2>Cold — touch 1</h2><span class="tag cold">Email or LinkedIn</span></div>
+    <div class="who">Short, specific, references a real signal. Don't pitch — ask.</div>
+    <div class="subj"><span>Subject:</span> Cutting your GPU bill (managed)</div>
+    <pre class="mail" id="m5">Hi [name],
+
+Saw you're [running X in production / hiring ML engineers] — usually means a real GPU bill. We get AI teams managed H100/H200 capacity under what they're paying now: one endpoint, one bill, we handle uptime and support.
+
+Worth a 15-minute look? If you tell me your rough monthly GPU spend and what you're running, I'll come back with a real number — no commitment.
+
 Brandon Cruz · Founder, Heliode · heliode.ai</pre>
-    <div style="margin-top:10px;"><button class="copy" data-t="m2">Copy email</button></div>
+    <button class="copy" data-t="m5">Copy email</button>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h2>Follow-up — touch 2</h2><span class="tag cold">3–4 days later</span></div>
+    <div class="who">Adds a concrete example. Two touches max, then move on.</div>
+    <div class="subj"><span>Subject:</span> re: Cutting your GPU bill</div>
+    <pre class="mail" id="m6">Hi [name],
+
+Following up — quick example of what this looks like: teams paying ~$8k/mo on hyperscaler on-demand we've been able to quote closer to ~$5k managed for the same workload.
+
+Share your current setup + monthly spend and I'll send you an apples-to-apples number this week. If it's not clearly better, no hard feelings.
+
+Brandon Cruz · Founder, Heliode · heliode.ai</pre>
+    <button class="copy" data-t="m6">Copy email</button>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h2>LinkedIn / X DM</h2><span class="tag cold">Short form</span></div>
+    <pre class="mail" id="m7">Hey [name] — saw you're running [model/product]. We do managed GPU compute for inference teams, usually under what you're paying now, fully run for you. Open to a quick look at what you'd save? I'll bring a number.</pre>
+    <button class="copy" data-t="m7">Copy DM</button>
+  </div>
+
+  <div class="note">
+    <b>Where to find them (and qualify):</b>
+    <ul>
+      <li><b>Warm network first</b> — fastest close. Anyone you know building with AI.</li>
+      <li><b>Hiring signals</b> — companies posting ML/inference/GPU roles (CUDA, vLLM, H100 in the JD) = real spend. Your <b>lead_finder</b> tool scrapes these.</li>
+      <li><b>Communities</b> — r/LocalLLaMA, MLOps/LLM Discords &amp; Slacks, Latent Space, indie hackers, Capital Factory / YC networks.</li>
+      <li><b>Metros</b> — Austin, SF Bay, Seattle, Boston.</li>
+      <li><b>Qualifier:</b> "What are you spending on GPU compute a month, and where?" Fast answer = real prospect. Shrug = keep warm, don't burn cycles.</li>
+    </ul>
   </div>
 </div>
 
