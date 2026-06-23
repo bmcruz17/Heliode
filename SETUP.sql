@@ -290,6 +290,24 @@ create policy "user reads own nda" on public.nda_acceptances
   for select to authenticated using (user_id = auth.uid() or public.is_admin());
 
 
+-- ░░ 8. QUOTE TRACKER (hardware/vendor node quotes) ░░░░░░░░░░░░░░░░░░░
+create table if not exists public.quotes (
+  id         uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  vendor     text not null,
+  gpu        text,
+  config     text,
+  unit_price numeric,
+  lead_time  text,
+  status     text not null default 'requested',
+  notes      text
+);
+alter table public.quotes enable row level security;
+drop policy if exists "admins manage quotes" on public.quotes;
+create policy "admins manage quotes" on public.quotes
+  for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
+
 -- ════════════════════════════════════════════════════════════════════
 -- Done. Old per-file scripts (compute_leads.sql, lead_tracker.sql,
 -- rep_portal.sql, vendors.sql) are now all captured here.

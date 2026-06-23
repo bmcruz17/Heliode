@@ -181,6 +181,8 @@
       <button class="tab" id="tab-reps">Reps</button>
       <button class="tab" id="tab-investors">Investors</button>
       <button class="tab" id="tab-team">Team</button>
+      <button class="tab" id="tab-quotes">Quotes</button>
+      <button class="tab" id="tab-ndas">NDAs</button>
       <button class="tab" id="tab-pages">Pages</button>
     </div>
 
@@ -261,6 +263,37 @@
         <table>
           <thead><tr><th>Name</th><th>Email</th><th>Status</th><th></th></tr></thead>
           <tbody id="rteam"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="quotes-view" style="display:none;">
+      <div class="stat-line" id="qstat"></div>
+      <div class="add-vform" style="grid-template-columns:1.1fr 0.7fr 1.2fr 0.8fr 0.8fr 0.9fr auto;">
+        <input class="vin inp" id="q-vendor" placeholder="Vendor (e.g. Dell)">
+        <select class="vin inp" id="q-gpu"><option>H100</option><option>H200</option><option>L40S</option><option>A100</option><option>Other</option></select>
+        <input class="vin inp" id="q-config" placeholder="Config (e.g. 8×H100 XE9680)">
+        <input class="vin inp" id="q-price" type="number" placeholder="Unit $">
+        <input class="vin inp" id="q-lead" placeholder="Lead time">
+        <select class="vin inp" id="q-status"><option value="requested">requested</option><option value="received">received</option><option value="negotiating">negotiating</option><option value="ordered">ordered</option><option value="declined">declined</option></select>
+        <button class="btn btn-primary" id="q-add">+ Add</button>
+      </div>
+      <p class="stat-line" style="margin:-6px 0 14px;">Track node quotes side by side. The unit price is your real-world check on the ~$250K assumption.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Vendor</th><th>GPU</th><th>Config</th><th>Unit price</th><th>Lead time</th><th>Status</th><th>Notes</th><th></th></tr></thead>
+          <tbody id="rquotes"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="ndas-view" style="display:none;">
+      <div class="stat-line" id="nstat"></div>
+      <p class="stat-line" style="margin:-6px 0 14px;">Everyone who's signed the confidentiality agreement on first login (reps, investors, team).</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Name (signature)</th><th>Personal email</th><th>Phone</th><th>Version</th><th>Signed</th></tr></thead>
+          <tbody id="rndas"></tbody>
         </table>
       </div>
     </div>
@@ -369,7 +402,7 @@
     $('dash').style.display='block';
     $('bar-actions').style.display='flex';
     render();
-    await Promise.all([loadVendors(), loadReps(), loadInvestors(), loadTeam()]);
+    await Promise.all([loadVendors(), loadReps(), loadInvestors(), loadTeam(), loadQuotes(), loadNdas()]);
     renderOverview();
   }
 
@@ -450,7 +483,7 @@
   ];
   let vendors=[], vendorsReady=false;
 
-  const VIEWS=['overview','leads','vendors','reps','investors','team','pages'];
+  const VIEWS=['overview','leads','vendors','reps','investors','team','quotes','ndas','pages'];
   VIEWS.forEach(v=> $('tab-'+v).addEventListener('click',()=>showView(v)));
   function showView(v){
     VIEWS.forEach(x=>{
@@ -662,6 +695,65 @@
     if($('lead-funnel')) $('lead-funnel').innerHTML = STAGES.map(s=>'<span class="fchip"><b>'+leads.filter(l=>(l.status||'new')===s).length+'</b> '+s+'</span>').join('');
     if($('vendor-funnel')) $('vendor-funnel').innerHTML = VSTAGES.map(s=>'<span class="fchip"><b>'+vendors.filter(v=>(v.stage||'to_contact')===s.k).length+'</b> '+s.label+'</span>').join('');
     if($('ov-pages') && !$('ov-pages').childElementCount) $('ov-pages').innerHTML = OV_PAGES.map(p=>'<a class="pagecard" href="'+p[1]+'" target="_blank"><div class="pt">'+p[0]+'</div><div class="pu">/'+p[1]+'</div></a>').join('');
+  }
+
+  // ── Quote tracker ──
+  let quotes=[];
+  const QSTATUS=['requested','received','negotiating','ordered','declined'];
+  const QCOLOR={requested:'#8a909a',received:'#2563eb',negotiating:'#a855f7',ordered:'#16a34a',declined:'#dc2626'};
+  async function loadQuotes(){
+    const { data, error } = await sb.from('quotes').select('*').order('created_at',{ascending:false});
+    if(error){ quotes=[]; $('qstat').textContent='Quotes not enabled yet — run the quotes SQL in Supabase.'; renderQuotes(); return; }
+    quotes=data||[]; renderQuotes();
+  }
+  async function qpatch(id,body){ const { error } = await sb.from('quotes').update(body).eq('id',id); return !error; }
+  $('q-add').addEventListener('click', async ()=>{
+    const vendor=$('q-vendor').value.trim(); if(!vendor){ alert('Vendor name?'); return; }
+    const unit_price = $('q-price').value===''?null:+$('q-price').value;
+    const { error } = await sb.from('quotes').insert({ vendor, gpu:$('q-gpu').value, config:$('q-config').value.trim(), unit_price, lead_time:$('q-lead').value.trim(), status:$('q-status').value });
+    if(error){ alert('Could not add (run quotes SQL first?): '+error.message); return; }
+    $('q-vendor').value=$('q-config').value=$('q-price').value=$('q-lead').value=''; loadQuotes();
+  });
+  function renderQuotes(){
+    if(!$('qstat').textContent.startsWith('Quotes not enabled')) $('qstat').innerHTML='<b>'+quotes.length+'</b> quotes tracked';
+    let html='';
+    quotes.forEach(q=>{
+      const opts=QSTATUS.map(s=>'<option value="'+s+'"'+(q.status===s?' selected':'')+'>'+s+'</option>').join('');
+      html+='<tr data-id="'+esc(q.id)+'">'
+        +'<td class="who-cell">'+esc(q.vendor||'—')+'</td>'
+        +'<td class="sub">'+esc(q.gpu||'—')+'</td>'
+        +'<td class="sub">'+esc(q.config||'—')+'</td>'
+        +'<td><input class="cell-in q-uprice" type="number" inputmode="numeric" value="'+(q.unit_price!=null?esc(q.unit_price):'')+'" placeholder="$"></td>'
+        +'<td><input class="cell-in q-ulead" value="'+esc(q.lead_time||'')+'" placeholder="lead time"></td>'
+        +'<td><select class="cell-in q-ustatus" style="color:'+(QCOLOR[q.status]||'#0d1320')+'">'+opts+'</select></td>'
+        +'<td><input class="cell-in q-unotes" value="'+esc(q.notes||'')+'" placeholder="notes"></td>'
+        +'<td><button class="del q-del" title="Delete">✕</button></td>'
+        +'</tr>';
+    });
+    $('rquotes').innerHTML = html || '<tr><td colspan="8" class="sub" style="padding:22px;text-align:center">No quotes yet — add one above, or send the Vendor outreach emails.</td></tr>';
+    $('rquotes').querySelectorAll('tr[data-id]').forEach(tr=>{
+      const id=tr.getAttribute('data-id'); const q=quotes.find(x=>String(x.id)===id);
+      tr.querySelector('.q-uprice').addEventListener('change', async function(){ const v=this.value===''?null:+this.value; if(await qpatch(id,{unit_price:v})){ if(q)q.unit_price=v; } });
+      tr.querySelector('.q-ulead').addEventListener('change', async function(){ if(await qpatch(id,{lead_time:this.value.trim()})){ if(q)q.lead_time=this.value.trim(); } });
+      tr.querySelector('.q-ustatus').addEventListener('change', async function(){ if(await qpatch(id,{status:this.value})){ if(q)q.status=this.value; renderQuotes(); } });
+      tr.querySelector('.q-unotes').addEventListener('change', async function(){ if(await qpatch(id,{notes:this.value.trim()})){ if(q)q.notes=this.value.trim(); } });
+      tr.querySelector('.q-del').addEventListener('click', async ()=>{ if(!confirm('Delete this quote?')) return; const { error }=await sb.from('quotes').delete().eq('id',id); if(!error){ quotes=quotes.filter(x=>String(x.id)!==id); renderQuotes(); } });
+    });
+  }
+
+  // ── Signed NDAs (read-only) ──
+  async function loadNdas(){
+    const { data, error } = await sb.from('nda_acceptances').select('*').order('signed_at',{ascending:false});
+    if(error){ $('nstat').textContent='NDA table not ready — run SETUP.sql in Supabase.'; $('rndas').innerHTML=''; return; }
+    const rows=data||[];
+    $('nstat').innerHTML='<b>'+rows.length+'</b> signed NDAs';
+    $('rndas').innerHTML = rows.map(r=>'<tr>'
+      +'<td class="who-cell">'+esc(r.full_name||'—')+'</td>'
+      +'<td class="sub"><a href="mailto:'+esc(r.personal_email||'')+'">'+esc(r.personal_email||'—')+'</a></td>'
+      +'<td class="sub">'+esc(r.phone||'—')+'</td>'
+      +'<td class="sub">'+esc(r.nda_version||'—')+'</td>'
+      +'<td class="when">'+(r.signed_at?new Date(r.signed_at).toLocaleString():'—')+'</td>'
+      +'</tr>').join('') || '<tr><td colspan="5" class="sub" style="padding:22px;text-align:center">No NDAs signed yet.</td></tr>';
   }
 
   route();
