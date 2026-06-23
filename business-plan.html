@@ -197,15 +197,15 @@
   <section class="s" id="s1">
     <div class="s-num">Section 01</div>
     <h2>Executive summary</h2>
-    <p><strong>Heliode sells AI computing power and owns the process behind delivering it.</strong> AI inference — running trained models in production — is a steady, 24/7, latency-sensitive load that is growing faster than the industry can build for. The binding constraint isn't chips alone; it's <strong>power and time-to-build</strong>. New grid interconnections take years; new data centers take longer.</p>
-    <p>We attack that gap in two de-risked phases. <strong>Phase 1 (now):</strong> an asset-light managed brokerage — source GPU capacity on the open market, wrap it in a managed service, and resell it to inference teams below their current cloud bill. This earns revenue immediately and, critically, proves and secures the demand. <strong>Phase 2 (next):</strong> deploy owned GPU nodes on power-ready sites — leased commercial space first, and service-upgraded, self-generating residential sites as an expansion channel — financed against contracted compute revenue.</p>
+    <p><strong>Heliode sells AI computing power and owns the process behind delivering it.</strong> AI inference<span class="info" data-k="inference"></span> — running trained models in production — is a steady, 24/7, latency-sensitive load that is growing faster than the industry can build for. The binding constraint isn't chips alone; it's <strong>power and time-to-build</strong>. New grid interconnections take years; new data centers take longer.</p>
+    <p>We attack that gap in two de-risked phases. <strong>Phase 1 (now):</strong> an asset-light managed brokerage<span class="info" data-k="brokerage"></span> — source GPU<span class="info" data-k="gpu"></span> capacity on the open market, wrap it in a managed service, and resell it to inference teams below their current cloud bill. This earns revenue immediately and, critically, proves and secures the demand. <strong>Phase 2 (next):</strong> deploy owned GPU nodes on power-ready sites — leased commercial space first, and service-upgraded, self-generating residential sites as an expansion channel — financed against contracted compute revenue.</p>
     <div class="kpis">
       <div class="kpi"><div class="v">days<small> vs 5–7 yr</small></div><div class="k">Deploy vs grid queue</div></div>
       <div class="kpi"><div class="v">~$730<small>/GPU/mo</small></div><div class="k">Brokerage gross margin</div></div>
       <div class="kpi"><div class="v">~$7.6K<small>/mo</small></div><div class="k">Owned-node net contribution</div></div>
       <div class="kpi"><div class="v">~$2.0M</div><div class="k">Pre-seed raise</div></div>
     </div>
-    <p>The moat is not the hardware — anyone can buy GPUs. It is <strong>distribution</strong>: sourcing sites, signing customers, installing, and operating many locations as one cloud. We are raising a ~$2.0M pre-seed to fund the team, software, brokerage launch, and a small number of proof nodes ahead of a 50-node Austin pilot.</p>
+    <p>The moat is <strong>distribution</strong>, not the hardware: anyone can buy GPUs, but sourcing sites, signing customers, installing, and operating many locations as one cloud is the hard part. We are raising a ~$2.0M pre-seed to fund the team, software, brokerage launch, and a small number of proof nodes ahead of a 50-node Austin pilot.</p>
   </section>
 
   <!-- 2 -->
@@ -216,7 +216,7 @@
     <ul>
       <li>Global data-center capex could reach <strong>~$7 trillion by 2030</strong>; capacity demand nearly triples from ~82&nbsp;GW (2025) to ~219&nbsp;GW (2030), with roughly <strong>70% of new demand driven by AI</strong>.<sup class="fn">1</sup></li>
       <li>In a survey of 120 U.S. power-company and data-center executives, <strong>grid stress was the leading challenge</strong> to development — the binding constraint is power and interconnection, not capital.<sup class="fn">2</sup></li>
-      <li><strong>Inference is projected to become ~100×</strong> the workload volume of training — steady, latency-sensitive, 24/7 demand — while reported GPU utilization often runs <strong>under 50%</strong>, so capacity is both scarce and poorly used.<sup class="fn">3,4</sup></li>
+      <li><strong>Inference is projected to become ~100×</strong> the workload volume of training — steady, latency-sensitive, 24/7 demand — while reported GPU utilization<span class="info" data-k="utilization"></span> often runs <strong>under 50%</strong>, so capacity is both scarce and poorly used.<sup class="fn">3,4</sup></li>
       <li>The architecture is shifting toward latency-optimized <strong>"inference zones"</strong> near population centers, not only remote mega-campuses.<sup class="fn">3</sup></li>
     </ul>
     <div class="callout"><b>The opening:</b> centralized supply is gated on multi-year power and permitting. Placing compute where heavy power already exists — and managing the messy deployment most incumbents avoid — sidesteps the queue and serves the underserved long tail of seed-to-Series-A AI teams.</div>
@@ -229,23 +229,23 @@
     <h2>Vision &amp; operating philosophy</h2>
     <p>We reason from first principles: the question is not "how do we build a data center?" but "what actually limits AI compute, and what's the fastest way around it?" The answer is power and time. So we go where power already exists and stand compute up in days.</p>
     <h3>The precedent: distributed assets, coordinated by software</h3>
-    <p>This model is proven. Tesla's <strong>Virtual Power Plant</strong> aggregates tens of thousands of distributed home batteries and solar into a single, AI-coordinated grid asset; in July 2025, California VPPs delivered <strong>&gt;535&nbsp;MW</strong>, with Powerwall homes alone providing ~500&nbsp;MW.<sup class="fn">5</sup> Grid-scale capacity, assembled entirely from distributed hardware. Heliode applies the identical playbook to <strong>compute</strong>: a coordinated fleet of nodes behaving like one cloud.</p>
-    <p>It is also already being funded. In 2026, <strong>Span and NVIDIA launched XFRA</strong> — a distributed data-center network running GPUs on existing electrical capacity in homes and small commercial space, targeting ~1&nbsp;GW by 2027.<sup class="fn">6</sup> That a chip-maker of NVIDIA's scale is capitalizing the "go where the power is" thesis validates the market. Heliode's wedge is a <strong>different layer</strong>: the managed, demand-side service that signs and serves the end inference teams — and a site model that pairs robust upgraded service with on-site self-generation.</p>
+    <p>This model is proven. Tesla's <strong>Virtual Power Plant</strong><span class="info" data-k="vpp"></span> aggregates tens of thousands of distributed home batteries and solar into a single, AI-coordinated grid asset; in July 2025, California VPPs delivered <strong>&gt;535&nbsp;MW</strong>, with Powerwall homes alone providing ~500&nbsp;MW.<sup class="fn">5</sup> Grid-scale capacity, assembled entirely from distributed hardware. Heliode applies the identical playbook to <strong>compute</strong>: a coordinated fleet of nodes behaving like one cloud.</p>
+    <p>It is also already being funded. In 2026, <strong>Span and NVIDIA launched XFRA</strong> — a distributed data-center network running GPUs on existing electrical capacity in homes and small commercial space, targeting ~1&nbsp;GW by 2027.<sup class="fn">6</sup> That a chip-maker of NVIDIA's scale is capitalizing the "go where the power is" thesis validates the market. Heliode's wedge is a <strong>different layer</strong>: the managed, demand-side service that signs and serves the end inference teams — and a site model that pairs upgraded service with on-site self-generation.</p>
   </section>
 
   <!-- 4 -->
   <section class="s" id="s4">
     <div class="s-num">Section 04</div>
     <h2>Product &amp; service</h2>
-    <p>We sell access to compute, measured in <strong>GPU-hours</strong>, wrapped in a managed service. The customer ships their model; we handle the metal. "Managed" means <strong>provisioning, orchestration, monitoring and reliability, one endpoint, and one bill</strong> — the layer the cheap marketplaces lack and the hyperscalers overcharge for.</p>
+    <p>We sell access to compute, measured in <strong>GPU-hours</strong><span class="info" data-k="gpu_hour"></span>, wrapped in a managed service. The customer ships their model; we handle the metal. "Managed" means <strong>provisioning, orchestration, monitoring and reliability, one endpoint, and one bill</strong> — the layer the cheap marketplaces lack and the hyperscalers<span class="info" data-k="hyperscaler"></span> overcharge for.</p>
     <h3>The arbitrage</h3>
-    <p>The same GPU-hour costs wildly different amounts by source. An H100-hour runs roughly <strong>~$2 wholesale</strong> on marketplaces; we resell it managed at <strong>~$3</strong>, still well under the <strong>$5–10</strong> a hyperscaler charges. The buyer saves; we keep ~$1/GPU-hr plus the managed-service premium.</p>
+    <p>The same GPU-hour costs wildly different amounts by source. An H100<span class="info" data-k="h100"></span>-hour runs roughly <strong>~$2 wholesale</strong> on marketplaces; we resell it managed at <strong>~$3</strong>, still well under the <strong>$5–10</strong> a hyperscaler charges. The buyer saves; we keep ~$1/GPU-hr plus the managed-service premium.</p>
     <table class="t"><thead><tr><th>Layer</th><th>Who</th><th>Trade-off</th></tr></thead><tbody>
       <tr><td>Hyperscalers</td><td>AWS, Google, Azure</td><td class="n">Most expensive; convenient, locked-in</td></tr>
-      <tr><td>Neoclouds</td><td>CoreWeave, Lambda, Crusoe</td><td class="n">Mid-price; GPU-specialized</td></tr>
+      <tr><td>Neoclouds<span class="info" data-k="neocloud"></span></td><td>CoreWeave, Lambda, Crusoe</td><td class="n">Mid-price; GPU-specialized</td></tr>
       <tr><td>Marketplaces / spot</td><td>Vast.ai, RunPod</td><td class="n">Cheapest; less managed, variable</td></tr>
     </tbody></table>
-    <p>We match the GPU to the workload: power-efficient <strong>L40S</strong> nodes for the broad inference market (≈⅓ the power and lower capex), and <strong>H100 / H200</strong> for the most demanding models — more revenue-generating compute per kilowatt on power-constrained sites.</p>
+    <p>We match the GPU to the workload: power-efficient <strong>L40S</strong> nodes for the broad inference market (≈⅓ the power and lower capex), and <strong>H100 / H200</strong><span class="info" data-k="h200"></span> for the most demanding models — more revenue-generating compute per kilowatt on power-constrained sites.</p>
   </section>
 
   <!-- 5 -->
@@ -254,24 +254,24 @@
     <h2>The model &amp; site strategy</h2>
     <h3>Two phases</h3>
     <ol class="list">
-      <li><strong>Phase 1 — Managed brokerage (now).</strong> Asset-light resale of managed capacity. Immediate revenue, near-zero CAC under a quote-first offer, and the demand proof that finances Phase 2.</li>
-      <li><strong>Phase 2 — Owned regional capacity (next).</strong> Owned GPU nodes on power-ready sites, financed against signed offtake. We own the hardware and the multi-year customer relationship; hardware refreshes every ~5 years.</li>
+      <li><strong>Phase 1 — Managed brokerage (now).</strong> Asset-light resale of managed capacity. Immediate revenue, near-zero CAC<span class="info" data-k="cac"></span> under a quote-first offer, and the demand proof that finances Phase 2.</li>
+      <li><strong>Phase 2 — Owned regional capacity (next).</strong> Owned GPU nodes on power-ready sites, financed against signed offtake<span class="info" data-k="offtake"></span>. We own the hardware and the multi-year customer relationship; hardware refreshes every ~5 years.</li>
     </ol>
     <h3>Site archetypes</h3>
     <p>A node is an 8-GPU server (~10&nbsp;kW, ~$250K). The site only needs <strong>power</strong> — and we bring our own install crew so electrical work is never a landlord dependency.</p>
     <ul>
-      <li><strong>Archetype A — service-upgraded residential, self-generating (priority):</strong> our crew upgrades a home to <strong>400A service</strong> (making it a commercial-grade power customer), deploys the node, and pairs it with a <strong>~20+ kW rooftop solar array + battery</strong>. The homeowner gets solar and backup; we get a power-ready, self-generating site and a distribution channel competitors can't easily assemble.</li>
-      <li><strong>Archetype B — power-ready commercial / light-industrial (secondary):</strong> buildings already carrying heavy 3-phase service. Lease, install, go live in days; fewer noise/zoning frictions; larger nodes where demand concentrates.</li>
+      <li><strong>Archetype A — service-upgraded residential, self-generating (priority):</strong> our crew upgrades a home to <strong>400A service</strong><span class="info" data-k="service_400a"></span> (making it a commercial-grade power customer), deploys the node, and pairs it with a <strong>~20+ kW rooftop solar array + battery</strong>. The homeowner gets solar and backup; we get a power-ready, self-generating site and a distribution channel competitors can't easily assemble.</li>
+      <li><strong>Archetype B — power-ready commercial / light-industrial (secondary):</strong> buildings already carrying heavy 3-phase service<span class="info" data-k="three_phase"></span>. Lease, install, go live in days; fewer noise/zoning frictions; larger nodes where demand concentrates.</li>
     </ul>
     <div class="flag"><div class="fl">Honesty note — solar</div>A node runs 24/7 (~240&nbsp;kWh/day); ~20&nbsp;kW of rooftop solar yields on the order of 100&nbsp;kWh/day. On-site solar + battery is a meaningful <em>energy-cost offset and resilience layer, not a full off-grid supply</em>. The upgraded utility service remains the primary feed; we underwrite to grid power and treat self-generation as upside.</div>
 
-    <h3 style="margin-top:24px;">The energy system as a credit-backed asset</h3>
-    <p>Because <strong>Heliode owns</strong> the solar + battery as a business asset (not the homeowner), the residential-priority model unlocks the <em>commercial</em> clean-energy incentive stack — not the now-expired residential homeowner credit. This materially lowers the net cost of the energy system that offsets a node's single largest operating cost: power.</p>
+    <h3 style="margin-top:24px;">How the energy system pays for itself</h3>
+    <p>Because <strong>Heliode owns</strong> the solar + battery as a business asset (not the homeowner), the residential-priority model qualifies for the <em>commercial</em> clean-energy incentive stack — not the now-expired residential homeowner credit<span class="info" data-k="s25d"></span>. This materially lowers the net cost of the energy system that offsets a node's single largest operating cost: power.</p>
     <ul>
-      <li><strong>§48E Clean Electricity Investment Tax Credit — 30% base</strong> on the solar + storage cost (projects under 1&nbsp;MW auto-qualify for the full rate), with stackable <strong>+10% domestic-content</strong> and <strong>+10% energy-community</strong> adders — up to roughly <strong>50%</strong> back.</li>
-      <li><strong>100% first-year bonus depreciation</strong> (5-year MACRS), restored for assets placed in service after Jan&nbsp;2025 — a second tax shield stacked on the credit.</li>
-      <li><strong>Battery storage</strong> retains the full §48E through <strong>~2033</strong> (beyond the tighter solar deadlines) and can export to the grid / participate in <strong>VPP &amp; demand-response</strong> programs — a secondary revenue line, not just resilience.</li>
-      <li><strong>Timing — long runway:</strong> battery storage keeps the full §48E <strong>through ~2033</strong>, so our owned-node rollout (~2027+) sits well inside the credit; the solar ITC tightens after mid-2026 and is treated as optimizable upside, not a deadline we race.</li>
+      <li><strong>§48E<span class="info" data-k="s48e"></span> Clean Electricity Investment Tax Credit — 30% base</strong> on the solar + storage cost (projects under 1&nbsp;MW auto-qualify for the full rate), with stackable <strong>+10% domestic-content</strong> and <strong>+10% energy-community</strong> adders<span class="info" data-k="adders"></span> — up to roughly <strong>50%</strong> back.</li>
+      <li><strong>100% first-year bonus depreciation<span class="info" data-k="bonus_depreciation"></span></strong> (5-year MACRS<span class="info" data-k="macrs"></span>), restored for assets placed in service after Jan&nbsp;2025 — a second tax shield stacked on the credit.</li>
+      <li><strong>Battery storage</strong> retains the full §48E through <strong>~2033</strong> (beyond the tighter solar deadlines) and can export to the grid / participate in <strong>VPP &amp; demand-response<span class="info" data-k="demand_response"></span></strong> programs — a secondary revenue line, not just resilience.</li>
+      <li><strong>Timing — long runway:</strong> battery storage keeps the full §48E <strong>through ~2033</strong>, so our owned-node rollout (~2027+) sits well inside the credit; the solar ITC<span class="info" data-k="itc"></span> tightens after mid-2026 and is treated as optimizable upside, not a deadline we race.</li>
     </ul>
 
     <h3 style="margin-top:22px;">Back-of-envelope — one site's energy stack</h3>
@@ -310,11 +310,11 @@
     <p>Per GPU-hour: pay ~$2, sell ~$3 → <strong>~$1 gross margin</strong>. One H100 run continuously (~730 hrs/mo) ≈ <strong>~$730 gross margin per GPU per month</strong>. A first real month of 5–6 clients at ~8 GPUs each (~48 GPUs) ≈ ~$105K revenue, ~$70K cost, <strong>~$35K gross profit</strong> — at near-zero CAC, since paid capacity only spins up once a customer says yes.</p>
     <h3>Phase 2 — owned node (base case, 8×H100)</h3>
     <table class="t"><thead><tr><th>Metric</th><th>Monthly</th><th>Annual</th></tr></thead><tbody>
-      <tr><td>Gross compute revenue</td><td class="n">~$9,800</td><td class="n">~$118K</td></tr>
-      <tr><td>Direct opex (power, lease, bandwidth)</td><td class="n">~$2,200</td><td class="n">~$26K</td></tr>
-      <tr class="total"><td>Net contribution</td><td class="n">~$7,600</td><td class="n">~$91K</td></tr>
+      <tr><td>Gross compute revenue<span class="info" data-k="gross_revenue"></span></td><td class="n">~$9,800</td><td class="n">~$118K</td></tr>
+      <tr><td>Direct opex<span class="info" data-k="opex"></span> (power, lease, bandwidth)</td><td class="n">~$2,200</td><td class="n">~$26K</td></tr>
+      <tr class="total"><td>Net contribution<span class="info" data-k="net_contribution"></span></td><td class="n">~$7,600</td><td class="n">~$91K</td></tr>
     </tbody></table>
-    <p>Assuming a deliberately conservative <strong>6%/yr</strong> compute-price decline and a hardware refresh at year 5: payback ~year 3, ~+$170K cumulative at 5 years. Sensitivity (realized $/GPU-hr × utilization): gross MRR ~$5,800–$14,300/mo; net contribution ~$3,600–$12,100/mo.</p>
+    <p>Assuming a deliberately conservative <strong>6%/yr</strong> compute-price decline and a hardware refresh at year 5: payback<span class="info" data-k="payback"></span> ~year 3, ~+$170K cumulative at 5 years. Sensitivity (realized $/GPU-hr × utilization): gross MRR ~$5,800–$14,300/mo; net contribution ~$3,600–$12,100/mo.</p>
 
     <h3>Phase 2 — blended node economics (Archetype B, self-powered)</h3>
     <p>On the priority residential archetype, the node carries its own ~20+ kW solar + battery. That changes three lines — capex, power opex, and a new grid-revenue line — and on net it <em>improves</em> the node, because the year-one tax benefit covers most of the added capex:</p>
@@ -324,9 +324,9 @@
       <tr><td>Net contribution / mo</td><td class="n">~$7,600</td><td class="n">~$8,000 + VPP upside</td></tr>
       <tr class="total"><td>First-year energy tax benefit</td><td class="n">—</td><td class="n">~$38K (credit + depreciation)</td></tr>
     </tbody></table>
-    <p style="font-size:0.92rem;color:var(--mute);">*~$80K solar+battery, net ~$42K after the §48E credit + 100% bonus depreciation (see §05). The node draws ~7,200&nbsp;kWh/mo; ~20&nbsp;kW of solar offsets on the order of 40% of that, trimming the power line ~$400/mo (~$5K/yr). The battery adds VPP / demand-response revenue on top. Net: the incremental energy capex is largely recovered in year one, ongoing power cost falls, and payback holds at ~year&nbsp;3 or better — the energy system is accretive, not a drag.</p>
+    <p style="font-size:0.92rem;color:var(--mute);">*~$80K solar+battery, net ~$42K after the §48E credit + 100% bonus depreciation (see §05). The node draws ~7,200&nbsp;kWh/mo; ~20&nbsp;kW of solar offsets on the order of 40% of that, trimming the power line ~$400/mo (~$5K/yr). The battery adds VPP / demand-response revenue on top. Net: the incremental energy capex is largely recovered in year one, ongoing power cost falls, and payback holds at ~year&nbsp;3 or better, so the energy system is accretive.</p>
 
-    <div class="flag"><div class="fl">Honesty note</div>The conservative case only just clears hardware amortization — which is exactly why a <strong>contracted buyer comes before any node goes on a rack</strong>. Hardware cost (~$250K) is a planning number to be ground-truthed with vendor quotes, and energy economics assume a CPA confirms the credit/depreciation treatment.</div>
+    <div class="flag"><div class="fl">Honesty note</div>The conservative case only just clears hardware amortization<span class="info" data-k="amortization"></span> — which is exactly why a <strong>contracted buyer comes before any node goes on a rack</strong>. Hardware cost (~$250K) is a planning number to be ground-truthed with vendor quotes, and energy economics assume a CPA confirms the credit/depreciation treatment.</div>
   </section>
 
   <!-- 8 -->
@@ -334,9 +334,9 @@
     <div class="s-num">Section 08</div>
     <h2>Market sizing</h2>
     <table class="t"><thead><tr><th>Tier</th><th>Definition</th><th>Heliode</th></tr></thead><tbody>
-      <tr><td><strong>TAM</strong></td><td>Total AI-compute / GPU infrastructure spend</td><td class="n">Hundreds of $B → $1T+ by 2030</td></tr>
-      <tr><td><strong>SAM</strong></td><td>GPU-as-a-service we can resell/own</td><td class="n">~$15–25B → $100B+</td></tr>
-      <tr><td><strong>SOM</strong></td><td>Realistic near-term capture</td><td class="n">Inference teams in our launch metros</td></tr>
+      <tr><td><strong>TAM</strong><span class="info" data-k="tam"></span></td><td>Total AI-compute / GPU infrastructure spend</td><td class="n">Hundreds of $B → $1T+ by 2030</td></tr>
+      <tr><td><strong>SAM</strong><span class="info" data-k="sam"></span></td><td>GPU-as-a-service we can resell/own</td><td class="n">~$15–25B → $100B+</td></tr>
+      <tr><td><strong>SOM</strong><span class="info" data-k="som"></span></td><td>Realistic near-term capture</td><td class="n">Inference teams in our launch metros</td></tr>
     </tbody></table>
     <div class="callout"><b>Bottoms-up SOM:</b> ~500 inference-heavy teams across launch metros × ~$15K/mo avg GPU spend = ~$90M/yr nearby. Winning 15% over three years ≈ <b>~$13.5M/yr</b> — a defensible, build-from-reality number, not "1% of a trillion."</div>
   </section>
@@ -380,7 +380,7 @@
       <tr><td>Site fit-out, install, ops, contingency</td><td class="n">~$1.5–2.5M</td></tr>
       <tr class="total"><td>Full pilot total</td><td class="n">~$14–16M</td></tr>
     </tbody></table>
-    <p>Instrument: a post-money <strong>SAFE</strong>; $2M at a ~$10–13M cap implies ~15–20% dilution — a healthy pre-seed. Structure: Delaware C-corp, founder stock with timely 83(b) election, raised from accredited investors under Reg&nbsp;D with qualified counsel. Milestones: launch brokerage and sign first contracts (90 days) → secure offtake + infrastructure hire → deploy first owned nodes → prove pilot economics and raise to scale.</p>
+    <p>Instrument: a post-money <strong>SAFE</strong><span class="info" data-k="safe"></span>; $2M at a ~$10–13M cap<span class="info" data-k="valuation_cap"></span> implies ~15–20% dilution<span class="info" data-k="dilution"></span> — a healthy pre-seed. Structure: Delaware C-corp<span class="info" data-k="delaware_ccorp"></span>, founder stock with timely 83(b) election<span class="info" data-k="election_83b"></span>, raised from accredited investors under Reg&nbsp;D<span class="info" data-k="reg_d"></span> with qualified counsel. Milestones: launch brokerage and sign first contracts (90 days) → secure offtake + infrastructure hire → deploy first owned nodes → prove pilot economics and raise to scale.</p>
   </section>
 
   <!-- 13 -->
@@ -462,5 +462,6 @@
   $('bpg-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
   (async()=>{ const { data:{ session } }=await sb.auth.getSession(); if(session) await unlock(session); })();
 </script>
+<script type="module" src="tooltips.js?v=1"></script>
 </body>
 </html>

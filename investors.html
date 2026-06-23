@@ -300,7 +300,7 @@
     </div>
 
     <table class="ramp">
-      <thead><tr><th>Network<span class="info" tabindex="0" role="note" aria-label="Number of deployed nodes — GPU units running at our commercial / light-industrial sites.">i<span class="tip">Number of deployed nodes — GPU units running at our commercial / light-industrial sites.</span></span></th><th>Markets</th><th>Profit / mo<span class="info" tabindex="0" role="note" aria-label="Total network net profit per month at that size.">i<span class="tip">Total network net profit per month at that size.</span></span></th><th>Profit / yr<span class="info" tabindex="0" role="note" aria-label="Monthly profit times 12.">i<span class="tip">Monthly profit times 12.</span></span></th><th>Illustrative value<span class="info" tabindex="0" role="note" aria-label="Annual profit times an assumed multiple. Illustrative.">i<span class="tip">Annual profit times an assumed multiple. Illustrative.</span></span></th></tr></thead>
+      <thead><tr><th>Network<span class="info" tabindex="0" role="note" aria-label="Number of deployed nodes — GPU units running at our sites — priority is service-upgraded homes, plus power-ready commercial space.">i<span class="tip">Number of deployed nodes — GPU units running at our sites — priority is service-upgraded homes, plus power-ready commercial space.</span></span></th><th>Markets</th><th>Profit / mo<span class="info" tabindex="0" role="note" aria-label="Total network net profit per month at that size.">i<span class="tip">Total network net profit per month at that size.</span></span></th><th>Profit / yr<span class="info" tabindex="0" role="note" aria-label="Monthly profit times 12.">i<span class="tip">Monthly profit times 12.</span></span></th><th>Illustrative value<span class="info" tabindex="0" role="note" aria-label="Annual profit times an assumed multiple. Illustrative.">i<span class="tip">Annual profit times an assumed multiple. Illustrative.</span></span></th></tr></thead>
       <tbody>
         <tr><td>50</td><td class="mk">Austin pilot</td><td>$380K</td><td>$4.6M</td><td>$37M</td></tr>
         <tr><td>250</td><td class="mk">Austin</td><td>$1.9M</td><td>$22.8M</td><td>$182M</td></tr>
@@ -321,7 +321,12 @@
         <li style="font-size:0.92rem;color:var(--ink);margin-bottom:0;"><strong>Timing — long runway:</strong> battery storage keeps the full §48E <strong>through ~2033</strong>, so our owned-node rollout (~2027+) sits well inside the credit; the solar ITC tightens after mid-2026 and is treated as optimizable upside.</li>
       </ul>
     </div>
-    <p class="calc-note" style="margin-top:10px;margin-bottom:24px;">Not tax advice — confirm structure with a CPA / tax attorney.</p>
+    <p class="calc-note" style="margin-top:10px;margin-bottom:18px;">Not tax advice — confirm structure with a CPA / tax attorney.</p>
+
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin:24px 0 4px;">How the investment is structured</h3>
+    <div class="callout" style="border-left:3px solid var(--blue);">
+      <p style="margin:0;font-size:0.94rem;color:var(--ink);"><strong>Heliode, Inc. is a Delaware C-corporation</strong> — the standard structure venture investors expect. Investment is made through a <strong>post-money SAFE</strong> (Simple Agreement for Future Equity): you commit capital now, and it converts into shares at the next priced round, with your ownership set by the valuation cap. Node hardware is financed against contracted revenue, not equity.</p>
+    </div>
 
     <div class="calc">
       <h3>Model your investment</h3>
@@ -331,7 +336,7 @@
         <div><label for="c-round">Investing at company valuation (post-money)<span class="info" tabindex="0" role="note" aria-label="TODAY'S value you and the investor agree on when they put money in (post-money = including their new cash). For an idea-stage raise this is a negotiated number based on potential, not profit. Your ownership = your investment divided by this.">i<span class="tip">TODAY'S value you and the investor agree on when they put money in (post-money = including their new cash). For an idea-stage raise this is a negotiated number based on potential, not profit. Your ownership = your investment divided by this.</span></span></label><input type="text" inputmode="numeric" id="c-round" value="$10,000,000"></div>
       </div>
       <div style="margin-top:14px;">
-        <label for="c-homes">Network size to model<span class="info" tabindex="0" role="note" aria-label="Drag to model the company at a given number of deployed nodes (GPU units at commercial / light-industrial sites).">i<span class="tip">Drag to model the company at a given number of deployed nodes (GPU units at commercial / light-industrial sites).</span></span>: <span class="range-val" id="c-homes-val">1,000 nodes</span></label>
+        <label for="c-homes">Network size to model<span class="info" tabindex="0" role="note" aria-label="Drag to model the company at a given number of deployed nodes (GPU units at sites — priority is service-upgraded homes, plus power-ready commercial space).">i<span class="tip">Drag to model the company at a given number of deployed nodes (GPU units at sites — priority is service-upgraded homes, plus power-ready commercial space).</span></span>: <span class="range-val" id="c-homes-val">1,000 nodes</span></label>
         <input type="range" id="c-homes" min="50" max="10000" step="50" value="1000">
         <div class="range-mk" id="c-homes-mk"></div>
       </div>
