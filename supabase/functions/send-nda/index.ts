@@ -24,7 +24,13 @@ Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
 
   try {
-    const { to, full_name, pdf_base64, nda_version } = await req.json();
+    const { to, full_name, pdf_base64, nda_version, token } = await req.json();
+    // lightweight guard so this isn't a fully open email relay
+    if (token !== "hld-nda-relay-2026") {
+      return new Response(JSON.stringify({ error: "Unauthorized." }), {
+        status: 401, headers: { ...CORS, "Content-Type": "application/json" },
+      });
+    }
     if (!to || !pdf_base64) {
       return new Response(JSON.stringify({ error: "Missing 'to' or 'pdf_base64'." }), {
         status: 400, headers: { ...CORS, "Content-Type": "application/json" },

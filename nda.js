@@ -93,7 +93,7 @@ export function generateNdaPdf({ full_name, personal_email, phone, signed_at }){
 export async function emailNda(sb, { to, full_name, pdf_base64 }){
   try {
     const { data, error } = await sb.functions.invoke('send-nda', {
-      body: { to, full_name, pdf_base64, nda_version: NDA_VERSION }
+      body: { to, full_name, pdf_base64, nda_version: NDA_VERSION, token: 'hld-nda-relay-2026' }
     });
     if(error){
       let m = error.message || 'request failed';
