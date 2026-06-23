@@ -132,20 +132,20 @@
   dl.gloss dd{margin:2px 0 0;color:var(--body);font-size:0.92rem;}
 
   /* quiz */
-  .quiz{background:var(--panel);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:26px 0 0;}
-  .quiz-h{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;}
+  .quiz{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:26px 0 0;box-shadow:0 1px 3px rgba(13,19,32,0.05);}
+  .quiz-h{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan-text);margin-bottom:14px;}
   .qq{margin-bottom:18px;}
   .qq:last-child{margin-bottom:0;}
   .qp{font-weight:600;color:var(--ink);margin-bottom:9px;font-size:0.95rem;}
   .opts{display:flex;flex-direction:column;gap:7px;}
-  .opts button{text-align:left;background:rgba(0,0,0,0.28);border:1px solid var(--line2);border-radius:9px;padding:9px 12px;font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--ink);cursor:pointer;transition:.12s;}
-  .opts button:hover:not(:disabled){border-color:var(--blue-line);background:rgba(59,130,246,0.10);}
-  .opts button.right{background:rgba(34,197,94,0.16);border-color:#22c55e;color:#86efac;font-weight:600;}
-  .opts button.wrong{background:rgba(248,113,113,0.16);border-color:#f87171;color:#fca5a5;}
+  .opts button{text-align:left;background:#f4f7fc;border:1px solid var(--line2);border-radius:9px;padding:9px 12px;font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--ink);cursor:pointer;transition:.12s;}
+  .opts button:hover:not(:disabled){border-color:var(--blue-line);background:rgba(37,99,235,0.08);}
+  .opts button.right{background:rgba(22,163,74,0.12);border-color:#16a34a;color:#15803d;font-weight:600;}
+  .opts button.wrong{background:rgba(220,38,38,0.10);border-color:#dc2626;color:#b91c1c;}
   .opts button:disabled{cursor:default;}
   .fb{display:none;margin-top:10px;font-size:0.88rem;color:var(--body);background:var(--blue-dim);border:1px solid var(--blue-line);border-radius:9px;padding:10px 12px;}
   .fb.show{display:block;}
-  .fb b{color:#7dd3fc;}
+  .fb b{color:var(--blue);}
   .print-cover{display:none;}
   .hidden{display:none !important;}
 
