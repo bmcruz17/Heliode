@@ -175,24 +175,30 @@ $$;
 grant execute on function public.is_investor() to authenticated;
 
 
--- ░░ 5. PROPOSAL TEXT FIXES (safe no-ops if already applied) ░░░░░░░░░
--- Node definition → 8-GPU server
-update public.proposal set content = replace(
-  replace(content,
-    '<p><strong>Node</strong> — One deployed unit of our GPU hardware, running at a commercial / light-industrial site.</p>',
-    '<p><strong>Node</strong> — One deployed 8-GPU server (~$250K all-in) running at a commercial / light-industrial site.</p>'),
-  'the <strong>node</strong> — one deployed GPU unit running at a commercial site.',
-  'the <strong>node</strong> — one deployed 8-GPU server (~$250K capex) running at a commercial site.')
-where id = 1;
+-- ░░ 5. PROPOSAL TEXT FIXES (only if a proposal table exists) ░░░░░░░░░
+do $do$
+begin
+  if to_regclass('public.proposal') is not null then
+    -- Node definition → 8-GPU server
+    update public.proposal set content = replace(
+      replace(content,
+        '<p><strong>Node</strong> — One deployed unit of our GPU hardware, running at a commercial / light-industrial site.</p>',
+        '<p><strong>Node</strong> — One deployed 8-GPU server (~$250K all-in) running at a commercial / light-industrial site.</p>'),
+      'the <strong>node</strong> — one deployed GPU unit running at a commercial site.',
+      'the <strong>node</strong> — one deployed 8-GPU server (~$250K capex) running at a commercial site.')
+    where id = 1;
 
--- Raise / use-of-funds → onboarding-funded, pilot financed later
-update public.proposal set content = replace(content,
-  '<p>We''re raising <strong>$2.0M</strong> at the valuation you can model above to stand up our first owned Austin site and reach ~50 deployed nodes, with 12–18 months of runway.</p>
+    -- Raise / use-of-funds → onboarding-funded, pilot financed later
+    update public.proposal set content = replace(content,
+      '<p>We''re raising <strong>$2.0M</strong> at the valuation you can model above to stand up our first owned Austin site and reach ~50 deployed nodes, with 12–18 months of runway.</p>
 <p>Allocation: <strong>~50%</strong> first owned site (GPU hardware, electrical buildout, lease); <strong>~30%</strong> team &amp; 24/7 operations; <strong>~15%</strong> working capital to carry committed capacity ahead of revenue; <strong>~5%</strong> legal, setup &amp; contingency.</p>',
-  '<p>We''re raising <strong>$2.0M</strong> (pre-seed, on a SAFE) to launch the managed brokerage, build the orchestration &amp; billing software, make the first key hires, and stand up a handful of proof nodes — with 12–18 months of runway.</p>
+      '<p>We''re raising <strong>$2.0M</strong> (pre-seed, on a SAFE) to launch the managed brokerage, build the orchestration &amp; billing software, make the first key hires, and stand up a handful of proof nodes — with 12–18 months of runway.</p>
 <p>Allocation: <strong>~35%</strong> team &amp; operations; <strong>~25%</strong> software &amp; brokerage launch; <strong>~25%</strong> proof nodes (a small owned cluster + site &amp; electrical); <strong>~15%</strong> working capital, legal &amp; contingency.</p>
 <p>The full ~50-node Austin pilot is a larger, later raise sequenced <strong>behind signed customer offtake</strong> and financed mostly against those contracts (equipment/debt), so this round isn''t buying all the hardware up front.</p>')
-where id = 1;
+    where id = 1;
+  end if;
+end
+$do$;
 
 -- ░░ 6. FULL-VISIBILITY LOGINS (email-managed admin allowlist) ░░░░░░░░
 -- Upgrade the admin allowlist so full-access logins can be created by
