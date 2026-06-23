@@ -146,6 +146,78 @@
     background:radial-gradient(560px 320px at 88% 8%, rgba(124,58,237,0.10), transparent 60%);
   }
   .blk .wrap{position:relative;z-index:1;}
+
+  /* ── LIGHT BAND ─────────────────────────────────────────────────────
+     The middle content sections sit on a light background with dark text.
+     We override the color tokens inside .light scopes so every shared
+     component (cards, forms, eyebrows, borders) flips to readable tones,
+     and give the sections an opaque light bg so the fixed dark body
+     texture behind them does not bleed through. */
+  .light{
+    --bg:#f4f7fc;--bg2:#ffffff;--panel:#ffffff;
+    --ink:#0d1320;--mute:#525a66;--faint:#737d8c;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--cyan:#0e7490;--violet-bright:#7c3aed;
+    --blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.35);
+    color:var(--ink);
+  }
+  /* opaque light backdrop for the whole light band (covers the fixed dark texture) */
+  section.blk.light{background:#f4f7fc;border-bottom-color:var(--line);}
+  section.blk.light.alt{background:#ffffff;}
+  section.blk.light.alt::before{
+    background:radial-gradient(560px 320px at 88% 8%, rgba(124,58,237,0.06), transparent 60%);
+  }
+  .light h2{color:var(--ink);}
+  .light h2 em{background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .light .sec-eye{color:#0e7490;}
+  .light .sec-eye::before{color:var(--violet-bright);}
+  /* light cards: white with soft border + subtle shadow */
+  .light .feat,.light .gpu,.light .city,.light .flow-node,
+  .light .calc-controls,.light .calc-out{
+    background:#ffffff;border-color:var(--line);
+    box-shadow:0 1px 2px rgba(13,19,32,0.04),0 8px 24px rgba(13,19,32,0.05);
+    backdrop-filter:none;
+  }
+  .light .feat:hover,.light .gpu:hover,.light .city:hover{
+    border-color:var(--violet-bright);box-shadow:0 18px 40px rgba(124,58,237,0.14);
+  }
+  .light .feat .ic,.light .gpu .chip-g,.light .city .tag,
+  .light .flow-k,.light .flow-cap b{color:#0e7490;}
+  .light .feat h4,.light .gpu h4,.light .city h3,.light .flow-t{color:var(--ink);}
+  .light .feat p,.light .gpu .best,.light .city p,.light .flow-d,
+  .light .body-lg{color:var(--mute);}
+  .light .body-lg strong{color:var(--ink);}
+  .light .gpu .vram,.light .gpu .price{color:var(--mute);}
+  .light .gpu .price span,.light .gpu-note,.light .flow-cap{color:var(--faint);}
+  .light .gpu-note a{color:#0e7490;}
+  .light .flow-node.core{border-color:var(--blue-line);background:linear-gradient(180deg,rgba(37,99,235,0.06),#ffffff);}
+  .light .calc-out{border-color:#a78bfa;background:linear-gradient(160deg,rgba(37,99,235,0.07),rgba(124,58,237,0.07));}
+  .light .calc-out-k,.light .calc-save-k{color:var(--mute);}
+  .light .calc-note{color:var(--faint);}
+  .light .calc-save{border-top-color:var(--line);}
+  /* light form inputs */
+  .light .inp{background:#ffffff;border-color:var(--line2);color:var(--ink);}
+  .light .inp:focus{border-color:var(--blue-line);box-shadow:0 0 0 3px var(--blue-dim);background:#ffffff;}
+  .light .inp::placeholder{color:var(--faint);}
+  .light .fld{color:var(--faint);}
+  .light select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23737d8c' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");}
+  .light select.inp option{background:#ffffff;color:var(--ink);}
+  /* recolor the "how it works" flow connectors dark-on-light so they're visible */
+  .light .flow-conn .base{stroke:rgba(13,19,32,0.16);}
+  .light .flow-conn .pkt,.light .flow-conn .arr{stroke:#2563eb;}
+
+  /* ── BAND BLEND SEAMS ───────────────────────────────────────────────
+     Tall gradient strips that fade dark↔light so band changes are gradual. */
+  .seam{height:120px;border:0;position:relative;z-index:1;}
+  .seam-dl{background:linear-gradient(180deg,#0a0b0f 0%,#1a2030 45%,#f4f7fc 100%);}
+  .seam-ld{background:linear-gradient(180deg,#ffffff 0%,#1a2030 60%,#0a0b0f 100%);}
+  @media(max-width:680px){.seam{height:84px;}}
+
+  /* ── BOTTOM DARK BAND ───────────────────────────────────────────────
+     Contact + footer return to dark with an opaque backdrop so the seam
+     resolves cleanly into solid near-black. */
+  section.blk.dark-bottom{background:#0a0b0f;border-bottom:0;}
+  footer{background:#0a0b0f;}
   h2{font-weight:700;font-size:clamp(1.55rem,3.6vw,2.3rem);letter-spacing:-0.025em;margin-bottom:18px;max-width:22ch;color:#fff;}
   h2 em{font-style:normal;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;}
   .body-lg{font-size:1.04rem;color:var(--mute);max-width:62ch;}
@@ -355,7 +427,9 @@
   <div class="cell"><div class="cell-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></svg></div><div class="n">Inference-first</div><div class="k">Built for the steady, 24/7, latency-sensitive workloads that dominate AI compute today.</div></div>
 </div></div></div>
 
-<section class="blk alt" id="gpus">
+<div class="seam seam-dl" aria-hidden="true"></div>
+
+<section class="blk alt light" id="gpus">
   <div class="wrap">
     <div class="sec-eye">gpus</div>
     <h2>The GPUs you want — managed, at open-market rates.</h2>
@@ -370,7 +444,7 @@
   </div>
 </section>
 
-<section class="blk" id="what">
+<section class="blk light" id="what">
   <div class="wrap">
     <div class="sec-eye">what we do</div>
     <h2>You need GPU-hours. You don't need another cloud to babysit.</h2>
@@ -383,7 +457,7 @@
   </div>
 </section>
 
-<section class="blk alt" id="how">
+<section class="blk alt light" id="how">
   <div class="wrap">
     <div class="sec-eye">how it works</div>
     <h2>From first call to running workloads in days, not quarters.</h2>
@@ -398,7 +472,7 @@
         </div>
 
         <div class="flow-conn" aria-hidden="true">
-          <svg viewBox="0 0 42 26" preserveAspectRatio="none"><line x1="2" y1="13" x2="34" y2="13" stroke="rgba(255,255,255,0.14)" stroke-width="2"/><line class="pkt" x1="2" y1="13" x2="34" y2="13" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="5 30"><animate attributeName="stroke-dashoffset" from="35" to="0" dur="1.5s" repeatCount="indefinite"/></line><path d="M30 7 L37 13 L30 19" fill="none" stroke="#22d3ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 42 26" preserveAspectRatio="none"><line class="base" x1="2" y1="13" x2="34" y2="13" stroke="rgba(255,255,255,0.14)" stroke-width="2"/><line class="pkt" x1="2" y1="13" x2="34" y2="13" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="5 30"><animate attributeName="stroke-dashoffset" from="35" to="0" dur="1.5s" repeatCount="indefinite"/></line><path class="arr" d="M30 7 L37 13 L30 19" fill="none" stroke="#22d3ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
 
         <div class="flow-node core">
@@ -409,7 +483,7 @@
         </div>
 
         <div class="flow-conn" aria-hidden="true">
-          <svg viewBox="0 0 42 26" preserveAspectRatio="none"><line x1="2" y1="13" x2="34" y2="13" stroke="rgba(255,255,255,0.14)" stroke-width="2"/><line class="pkt" x1="2" y1="13" x2="34" y2="13" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="5 30"><animate attributeName="stroke-dashoffset" from="35" to="0" dur="1.5s" repeatCount="indefinite"/></line><path d="M30 7 L37 13 L30 19" fill="none" stroke="#22d3ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 42 26" preserveAspectRatio="none"><line class="base" x1="2" y1="13" x2="34" y2="13" stroke="rgba(255,255,255,0.14)" stroke-width="2"/><line class="pkt" x1="2" y1="13" x2="34" y2="13" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="5 30"><animate attributeName="stroke-dashoffset" from="35" to="0" dur="1.5s" repeatCount="indefinite"/></line><path class="arr" d="M30 7 L37 13 L30 19" fill="none" stroke="#22d3ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
 
         <div class="flow-node">
@@ -424,7 +498,7 @@
   </div>
 </section>
 
-<section class="blk" id="sites">
+<section class="blk light" id="sites">
   <div class="wrap">
     <div class="sec-eye">where it runs</div>
     <h2>Open market today. <em>Owned, self-powered sites</em> next.</h2>
@@ -437,7 +511,7 @@
   </div>
 </section>
 
-<section class="blk alt" id="savings">
+<section class="blk alt light" id="savings">
   <div class="wrap">
     <div class="sec-eye">savings</div>
     <h2>See roughly what you'd save — before you send a single email.</h2>
@@ -467,7 +541,9 @@
   </div>
 </section>
 
-<section class="blk" id="contact">
+<div class="seam seam-ld" aria-hidden="true"></div>
+
+<section class="blk dark-bottom" id="contact">
   <div class="wrap">
     <div class="sec-eye">get started</div>
     <h2>Send us your current GPU bill. We'll quote the same workload at open-market rates.</h2>
