@@ -339,3 +339,8 @@ create policy "admins insert private_docs" on public.private_docs
 drop policy if exists "admins update private_docs" on public.private_docs;
 create policy "admins update private_docs" on public.private_docs
   for update to authenticated using ( public.is_admin() ) with check ( public.is_admin() );
+
+-- ░░ 10. M1 PRICING-POWER PROOF ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+-- spot_cost = what we pay for a deal's capacity (our buy); quoted_amount = our
+-- sell price. The dashboard derives realized margin over spot from the two.
+alter table public.compute_leads add column if not exists spot_cost text;

@@ -221,6 +221,8 @@
     <div id="overview-view">
       <div class="ov-h">Key metrics</div>
       <div class="kpis" id="kpis"></div>
+      <div class="ov-h" style="margin-top:22px;">M1 · pricing-power proof <span style="text-transform:none;letter-spacing:0;color:var(--faint);">— the gate before financing any node</span></div>
+      <div class="kpis" id="m1kpis"></div>
       <div class="ov-h" style="margin-top:22px;">Lead pipeline</div>
       <div class="funnel" id="lead-funnel"></div>
       <div class="ov-h">Vendor pipeline</div>
@@ -489,7 +491,8 @@
           +(l.workload?'<div class="vsub">'+esc(l.workload)+'</div>':'')
           +(l.source?'<div class="vcat">'+esc(l.source)+'</div>':'')
           +'<label>Stage</label><select class="vin js-status" style="color:'+COLORS[st]+'">'+opts+'</select>'
-          +'<label>Quoted</label><input class="vin js-quote" value="'+esc(l.quoted_amount||'')+'" placeholder="$/mo">'
+          +'<label>Quoted (our sell)</label><input class="vin js-quote" value="'+esc(l.quoted_amount||'')+'" placeholder="$/mo">'
+          +'<label>Spot cost (our buy)</label><input class="vin js-spot" value="'+esc(l.spot_cost||'')+'" placeholder="$/mo">'
           +'<label>Notes</label><input class="vin js-notes" value="'+esc(l.notes||'')+'" placeholder="note…">'
           +'<span class="saved">✓ saved</span>'
           +'</div>';
@@ -515,7 +518,10 @@
         if(await patch(id,body)){ if(lead){ lead.status=sel.value; if(body.contacted_at) lead.contacted_at=body.contacted_at; } render(); }
       });
       card.querySelector('.js-quote').addEventListener('change', async function(){
-        const v=this.value.trim(); if(await patch(id,{quoted_amount:v})){ if(lead) lead.quoted_amount=v; flash(card); }
+        const v=this.value.trim(); if(await patch(id,{quoted_amount:v})){ if(lead) lead.quoted_amount=v; flash(card); renderOverview(); }
+      });
+      card.querySelector('.js-spot').addEventListener('change', async function(){
+        const v=this.value.trim(); if(await patch(id,{spot_cost:v})){ if(lead) lead.spot_cost=v; flash(card); renderOverview(); }
       });
       card.querySelector('.js-notes').addEventListener('change', async function(){
         const v=this.value.trim(); if(await patch(id,{notes:v})){ if(lead) lead.notes=v; flash(card); }
@@ -834,6 +840,21 @@
       ['Team logins', team, 'full-visibility access'],
     ];
     if($('kpis')) $('kpis').innerHTML = cards.map(c=>'<div class="kpi"><div class="kv">'+c[1]+'</div><div class="kk">'+c[0]+'</div><div class="ks">'+c[2]+'</div></div>').join('');
+    // M1 — pricing-power proof: realized margin over spot + trial→contract conversion
+    const money=v=>{const n=parseFloat(String(v==null?'':v).replace(/[^0-9.]/g,''));return isFinite(n)?n:0;};
+    const wonLeads=leads.filter(l=>l.status==='won');
+    const marg=wonLeads.map(l=>{const s=money(l.spot_cost),p=money(l.quoted_amount);return (s>0&&p>0)?(p-s)/s:null;}).filter(x=>x!=null);
+    const avgMarg=marg.length?Math.round(marg.reduce((a,b)=>a+b,0)/marg.length*100):null;
+    const reachedTrial=leads.filter(l=>l.status==='trial'||l.status==='won').length;
+    const trialConv=reachedTrial?Math.round(won/reachedTrial*100):null;
+    const dealVals=wonLeads.map(l=>money(l.quoted_amount)).filter(x=>x>0);
+    const avgDeal=dealVals.length?Math.round(dealVals.reduce((a,b)=>a+b,0)/dealVals.length):null;
+    const m1=[
+      ['Margin over spot', avgMarg==null?'—':avgMarg+'%', marg.length?('across <b>'+marg.length+'</b> won deal'+(marg.length>1?'s':'')+' with data'):'enter spot cost + quote on won deals'],
+      ['Trial → contract', trialConv==null?'—':trialConv+'%', reachedTrial?('of <b>'+reachedTrial+'</b> that reached trial'):'no deals at trial yet'],
+      ['Avg deal', avgDeal==null?'—':'$'+avgDeal.toLocaleString()+'/mo', dealVals.length?'mean quote across won deals':'won-deal quotes'],
+    ];
+    if($('m1kpis')) $('m1kpis').innerHTML = m1.map(c=>'<div class="kpi"><div class="kv">'+c[1]+'</div><div class="kk">'+c[0]+'</div><div class="ks">'+c[2]+'</div></div>').join('');
     if($('lead-funnel')) $('lead-funnel').innerHTML = STAGES.map(s=>'<span class="fchip"><b>'+leads.filter(l=>(l.status||'new')===s).length+'</b> '+s+'</span>').join('');
     if($('vendor-funnel')) $('vendor-funnel').innerHTML = VSTAGES.map(s=>'<span class="fchip"><b>'+vendors.filter(v=>(v.stage||'to_contact')===s.k).length+'</b> '+s.label+'</span>').join('');
     if($('ov-pages') && !$('ov-pages').childElementCount) $('ov-pages').innerHTML = OV_PAGES.map(p=>'<a class="pagecard" href="'+p[1]+'" target="_blank"><div class="pt">'+p[0]+'</div><div class="pu">/'+p[1]+'</div></a>').join('');
