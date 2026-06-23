@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heliode — Investor Brief</title>
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Heliode">
+<meta property="og:url" content="https://heliode.ai/pitch.html">
+<meta property="og:title" content="Heliode — Investor Brief">
+<meta property="og:description" content="Cheaper managed AI compute today; owned, self-powered GPU capacity next. Pre-seed investor brief.">
+<meta property="og:image" content="https://heliode.ai/og/og-opportunity.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Heliode — Investor Brief">
+<meta name="twitter:image" content="https://heliode.ai/og/og-opportunity.png">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#f4f7fc;--panel:#fff;--ink:#0d1320;--mute:#525a66;--faint:#8a909a;
+    --line:rgba(13,19,32,0.10);--line2:rgba(13,19,32,0.16);
+    --blue:#2563eb;--blue-bright:#3b82f6;--blue-dim:rgba(37,99,235,0.08);--blue-line:rgba(37,99,235,0.28);
+    --accent:#f97316;--accent-hover:#ea580c;--accent-dim:rgba(249,115,22,0.08);--accent-line:rgba(249,115,22,0.30);
+    --violet:#7c3aed;--violet-bright:#8b5cf6;--green:#16a34a;--body:#39414d;
+    --grad:linear-gradient(110deg,#2563eb 0%,#7c3aed 52%,#f97316 100%);
+    --grad-bv:linear-gradient(120deg,#2563eb,#7c3aed);
+    --maxw:980px;
+  }
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(820px 460px at 8% -4%, rgba(37,99,235,0.07), transparent 60%),
+      radial-gradient(760px 460px at 102% 2%, rgba(124,58,237,0.06), transparent 58%),
+      radial-gradient(700px 500px at 50% 108%, rgba(249,115,22,0.05), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,.brand{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  em{font-style:normal;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+  /* progress bar */
+  .prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:60;transition:width .15s;}
+  /* dot nav */
+  .dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:55;display:flex;flex-direction:column;gap:9px;}
+  .dots a{width:9px;height:9px;border-radius:50%;background:rgba(13,19,32,0.18);transition:.2s;}
+  .dots a.on{background:var(--violet);transform:scale(1.35);}
+  @media(max-width:760px){.dots{display:none;}}
+
+  /* slides */
+  .slide{min-height:100vh;display:flex;align-items:center;padding:84px 26px;border-bottom:1px solid var(--line);}
+  .slide .wrap{max-width:var(--maxw);margin:0 auto;width:100%;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px;display:inline-block;}
+  .slide h2{font-size:2rem;line-height:1.1;margin-bottom:14px;}
+  .slide p.lead{font-size:1.12rem;color:var(--mute);max-width:760px;margin-bottom:8px;}
+  .slide .body{font-size:1rem;color:var(--body);max-width:760px;}
+  .slide .body p{margin-bottom:12px;}
+
+  /* cover */
+  .cover{background:linear-gradient(140deg,#0d1320 0%,#15233f 62%,#1a2a47 100%);position:relative;overflow:hidden;color:#fff;border-bottom:none;}
+  .cover::after{content:"";position:absolute;inset:0;background:radial-gradient(680px 420px at 92% 8%, rgba(124,58,237,0.22), transparent 60%),radial-gradient(560px 360px at 0% 100%, rgba(249,115,22,0.12), transparent 60%);pointer-events:none;}
+  .cover .wrap{position:relative;z-index:1;}
+  .cover .brand{display:flex;align-items:center;gap:10px;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:34px;}
+  .cover .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(249,115,22,0.18);}
+  .cover .eyebrow{color:transparent;background:linear-gradient(110deg,#60a5fa,#a78bfa);-webkit-background-clip:text;background-clip:text;}
+  .cover h1{font-size:3rem;line-height:1.04;margin-bottom:18px;max-width:880px;}
+  .cover h1 em{background:linear-gradient(110deg,#60a5fa,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .cover .sub{font-size:1.2rem;color:#c6cedb;max-width:680px;margin-bottom:34px;}
+  .cover .meta{display:flex;gap:26px;flex-wrap:wrap;font-size:0.95rem;color:#aeb6c6;}
+  .cover .meta b{color:#fff;font-weight:600;}
+  .scrollcue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);color:#8a93a6;font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;z-index:1;}
+
+  /* stat row */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px;}
+  .stat{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:18px 18px;}
+  .stat .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;background:linear-gradient(110deg,#60a5fa,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .stat .k{font-size:0.84rem;color:#aeb6c6;margin-top:4px;}
+  @media(max-width:760px){.stats{grid-template-columns:1fr;} .cover h1{font-size:2.1rem;} .slide h2{font-size:1.6rem;}}
+
+  /* cards / grids */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px;}
+  @media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;position:relative;overflow:hidden;box-shadow:0 1px 2px rgba(13,19,32,0.03);}
+  .card::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);opacity:.85;}
+  .card .k{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--violet);margin-bottom:8px;}
+  .card h3{font-size:1.12rem;margin-bottom:6px;}
+  .card p{font-size:0.95rem;color:var(--body);}
+  .card .big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.7rem;background:var(--grad-bv);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+  ul.ticks{list-style:none;margin-top:18px;}
+  ul.ticks li{position:relative;padding-left:28px;margin-bottom:11px;font-size:1rem;color:var(--body);}
+  ul.ticks li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:4px;background:var(--grad);}
+
+  table.t{width:100%;border-collapse:collapse;margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  table.t th{text-align:left;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:0.64rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--faint);padding:13px 16px;border-bottom:1px solid var(--line);background:var(--bg);}
+  table.t td{padding:13px 16px;border-bottom:1px solid var(--line);font-size:0.95rem;color:var(--body);}
+  table.t td.n{font-family:'JetBrains Mono',monospace;color:var(--ink);}
+  table.t tr:last-child td{border-bottom:none;}
+  table.t tr.total td{font-weight:700;color:var(--ink);background:var(--blue-dim);}
+
+  .flag{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin-top:22px;font-size:0.95rem;color:var(--body);}
+  .flag b{color:var(--ink);}
+  .note{font-size:0.8rem;color:var(--faint);margin-top:14px;}
+
+  .ctarow{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.98rem;text-decoration:none;border-radius:11px;padding:13px 22px;display:inline-block;}
+  .btn-p{background:var(--grad);color:#fff;box-shadow:0 8px 22px rgba(124,58,237,0.26);}
+  .btn-g{background:#fff;color:var(--ink);border:1px solid var(--line2);}
+  .cover .btn-g{background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.2);}
+
+  /* close slide */
+  .close{background:linear-gradient(140deg,#0d1320 0%,#15233f 62%,#211a3d 100%);color:#fff;border-bottom:none;}
+  .close h2{font-size:2.2rem;}
+  .close .lead{color:#c6cedb;}
+  .close a{color:#a78bfa;}
+  .close .contact{margin-top:26px;font-size:1.05rem;}
+  .close .contact b{color:#fff;}
+
+  @media print{
+    .prog,.dots,.scrollcue{display:none!important;}
+    .slide{min-height:auto;page-break-after:always;padding:40px 30px;border:none;}
+    body{background:#fff;}
+    .cover,.close{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<nav class="dots" id="dots"></nav>
+
+<!-- 1 · COVER -->
+<section class="slide cover" id="s1">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>Heliode</div>
+    <div class="eyebrow">Pre-seed investor brief · 2026</div>
+    <h1>Cheaper AI compute today. <em>Owned, self-powered</em> capacity next.</h1>
+    <p class="sub">Heliode delivers managed GPU compute for AI inference below what teams pay now — then owns the capacity, deployed where power already exists and paired with on-site solar + storage.</p>
+    <div class="meta">
+      <span><b>Raising</b> · ~$2.0M pre-seed (SAFE)</span>
+      <span><b>Stage</b> · revenue-ready, asset-light</span>
+      <span><b>Contact</b> · brandon@heliode.ai</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">Days, not years</div><div class="k">to stand up capacity vs. a new data center</div></div>
+      <div class="stat"><div class="n">24/7</div><div class="k">inference is the steady, growing AI load</div></div>
+      <div class="stat"><div class="n">~$1T+</div><div class="k">AI-compute spend by 2030 (TAM)</div></div>
+    </div>
+  </div>
+  <div class="scrollcue">scroll ↓</div>
+</section>
+
+<!-- 2 · PROBLEM -->
+<section class="slide" id="s2">
+  <div class="wrap">
+    <div class="eyebrow">The problem</div>
+    <h2>Compute is the bottleneck — and <em>power</em>, not chips alone, is the binding constraint.</h2>
+    <p class="lead">Inference is overtaking training as the dominant AI workload: steady, latency-sensitive, growing fast. Centralized supply can't keep up.</p>
+    <div class="grid3">
+      <div class="card"><div class="k">Demand</div><h3>Inference, 24/7</h3><p>Production AI runs continuously and close to users — a different load than bursty training.</p></div>
+      <div class="card"><div class="k">Supply</div><h3>5–7 year grid queues</h3><p>New data centers are multi-year, multi-billion-dollar builds gated by interconnection and permitting.</p></div>
+      <div class="card"><div class="k">The edge</div><h3>Deployment nobody owns</h3><p>The hard, unglamorous work — securing power-ready sites and standing compute up fast — is wide open.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · SOLUTION -->
+<section class="slide" id="s3">
+  <div class="wrap">
+    <div class="eyebrow">The solution</div>
+    <h2>One managed layer between the team that needs compute and the metal that runs it.</h2>
+    <p class="lead">Inference teams get one endpoint, one bill, uptime and support — at a price below their current cloud spend. We source on the open market today; we deliver from owned, self-powered nodes next.</p>
+    <ul class="ticks">
+      <li><b>Open-market sourcing now</b> — marketplace + spot capacity well under hyperscaler on-demand, passed through with a managed wrapper.</li>
+      <li><b>We handle the babysitting</b> — provisioning, monitoring, support, billing. The customer points at one endpoint, not a pile of accounts.</li>
+      <li><b>One contract, one invoice</b> — predictable cost, no surprise egress math, no lock-in.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4 · WHY NOW -->
+<section class="slide" id="s4">
+  <div class="wrap">
+    <div class="eyebrow">Why now</div>
+    <h2>The architecture is <em>already proven — and already being funded.</em></h2>
+    <p class="lead">We're not inventing "distributed assets coordinated by software." We're the managed, demand-side layer that rides on top of it.</p>
+    <div class="grid2">
+      <div class="card"><div class="k">Precedent · power</div><h3>Tesla's Virtual Power Plant</h3><p>Tens of thousands of distributed home batteries behaving as one grid asset — California VPPs delivered <b>&gt;535&nbsp;MW</b> in July 2025. Grid-scale capacity assembled entirely from distributed hardware + coordination.</p></div>
+      <div class="card"><div class="k">Precedent · compute</div><h3>Span + NVIDIA's XFRA</h3><p>In 2026, Span + NVIDIA launched a distributed data-center network running GPUs on existing electrical capacity in homes and small commercial space — targeting <b>~1&nbsp;GW by 2027.</b> NVIDIA is funding the exact "go where the power already is" thesis.</p></div>
+    </div>
+    <div class="flag"><b>Our wedge is a different layer:</b> they build distributed <em>supply</em>; Heliode is the managed <em>demand</em> layer that signs and serves the end inference teams — and can source from many supplies, including networks like theirs.</div>
+  </div>
+</section>
+
+<!-- 5 · MODEL -->
+<section class="slide" id="s5">
+  <div class="wrap">
+    <div class="eyebrow">The model</div>
+    <h2>Two phases: prove demand first, then own the network.</h2>
+    <div class="grid2">
+      <div class="card"><div class="k">Phase 1 · now · asset-light</div><h3>Managed brokerage</h3><p>Source open-market capacity, wrap it in a managed service, resell to inference teams. Near-immediate revenue, near-zero CAC under a quote-first offer, and the demand proof that finances Phase 2.</p></div>
+      <div class="card"><div class="k">Phase 2 · next</div><h3>Owned regional capacity</h3><p>Owned GPU nodes on power-ready sites, financed against signed offtake. We own the hardware and the multi-year customer relationship; the customer + site relationship is the durable asset.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · SELF-POWERED SITE + INCENTIVES -->
+<section class="slide" id="s6">
+  <div class="wrap">
+    <div class="eyebrow">The differentiator</div>
+    <h2>Priority sites are <em>service-upgraded homes</em> that power themselves — and earn tax credits.</h2>
+    <p class="lead">Our crew upgrades a home to 400A (a commercial-grade power customer), installs the node, and pairs it with a ~20+ kW solar array + battery. Solar offsets the node's biggest cost — power — and the battery adds resilience and grid revenue.</p>
+    <div class="grid2">
+      <div class="card"><div class="k">Why Heliode captures it</div><h3>We own the energy asset</h3><p>Because <b>Heliode owns</b> the solar + battery as a business asset (not the homeowner), the site claims the <b>commercial §48E Investment Tax Credit — 30% base</b> (auto-qualifies under 1&nbsp;MW), with stackable <b>+10% domestic-content</b> and <b>+10% energy-community</b> adders — up to ~50%. The residential homeowner credit expired end of 2025; ownership is what unlocks value.</p></div>
+      <div class="card"><div class="k">Stacked returns</div><h3>~$38K–$53K back in year one</h3><p>On a ~$80K system: the credit plus <b>100% first-year bonus depreciation</b> returns roughly <b>half to a third</b> of the cost in year one. Battery storage keeps the full §48E through ~2033 and can earn <b>VPP / demand-response</b> revenue. <b>Begin construction before July&nbsp;4,&nbsp;2026</b> to lock the full 30%.</p></div>
+    </div>
+    <p class="note">Not tax advice — credit eligibility and the third-party-ownership structure to be confirmed with a CPA / tax attorney.</p>
+  </div>
+</section>
+
+<!-- 7 · UNIT ECONOMICS -->
+<section class="slide" id="s7">
+  <div class="wrap">
+    <div class="eyebrow">Unit economics</div>
+    <h2>Margin now; an accretive, self-powered node next.</h2>
+    <p class="lead"><b>Phase 1:</b> pay ~$2 / GPU-hr, sell ~$3 → ~$1 gross margin. A first real month (~48 GPUs across 5–6 clients) ≈ <b>~$35K gross profit</b> at near-zero CAC.</p>
+    <table class="t">
+      <thead><tr><th>Phase 2 owned node (8×H100)</th><th>Grid-only</th><th>Self-powered (Arch. B)</th></tr></thead>
+      <tbody>
+        <tr><td>Net contribution / mo</td><td class="n">~$7,600</td><td class="n">~$8,000 + VPP</td></tr>
+        <tr><td>Power opex / mo</td><td class="n">~$1,000</td><td class="n">~$600</td></tr>
+        <tr><td>All-in capex / site</td><td class="n">~$250K</td><td class="n">~$250K + ~$42K energy*</td></tr>
+        <tr class="total"><td>First-year energy tax benefit</td><td class="n">—</td><td class="n">~$38K</td></tr>
+      </tbody>
+    </table>
+    <p class="note">*Net of the §48E credit + 100% bonus depreciation. Payback ~year 3; the year-one tax benefit covers most of the added energy capex, so the self-powered node is accretive, not a drag. Hardware ~$250K is a planning number being ground-truthed with vendor quotes; a contracted buyer comes before any node ships.</p>
+  </div>
+</section>
+
+<!-- 8 · MARKET -->
+<section class="slide" id="s8">
+  <div class="wrap">
+    <div class="eyebrow">Market</div>
+    <h2>A trillion-dollar tailwind — sized from the <em>bottom up.</em></h2>
+    <table class="t">
+      <thead><tr><th>Tier</th><th>Definition</th><th>Heliode</th></tr></thead>
+      <tbody>
+        <tr><td><b>TAM</b></td><td>Total AI-compute / GPU infrastructure spend</td><td class="n">Hundreds of $B → $1T+ by 2030</td></tr>
+        <tr><td><b>SAM</b></td><td>GPU-as-a-service we can resell / own</td><td class="n">~$15–25B → $100B+</td></tr>
+        <tr><td><b>SOM</b></td><td>Realistic near-term capture</td><td class="n">Inference teams in launch metros</td></tr>
+      </tbody>
+    </table>
+    <div class="flag"><b>Bottoms-up SOM:</b> ~500 inference-heavy teams across launch metros × ~$15K/mo avg spend ≈ ~$90M/yr nearby. Winning 15% over three years ≈ <b>~$13.5M/yr</b> — built from reality, not "1% of a trillion."</div>
+  </div>
+</section>
+
+<!-- 9 · MOAT -->
+<section class="slide" id="s9">
+  <div class="wrap">
+    <div class="eyebrow">Why we win</div>
+    <h2>The moat is the relationship and the deployment, not the chips.</h2>
+    <ul class="ticks">
+      <li><b>Demand-side ownership</b> — we sign and serve the end inference team; whoever owns the customer relationship owns the margin.</li>
+      <li><b>Multi-source supply</b> — we're not captive to one cloud; we route to the cheapest reliable capacity, including networks like XFRA.</li>
+      <li><b>Self-powered deployment channel</b> — a repeatable residential install motion (400A + solar + battery) competitors can't easily assemble, with the incentive stack attached.</li>
+      <li><b>Asset-light first</b> — revenue and demand proof before a dollar of hardware, then debt-financed nodes against signed offtake.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 10 · THE ASK -->
+<section class="slide" id="s10">
+  <div class="wrap">
+    <div class="eyebrow">The ask</div>
+    <h2>~$2.0M pre-seed to launch the brokerage and prove the first nodes.</h2>
+    <p class="lead">Instrument: post-money <b>SAFE</b>, ~$10–13M cap (~15–20% dilution). Delaware C-corp; founder stock with timely 83(b); raised from accredited investors under Reg&nbsp;D. Pilot node hardware is debt-financed against contracted revenue — not equity.</p>
+    <div class="grid2">
+      <div class="card"><div class="k">Use of funds</div><h3>Brokerage, team, software, proof nodes</h3><p>Stand up the managed brokerage, make the first infrastructure / compute hire, build the orchestration + billing layer, and deploy proof nodes.</p></div>
+      <div class="card"><div class="k">Milestones</div><h3>Revenue → offtake → owned nodes</h3><p>Launch brokerage + sign first contracts (90 days) → secure offtake + infra hire → deploy first owned, self-powered nodes → prove pilot economics → raise to scale.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · CLOSE -->
+<section class="slide close" id="s11">
+  <div class="wrap">
+    <div class="eyebrow">Let's talk</div>
+    <h2>Compute, deployed in days — not years.</h2>
+    <p class="lead">If the thesis resonates, I'd welcome a conversation. The full business plan and opportunity brief are a click away.</p>
+    <div class="ctarow">
+      <a class="btn btn-p" href="business-plan.html">Read the business plan →</a>
+      <a class="btn btn-g" href="opportunity.html">Opportunity brief</a>
+    </div>
+    <p class="contact"><b>Brandon Cruz</b> · Founder, Heliode, Inc.<br>
+      <a href="mailto:brandon@heliode.ai">brandon@heliode.ai</a> · <a href="https://heliode.ai">heliode.ai</a></p>
+  </div>
+</section>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const dots=document.getElementById('dots');
+  slides.forEach((s,i)=>{const a=document.createElement('a');a.href='#'+s.id;a.title='Slide '+(i+1);dots.appendChild(a);});
+  const dotEls=[...dots.children];
+  const prog=document.getElementById('prog');
+  function onScroll(){
+    const h=document.documentElement;
+    const pct=h.scrollTop/(h.scrollHeight-h.clientHeight||1);
+    prog.style.width=(pct*100)+'%';
+    let cur=0;const mid=h.clientHeight/2;
+    slides.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.top<=mid&&r.bottom>=mid)cur=i;});
+    dotEls.forEach((d,i)=>d.classList.toggle('on',i===cur));
+  }
+  document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  // arrow / space navigation
+  document.addEventListener('keydown',e=>{
+    let cur=0;const mid=window.innerHeight/2;
+    slides.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.top<=mid&&r.bottom>=mid)cur=i;});
+    if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();if(slides[cur+1])slides[cur+1].scrollIntoView({behavior:'smooth'});}
+    if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();if(slides[cur-1])slides[cur-1].scrollIntoView({behavior:'smooth'});}
+  });
+</script>
+</body>
+</html>

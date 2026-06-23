@@ -279,8 +279,19 @@
       <tr><td>Direct opex (power, lease, bandwidth)</td><td class="n">~$2,200</td><td class="n">~$26K</td></tr>
       <tr class="total"><td>Net contribution</td><td class="n">~$7,600</td><td class="n">~$91K</td></tr>
     </tbody></table>
-    <p>Assuming a deliberately conservative <strong>6%/yr</strong> compute-price decline and a hardware refresh at year 5: payback ~year 3, ~+$170K cumulative at 5 years. Sensitivity (realized $/GPU-hr × utilization): gross MRR ~$5,800–$14,300/mo; net contribution ~$3,600–$12,100/mo. On Archetype B, on-site self-generation reduces the power line of direct opex.</p>
-    <div class="flag"><div class="fl">Honesty note</div>The conservative case only just clears hardware amortization — which is exactly why a <strong>contracted buyer comes before any node goes on a rack</strong>. Hardware cost (~$250K) is a planning number to be ground-truthed with vendor quotes.</div>
+    <p>Assuming a deliberately conservative <strong>6%/yr</strong> compute-price decline and a hardware refresh at year 5: payback ~year 3, ~+$170K cumulative at 5 years. Sensitivity (realized $/GPU-hr × utilization): gross MRR ~$5,800–$14,300/mo; net contribution ~$3,600–$12,100/mo.</p>
+
+    <h3>Phase 2 — blended node economics (Archetype B, self-powered)</h3>
+    <p>On the priority residential archetype, the node carries its own ~20+ kW solar + battery. That changes three lines — capex, power opex, and a new grid-revenue line — and on net it <em>improves</em> the node, because the year-one tax benefit covers most of the added capex:</p>
+    <table class="t"><thead><tr><th>Line</th><th>Grid-only (Arch. A)</th><th>Self-powered (Arch. B)</th></tr></thead><tbody>
+      <tr><td>All-in capex per site</td><td class="n">~$250K</td><td class="n">~$250K + ~$42K energy*</td></tr>
+      <tr><td>Power opex / mo</td><td class="n">~$1,000</td><td class="n">~$600 (solar offsets ~40%)</td></tr>
+      <tr><td>Net contribution / mo</td><td class="n">~$7,600</td><td class="n">~$8,000 + VPP upside</td></tr>
+      <tr class="total"><td>First-year energy tax benefit</td><td class="n">—</td><td class="n">~$38K (credit + depreciation)</td></tr>
+    </tbody></table>
+    <p style="font-size:0.92rem;color:var(--mute);">*~$80K solar+battery, net ~$42K after the §48E credit + 100% bonus depreciation (see §05). The node draws ~7,200&nbsp;kWh/mo; ~20&nbsp;kW of solar offsets on the order of 40% of that, trimming the power line ~$400/mo (~$5K/yr). The battery adds VPP / demand-response revenue on top. Net: the incremental energy capex is largely recovered in year one, ongoing power cost falls, and payback holds at ~year&nbsp;3 or better — the energy system is accretive, not a drag.</p>
+
+    <div class="flag"><div class="fl">Honesty note</div>The conservative case only just clears hardware amortization — which is exactly why a <strong>contracted buyer comes before any node goes on a rack</strong>. Hardware cost (~$250K) is a planning number to be ground-truthed with vendor quotes, and energy economics assume a CPA confirms the credit/depreciation treatment.</div>
   </section>
 
   <!-- 8 -->
