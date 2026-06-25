@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Heliode — Investor One-Pager</title>
+<style>
+  :root{
+    --ink:#0d1320; --mute:#555c66; --faint:#8a909a; --line:#d9dde3;
+    --blue:#2563eb; --violet:#7c3aed; --cyan:#0e7490;
+    --grad:linear-gradient(110deg,#2563eb,#7c3aed);
+    --dim:#f7f8fb;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    color:var(--ink);line-height:1.5;background:#eef0f3;font-size:14px}
+  .page{max-width:820px;margin:22px auto;background:#fff;padding:42px 48px;
+    box-shadow:0 2px 18px rgba(13,19,32,.08);border-radius:10px}
+
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+  .brand{display:flex;align-items:center;gap:9px}
+  .dot{width:13px;height:13px;border-radius:50%;background:#4f46e5;box-shadow:0 0 0 5px rgba(79,70,229,.16)}
+  .brand b{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;letter-spacing:3px;font-size:14px}
+  .top .meta{text-align:right;font-size:12px;color:var(--mute)}
+  h1{font-size:25px;letter-spacing:-.4px;margin:14px 0 2px}
+  .tag{color:var(--mute);font-size:15px;margin:0 0 4px;max-width:62ch}
+  .bar{height:5px;width:80px;border-radius:3px;background:var(--grad);margin:12px 0 0}
+
+  .ask{display:flex;gap:14px;margin:20px 0 6px}
+  .ask .box{flex:1;border:1px solid var(--line);border-radius:9px;padding:12px 14px;background:var(--dim)}
+  .ask .k{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--blue);font-weight:700}
+  .ask .v{font-size:18px;font-weight:700;margin-top:3px}
+  .ask .v small{font-weight:500;color:var(--mute);font-size:12px}
+
+  h2{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:#fff;background:var(--grad);
+    display:inline-block;padding:4px 11px;border-radius:5px;margin:24px 0 10px}
+  .cols{display:flex;gap:26px}
+  .cols>div{flex:1}
+  p{margin:7px 0}
+  ul{margin:7px 0;padding-left:18px}
+  li{margin:4px 0}
+  .mute{color:var(--mute)}
+  b.hl{color:var(--violet)}
+
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+  td{border-bottom:1px solid #eceef1;padding:6px 4px;vertical-align:top}
+  td.r{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  tr.tot td{border-top:2px solid var(--line);border-bottom:none;font-weight:700;padding-top:8px}
+  .fill{color:#b1b7c0}
+
+  .foot{margin-top:26px;border-top:1px solid var(--line);padding-top:12px;color:var(--mute);
+    font-size:11.5px;display:flex;justify-content:space-between}
+  .printbtn{position:fixed;top:16px;right:16px;background:var(--grad);color:#fff;border:none;
+    padding:9px 16px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;
+    box-shadow:0 4px 14px rgba(79,70,229,.3)}
+  @media print{
+    body{background:#fff;font-size:12.5px}
+    .page{box-shadow:none;margin:0;max-width:none;border-radius:0;padding:0 6px}
+    h2,.bar,.dot{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .printbtn{display:none}
+  }
+</style>
+</head>
+<body>
+<button class="printbtn" onclick="window.print()">Print / Save as PDF</button>
+<div class="page">
+
+  <div class="top">
+    <div class="brand"><span class="dot"></span><b>HELIODE</b></div>
+    <div class="meta">Heliode, Inc. · Delaware C-Corp · Austin, TX<br>Confidential — for discussion · June 2026</div>
+  </div>
+
+  <h1>The cheaper AWS alternative for AI inference.</h1>
+  <p class="tag">H100/H200 GPU capacity delivered as a single managed endpoint — so AI teams get cheaper,
+  simpler inference than the hyperscalers, with no infrastructure to babysit.</p>
+  <div class="bar"></div>
+
+  <div class="ask">
+    <div class="box"><div class="k">Raising</div><div class="v">$2.5M <small>SAFE</small></div></div>
+    <div class="box"><div class="k">Cap / Discount</div><div class="v">$10M <small>post-money · 20%</small></div></div>
+    <div class="box"><div class="k">Runway</div><div class="v">18 mo</div></div>
+    <div class="box"><div class="k">Stage</div><div class="v">Pre-seed</div></div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h2>The Problem</h2>
+      <p>Companies running AI models in production on AWS, GCP, or Azure are paying
+      <b class="hl">2–4× too much per GPU-hour</b>. The hyperscalers price inference like a scarce
+      enterprise product — it isn't anymore. But the cheaper capacity that exists is fragmented,
+      unmanaged, and a headache to operate.</p>
+
+      <h2>The Solution</h2>
+      <p>Heliode sources wholesale GPU capacity and runs it end to end:</p>
+      <ul>
+        <li><b>One managed endpoint</b> — OpenAI-compatible, their same API.</li>
+        <li><b>One bill, real support</b> — no infra to babysit.</li>
+        <li><b>A fraction of on-demand cloud rates</b> on the same H100/H200 hardware.</li>
+      </ul>
+      <p class="mute">We earn margin over wholesale spot, with committed-spend tiers as customers scale.</p>
+
+      <h2>Why Now</h2>
+      <ul>
+        <li>Inference demand is compounding; every team needs steady GPU-hours.</li>
+        <li>Capacity is splintering across neoclouds &amp; marketplaces — buyers can't navigate it.</li>
+        <li>Teams want hyperscaler simplicity at open-market prices. Nobody owns that lane.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Model &amp; Roadmap</h2>
+      <ul>
+        <li><b>Now (asset-light):</b> resell + manage wholesale capacity at margin — capital-efficient,
+          live today.</li>
+        <li><b>Next:</b> a prototype owned node in Austin to prove unit economics.</li>
+        <li><b>Vision:</b> owned, self-powered regional nodes — a <b class="hl">virtual data center</b>
+          across multiple sites.</li>
+      </ul>
+
+      <h2>Go-To-Market</h2>
+      <ul>
+        <li><b>Wedge:</b> "AWS alternative" — target teams spending <b>$5–50k/mo</b> on cloud GPUs.</li>
+        <li>Live funnel at <b>heliode.ai</b> (free quote on a customer's current bill) + paid search/social.</li>
+        <li>Founder-led outbound to AWS-overspenders.</li>
+      </ul>
+
+      <h2>Traction <span class="mute" style="font-weight:400">— fill in your real numbers</span></h2>
+      <ul>
+        <li>Live product site + quote funnel, GA4 + ad tracking running.</li>
+        <li><span class="fill">[ __ discovery calls booked · __ qualified pipeline ]</span></li>
+        <li><span class="fill">[ __ LOIs / pilot customers ]</span></li>
+        <li>Wholesale supply partnership in progress (RunPod); Dell hardware quote underway for node.</li>
+      </ul>
+
+      <h2>Team</h2>
+      <ul>
+        <li><b>Brandon Cruz</b> — Founder &amp; CEO. <span class="fill">[1-line background]</span></li>
+        <li>Raising to hire a 5–6 person founding crew (eng, ops, sales).</li>
+        <li><span class="fill">[Advisors — e.g., RunPod partner, others]</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Use of Funds — 18 Months</h2>
+  <table>
+    <tr><td>Founding team payroll (5–6, fully loaded)</td><td class="r">~$1.45M</td></tr>
+    <tr><td>First prototype node — servers, GPUs, rack, networking, cooling</td><td class="r">~$200K</td></tr>
+    <tr><td>Marketing &amp; customer acquisition</td><td class="r">~$150K</td></tr>
+    <tr><td>Austin office lease + utilities (node-grade power)</td><td class="r">~$120K</td></tr>
+    <tr><td>G&amp;A — legal, accounting, insurance, software</td><td class="r">~$70K</td></tr>
+    <tr><td>Contingency (~10%)</td><td class="r">~$200K</td></tr>
+    <tr class="tot"><td>Total</td><td class="r">~$2.2–2.5M</td></tr>
+  </table>
+  <p class="mute" style="font-size:12px">Burn ≈ $120–130K/mo. Hiring ramps with customer traction — leaner
+  start extends runway beyond 18 months.</p>
+
+  <div class="foot">
+    <span>Brandon Cruz · Founder · hello@heliode.ai · heliode.ai</span>
+    <span>Heliode, Inc. — Confidential</span>
+  </div>
+
+</div>
+</body>
+</html>
