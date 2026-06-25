@@ -5,27 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1YHMWE0BG6"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S0N66S4EK5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-1YHMWE0BG6');
+  gtag('config', 'G-S0N66S4EK5');
 </script>
 
-<title>What AI inference actually costs in 2026 — and where the money goes | Heliode</title>
+<title>AWS GPU Cost & H100 Pricing: What AI Inference Really Costs in 2026 | Heliode</title>
 <meta property="og:image" content="https://heliode.ai/og/og-inference-cost.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://heliode.ai/og/og-inference-cost.png">
-<meta name="description" content="A plain-English teardown of GPU inference pricing: hyperscaler on-demand vs. neoclouds vs. marketplace/spot, why teams overpay 2–5×, and where a typical GPU bill leaks. Includes a free savings calculator.">
+<meta name="description" content="A plain-English teardown of GPU inference pricing: AWS and hyperscaler on-demand vs. neoclouds vs. marketplace/spot, what an H100 really costs per hour, why teams overpay 2–5×, and where a typical GPU bill leaks. Includes a free savings calculator.">
+<meta name="keywords" content="AWS GPU cost, H100 price, H100 cost per hour, H200 price, AWS GPU pricing, GPU inference cost, p4d cost, p5 cost, SageMaker pricing, GPU cloud pricing comparison, cheaper than AWS GPU, AI inference cost 2026">
 <link rel="canonical" href="https://heliode.ai/inference-cost.html">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="What AI inference actually costs in 2026">
 <meta property="og:description" content="GPU inference pricing, torn down: hyperscaler vs. neocloud vs. marketplace, and where your bill leaks.">
 <meta property="og:url" content="https://heliode.ai/inference-cost.html">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"AWS GPU Cost & H100 Pricing: What AI Inference Really Costs in 2026","description":"A plain-English teardown of GPU inference pricing across AWS/hyperscalers, neoclouds, and marketplace/spot, and where a typical GPU bill leaks.","author":{"@type":"Organization","name":"Heliode"},"publisher":{"@type":"Organization","name":"Heliode"},"mainEntityOfPage":"https://heliode.ai/inference-cost.html","image":"https://heliode.ai/og/og-inference-cost.png"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why is the same H100 so much more expensive on AWS?","acceptedAnswer":{"@type":"Answer","text":"The same H100 GPU can cost very different amounts depending on where you run it. Hyperscalers like AWS bundle premium support, networking, and enterprise overhead into on-demand pricing, so teams often pay several times the open-market rate for identical hardware. Neoclouds and marketplaces price the same chip far lower."}},
+{"@type":"Question","name":"How much can I save moving AI inference off AWS?","acceptedAnswer":{"@type":"Answer","text":"Teams running steady inference on AWS, SageMaker, GCP, or Azure on-demand commonly overpay by 2–5× versus open-market GPU capacity for the same workload. The exact savings depend on your GPU type, utilization, and commitment level."}},
+{"@type":"Question","name":"Where does a typical GPU inference bill leak money?","acceptedAnswer":{"@type":"Answer","text":"The biggest leaks are paying on-demand rates for steady workloads, idle GPUs that stay provisioned, over-sized instances, and egress and support fees. Matching the pricing model to the workload usually recovers the most."}}
+]}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

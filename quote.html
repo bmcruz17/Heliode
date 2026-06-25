@@ -24,6 +24,32 @@
 </script>
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+
+<!-- GOOGLE ADS + ANALYTICS (gtag.js) -->
+<!-- 1) In Google Ads: Goals → Conversions → create a "Submit lead form" action. -->
+<!--    It gives you a tag like AW-1234567890 and a label like AbC-D_efGh1234. -->
+<!-- 2) Paste them into GADS_CONVERSION_ID and GADS_CONVERSION_LABEL below. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S0N66S4EK5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S0N66S4EK5');                 // GA4 (shared with the main site)
+
+  const GADS_CONVERSION_ID    = 'AW-CONVERSION_ID';    // <-- replace, e.g. AW-1234567890
+  const GADS_CONVERSION_LABEL = 'CONVERSION_LABEL';    // <-- replace, e.g. AbC-D_efGh1234
+  if(GADS_CONVERSION_ID && GADS_CONVERSION_ID !== 'AW-CONVERSION_ID'){
+    gtag('config', GADS_CONVERSION_ID);
+  }
+  // Fired on a successful quote submit (called from submitLead()).
+  function gadsReportConversion(){
+    if(GADS_CONVERSION_ID && GADS_CONVERSION_ID !== 'AW-CONVERSION_ID'
+       && GADS_CONVERSION_LABEL && GADS_CONVERSION_LABEL !== 'CONVERSION_LABEL'){
+      gtag('event', 'conversion', {'send_to': GADS_CONVERSION_ID + '/' + GADS_CONVERSION_LABEL});
+    }
+    gtag('event', 'generate_lead');   // also logs a GA4 lead event regardless
+  }
+</script>
 <!-- end Meta Pixel -->
 
 <title>Heliode — Get a GPU compute quote</title>
@@ -225,6 +251,7 @@
     }).then(function(r){
       if(r.ok){
         if(window.fbq) fbq('track','Lead');
+        if(window.gadsReportConversion) gadsReportConversion();
         document.getElementById('ok-msg').textContent="Got it — we'll send your quote to "+email+" shortly.";
         document.getElementById('form').style.display='none';
         document.getElementById('ok').style.display='block';
