@@ -25,8 +25,10 @@ Most common fixes (try in this order):
 ## 🟠 PRIORITY 2 — Dell homework (before tomorrow's call with Drew)
 Drew flagged my address as **residential**; he needs a **commercial Austin, TX ship-to** to build the quote.
 
-- [ ] **Get a commercial Austin address** — virtual office / coworking / colo. Real street address I control,
-      **NOT a PO box.** (Bonus: reusable for D-U-N-S / business credit later.)
+- [ ] **Reserve a suite at WorkHub Pflugerville** (19241 Wilke Ln, Pflugerville, TX 78660 · Austin metro)
+      — call (832) 521-5404. Get the **exact suite number** + confirm **3-phase power amps** for the node.
+      Flex suites can go **month-to-month** (don't get pushed into the 5-yr office-warehouse term for a prototype).
+      This becomes the commercial Austin ship-to for Dell AND reusable for D-U-N-S / business credit.
 - [ ] **Send Drew the email** (draft ready below — just drop in the address).
 - [ ] Include the **Heliode one-liner** so his internal write-up is easy.
 
@@ -41,8 +43,8 @@ Thanks again for flagging the address. Here's a commercial (non-residential)
 ship-to in Austin for the quote:
 
   Heliode, Inc.
-  [STREET ADDRESS], Suite [###]
-  Austin, TX [ZIP]
+  19241 Wilke Ln, Suite [### — confirm when you reserve the suite]
+  Pflugerville, TX 78660   (Austin metro)
 
 A few things I'd love to cover on our call:
 
