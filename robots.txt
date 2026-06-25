@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /playbook.html
+Disallow: /rep.html
+Disallow: /business-plan.html
+Disallow: /sales/
+
+Sitemap: https://heliode.ai/sitemap.xml
