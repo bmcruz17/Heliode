@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Heliode — Client Report</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{--ink:#0d1320;--mute:#555c66;--faint:#8a909a;--line:rgba(13,19,32,.10);
+    --blue:#2563eb;--violet:#7c3aed;--green:#0e9f6e;--grad:linear-gradient(110deg,#2563eb,#7c3aed);--bg2:#f6f8fc;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg2);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px;margin:0 auto;padding:30px 22px 70px;}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:6px;}
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;display:flex;align-items:center;gap:9px;font-size:1.05rem;}
+  .dot{width:11px;height:11px;border-radius:50%;background:#4f46e5;box-shadow:0 0 0 4px rgba(79,70,229,.16);}
+  h1{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;letter-spacing:-.02em;margin:10px 0 2px;}
+  .sub{color:var(--mute);}
+  [contenteditable]{outline:none;border-bottom:1px dashed transparent;}
+  [contenteditable]:focus{border-bottom-color:var(--blue);background:rgba(37,99,235,.04);}
+  .bar{height:5px;width:78px;border-radius:3px;background:var(--grad);margin:12px 0 26px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;cursor:pointer;transition:.18s;}
+  .kpi:hover{box-shadow:0 8px 22px rgba(13,19,32,.07);transform:translateY(-1px);}
+  .kpi .k{font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);}
+  .kpi .v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:2rem;color:var(--blue);margin:5px 0;}
+  .kpi .d{font-size:.8rem;color:var(--mute);}
+  .kpi .expand{display:none;margin-top:12px;border-top:1px solid var(--line);padding-top:12px;font-size:.84rem;}
+  .kpi.open .expand{display:block;}
+  .kpi .expand h4{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--violet);margin:9px 0 2px;}
+  .kpi .expand p{color:var(--mute);margin:0;}
+  .foot{margin-top:30px;border-top:1px solid var(--line);padding-top:16px;color:var(--faint);font-size:.78rem;}
+  .hint{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--faint);margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="brand"><span class="dot"></span>HELIODE</div>
+    <div class="sub">Reporting period: <span contenteditable>This month</span></div>
+  </div>
+  <h1>AI Performance Report — <span contenteditable>Client Name</span></h1>
+  <div class="sub">Prepared for <span contenteditable>contact@client.com</span> · tap any metric to see what it means.</div>
+  <div class="bar"></div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="foot">
+    Figures reflect this client's live Heliode AI deployment. Tap a card for detail. Values are
+    editable in-page (click a number to update before exporting/printing).
+    <div class="hint">Operator: edit the KPI defaults in the script's <b>KPIS</b> array, or just click numbers to overwrite.</div>
+  </div>
+</div>
+
+<script>
+// Heliode AI-solution KPIs — value language is inference-specific.
+const KPIS = [
+  { k:'Tickets auto-resolved', v:'0', d:'Support tickets handled end-to-end by AI',
+    mean:'The share of inbound questions your AI assistant resolved with no human touch.',
+    why:'Every auto-resolved ticket is staff time you did not spend — and a customer who got an instant answer.',
+    how:'Trending up as the assistant learns your FAQs, policies, and product details.',
+    does:'Heliode tunes the assistant on your real conversations and expands the topics it can close.' },
+  { k:'Hours saved / week', v:'0', d:'Staff hours returned by automation',
+    mean:'Estimated human hours your team no longer spends on repetitive, automatable work.',
+    why:'Time your team redirects to revenue and judgment work machines should not do.',
+    how:'Compounds as more workflows (replies, intake, routing) move to AI.',
+    does:'Heliode finds the next highest-volume manual task and automates it.' },
+  { k:'Avg. response time', v:'—', d:'First-response speed to a customer',
+    mean:'How fast a customer gets a first useful reply, day or night.',
+    why:'Faster first response is the single biggest driver of CSAT and conversion.',
+    how:'AI responds in seconds vs. minutes/hours for a human queue.',
+    does:'Heliode keeps the 24/7 assistant accurate so speed never costs quality.' },
+  { k:'After-hours captured', v:'0', d:'Inquiries handled outside business hours',
+    mean:'Conversations and leads handled while your office was closed.',
+    why:'Revenue and questions that used to wait until morning — or go to a competitor.',
+    how:'A 24/7 AI receptionist catches overflow and after-hours demand.',
+    does:'Heliode books, answers, or routes these so nothing is lost.' },
+  { k:'Conversion lift', v:'—', d:'Improvement vs. pre-AI baseline',
+    mean:'Change in the rate at which inquiries become customers since AI went live.',
+    why:'The clearest line from automation to revenue.',
+    how:'Measured against your baseline before deployment.',
+    does:'Heliode A/B tests assistant behavior to push this up responsibly.' },
+  { k:'Docs processed', v:'0', d:'Intake docs / invoices / claims read by AI',
+    mean:'Documents the AI read, extracted, and routed automatically.',
+    why:'Document-heavy work (legal/insurance/billing) is slow and error-prone by hand.',
+    how:'Scales linearly — more volume just means more saved.',
+    does:'Heliode adds new document types and validation rules as you grow.' },
+];
+
+const box = document.getElementById('kpis');
+KPIS.forEach((m,i)=>{
+  const el=document.createElement('div'); el.className='kpi';
+  el.innerHTML=`<div class="k">${m.k}</div>
+    <div class="v" contenteditable>${m.v}</div>
+    <div class="d">${m.d}</div>
+    <div class="expand">
+      <h4>What it means</h4><p>${m.mean}</p>
+      <h4>Why it matters</h4><p>${m.why}</p>
+      <h4>How you're doing</h4><p>${m.how}</p>
+      <h4>What Heliode does about it</h4><p>${m.does}</p>
+    </div>`;
+  el.addEventListener('click',(e)=>{ if(e.target.isContentEditable) return; el.classList.toggle('open'); });
+  box.appendChild(el);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+name: Heliode scheduled emails
+
+# Sends due Gmail drafts every 20 min by calling the secured edge endpoint.
+# Requires two GitHub repo secrets:
+#   HELIODE_OPS_URL  = https://<your-cloudflare-pages>.pages.dev  (or ops.heliode.ai)
+#   SCHED_SECRET     = same value as the Cloudflare SCHED_SECRET secret
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger run-scheduled
+        run: |
+          if [ -z "${{ secrets.HELIODE_OPS_URL }}" ] || [ -z "${{ secrets.SCHED_SECRET }}" ]; then
+            echo "Secrets HELIODE_OPS_URL / SCHED_SECRET not set — skipping."; exit 0
+          fi
+          code=$(curl -s -o /tmp/out.json -w "%{http_code}" -X POST \
+            -H "x-sched-secret: ${{ secrets.SCHED_SECRET }}" \
+            "${{ secrets.HELIODE_OPS_URL }}/api/run-scheduled")
+          echo "HTTP $code"; cat /tmp/out.json || true
+          [ "$code" = "200" ]

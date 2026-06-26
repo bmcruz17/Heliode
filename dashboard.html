@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Heliode — Operator</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#0d1320;--panel:#141c2e;--panel2:#1b2740;--line:rgba(255,255,255,0.10);
+    --ink:#eef2f8;--mute:#9aa6bd;--faint:#6b7790;
+    --blue:#3b82f6;--violet:#8b5cf6;--cyan:#22d3ee;--green:#34d399;--red:#f87171;--amber:#fbbf24;
+    --grad:linear-gradient(110deg,#3b82f6,#8b5cf6);
+  }
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  a{color:var(--blue);}
+  button{font-family:inherit;cursor:pointer;}
+  .hidden{display:none !important;}
+  .mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;}
+
+  /* login */
+  .login{max-width:380px;margin:14vh auto;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:32px;}
+  .login h1{font-size:1.3rem;margin-bottom:4px;display:flex;align-items:center;gap:10px;}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--violet);box-shadow:0 0 0 4px rgba(139,92,246,0.2);}
+  .login p{color:var(--mute);font-size:.88rem;margin-bottom:18px;}
+  .inp{width:100%;background:#0b1322;border:1px solid var(--line);border-radius:10px;padding:12px 13px;color:var(--ink);font-size:.94rem;margin-bottom:10px;outline:none;}
+  .inp:focus{border-color:var(--blue);}
+  .btn{background:var(--grad);color:#fff;border:none;border-radius:10px;padding:11px 16px;font-weight:600;font-size:.9rem;}
+  .btn.sm{padding:6px 11px;font-size:.78rem;border-radius:8px;}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);}
+  .btn:disabled{opacity:.5;}
+  .msg{font-size:.82rem;color:var(--red);margin-top:8px;min-height:1em;}
+
+  /* top bar */
+  .bar{position:sticky;top:0;z-index:40;background:rgba(13,19,32,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .bar-in{display:flex;align-items:center;gap:14px;padding:10px 18px;flex-wrap:wrap;}
+  .brand{font-weight:700;display:flex;align-items:center;gap:8px;font-size:1rem;}
+  .tabs{display:flex;gap:4px;margin-left:6px;}
+  .tab{background:transparent;border:1px solid transparent;color:var(--mute);padding:7px 13px;border-radius:9px;font-weight:600;font-size:.85rem;}
+  .tab.on{background:var(--panel2);color:var(--ink);border-color:var(--line);}
+  .spacer{flex:1;}
+  .pill{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.78rem;color:var(--mute);display:flex;align-items:center;gap:7px;}
+  select.inp{margin:0;width:auto;padding:8px 10px;}
+
+  .wrap{padding:18px;}
+
+  /* pipeline */
+  .board{display:flex;gap:13px;overflow-x:auto;padding-bottom:14px;}
+  .col{flex:0 0 290px;background:var(--panel);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;max-height:calc(100vh - 130px);}
+  .col h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);padding:12px 14px;display:flex;justify-content:space-between;border-bottom:1px solid var(--line);}
+  .col .body{padding:10px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;}
+  .card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:grab;}
+  .card.drag{opacity:.4;}
+  .card .nm{font-weight:700;font-size:.95rem;}
+  .card .addr{color:var(--faint);font-size:.74rem;margin:1px 0 6px;display:flex;gap:4px;}
+  .card .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px;}
+  .tag{font-size:.66rem;padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--mute);}
+  .tag.score{font-weight:700;color:#0d1320;}
+  .tag.owner{background:rgba(59,130,246,.18);color:#bcd4ff;border-color:transparent;}
+  .tag.val{background:rgba(52,211,153,.16);color:#9af0cf;border-color:transparent;}
+  .card .row{font-size:.78rem;color:var(--mute);display:flex;gap:6px;align-items:center;margin:2px 0;}
+  .card .desc{font-size:.78rem;color:var(--mute);margin:6px 0;max-height:46px;overflow:hidden;}
+  .card .note{font-size:.74rem;color:var(--faint);border-left:2px solid var(--line);padding-left:7px;margin:6px 0;}
+  .card .last{font-size:.66rem;color:var(--faint);margin-top:4px;}
+  .card .last b{color:var(--cyan);}
+  .acts{display:flex;gap:6px;margin-top:9px;}
+  .acts .big{flex:1;text-align:center;padding:7px 0;border-radius:8px;font-size:.74rem;font-weight:600;border:1px solid var(--line);background:#0b1322;color:var(--ink);text-decoration:none;}
+  .icons{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap;}
+  .ic{width:28px;height:28px;border-radius:7px;border:1px solid var(--line);background:#0b1322;color:var(--mute);font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .ic:hover{color:var(--ink);border-color:var(--blue);}
+  .arrows{display:flex;gap:5px;margin-top:7px;}
+  .arrows button{flex:1;background:#0b1322;border:1px solid var(--line);color:var(--mute);border-radius:7px;padding:4px;font-size:.8rem;}
+
+  /* find leads */
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+  .grid label{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);display:block;margin-bottom:4px;}
+  .chk{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:.82rem;color:var(--mute);}
+  .chk label{display:flex;align-items:center;gap:6px;}
+  .res{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:14px;}
+  .lead{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:13px;}
+  .lead .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;}
+  .lead .nm{font-weight:700;font-size:.92rem;}
+  .scorebadge{font-weight:800;font-size:.8rem;padding:3px 9px;border-radius:8px;color:#0d1320;white-space:nowrap;}
+  .lead .meta{font-size:.76rem;color:var(--mute);margin:5px 0;}
+  .lead .acts{margin-top:9px;}
+
+  /* scoreboard */
+  table.sb{width:100%;border-collapse:collapse;font-size:.85rem;}
+  table.sb th,table.sb td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:right;}
+  table.sb th:first-child,table.sb td:first-child{text-align:left;}
+  table.sb th{color:var(--faint);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;}
+  .clockbar{height:30px;border-radius:8px;background:#0b1322;border:1px solid var(--line);position:relative;overflow:hidden;margin:8px 0;}
+  .clockbar .seg{position:absolute;top:0;bottom:0;background:var(--grad);opacity:.7;}
+
+  /* modal */
+  .ov{position:fixed;inset:0;background:rgba(5,8,15,.7);z-index:60;display:flex;align-items:center;justify-content:center;padding:18px;}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;}
+  .modal h3{margin-bottom:10px;}
+  .modal textarea{width:100%;min-height:120px;background:#0b1322;border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:11px;font-family:inherit;font-size:.86rem;resize:vertical;}
+  .modal .lbl{font-size:.7rem;text-transform:uppercase;color:var(--faint);margin:12px 0 4px;letter-spacing:.05em;}
+  .modal .rowbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;}
+  .legend div{display:flex;gap:9px;align-items:center;font-size:.84rem;color:var(--mute);margin:7px 0;}
+  .legend .k{width:26px;text-align:center;}
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--line);padding:11px 18px;border-radius:10px;font-size:.86rem;z-index:80;box-shadow:0 10px 30px rgba(0,0,0,.4);}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="login">
+  <h1><span class="dot"></span> Heliode Operator</h1>
+  <p>Team access only. Sign in with your Heliode account.</p>
+  <input class="inp" id="li-email" type="email" placeholder="you@heliode.ai" autocomplete="username">
+  <input class="inp" id="li-pass" type="password" placeholder="password" autocomplete="current-password">
+  <button class="btn" id="li-btn" style="width:100%">Sign in</button>
+  <button class="btn ghost sm" id="li-signup" style="width:100%;margin-top:8px">First time? Create password</button>
+  <div class="msg" id="li-msg"></div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <div class="bar"><div class="bar-in">
+    <div class="brand"><span class="dot"></span>HELIODE</div>
+    <div class="tabs">
+      <button class="tab on" data-view="pipeline">Pipeline</button>
+      <button class="tab" data-view="find">Find Leads</button>
+      <button class="tab" data-view="score">Scoreboard</button>
+    </div>
+    <div class="spacer"></div>
+    <select class="inp" id="ownerFilter"><option value="">Combined</option></select>
+    <div class="pill" id="clockPill"><span id="clockState">Clocked out</span>
+      <button class="btn sm" id="clockBtn">Clock in</button></div>
+    <button class="btn ghost sm" id="gmailBtn">Connect Gmail</button>
+    <span class="pill mono" id="meEmail"></span>
+    <button class="btn ghost sm" id="signout">Sign out</button>
+  </div></div>
+
+  <div class="wrap">
+    <!-- PIPELINE -->
+    <div id="view-pipeline">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="color:var(--mute);font-size:.85rem;" id="pipeStats"></div>
+        <button class="btn ghost sm" id="legendBtn">❔ Legend</button>
+      </div>
+      <div class="board" id="board"></div>
+    </div>
+
+    <!-- FIND LEADS -->
+    <div id="view-find" class="hidden">
+      <div class="panel">
+        <div class="grid">
+          <div><label>Industry</label><select class="inp" id="f-industry"></select></div>
+          <div><label>City</label><input class="inp" id="f-city" placeholder="Austin"></div>
+          <div><label>State</label><select class="inp" id="f-state"></select></div>
+          <div><label>Keyword</label><input class="inp" id="f-keyword" placeholder="optional"></div>
+        </div>
+        <div class="chk">
+          <label>Min reviews <input class="inp" id="f-minrev" type="number" value="0" style="width:70px;margin:0"></label>
+          <label><input type="checkbox" id="f-phone"> Has phone</label>
+          <label><input type="checkbox" id="f-web" checked> Has website</label>
+          <label><input type="checkbox" id="f-emailonly"> Email-found only</label>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+          <button class="btn" id="searchBtn">🔍 Search</button>
+          <button class="btn ghost" id="diceBtn">🎲 Roll the Dice</button>
+          <span style="flex:1"></span>
+          <span class="mono" id="findCount" style="color:var(--mute);font-size:.8rem;align-self:center;"></span>
+        </div>
+      </div>
+      <div class="res" id="results"></div>
+    </div>
+
+    <!-- SCOREBOARD -->
+    <div id="view-score" class="hidden">
+      <div class="panel">
+        <h3 style="margin-bottom:6px">Today's clock</h3>
+        <div class="clockbar" id="clockbar"></div>
+        <div style="font-size:.78rem;color:var(--faint)">5 zones = 5 work blocks across the day. Filled = clocked-in time.</div>
+      </div>
+      <div class="panel">
+        <table class="sb" id="sbTable">
+          <thead><tr><th>Rep</th><th>Leads</th><th>Pitches</th><th>Rejections</th><th>Win %</th><th>Closed</th><th>Revenue</th><th>Hours</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SB_URL = 'https://pyosjuuvbxzyjtokfqfu.supabase.co';
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5b3NqdXV2Ynh6eWp0b2tmcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjk4MTcsImV4cCI6MjA5NzY0NTgxN30.7bH19ZZJHxchfRVt3t-I20gJ44WvbR3al516QhwQpmw';
+const sb = createClient(SB_URL, SB_ANON);
+const API = ''; // same-origin on Cloudflare Pages
+
+const STAGES = ['Lead','Contacted','Qualified','Pilot','Deployed','Retainer','Archived'];
+const INDUSTRIES = ['e-commerce','online store','law firm','insurance agency','real estate brokerage','property management','medical clinic','dental practice','veterinary hospital','accounting firm','recruiting agency','staffing agency','logistics company','freight broker','call center','answering service','marketing agency','SaaS company','manufacturer','auto dealership','mortgage broker','medical billing','HVAC company','plumbing company','roofing company','hotel','fitness franchise','pharmacy','debt collection agency','title company'];
+const STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+
+const $ = (id) => document.getElementById(id);
+let ME = null, TOKEN = null, CLIENTS = [], TIME = [], openClock = null;
+
+const toast = (m) => { const t=document.createElement('div'); t.className='toast'; t.textContent=m; $('toastRoot').appendChild(t); setTimeout(()=>t.remove(),2600); };
+async function api(path, body, method='POST'){
+  const res = await fetch(API+path, { method, headers:{'content-type':'application/json','Authorization':`Bearer ${TOKEN}`}, body: body?JSON.stringify(body):undefined });
+  const data = await res.json().catch(()=>({error:'bad response'}));
+  if(!res.ok) throw new Error(data.error||('http '+res.status));
+  return data;
+}
+const stripUrls = (s)=> (s||'').replace(/https?:\/\/\S+/g,'').trim();
+const tierColor = (s)=> s>=85?'#fb7185': s>=70?'#fbbf24': s>=50?'#34d399':'#64748b';
+const money = (n)=> '$'+(Number(n)||0).toLocaleString();
+
+// ---------- auth ----------
+$('li-btn').onclick = async ()=>{
+  const email=$('li-email').value.trim(), password=$('li-pass').value;
+  $('li-msg').textContent='';
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  if(error){ $('li-msg').textContent=error.message; return; }
+  boot();
+};
+$('li-signup').onclick = async ()=>{
+  const email=$('li-email').value.trim(), password=$('li-pass').value;
+  if(password.length<6){ $('li-msg').textContent='Password ≥ 6 chars'; return; }
+  const { error } = await sb.auth.signUp({ email, password });
+  $('li-msg').textContent = error ? error.message : 'Created — now sign in.';
+};
+$('li-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') $('li-btn').click(); });
+$('signout').onclick = async ()=>{ await sb.auth.signOut(); location.reload(); };
+
+async function boot(){
+  const { data:{ session } } = await sb.auth.getSession();
+  if(!session){ $('login').classList.remove('hidden'); $('app').classList.add('hidden'); return; }
+  const email = session.user.email.toLowerCase();
+  if(!(email.endsWith('@heliode.ai') || email==='brandonmcruz@mac.com')){
+    $('li-msg').textContent='Not a Heliode team account.'; await sb.auth.signOut(); return;
+  }
+  ME = session.user.email; TOKEN = session.access_token;
+  $('login').classList.add('hidden'); $('app').classList.remove('hidden');
+  $('meEmail').textContent = ME;
+  populateSelects();
+  await Promise.all([loadClients(), loadTime()]);
+  switchView('pipeline');
+}
+
+function populateSelects(){
+  $('f-industry').innerHTML = '<option value="">Any industry</option>'+INDUSTRIES.map(i=>`<option>${i}</option>`).join('');
+  $('f-state').innerHTML = '<option value="">State</option>'+STATES.map(s=>`<option>${s}</option>`).join('');
+}
+
+// ---------- data ----------
+async function loadClients(){
+  const { data, error } = await sb.from('heliode_clients').select('*').order('sort_order',{ascending:true}).order('created_at',{ascending:false});
+  if(error){ toast('load error: '+error.message); return; }
+  CLIENTS = data||[];
+  refreshOwners(); renderBoard(); renderScore();
+}
+async function loadTime(){
+  const { data } = await sb.from('heliode_time_entries').select('*').order('clock_in',{ascending:false}).limit(200);
+  TIME = data||[];
+  openClock = TIME.find(t=>t.email===(ME||'').toLowerCase() && !t.clock_out) || null;
+  renderClock();
+}
+function refreshOwners(){
+  const owners=[...new Set(CLIENTS.map(c=>c.owner).filter(Boolean))];
+  const cur=$('ownerFilter').value;
+  $('ownerFilter').innerHTML='<option value="">Combined</option>'+owners.map(o=>`<option ${o===cur?'selected':''}>${o}</option>`).join('');
+}
+const visibleClients = ()=>{ const f=$('ownerFilter').value; return f?CLIENTS.filter(c=>c.owner===f):CLIENTS; };
+
+// ---------- pipeline board ----------
+function renderBoard(){
+  const board=$('board'); board.innerHTML='';
+  const cl=visibleClients();
+  STAGES.forEach(stage=>{
+    const inStage=cl.filter(c=>(c.stage||'Lead')===stage);
+    const col=document.createElement('div'); col.className='col'; col.dataset.stage=stage;
+    col.innerHTML=`<h3>${stage}<span>${inStage.length}</span></h3><div class="body"></div>`;
+    const body=col.querySelector('.body');
+    inStage.forEach(c=> body.appendChild(cardEl(c)));
+    body.addEventListener('dragover', e=>e.preventDefault());
+    body.addEventListener('drop', e=>{ e.preventDefault(); const id=e.dataTransfer.getData('id'); if(id) moveStage(id, stage); });
+    board.appendChild(col);
+  });
+  const stats=STAGES.map(s=>`${s}: ${cl.filter(c=>(c.stage||'Lead')===s).length}`).join('  ·  ');
+  $('pipeStats').textContent=stats;
+}
+function cardEl(c){
+  const el=document.createElement('div'); el.className='card'; el.draggable=true;
+  const last=(c.activities&&c.activities[0])||null;
+  el.innerHTML=`
+    <div class="nm">${c.company_name||'(no name)'}</div>
+    ${c.address?`<div class="addr">📍 ${c.address}</div>`:''}
+    <div class="badges">
+      ${c.opportunity!=null?`<span class="tag score" style="background:${tierColor(c.opportunity)}">${c.opportunity}</span>`:''}
+      ${c.owner?`<span class="tag owner">${c.owner}</span>`:''}
+      ${c.deal_value?`<span class="tag val">${money(c.deal_value)}</span>`:''}
+      ${c.industry?`<span class="tag">${c.industry}</span>`:''}
+    </div>
+    ${c.phone?`<div class="row">📞 ${c.phone}</div>`:''}
+    ${c.email?`<div class="row">✉️ ${c.email}</div>`:''}
+    ${c.description?`<div class="desc">${stripUrls(c.description)}</div>`:''}
+    ${c.notes?`<div class="note">${stripUrls(c.notes)}</div>`:''}
+    ${last?`<div class="last"><b>LAST</b> ${last.type} · ${new Date(last.at).toLocaleDateString()}</div>`:''}
+    <div class="acts">
+      ${c.phone?`<a class="big" href="tel:${c.phone}">Call</a><a class="big" href="sms:${c.phone}">Text</a>`:''}
+      ${c.email?`<a class="big" href="mailto:${c.email}">Email</a>`:''}
+    </div>
+    <div class="icons">
+      <button class="ic" title="Schedule AI email" data-act="ai">🤖</button>
+      <button class="ic" title="Scripts (SMS + call)" data-act="script">📝</button>
+      <button class="ic" title="Set reminder/follow-up" data-act="remind">⏰</button>
+      <button class="ic" title="Proposal value" data-act="proposal">💼</button>
+      <button class="ic" title="Deep scrape" data-act="scrape">🔬</button>
+      <button class="ic" title="Add note" data-act="note">🗒️</button>
+      <button class="ic" title="Enrich contact" data-act="enrich">📧</button>
+    </div>
+    <div class="arrows"><button data-mv="-1">←</button><button data-mv="1">→</button></div>`;
+  el.addEventListener('dragstart', e=>{ e.dataTransfer.setData('id',c.id); el.classList.add('drag'); });
+  el.addEventListener('dragend', ()=> el.classList.remove('drag'));
+  el.querySelectorAll('[data-mv]').forEach(b=> b.onclick=()=>{ const i=STAGES.indexOf(c.stage||'Lead')+ +b.dataset.mv; if(i>=0&&i<STAGES.length) moveStage(c.id, STAGES[i]); });
+  el.querySelectorAll('[data-act]').forEach(b=> b.onclick=()=> cardAction(b.dataset.act, c));
+  return el;
+}
+async function moveStage(id, stage){
+  await sb.from('heliode_clients').update({stage}).eq('id',id);
+  const c=CLIENTS.find(x=>x.id===id); if(c) c.stage=stage;
+  renderBoard(); renderScore();
+}
+
+async function cardAction(act, c){
+  if(act==='note') return noteModal(c);
+  if(act==='remind') return remindModal(c);
+  if(act==='proposal') return proposalModal(c);
+  if(act==='ai' || act==='script') return aiModal(c, act==='script');
+  if(act==='enrich') return doEnrich(c);
+  if(act==='scrape') return doScrape(c);
+}
+
+// ---------- modals ----------
+function modal(html){
+  const ov=document.createElement('div'); ov.className='ov';
+  ov.innerHTML=`<div class="modal">${html}</div>`;
+  ov.addEventListener('click', e=>{ if(e.target===ov) ov.remove(); });
+  $('modalRoot').appendChild(ov); return ov;
+}
+function noteModal(c){
+  const ov=modal(`<h3>Note · ${c.company_name}</h3><textarea id="nt">${c.notes||''}</textarea>
+    <div class="rowbtns"><button class="btn ghost sm" data-x>Cancel</button><button class="btn sm" id="ntsave">Save</button></div>`);
+  ov.querySelector('[data-x]').onclick=()=>ov.remove();
+  ov.querySelector('#ntsave').onclick=async()=>{
+    const notes=ov.querySelector('#nt').value;
+    const acts=c.activities||[]; acts.unshift({at:new Date().toISOString(),type:'note',text:notes.slice(0,80)});
+    await sb.from('heliode_clients').update({notes,activities:acts}).eq('id',c.id);
+    Object.assign(c,{notes,activities:acts}); ov.remove(); renderBoard(); toast('Note saved');
+  };
+}
+function remindModal(c){
+  const ov=modal(`<h3>Follow-up · ${c.company_name}</h3><div class="lbl">Date</div>
+    <input class="inp" id="fu" type="date" value="${c.follow_up||''}">
+    <div class="rowbtns"><button class="btn ghost sm" data-x>Cancel</button><button class="btn sm" id="fusave">Save</button></div>`);
+  ov.querySelector('[data-x]').onclick=()=>ov.remove();
+  ov.querySelector('#fusave').onclick=async()=>{ const follow_up=ov.querySelector('#fu').value; await sb.from('heliode_clients').update({follow_up}).eq('id',c.id); c.follow_up=follow_up; ov.remove(); toast('Reminder set'); };
+}
+function proposalModal(c){
+  const ov=modal(`<h3>Deal value · ${c.company_name}</h3>
+    <div class="lbl">One-time deal value</div><input class="inp" id="dv" type="number" value="${c.deal_value||0}">
+    <div class="lbl">Monthly retainer</div><input class="inp" id="mv" type="number" value="${c.monthly_value||0}">
+    <div class="rowbtns"><button class="btn ghost sm" data-x>Cancel</button><button class="btn sm" id="dvsave">Save</button></div>`);
+  ov.querySelector('[data-x]').onclick=()=>ov.remove();
+  ov.querySelector('#dvsave').onclick=async()=>{ const deal_value=+ov.querySelector('#dv').value, monthly_value=+ov.querySelector('#mv').value; await sb.from('heliode_clients').update({deal_value,monthly_value}).eq('id',c.id); Object.assign(c,{deal_value,monthly_value}); ov.remove(); renderBoard(); toast('Saved'); };
+}
+async function doEnrich(c){
+  toast('Enriching…');
+  try{
+    const d=await api('/api/enrich',{company_name:c.company_name,address:c.address,website:c.website});
+    const patch={}; if(d.email&&!c.email)patch.email=d.email; if(d.phone&&!c.phone)patch.phone=d.phone;
+    if(d.about) patch.description=(c.description?c.description+' ':'')+d.about;
+    if(d.socials) patch.firmographics={...(c.firmographics||{}),socials:d.socials};
+    if(Object.keys(patch).length){ await sb.from('heliode_clients').update(patch).eq('id',c.id); Object.assign(c,patch); renderBoard(); }
+    toast(d.email?('Found '+d.email):'Enriched');
+  }catch(e){ toast('Enrich failed: '+e.message); }
+}
+async function doScrape(c){
+  const fb=c.firmographics?.socials?.facebook;
+  if(!fb) return toast('Enrich first (need a Facebook URL)');
+  toast('Deep scraping…');
+  try{
+    const d=await api('/api/company-scrape',{facebook:fb});
+    const firmographics={...(c.firmographics||{}),...d.firmographics};
+    let opp=c.opportunity; if(d.firmographics?.headcount>=20) opp=Math.min(100,(c.opportunity||0)+8);
+    await sb.from('heliode_clients').update({firmographics,opportunity:opp}).eq('id',c.id);
+    Object.assign(c,{firmographics,opportunity:opp}); renderBoard(); toast('Firmographics added');
+  }catch(e){ toast('Scrape failed: '+e.message); }
+}
+
+// AI draft + schedule modal
+async function aiModal(c, scriptsOnly){
+  if(!c.email && !scriptsOnly) { if(!confirm('No email on file. Generate anyway?')) return; }
+  const ov=modal(`<h3>${scriptsOnly?'Scripts':'AI email'} · ${c.company_name}</h3>
+    <div id="aibody"><p style="color:var(--mute)">Generating with Claude…</p></div>`);
+  let draft;
+  try{ draft=await api('/api/ai-draft',{...c}); }
+  catch(e){ ov.querySelector('#aibody').innerHTML=`<p style="color:var(--red)">${e.message}</p>`; return; }
+  const today=new Date(Date.now()+3600*1000).toISOString().slice(0,16);
+  ov.querySelector('#aibody').innerHTML = `
+    ${scriptsOnly?'':`<div class="lbl">Subject</div><input class="inp" id="ai-subj" value="${(draft.subject||'').replace(/"/g,'&quot;')}">
+    <div class="lbl">Email</div><textarea id="ai-email">${draft.email||''}</textarea>
+    <div class="lbl">Send at</div><input class="inp" id="ai-when" type="datetime-local" value="${today}">
+    <div class="lbl" style="margin-top:6px">Send from</div><input class="inp" id="ai-from" value="${ME}">`}
+    <div class="lbl">SMS template</div><textarea id="ai-sms" style="min-height:70px">${draft.sms||''}</textarea>
+    <div class="lbl">Call script</div><textarea id="ai-call" style="min-height:90px">${draft.call_script||''}</textarea>
+    <div class="rowbtns">
+      <button class="btn ghost sm" data-x>Close</button>
+      ${scriptsOnly?'':'<button class="btn sm" id="ai-sched">Draft + schedule send</button>'}
+    </div>`;
+  ov.querySelector('[data-x]').onclick=()=>ov.remove();
+  const sb2=ov.querySelector('#ai-sched');
+  if(sb2) sb2.onclick=async()=>{
+    if(!c.email) return toast('No recipient email');
+    sb2.disabled=true; sb2.textContent='Scheduling…';
+    try{
+      await api('/api/schedule-email',{ sender_email:ov.querySelector('#ai-from').value, client_id:c.id, to_email:c.email,
+        subject:ov.querySelector('#ai-subj').value, body:ov.querySelector('#ai-email').value, send_at:new Date(ov.querySelector('#ai-when').value).toISOString() });
+      ov.remove(); await loadClients(); toast('Drafted + scheduled. Lead → Contacted.');
+    }catch(e){ sb2.disabled=false; sb2.textContent='Draft + schedule send'; toast('Failed: '+e.message); }
+  };
+}
+
+function legendModal(){
+  const items=[['🤖','Schedule an AI-written email (Claude) and auto-send at a chosen time'],['📝','Generate SMS + call scripts'],['⏰','Set a follow-up reminder date'],['💼','Set the deal / retainer value'],['🔬','Deep-scrape firmographics (Apify) — needs enrich first'],['🗒️','Add / edit a note'],['📧','Enrich contact (Serper) — email, phone, socials, about'],['🔥','Hot lead (score 85+)'],['⭐','Strong (70+)'],['•','Warm (50+)'],['·','Cool (<50)']];
+  const ov=modal(`<h3>Legend</h3><div class="legend">${items.map(([k,v])=>`<div><span class="k">${k}</span><span>${v}</span></div>`).join('')}</div><div class="rowbtns"><button class="btn sm" data-x>Got it</button></div>`);
+  ov.querySelector('[data-x]').onclick=()=>ov.remove();
+}
+$('legendBtn').onclick=legendModal;
+
+// ---------- find leads ----------
+$('searchBtn').onclick=async()=>{
+  const btn=$('searchBtn'); btn.disabled=true; btn.textContent='Searching…';
+  $('results').innerHTML=''; $('findCount').textContent='';
+  try{
+    const d=await api('/api/places',{ industry:$('f-industry').value, city:$('f-city').value, state:$('f-state').value, keyword:$('f-keyword').value,
+      minReviews:+$('f-minrev').value, filterHasPhone:$('f-phone').checked, filterHasWebsite:$('f-web').checked });
+    renderResults(d.results||[]);
+  }catch(e){ toast('Search failed: '+e.message); }
+  btn.disabled=false; btn.textContent='🔍 Search';
+};
+$('diceBtn').onclick=async()=>{
+  const btn=$('diceBtn'); btn.disabled=true; btn.textContent='Rolling…';
+  $('results').innerHTML='';
+  try{ const d=await api('/api/places',{dice:true}); renderResults(d.results||[]); toast(`${(d.results||[]).length} businesses across the USA`); }
+  catch(e){ toast('Dice failed: '+e.message); }
+  btn.disabled=false; btn.textContent='🎲 Roll the Dice';
+};
+async function renderResults(rows){
+  if($('f-emailonly').checked){ /* enrich top, then filter */ }
+  $('findCount').textContent=rows.length+' results';
+  const box=$('results'); box.innerHTML='';
+  rows.forEach((r,i)=>{
+    const el=document.createElement('div'); el.className='lead';
+    el.innerHTML=`<div class="top"><div class="nm">${r.company_name}</div>
+      <span class="scorebadge" style="background:${tierColor(r.opportunity)}">${r.tier||''} ${r.opportunity}</span></div>
+      <div class="meta">📍 ${r.address||''}</div>
+      <div class="meta">${r.reviews||0} reviews${r.rating?` · ★${r.rating}`:''} · ${r.website?'🌐 site':'no site'} · ${r.phone||'no phone'}</div>
+      <div class="acts">
+        <button class="btn sm" data-add>+ Pipeline</button>
+        <button class="btn ghost sm" data-enrich>📧 Enrich</button>
+        ${r.website?`<a class="btn ghost sm" href="${r.website}" target="_blank" rel="noopener">Site</a>`:''}
+      </div>`;
+    el.querySelector('[data-add]').onclick=()=>addToPipeline(r, el);
+    el.querySelector('[data-enrich]').onclick=async(ev)=>{ ev.target.textContent='…'; try{ const d=await api('/api/enrich',{company_name:r.company_name,address:r.address,website:r.website}); r.email=d.email; r.description=d.about; el.querySelector('.meta:last-of-type').insertAdjacentHTML('afterend',`<div class="meta">${d.email?'✉️ '+d.email:'no email'} ${d.about?'· '+stripUrls(d.about).slice(0,70):''}</div>`); ev.target.textContent='📧 Enrich'; }catch(e){ ev.target.textContent='failed'; } };
+    box.appendChild(el);
+  });
+}
+async function addToPipeline(r, el){
+  const row={ company_name:r.company_name, address:r.address, phone:r.phone, website:r.website, email:r.email||null,
+    description:r.description||null, industry:r.industry, reviews:r.reviews, rating:r.rating, opportunity:r.opportunity,
+    stage:'Lead', owner:(ME||'').split('@')[0], acquired_by:ME, place_id:r.place_id, activities:[] };
+  const { error } = await sb.from('heliode_clients').upsert(row,{onConflict:'place_id',ignoreDuplicates:true});
+  if(error){ toast(error.message); return; }
+  if(el) el.style.opacity=.5; toast('Added to pipeline');
+  await loadClients();
+}
+
+// ---------- clock + scoreboard ----------
+$('clockBtn').onclick=async()=>{
+  if(openClock){ await sb.from('heliode_time_entries').update({clock_out:new Date().toISOString()}).eq('id',openClock.id); }
+  else{ await sb.from('heliode_time_entries').insert({person:(ME||'').split('@')[0],email:(ME||'').toLowerCase(),clock_in:new Date().toISOString()}); }
+  await loadTime();
+};
+function renderClock(){
+  $('clockState').textContent = openClock?'Clocked in':'Clocked out';
+  $('clockBtn').textContent = openClock?'Clock out':'Clock in';
+  const bar=$('clockbar'); if(!bar) return; bar.innerHTML='';
+  const dayStart=new Date(); dayStart.setHours(6,0,0,0); const span=15*3600*1000;
+  TIME.filter(t=>t.email===(ME||'').toLowerCase()).forEach(t=>{
+    const a=new Date(t.clock_in), b=t.clock_out?new Date(t.clock_out):new Date();
+    if(b<dayStart) return;
+    const l=Math.max(0,(a-dayStart)/span)*100, w=Math.min(100,((b-a)/span)*100);
+    const seg=document.createElement('div'); seg.className='seg'; seg.style.left=l+'%'; seg.style.width=Math.max(1,w)+'%'; bar.appendChild(seg);
+  });
+}
+function hoursFor(email){
+  return TIME.filter(t=>t.email===email&&t.clock_out).reduce((s,t)=>s+(new Date(t.clock_out)-new Date(t.clock_in))/3600000,0);
+}
+function renderScore(){
+  const reps=[...new Set([...CLIENTS.map(c=>c.owner).filter(Boolean), (ME||'').split('@')[0]])];
+  const tb=$('sbTable').querySelector('tbody'); tb.innerHTML='';
+  reps.forEach(rep=>{
+    const mine=CLIENTS.filter(c=>c.owner===rep);
+    const leads=mine.length;
+    const pitches=mine.reduce((s,c)=>s+((c.activities||[]).filter(a=>a.type==='email').length),0);
+    const closed=mine.filter(c=>['Deployed','Retainer'].includes(c.stage)).length;
+    const rejections=mine.filter(c=>c.stage==='Archived').length;
+    const contacted=mine.filter(c=>c.stage!=='Lead').length;
+    const rev=mine.filter(c=>['Deployed','Retainer'].includes(c.stage)).reduce((s,c)=>s+(+c.deal_value||0),0);
+    const hrs=hoursFor((rep+'@heliode.ai')); // best-effort: maps rep name → @heliode.ai
+    tb.innerHTML+=`<tr><td>${rep}</td><td>${leads}</td><td>${pitches}</td><td>${rejections}</td><td>${contacted?Math.round(closed/contacted*100):0}%</td><td>${closed}</td><td>${money(rev)}</td><td>${hrs.toFixed(1)}</td></tr>`;
+  });
+}
+
+// ---------- gmail connect ----------
+$('gmailBtn').onclick=async()=>{
+  try{ const d=await api('/api/google-oauth',null,'GET'); window.open(d.url,'gmail','width=520,height=640'); }
+  catch(e){ toast('OAuth start failed: '+e.message); }
+};
+window.addEventListener('message', e=>{ if(e.data&&'heliodeGoogle' in e.data) toast(e.data.heliodeGoogle?'Gmail connected':'Gmail connect failed'); });
+
+// ---------- views ----------
+function switchView(v){
+  ['pipeline','find','score'].forEach(x=>{ $('view-'+x).classList.toggle('hidden',x!==v); });
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.view===v));
+}
+document.querySelectorAll('.tab').forEach(t=> t.onclick=()=>switchView(t.dataset.view));
+$('ownerFilter').onchange=()=>{ renderBoard(); };
+
+boot();
+</script>
+</body>
+</html>
