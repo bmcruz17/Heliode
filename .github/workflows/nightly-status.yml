@@ -1,0 +1,35 @@
+name: Nightly STATUS checkpoint
+
+# Runs on GitHub's infra (survives even when no Claude session is alive).
+# NOTE: GitHub cron is always UTC. 06:07 UTC ≈ 1:07am Central (CDT, summer);
+# ≈ 12:07am Central in winter (CST). Adjust the hour if you want exactly 1am year-round.
+on:
+  schedule:
+    - cron: '7 6 * * *'
+  workflow_dispatch: {}   # lets you run it on-demand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Update STATUS.md
+        run: python3 scripts/update_status.py
+
+      - name: Commit & push if changed
+        run: |
+          if git diff --quiet -- STATUS.md; then
+            echo "No STATUS.md changes — nothing to commit."
+            exit 0
+          fi
+          git config user.name "heliode-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add STATUS.md
+          git commit -m "STATUS: nightly auto-checkpoint [skip ci]"
+          git push origin main
