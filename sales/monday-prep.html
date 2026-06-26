@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heliode — Sales Prep Packet</title>
+<style>
+  :root{
+    --ink:#0d1320; --mute:#555c66; --line:#d6dae0;
+    --blue:#2563eb; --violet:#7c3aed; --cyan:#0e7490;
+    --grad:linear-gradient(110deg,#2563eb,#7c3aed);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    color:var(--ink); line-height:1.5; background:#f4f5f7;
+  }
+  .page{
+    max-width:760px; margin:24px auto; background:#fff; padding:48px 56px;
+    box-shadow:0 2px 18px rgba(13,19,32,.08); border-radius:10px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .dot{width:14px;height:14px;border-radius:50%;background:#4f46e5;box-shadow:0 0 0 5px rgba(79,70,229,.16)}
+  .brand b{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;letter-spacing:3px;font-size:15px}
+  h1{font-size:30px;margin:14px 0 2px;letter-spacing:-.5px}
+  .sub{color:var(--mute);margin:0 0 6px;font-size:15px}
+  .bar{height:5px;width:88px;border-radius:3px;background:var(--grad);margin:14px 0 0}
+  h2{
+    font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#fff;
+    background:var(--grad); display:inline-block; padding:5px 12px; border-radius:5px;
+    margin:34px 0 14px;
+  }
+  h3{font-size:17px;margin:22px 0 6px}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0;padding-left:22px}
+  li{margin:5px 0}
+  .mute{color:var(--mute)}
+  .small{font-size:13px}
+  .card{border:1px solid var(--line);border-radius:9px;padding:16px 18px;margin:12px 0;background:#fcfcfd}
+  .q{border-left:4px solid var(--violet);padding:8px 14px;margin:10px 0;background:#faf9ff;border-radius:0 6px 6px 0}
+  .q b{color:var(--violet)}
+  .email{border:1px dashed var(--line);border-radius:9px;padding:16px 18px;margin:12px 0;background:#fbfcff;font-size:14px}
+  .email .subj{font-weight:700;margin-bottom:8px}
+  .label{display:inline-block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:6px}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#f3f4f7;font-size:12px;letter-spacing:.5px}
+  .fill{color:#aeb4bd}
+  .check{list-style:none;padding-left:0}
+  .check li{padding-left:30px;position:relative;margin:8px 0}
+  .check li::before{content:"";position:absolute;left:0;top:2px;width:16px;height:16px;border:2px solid var(--line);border-radius:4px}
+  .day{font-weight:700;color:var(--blue);letter-spacing:.5px;margin-top:18px}
+  .gloss b{color:var(--ink)}
+  .gloss{font-size:14px}
+  .gloss div{margin:7px 0;padding-bottom:7px;border-bottom:1px solid #eef0f3}
+  .tip{background:#f0f6ff;border:1px solid #cfe0ff;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:14px}
+  .foot{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;color:var(--mute);font-size:12px;display:flex;justify-content:space-between}
+  @media print{
+    body{background:#fff}
+    .page{box-shadow:none;margin:0;max-width:none;border-radius:0;padding:0 8px}
+    h2{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .bar,.dot,th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .pgbreak{page-break-before:always}
+    .noprint{display:none}
+  }
+  .printbtn{position:fixed;top:16px;right:16px;background:var(--grad);color:#fff;border:none;
+    padding:10px 18px;border-radius:8px;font-weight:600;cursor:pointer;font-size:14px;box-shadow:0 4px 14px rgba(79,70,229,.3)}
+</style>
+</head>
+<body>
+<button class="printbtn noprint" onclick="window.print()">Print / Save as PDF</button>
+
+<div class="page">
+
+  <div class="brand"><span class="dot"></span><b>HELIODE</b></div>
+  <h1>Sales Prep Packet</h1>
+  <p class="sub">Everything to review, learn, and do before Monday's RunPod call &mdash; plus tomorrow's Dell call.</p>
+  <div class="bar"></div>
+
+  <!-- ============ THE ICP ============ -->
+  <h2>1 &middot; Who I'm selling to (the ICP)</h2>
+  <div class="card">
+    <p><b>A company already spending heavily on AWS / GCP / Azure to run an AI model in production</b> &mdash; technical enough to know their setup, but who hasn't realized there's a cheaper way.</p>
+    <p class="mute small">If they're not running a model in production yet, or have no real monthly cloud bill, they're <b>not</b> my customer. Don't burn time on them &mdash; follow up next quarter.</p>
+  </div>
+  <p><b>The qualifying signal is the monthly GPU bill:</b></p>
+  <ul>
+    <li><b>Under ~$5k/mo</b> &mdash; small fish. Take them, but don't chase.</li>
+    <li><b>$5k&ndash;$50k/mo</b> &mdash; my bread and butter. <b>Build the base here.</b></li>
+    <li><b>$50k+/mo</b> &mdash; whale. Great, but one whale walking can't sink the bandwidth commitment.</li>
+  </ul>
+  <div class="tip"><b>Portfolio rule (from Zach):</b> aim for a <b>majority of mid-size accounts</b>, a few whales, and some small fish. A single big customer leaving shouldn't jeopardize my committed spend with RunPod.</div>
+
+  <!-- ============ WORDS TO KNOW ============ -->
+  <h2>2 &middot; Words to know (so I never freeze)</h2>
+  <div class="card gloss">
+    <div><b>Inference</b> &mdash; running a trained model to get answers (what my customers do). Not training, which is building the model.</div>
+    <div><b>H100 / H200</b> &mdash; flagship NVIDIA GPUs, high demand. These are what I can actually serve well and sell.</div>
+    <div><b>A100 / L40S</b> &mdash; older/cheaper GPUs. Zach said adding these "won't add much" &mdash; lower demand. Don't lead with them.</div>
+    <div><b>3090 / 4090</b> &mdash; consumer GPUs (24GB each). Can stitch ~4 together &rarr; ~96GB for smaller, sharded workloads. Cheap, niche.</div>
+    <div><b>VRAM</b> &mdash; the GPU's memory. Bigger models need more. A 70B model needs far more than a 7B model.</div>
+    <div><b>On-demand</b> &mdash; pay per hour, no money up front, no commitment. This is how I start customers &mdash; removes their risk.</div>
+    <div><b>Committed / reserved spend</b> &mdash; promise a baseline of usage for a discount. RunPod: ~10% low end &rarr; ~30% at ~$1M/yr.</div>
+    <div><b>Serverless</b> &mdash; capacity that scales to zero when idle; you pay only when it runs.</div>
+    <div><b>Margin over spot</b> &mdash; my profit = what I charge the customer minus what I pay RunPod.</div>
+    <div><b>Ramp</b> &mdash; a starting baseline that steps <b>up</b> as I hit performance targets over 2&ndash;3 months. Can go up, not down.</div>
+    <div><b>Docker / container</b> &mdash; the package the model runs in. RunPod runs on Docker; I deploy containers onto their capacity.</div>
+  </div>
+
+  <!-- ============ DISCOVERY SCRIPT ============ -->
+  <div class="pgbreak"></div>
+  <h2>3 &middot; Discovery call script</h2>
+  <p class="mute small">My job on a discovery call is <b>not to pitch</b> &mdash; it's to ask 5 questions and listen. Keep this in front of me.</p>
+
+  <h3>Open (say it the same way every time)</h3>
+  <div class="q">"Thanks for hopping on. I'll keep this short. I'm not going to pitch you &mdash; I just want to understand what you're running and what you're paying, and if there's a cheaper way I'll show you. Cool if I ask a few quick questions?"</div>
+
+  <h3>The 5 questions</h3>
+  <div class="q"><b>1.</b> What model do you have in production right now? <span class="mute">(listen for size &mdash; 7B vs 70B changes everything)</span></div>
+  <div class="q"><b>2.</b> What are you running it on today? <span class="mute">(AWS? which instances &mdash; p4d, p5, g5? tells me their GPU + sophistication)</span></div>
+  <div class="q"><b>3.</b> Roughly what's the monthly GPU / compute bill? <span class="mute">(this is what qualifies them &mdash; see the tiers in §1)</span></div>
+  <div class="q"><b>4.</b> Which GPUs, and how many? <span class="mute">(H100/H200 = I can help; A100/L40S = limited)</span></div>
+  <div class="q"><b>5.</b> What's the biggest pain &mdash; cost, availability, or the ops headache? <span class="mute">(this is what I sell against)</span></div>
+
+  <h3>Close (always end with a next step &mdash; never "I'll send info")</h3>
+  <div class="q">"This is really helpful. Based on what you're describing, I think I can get you <span class="fill">[rough %]</span> cheaper with no money up front and no infra change. Let me put together exact numbers &mdash; can I send those over and grab 20 minutes <span class="fill">[day]</span> to walk through them?"</div>
+
+  <!-- ============ THE EMAILS ============ -->
+  <div class="pgbreak"></div>
+  <h2>4 &middot; The outreach (AWS-overspender angle)</h2>
+  <p class="mute small">The goal of every message is one thing: book a 15-minute call. Lead with a cheap, specific claim and ask one easy question.</p>
+
+  <div class="email">
+    <div class="label">Cold email</div>
+    <div class="subj">Subject: your AWS GPU bill</div>
+    <p>Hi {First},</p>
+    <p>Quick one &mdash; are you running {model / inference workload} on AWS (or GCP/Azure) right now?</p>
+    <p>If so, you're almost certainly paying 2&ndash;4&times; more per GPU-hour than you need to. The hyperscalers price inference like it's a scarce enterprise product. It isn't anymore.</p>
+    <p>We run the same H100/H200 capacity through one managed endpoint &mdash; your same API, one bill, no infra to babysit &mdash; at a fraction of on-demand cloud rates.</p>
+    <p>Worth a 15-minute call to see if the math works for you? No commitment, no card up front. Even if you don't switch, you'll leave knowing exactly what you should be paying.</p>
+    <p>&mdash; Brandon<br>Founder, Heliode &middot; heliode.ai</p>
+  </div>
+
+  <div class="email">
+    <div class="label">LinkedIn DM</div>
+    <p>Hi {First} &mdash; saw {company} is running {model/inference} in production. If that's on AWS/GCP/Azure, you're likely overpaying 2&ndash;4&times; on GPU-hours. We run the same H100/H200 capacity through one managed endpoint for a fraction of on-demand rates. Open to a quick 15-min call to check the math? No commitment.</p>
+  </div>
+
+  <!-- ============ ZACH PREP SHEET ============ -->
+  <div class="pgbreak"></div>
+  <h2>5 &middot; Monday-with-Zach prep sheet</h2>
+  <p class="mute small">Fill this in through the week from discovery calls. Walk into Monday with <b>named accounts and dollar figures</b> &mdash; that's what lets Zach write a real contract.</p>
+
+  <p class="label">Pipeline this week (from discovery calls)</p>
+  <table>
+    <tr><th>Account</th><th>Their model</th><th>Today on</th><th>Monthly $</th><th>GPU + #</th><th>Pain</th><th>Fit?</th></tr>
+    <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <p class="label">Portfolio shape (de-risks the bandwidth commitment)</p>
+  <table>
+    <tr><th>Whales ($50k+/mo)</th><th>Mid-size ($5&ndash;50k/mo) &larr; the base</th><th>Small fish (&lt;$5k/mo)</th></tr>
+    <tr><td>&nbsp;<br>&nbsp;</td><td></td><td></td></tr>
+  </table>
+  <p class="small mute">If one whale walks, what % of my committed spend disappears? <span class="fill">________%</span></p>
+
+  <p class="label">What I need from Zach this week</p>
+  <ul class="check">
+    <li>Confirm card type + GPU availability for: <span class="fill">_______________</span> (he can't quote without category/#)</li>
+    <li>On-demand rates for H100 / H200 so I can quote my customers</li>
+    <li>Where committed-spend tiers start (~10% low end &rarr; ~30% at ~$1M/yr)</li>
+    <li>Ramp terms &mdash; perf targets over 2&ndash;3 mo to step the baseline up</li>
+  </ul>
+
+  <div class="tip"><b>Fresh intel (Jun 26) &mdash; RunPod just raised $100M @ $1B valuation (Summit Partners), two days ago.</b> Revenue doubled to ~$240M ARR, 1M+ developers, and they turned down $500M buyout offers. They're in a compute crunch (demand &gt; supply). <b>So:</b> they have pricing leverage and won't bend much on price for a small new reseller &mdash; but they want <b>distribution &amp; developer growth</b>, which is exactly what I bring. Frame myself as a <b>managed-demand channel</b>, not just a buyer. Full brief: sales/runpod-research.md.</div>
+
+  <p class="label">Sharpen these with Zach (from the RunPod research)</p>
+  <div class="q"><b>1. Reseller vs. affiliate &mdash; the big one.</b> Their public program is affiliate-only (3% Pod / 5% Serverless, or 10% referral). Can I buy <b>wholesale and resell at my own price + SLA</b>, or am I capped at affiliate commissions? This decides my entire margin model.</div>
+  <div class="q"><b>2. Committed-spend curve.</b> Where do discounts actually start, and how do they scale ($ &rarr; %)? Get it in writing.</div>
+  <div class="q"><b>3. My ramp proposal &mdash; "discount-first, 30-day quota."</b> Give me <b>committed-tier discount pricing from day one</b> with on-demand flexibility (pay-as-I-go, no big prepay). I commit to hit <span class="fill">[$____/mo or ____ GPU-hrs]</span> within <b>30 days</b>. Hit it &rarr; the discount locks in as my ongoing rate and steps up from there. Miss it &rarr; rate reverts to standard on-demand going forward. <b>My give (to de-risk it for them):</b> a true-up &mdash; if I miss the quota, I back-pay the difference between the discounted and on-demand rate on the hours I used. That way they risk nothing.</div>
+  <div class="q"><b>4. Capacity guarantee.</b> During the crunch, can you guarantee H100/H200 behind a commitment, and in which regions?</div>
+  <div class="q"><b>5. Startup Program.</b> Commit $50K &rarr; +$25K bonus ($75K total). Requirements, and can those credits roll into a committed contract later? &larr; low-risk on-ramp.</div>
+  <div class="q"><b>6. Who owns the deal?</b> Can Zach authorize committed rates/ramp, or does it route through RunPod RevOps/COO (Justin Mongroo)?</div>
+
+  <p class="label">My decisions to bring</p>
+  <ul class="check">
+    <li><b>Opening ask:</b> discount-first 30-day ramp (Q3 above) &mdash; discounted rate now, 30 days to hit quota, true-up if I miss. <b>Fallback:</b> a small committed baseline that steps up with a perf ramp.</li>
+    <li>Baseline commit I'm comfortable with given real pipeline: <span class="fill">$________/mo</span></li>
+    <li>First account I actually want to onboard: <span class="fill">_______________</span></li>
+    <li>Open question for Zach: <span class="fill">_______________________________</span></li>
+  </ul>
+
+  <!-- ============ DELL TOMORROW ============ -->
+  <div class="pgbreak"></div>
+  <h2>6 &middot; Dell call (tomorrow, with Drew)</h2>
+  <div class="card">
+    <p><b>Status:</b> Drew flagged my address as residential. He needs a <b>commercial (non-residential) ship-to in Austin, TX</b> to build the quote. He's doing internal discovery on Heliode tomorrow to explain us to his managers.</p>
+  </div>
+
+  <p class="label">Before the call</p>
+  <ul class="check">
+    <li>Get a commercial Austin address (virtual office / coworking / colo &mdash; not a PO box, real street address I control)</li>
+    <li>Send Drew the address + my questions (email drafted in chat)</li>
+    <li>Send Drew the Heliode one-liner so his internal write-up is easy</li>
+  </ul>
+
+  <p class="label">Questions I want answered tomorrow</p>
+  <ol>
+    <li>Lead times on the configs &mdash; especially H100/H200 SXM (the long pole).</li>
+    <li>Financing / leasing for a newly incorporated company building credit (DFS, lease-to-own, net terms).</li>
+    <li>Volume / ramp pricing as I scale across multiple nodes &mdash; can I lock rates as I ramp?</li>
+    <li>Multi-site staggered shipping &amp; any rack/integration/deployment support.</li>
+    <li>Support &amp; warranty tiers for production inference hardware (ProSupport, on-site, RMA turnaround).</li>
+  </ol>
+
+  <div class="tip"><b>Heliode in one line (for Drew):</b> Managed GPU compute for AI inference &mdash; H100/H200 capacity as a single managed endpoint so AI teams get cheaper, simpler inference than the hyperscalers. Near-term we resell and manage capacity; this build-out is our move toward owned, self-powered regional nodes &mdash; a virtual data center across multiple sites.</div>
+
+  <!-- ============ CHECKLIST ============ -->
+  <div class="pgbreak"></div>
+  <h2>7 &middot; The week &mdash; what to do before Monday</h2>
+
+  <p class="day">TODAY / TONIGHT</p>
+  <ul class="check">
+    <li>Lock a commercial Austin address (virtual office &mdash; reusable for D-U-N-S/credit too)</li>
+    <li>Send Drew the address + questions + Heliode one-liner</li>
+  </ul>
+
+  <p class="day">TOMORROW</p>
+  <ul class="check">
+    <li>Dell call with Drew &mdash; get answers to the 5 questions above; let him do his discovery</li>
+    <li>Capture the quote details Dell needs (config, lead time, financing path)</li>
+  </ul>
+
+  <p class="day">THIS WEEK (the real work: customer demand)</p>
+  <ul class="check">
+    <li>Send 10&ndash;20 cold emails / LinkedIn DMs to AWS-overspenders (use §4)</li>
+    <li>Book + run discovery calls using the §3 script</li>
+    <li>Log every call into the §5 pipeline table &mdash; account, model, bill, GPUs, pain</li>
+    <li>Aim to walk into Monday with at least 2&ndash;3 named, qualified accounts</li>
+  </ul>
+
+  <p class="day">ADMIN / FOUNDATION</p>
+  <ul class="check">
+    <li>Finish D-U-N-S number; start building business credit (use EIN, pay vendors early)</li>
+    <li>Confirm 83(b) election filed by July 8, 2026</li>
+    <li>Drop real Meta Pixel ID into quote.html; run the spot_cost SQL</li>
+  </ul>
+
+  <p class="day">MONDAY</p>
+  <ul class="check">
+    <li>RunPod call with Zach &mdash; bring the filled §5 sheet (real demand, not vaporware)</li>
+    <li>Get the answers I need from Zach; propose a baseline commit I'm comfortable with</li>
+  </ul>
+
+  <div class="foot">
+    <span>Heliode, Inc. &mdash; confidential</span>
+    <span>heliode.ai</span>
+  </div>
+
+</div>
+</body>
+</html>

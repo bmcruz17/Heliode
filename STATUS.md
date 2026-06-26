@@ -44,6 +44,13 @@ Related docs: `sales/return-todo.md` (detailed to-dos + drafts) · `sales/invest
 - [ ] Run discovery calls; log each into the §5 pipeline table.
 - [ ] Walk into Monday with 2–3 named, qualified accounts.
 
+### 🔌 Supply — RunPod (Monday call w/ Zach, 6/29)
+- Intel: RunPod raised **$100M @ $1B (Jun 24)**, ~$240M ARR, 1M+ devs, turned down $500M buyouts, compute crunch → leverage on their side, but they want distribution. Brief: `sales/runpod-research.md`.
+- [ ] **Lead with the ramp proposal:** discounted (committed-tier) pricing from day one + on-demand flexibility; **30 days to hit quota** to keep the discount; **true-up if I miss** (back-pay the difference) so they risk nothing.
+- [ ] Pin down **reseller vs. affiliate** — can I buy wholesale & resell at my own price/SLA? (decides margin model)
+- [ ] Get H100/H200 rates, committed-tier start point, capacity guarantee; mention Startup Program ($50K→$75K).
+- [ ] Confirm Zach can authorize terms vs. routing through RevOps/COO.
+
 ### 🖥️ Hardware / Dell
 - Drew (Dell) flagged address as residential; needs commercial **Austin** ship-to to quote.
 - [ ] Reserve WorkHub Pflugerville suite → get exact address/suite + confirm 3-phase amps.

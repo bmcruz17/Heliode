@@ -98,6 +98,28 @@ Runs ops + revenue — the commercial/contracts side a committed-spend deal like
 
 ---
 
+## Pre-call note to Zach (send before Monday)
+```
+Subject: Monday — quick agenda
+
+Hey Zach — looking forward to Monday. Quick heads-up on what I'd like to cover so
+you can come ready (or loop in whoever owns pricing):
+
+1. Committed/reserved pricing on H100/H200 — where tiers start and how the discount
+   curve scales.
+2. A ramp structure I want to propose: discounted (committed-tier) pricing from day
+   one with on-demand flexibility, and I hit a usage quota within 30 days to keep it.
+   Happy to true-up the difference if I miss, so it's zero risk on your side.
+3. Whether RunPod supports a true wholesale/reseller setup — I resell and manage
+   capacity for my customers under my own endpoint + SLA — vs. the affiliate program.
+4. Capacity assurance for H100/H200 given how tight things are right now.
+
+I'll bring real pipeline — named accounts and monthly spend, not vaporware. And
+congrats on the $100M round. See you Monday.
+
+— Brandon
+```
+
 ## Sources
 - [RunPod raises $100M @ $1B (Morningstar/PR)](https://www.morningstar.com/news/pr-newswire/20260624la90924/runpod-raises-100m-led-by-summit-partners-to-accelerate-the-ai-developer-cloud)
 - [Runpod hits $1bn valuation — The Next Web](https://thenextweb.com/news/runpod-100m-summit-partners-1bn-valuation)
