@@ -174,6 +174,14 @@
   .hidden{display:none !important;}
   .spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;display:inline-block;animation:sp .7s linear infinite;}
   @keyframes sp{to{transform:rotate(360deg);}}
+  /* investor hub nav */
+  .hub{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 24px;}
+  @media(max-width:680px){.hub{grid-template-columns:1fr;}}
+  .hub a{display:flex;flex-direction:column;gap:4px;text-decoration:none;background:var(--bg2);border:1px solid var(--line);border-radius:13px;padding:15px 16px;transition:.18s;color:var(--ink);}
+  .hub a:hover{border-color:var(--blue-line);box-shadow:0 6px 18px rgba(37,99,235,0.10);transform:translateY(-1px);}
+  .hub .ht{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.95rem;display:flex;align-items:center;gap:8px;}
+  .hub .hs{font-size:0.76rem;color:var(--mute);line-height:1.45;}
+  .hub .hi{font-size:1.02rem;}
 </style>
 </head>
 <body>
@@ -233,6 +241,31 @@
     </div>
     <div class="prop-head">
       <div class="stamp" id="prop-stamp"></div>
+    </div>
+
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin-bottom:4px;">Investor hub</h3>
+    <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">Every Heliode investor document in one place. All materials are confidential and bound by the agreement you accepted.</p>
+    <div class="hub">
+      <a href="/teaser.html"><span class="ht"><span class="hi">📰</span> Overview / teaser</span><span class="hs">The two-minute version of Heliode.</span></a>
+      <a href="/opportunity.html"><span class="ht"><span class="hi">📈</span> The opportunity</span><span class="hs">Market, the wedge, and why now.</span></a>
+      <a href="/pitch.html"><span class="ht"><span class="hi">🎤</span> Pitch deck</span><span class="hs">The full narrative deck.</span></a>
+      <a href="/business-plan.html"><span class="ht"><span class="hi">📘</span> Business plan</span><span class="hs">Detailed plan, model &amp; strategy.</span></a>
+      <a href="/sales/investor-one-pager.html" target="_blank" rel="noopener"><span class="ht"><span class="hi">📄</span> One-pager</span><span class="hs">Printable summary &amp; round terms.</span></a>
+      <a href="/inference-cost.html" target="_blank" rel="noopener"><span class="ht"><span class="hi">🧮</span> GPU cost teardown</span><span class="hs">What AI inference really costs.</span></a>
+    </div>
+
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin:24px 0 4px;">What Heliode does — and the demand we fill</h3>
+    <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">The value we bring customers, and why that demand is large and growing.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="n">2–4×</div><div class="k">What teams overpay on hyperscaler GPU-hours</div></div>
+      <div class="kpi"><div class="n">$5–50K<span style="font-size:0.8rem">/mo</span></div><div class="k">Our core customer's GPU spend</div></div>
+      <div class="kpi"><div class="n">H100/H200</div><div class="k">The capacity we source &amp; manage</div></div>
+      <div class="kpi"><div class="n">1 endpoint</div><div class="k">One bill, drop-in, OpenAI-compatible</div></div>
+    </div>
+    <div class="callout" style="border-left:3px solid var(--blue);">
+      <p style="margin:0 0 10px;color:var(--ink);font-size:0.92rem;"><strong>The problem.</strong> Companies running AI models in production on AWS, GCP, or Azure pay <strong>2–4× too much per GPU-hour</strong>. The hyperscalers price inference like a scarce enterprise product — it isn't anymore.</p>
+      <p style="margin:0 0 10px;color:var(--ink);font-size:0.92rem;"><strong>What we do.</strong> Heliode sources wholesale H100/H200 capacity and runs it end to end — one managed, OpenAI-compatible endpoint, one bill, real support — at a fraction of on-demand cloud rates. Customers keep their same API and switch in a day.</p>
+      <p style="margin:0;color:var(--ink);font-size:0.92rem;"><strong>The demand.</strong> Inference is the fastest-growing slice of compute, and every production AI team needs steady GPU-hours. We wedge in with the team feeling the overpay first, then earn durable margin on the managed layer — uptime, one bill, support, and later local latency — which holds as raw compute commoditizes.</p>
     </div>
 
     <div class="snap">
@@ -322,6 +355,31 @@
       </ul>
     </div>
     <p class="calc-note" style="margin-top:10px;margin-bottom:18px;">Not tax advice — confirm structure with a CPA / tax attorney.</p>
+
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin:24px 0 4px;">Fundraising goals — current round</h3>
+    <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">A first round to stand up the Austin pilot, hire the founding team, and prove the managed-brokerage economics before any owned hardware is financed.</p>
+    <div class="snap">
+      <div class="s"><div class="n">$2.5M</div><div class="k">Target raise · post-money SAFE</div></div>
+      <div class="s"><div class="n">$10M</div><div class="k">Valuation cap (post-money)</div></div>
+      <div class="s"><div class="n">20%</div><div class="k">Discount</div></div>
+      <div class="s"><div class="n">18 mo</div><div class="k">Runway</div></div>
+    </div>
+    <p class="calc-note" style="margin-bottom:18px;">Offered under Reg D 506(b) to accredited investors. The <strong>$10M cap</strong> is the figure pre-filled in the calculator below — adjust your amount to see your stake. Rolling close: each commitment is papered as it's confirmed.</p>
+
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin:24px 0 4px;">How the first round is deployed</h3>
+    <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">How the ~$2.5M is put to work over 18 months. Team is the main lever; hiring ramps with customer traction to extend runway.</p>
+    <table class="fin">
+      <thead><tr><th>Use of funds</th><th style="text-align:right">18 months</th></tr></thead>
+      <tbody>
+        <tr><td>Founding team payroll (5–6, fully loaded)</td><td class="num">~$1.45M</td></tr>
+        <tr><td>First prototype node — servers, GPUs, rack, networking, cooling</td><td class="num">~$200K</td></tr>
+        <tr><td>Marketing &amp; customer acquisition</td><td class="num">~$150K</td></tr>
+        <tr><td>Austin office lease + utilities (node-grade power)</td><td class="num">~$120K</td></tr>
+        <tr><td>G&amp;A — legal, accounting, insurance, software</td><td class="num">~$70K</td></tr>
+        <tr><td>Contingency (~10%)</td><td class="num">~$200K</td></tr>
+        <tr class="tot"><td>Total</td><td class="num">~$2.2–2.5M</td></tr>
+      </tbody>
+    </table>
 
     <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin:24px 0 4px;">How the investment is structured</h3>
     <div class="callout" style="border-left:3px solid var(--blue);">
