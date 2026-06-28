@@ -34,6 +34,7 @@ Related docs: `sales/return-todo.md` (detailed to-dos + drafts) · `sales/invest
 - Board approved up to $10M SAFE authorization in Atlas. ✅
 - Path: **Reg D 506(b)** — accredited angels + wealthy friends/family. **No public FB/IG solicitation.**
 - Warm lead: **Hinze Capital** (old manager's brother) — target first/lead check.
+- 📌 Before investor calls: skim `sales/sunrun-positioning.md` — the "what about Sunrun?" answer (we sell compute, not energy; same megatrend, richer slice; don't claim we beat them).
 - [ ] Fill traction/bio brackets in `sales/investor-one-pager.html`.
 - [ ] Draft warm-intro message (old manager → Hinze) + follow-up note. ← Claude can do next.
 - [ ] Anchor a final cap with the Atlas attorney before sending SAFEs.
