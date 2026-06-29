@@ -361,6 +361,28 @@
     </div>
     <div class="chart-cap">Illustrative — based on concentration of data-center, cloud-region, and AI activity, not exact demand figures. The vision: many clusters stitched into one self-powered virtual data center, scaling beyond any single hyperscaler campus.</div>
 
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin-bottom:4px;">The vision — path to 1,000,000 nodes</h3>
+    <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">Every home we light up is one node in a single virtual data center. We start with the Austin pilot, expand to the top demand metros, then build a national grid — adding cheap-power batch zones along the way.</p>
+    <img src="/strategy/phased-rollout.png" alt="Phased rollout — Year 1 Austin pilot, Year 3 five regional clusters, Year 5 national grid" style="width:100%;border-radius:12px;border:1px solid var(--line);margin:4px 0 16px;display:block;">
+
+    <div class="calc">
+      <h3>Model the network at scale</h3>
+      <p class="calc-sub">Drag the number of homes/nodes. Each node ≈ one 8-GPU server (~10&nbsp;kW). Illustrative — read the notes.</p>
+      <label for="v-homes">Homes / nodes deployed: <span class="range-val" id="v-homes-val">100,000</span></label>
+      <input type="range" id="v-homes" min="0" max="100" value="67">
+      <div class="range-mk" id="v-homes-mk"></div>
+      <div class="calc-out">
+        <div class="o"><div class="ok">Compute capacity (nameplate)<span class="info" tabindex="0" role="note" aria-label="Total power of the network at ~10 kW per node. Nameplate — solar is intermittent, so 24/7 compute is lower.">i<span class="tip">Total power of the network at ~10 kW per node. Nameplate — solar is intermittent, so 24/7 compute is lower.</span></span></div><div class="ov" id="v-gw">&mdash;</div></div>
+        <div class="o"><div class="ok">vs. a 1&nbsp;GW AI campus (Colossus-class)<span class="info" tabindex="0" role="note" aria-label="How many flagship 1 GW AI data centers this network equals. xAI's Colossus 2 is ~1.2 GW.">i<span class="tip">How many flagship 1 GW AI data centers this network equals. xAI's Colossus 2 is ~1.2 GW.</span></span></div><div class="ov" id="v-vs">&mdash;</div></div>
+        <div class="o"><div class="ok">Modeled annual net profit<span class="info" tabindex="0" role="note" aria-label="At ~$7,600 net per node per month. Illustrative; will not hold linearly at scale.">i<span class="tip">At ~$7,600 net per node per month. Illustrative; will not hold linearly at scale.</span></span></div><div class="ov" id="v-net">&mdash;</div></div>
+        <div class="o hl"><div class="ok">Modeled value (8&times; annual net)<span class="info" tabindex="0" role="note" aria-label="Annual net times an assumed 8x multiple. A far-future, assumption-stacked illustration — not a forecast.">i<span class="tip">Annual net times an assumed 8x multiple. A far-future, assumption-stacked illustration — not a forecast.</span></span></div><div class="ov" id="v-val">&mdash;</div></div>
+      </div>
+      <div class="calc-out" style="grid-template-columns:1fr;margin-top:12px;">
+        <div class="o"><div class="ok">Capital to build (~$300k/home — financed against contracts, node-by-node)<span class="info" tabindex="0" role="note" aria-label="Node hardware + solar + battery per home, roughly $300k. Debt-financed over a decade-plus, not raised as equity.">i<span class="tip">Node hardware + solar + battery per home, roughly $300k. Debt-financed over a decade-plus, not raised as equity.</span></span></div><div class="ov" id="v-capex">&mdash;</div></div>
+      </div>
+      <div class="calc-note">Illustrative, not a forecast. Assumes ~$7,600 net/node&middot;mo and an 8&times; multiple — these will <strong>not</strong> hold linearly to 1M nodes (compute prices deflate, competition, utilization). Capacity is nameplate (solar is intermittent; effective 24/7 compute is lower). The ~$300k/home capital is financed against long-term contracts and built node-by-node over a decade+, not raised as equity. Tax credits modeled on battery ITC + depreciation (the solar ITC window is closing).</div>
+    </div>
+
     <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.12rem;letter-spacing:-0.01em;margin-bottom:4px;">Scale trajectory</h3>
     <p class="calc-sub" style="font-size:0.84rem;color:var(--mute);margin-bottom:8px;">Per-node economics hold as the network grows across markets. Illustrative — at ~$7,600/node·mo net and an 8&times; multiple on annual net.</p>
 
@@ -665,6 +687,23 @@
     if(ic){ e.preventDefault(); e.stopPropagation(); ic.classList.toggle('open'); }
   });
   if($('c-invest')) calc();
+
+  // ---- vision: scale-to-1M calculator (log slider 1k → 1M homes/nodes) ----
+  function vcalc(){
+    const t=(+$('v-homes').value)/100;                       // 0..1
+    const homes=Math.max(1000, Math.round(Math.pow(10, 3 + t*3)/1000)*1000); // 1k..1M
+    const gw=homes/100000;                                   // ~10 kW per node
+    $('v-homes-val').textContent=homes.toLocaleString();
+    $('v-gw').textContent = gw<1 ? Math.round(gw*1000)+' MW' : gw.toFixed(1)+' GW';
+    $('v-vs').textContent = gw.toFixed(gw<1?2:1)+'×';
+    $('v-net').textContent = fmtUSD(homes*7600*12)+'/yr';
+    $('v-val').textContent = fmtUSD(homes*7600*12*8);
+    $('v-capex').textContent = fmtUSD(homes*300000);
+    $('v-homes-mk').textContent = homes>=1000000?'national grid — ~10 GW, hyperscaler-scale'
+      : homes>=100000?'hyperscaler-scale AI capacity'
+      : homes>=10000?'regional network' : 'pilot / early build';
+  }
+  if($('v-homes')){ $('v-homes').addEventListener('input', vcalc); vcalc(); }
 
   route();
 </script>
