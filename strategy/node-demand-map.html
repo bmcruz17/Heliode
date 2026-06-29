@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Heliode — U.S. Inference Demand Map</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#070b15;color:#eaf0fb;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;}
+  .page{width:1240px;padding:36px 44px 30px;}
+  .top{display:flex;align-items:center;gap:11px;margin-bottom:4px;}
+  .dot{width:13px;height:13px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 0 5px rgba(139,92,246,.22);}
+  .brand{font-weight:800;letter-spacing:3px;font-size:15px;}
+  h1{font-size:30px;letter-spacing:-.5px;margin:10px 0 3px;font-weight:800;}
+  .sub{color:#9fb0cf;font-size:15px;max-width:90ch;}
+  .legend{display:flex;gap:26px;align-items:center;margin:14px 0 4px;font-size:13px;color:#c4d0e6;flex-wrap:wrap;}
+  .legend b{color:#fff;}
+  .lk{display:inline-block;border-radius:50%;vertical-align:middle;margin-right:8px;}
+  svg{width:100%;height:auto;display:block;}
+  .cap{margin-top:10px;font-size:13px;color:#8fa0c0;line-height:1.6;}
+  .vision{margin-top:14px;background:linear-gradient(100deg,rgba(139,92,246,.16),rgba(255,90,54,.12));
+    border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:14px 18px;font-size:14.5px;color:#eef3fc;}
+  .foot{margin-top:12px;font-size:11px;color:#5d6b86;}
+</style></head>
+<body>
+<div class="page">
+  <div class="top"><span class="dot"></span><span class="brand">HELIODE</span></div>
+  <h1>Where the compute demand is — and where we cluster nodes.</h1>
+  <div class="sub">Red intensity = concentration of AI / inference &amp; cloud demand (where customers' apps and data-center ecosystems live). We place node clusters on the hot spots for latency &amp; data-residency-sensitive workloads, and route batch workloads to cheap-power / high-sun zones.</div>
+
+  <div class="legend">
+    <span><span class="lk" style="width:18px;height:18px;background:#ff3b30;"></span><b>Tier 1</b> — flagship cluster (top demand)</span>
+    <span><span class="lk" style="width:13px;height:13px;background:#ff6a3d;"></span><b>Tier 2</b> — major cluster</span>
+    <span><span class="lk" style="width:10px;height:10px;background:#ffb24d;"></span><b>Tier 3</b> — edge node</span>
+    <span><span class="lk" style="width:11px;height:11px;background:#34d399;"></span><b>Sun / cheap-power</b> build zone (batch)</span>
+  </div>
+
+  <svg viewBox="0 0 960 600" role="img" aria-label="United States map with red heat spots over the highest AI inference demand metros.">
+    <defs>
+      <radialGradient id="heat" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ff2d20" stop-opacity="0.95"/>
+        <stop offset="38%" stop-color="#ff5a36" stop-opacity="0.40"/>
+        <stop offset="100%" stop-color="#ff5a36" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#34d399" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#34d399" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- continental US silhouette -->
+    <path d="M95,95 L250,88 L430,85 L600,90 L700,96 L775,78 L800,72 L792,120 L805,150 L778,175 L762,235 L735,300 L730,345 L745,400 L752,455 L735,410 L720,360 L690,350 L620,372 L560,378 L520,372 L470,430 L430,478 L395,452 L375,430 L300,442 L210,445 L160,448 L150,430 L135,395 L120,350 L108,300 L100,240 L98,170 Z"
+          fill="#121d33" stroke="#27395f" stroke-width="1.5" stroke-linejoin="round"/>
+
+    <!-- green cheap-power / sun build zones (Southwest + HI/PR markers) -->
+    <g>
+      <circle cx="235" cy="360" r="60" fill="url(#sun)"/>   <!-- AZ/Southwest -->
+      <circle cx="300" cy="330" r="44" fill="url(#sun)"/>   <!-- NM/W.Texas -->
+    </g>
+
+    <!-- HEAT SPOTS: glow + core + label. Tier sets glow/core size. -->
+    <g font-family="Arial, sans-serif" style="paint-order:stroke;">
+      <!-- Tier 1 -->
+      <g><circle cx="735" cy="272" r="74" fill="url(#heat)"/><circle cx="735" cy="272" r="9" fill="#ff3b30" stroke="#fff" stroke-width="1.6"/><circle cx="735" cy="272" r="3.2" fill="#fff"/><text x="735" y="250" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">N. Virginia</text></g>
+      <g><circle cx="108" cy="292" r="72" fill="url(#heat)"/><circle cx="108" cy="292" r="9" fill="#ff3b30" stroke="#fff" stroke-width="1.6"/><circle cx="108" cy="292" r="3.2" fill="#fff"/><text x="118" y="282" text-anchor="start" font-size="14" font-weight="700" fill="#fff">SF Bay Area</text></g>
+      <g><circle cx="462" cy="404" r="66" fill="url(#heat)"/><circle cx="462" cy="404" r="8.5" fill="#ff3b30" stroke="#fff" stroke-width="1.6"/><circle cx="462" cy="404" r="3" fill="#fff"/><text x="462" y="384" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Dallas</text></g>
+
+      <!-- Tier 2 -->
+      <g><circle cx="765" cy="208" r="50" fill="url(#heat)"/><circle cx="765" cy="208" r="6.5" fill="#ff6a3d" stroke="#fff" stroke-width="1.3"/><text x="773" y="200" text-anchor="start" font-size="12.5" font-weight="600" fill="#f2d8cf">NYC / NJ</text></g>
+      <g><circle cx="130" cy="120" r="50" fill="url(#heat)"/><circle cx="130" cy="120" r="6.5" fill="#ff6a3d" stroke="#fff" stroke-width="1.3"/><text x="140" y="114" text-anchor="start" font-size="12.5" font-weight="600" fill="#f2d8cf">Seattle</text></g>
+      <g><circle cx="148" cy="356" r="46" fill="url(#heat)"/><circle cx="148" cy="356" r="6.5" fill="#ff6a3d" stroke="#fff" stroke-width="1.3"/><text x="156" y="372" text-anchor="start" font-size="12.5" font-weight="600" fill="#f2d8cf">Los Angeles</text></g>
+      <g><circle cx="588" cy="232" r="46" fill="url(#heat)"/><circle cx="588" cy="232" r="6.5" fill="#ff6a3d" stroke="#fff" stroke-width="1.3"/><text x="588" y="214" text-anchor="middle" font-size="12.5" font-weight="600" fill="#f2d8cf">Chicago</text></g>
+      <g><circle cx="655" cy="362" r="46" fill="url(#heat)"/><circle cx="655" cy="362" r="6.5" fill="#ff6a3d" stroke="#fff" stroke-width="1.3"/><text x="655" y="382" text-anchor="middle" font-size="12.5" font-weight="600" fill="#f2d8cf">Atlanta</text></g>
+      <g><circle cx="232" cy="372" r="44" fill="url(#heat)"/><circle cx="232" cy="372" r="6.5" fill="#ff6a3d" stroke="#fff" stroke-width="1.3"/><text x="232" y="392" text-anchor="middle" font-size="12.5" font-weight="600" fill="#f2d8cf">Phoenix</text></g>
+
+      <!-- Tier 3 -->
+      <g><circle cx="800" cy="178" r="34" fill="url(#heat)"/><circle cx="800" cy="178" r="5" fill="#ffb24d" stroke="#fff" stroke-width="1"/><text x="794" y="170" text-anchor="end" font-size="11.5" fill="#f0deca">Boston</text></g>
+      <g><circle cx="662" cy="250" r="32" fill="url(#heat)"/><circle cx="662" cy="250" r="5" fill="#ffb24d" stroke="#fff" stroke-width="1"/><text x="668" y="246" text-anchor="start" font-size="11.5" fill="#f0deca">Columbus</text></g>
+      <g><circle cx="452" cy="442" r="32" fill="url(#heat)"/><circle cx="452" cy="442" r="5" fill="#ffb24d" stroke="#fff" stroke-width="1"/><text x="452" y="462" text-anchor="middle" font-size="11.5" fill="#f0deca">Austin</text></g>
+      <g><circle cx="120" cy="152" r="30" fill="url(#heat)"/><circle cx="120" cy="152" r="5" fill="#ffb24d" stroke="#fff" stroke-width="1"/><text x="130" y="160" text-anchor="start" font-size="11.5" fill="#f0deca">Portland</text></g>
+    </g>
+  </svg>
+
+  <div class="vision">
+    <b>The vision:</b> every cluster is one node in a single <b>virtual data center</b> — distributed across the country's demand centers, self-powered by on-site solar + battery, and stitched into one managed fabric. No single campus to permit, power, or cool; we scale by adding nodes where demand and cheap energy are — aiming, in aggregate, to exceed any single hyperscaler or xAI campus.
+  </div>
+  <div class="cap">Latency &amp; compliance-sensitive workloads → run on the red demand clusters (near customers' apps + U.S. data residency). Batch / async workloads → routed to the green cheap-power, high-sun zones (Southwest first; Hawaii / Puerto Rico as self-power showcases).</div>
+  <div class="foot">Heatmap is illustrative — based on concentration of data-center, cloud-region, and AI-company activity, not exact demand figures. Heliode, Inc. — confidential.</div>
+</div>
+</body></html>
