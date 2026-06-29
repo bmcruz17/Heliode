@@ -5,9 +5,9 @@ This is the single source of truth for what to run — keep it updated with ever
 
 | # | File | What it does | Run? |
 |---|------|--------------|------|
-| 1 | `sql/heliode_schema.sql` | Operator CRM: `heliode_clients`, `heliode_scheduled_emails`, `heliode_time_entries`, `heliode_settings`, `heliode_expenses`, the `heliode_is_team()` gate, RLS on all. | ⬜ |
-| 2 | `sql/heliode_invites.sql` | Invite system: `heliode_team_members`, `heliode_invites`, upgraded `heliode_is_team()`, `heliode_redeem_invite()`, RLS, seeds you as admin. **Run after #1.** | ⬜ |
-| 3 | Business-plan section (inline below) | Appends the "Competitive positioning — Sunrun" section to the DB-stored business plan. | ⬜ |
+| 1 | `sql/heliode_schema.sql` | Operator CRM: `heliode_clients`, `heliode_scheduled_emails`, `heliode_time_entries`, `heliode_settings`, `heliode_expenses`, the `heliode_is_team()` gate, RLS on all. | ✅ |
+| 2 | `sql/heliode_invites.sql` | Invite system: `heliode_team_members`, `heliode_invites`, upgraded `heliode_is_team()`, `heliode_redeem_invite()`, RLS, seeds you as admin. **Run after #1.** | ✅ |
+| 3 | Business-plan section (inline below) | Appends the "Competitive positioning — Sunrun" section to the DB-stored business plan. | ✅ |
 
 After running each, tick its box (⬜ → ✅) so you know what's done.
 
