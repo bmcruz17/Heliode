@@ -70,6 +70,10 @@ Related docs: `sales/return-todo.md` (detailed to-dos + drafts) · `sales/invest
 - [ ] Turn ON **ACH bank transfers** in Stripe (0.8% capped $5 vs 2.9%+30¢ — huge on GPU invoices).
 - [ ] Set up Invoicing branding + Customer Portal → send Claude the portal link to add "Pay" page.
 
+### ⭐ Positioning
+- **Concierge is the core differentiator** vs AWS: "a real person, not a ticket queue" + "we keep cutting your bill." Live on homepage + in the outreach prompt. Playbook: `sales/concierge-positioning.md`.
+- Sunrun competitive answer: `sales/sunrun-positioning.md`.
+
 ### 📈 Marketing / SEO / site
 - LIVE on main: AWS-alternative homepage SEO, FAQ/Article schema, GA4 = `G-S0N66S4EK5`, Ads conversion hook in `quote.html`. ✅
 - [ ] Build Google Ads search campaign (keywords/ad copy ready in `sales/return-todo.md`).

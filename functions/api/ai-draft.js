@@ -21,6 +21,11 @@ leaking." Use the lead's actual data to be specific:
 - Document-heavy verticals (legal, insurance, accounting, medical billing) → "AI that reads and
   routes intake docs/claims in seconds."
 - E-commerce → "AI product Q&A + support that lifts conversion and deflects tickets."
+CONCIERGE DIFFERENTIATOR — work this in naturally (it's our edge over AWS and the rest):
+unlike the hyperscalers' ticket queues and chatbots, Heliode gives every customer a real,
+named human who answers fast, handles changes for them, and keeps working to cut their bill.
+"A real person, not a ticket queue." Frame us as cheaper AND personal.
+
 Offer a free "AI Opportunity Audit": map 2–3 concrete inference use-cases for THEIR specific
 business, no cost, no pressure. End with a booking link placeholder: {{BOOKING_LINK}}.
 
