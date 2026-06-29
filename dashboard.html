@@ -111,11 +111,12 @@
 <!-- LOGIN -->
 <div id="login" class="login">
   <h1><span class="dot"></span> Heliode Operator</h1>
-  <p>Team access only. Sign in with your Heliode account.</p>
-  <input class="inp" id="li-email" type="email" placeholder="you@heliode.ai" autocomplete="username">
+  <p>Sign in, or create your account with an invite code.</p>
+  <input class="inp" id="li-email" type="email" placeholder="you@email.com" autocomplete="username">
   <input class="inp" id="li-pass" type="password" placeholder="password" autocomplete="current-password">
+  <input class="inp" id="li-invite" type="text" placeholder="invite code (new accounts only)" autocomplete="off">
   <button class="btn" id="li-btn" style="width:100%">Sign in</button>
-  <button class="btn ghost sm" id="li-signup" style="width:100%;margin-top:8px">First time? Create password</button>
+  <button class="btn ghost sm" id="li-signup" style="width:100%;margin-top:8px">First time? Create account with invite</button>
   <div class="msg" id="li-msg"></div>
 </div>
 
@@ -127,6 +128,7 @@
       <button class="tab on" data-view="pipeline">Pipeline</button>
       <button class="tab" data-view="find">Find Leads</button>
       <button class="tab" data-view="score">Scoreboard</button>
+      <button class="tab" data-view="invites" id="tab-invites" style="display:none">Invites</button>
     </div>
     <div class="spacer"></div>
     <select class="inp" id="ownerFilter"><option value="">Combined</option></select>
@@ -189,6 +191,37 @@
         </table>
       </div>
     </div>
+
+    <!-- INVITES -->
+    <div id="view-invites" class="hidden">
+      <div class="panel">
+        <h3 style="margin-bottom:4px">Invites</h3>
+        <p style="color:var(--mute);font-size:.85rem;margin-bottom:6px">Nobody gets into the dashboard without an invite from you. Generate a code, share the link, done.</p>
+        <p style="color:var(--faint);font-size:.76rem;border-left:2px solid var(--line);padding-left:8px">Invites control <b>access</b> — a new sign-up can't see anything until they redeem a valid code. (Keep Supabase email signups ON for this flow.)</p>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <div class="panel" style="flex:1;text-align:center;padding:14px"><div style="font-size:1.5rem;font-weight:700" id="inv-total">0</div><div style="font-size:.72rem;color:var(--faint)">INVITES</div></div>
+          <div class="panel" style="flex:1;text-align:center;padding:14px"><div style="font-size:1.5rem;font-weight:700;color:var(--green)" id="inv-unused">0</div><div style="font-size:.72rem;color:var(--faint)">UNUSED</div></div>
+          <div class="panel" style="flex:1;text-align:center;padding:14px"><div style="font-size:1.5rem;font-weight:700;color:var(--blue)" id="inv-redeemed">0</div><div style="font-size:.72rem;color:var(--faint)">REDEEMED</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-bottom:10px">+ New invite</h3>
+        <div class="grid">
+          <div><label>Code</label><div style="display:flex;gap:6px"><input class="inp" id="inv-code" placeholder="HEL-AB12CD" style="margin:0"><button class="btn ghost sm" id="inv-gen">Generate</button></div></div>
+          <div><label>Lock to email (optional)</label><input class="inp" id="inv-email" placeholder="person@email.com" style="margin:0"></div>
+          <div><label>Account type</label><select class="inp" id="inv-role" style="margin:0"><option value="rep">Rep</option><option value="admin">Admin (full)</option></select></div>
+          <div><label>Expires (optional)</label><input class="inp" id="inv-exp" type="date" style="margin:0"></div>
+          <div><label>Note (just for you)</label><input class="inp" id="inv-note" placeholder="Who's this for?" style="margin:0"></div>
+        </div>
+        <label class="chk" style="margin-top:12px"><input type="checkbox" id="inv-single" checked> Single use (one account)</label>
+        <button class="btn" id="inv-create" style="margin-top:12px">+ Create invite &amp; copy link</button>
+        <div class="msg" id="inv-msg" style="display:block"></div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-bottom:10px">Your invites</h3>
+        <div id="inv-list" style="color:var(--faint);font-size:.85rem">No invites yet. Generate one above to let someone in.</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -230,24 +263,55 @@ $('li-btn').onclick = async ()=>{
   boot();
 };
 $('li-signup').onclick = async ()=>{
-  const email=$('li-email').value.trim(), password=$('li-pass').value;
+  const email=$('li-email').value.trim(), password=$('li-pass').value, code=$('li-invite').value.trim();
+  $('li-msg').textContent='';
   if(password.length<6){ $('li-msg').textContent='Password ≥ 6 chars'; return; }
-  const { error } = await sb.auth.signUp({ email, password });
-  $('li-msg').textContent = error ? error.message : 'Created — now sign in.';
+  if(!code){ $('li-msg').textContent='An invite code is required to create an account.'; return; }
+  localStorage.setItem('heliode_invite', code);
+  const { data, error } = await sb.auth.signUp({ email, password });
+  if(error){ $('li-msg').textContent=error.message; return; }
+  if(data.session){ boot(); }   // boot() redeems the stashed invite
+  else { $('li-msg').textContent='Account created — confirm via the email we sent, then sign in (your invite is saved).'; }
 };
 $('li-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') $('li-btn').click(); });
 $('signout').onclick = async ()=>{ await sb.auth.signOut(); location.reload(); };
 
+const urlInvite = ()=> new URLSearchParams(location.search).get('invite');
 async function boot(){
   const { data:{ session } } = await sb.auth.getSession();
-  if(!session){ $('login').classList.remove('hidden'); $('app').classList.add('hidden'); return; }
-  const email = session.user.email.toLowerCase();
-  if(!(email.endsWith('@heliode.ai') || email==='brandonmcruz@mac.com')){
-    $('li-msg').textContent='Not a Heliode team account.'; await sb.auth.signOut(); return;
+  if(!session){
+    $('login').classList.remove('hidden'); $('app').classList.add('hidden');
+    if(urlInvite()) $('li-invite').value = urlInvite();
+    return;
   }
+  const email = session.user.email.toLowerCase();
   ME = session.user.email; TOKEN = session.access_token;
+
+  // founders/allowlist always pass; otherwise check team membership, then try a pending invite
+  let allowed = email.endsWith('@heliode.ai') || email==='brandonmcruz@mac.com';
+  if(!allowed){ try{ const {data}=await sb.rpc('heliode_is_team'); allowed=!!data; }catch{} }
+  const pending = localStorage.getItem('heliode_invite') || urlInvite();
+  if(!allowed && pending){
+    try{
+      const { data } = await sb.rpc('heliode_redeem_invite', { p_code: pending });
+      if(data && data.ok){ allowed=true; }
+      else if(data && data.error){ $('li-msg').textContent='Invite: '+data.error; }
+    }catch(e){}
+  }
+  if(allowed) localStorage.removeItem('heliode_invite');
+
+  if(!allowed){
+    $('login').classList.remove('hidden'); $('app').classList.add('hidden');
+    if(!$('li-msg').textContent) $('li-msg').textContent='No access yet — create an account with a valid invite code, or contact your admin.';
+    await sb.auth.signOut(); return;
+  }
+
   $('login').classList.add('hidden'); $('app').classList.remove('hidden');
   $('meEmail').textContent = ME;
+  // admins (founder/allowlist, or invited as admin) can manage invites
+  let isAdmin = email.endsWith('@heliode.ai') || email==='brandonmcruz@mac.com';
+  if(!isAdmin){ try{ const {data:m}=await sb.from('heliode_team_members').select('role').eq('email',email).maybeSingle(); isAdmin = m && m.role==='admin'; }catch{} }
+  if(isAdmin) $('tab-invites').style.display='';
   populateSelects();
   await Promise.all([loadClients(), loadTime()]);
   switchView('pipeline');
@@ -607,10 +671,55 @@ $('gmailBtn').onclick=async()=>{
 };
 window.addEventListener('message', e=>{ if(e.data&&'heliodeGoogle' in e.data) toast(e.data.heliodeGoogle?'Gmail connected':'Gmail connect failed'); });
 
+// ---------- invites ----------
+function genCode(){ const a='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s=''; for(let i=0;i<6;i++) s+=a[Math.floor(Math.random()*a.length)]; return 'HEL-'+s; }
+function inviteLink(code){ return `${location.origin}${location.pathname}?invite=${encodeURIComponent(code)}`; }
+function copyLink(code){ const url=inviteLink(code); (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(()=>toast('Invite link copied'),()=>toast(url)); }
+async function loadInvites(){
+  const { data, error } = await sb.from('heliode_invites').select('*').order('created_at',{ascending:false});
+  if(error){ $('inv-msg').textContent=error.message; return; }
+  const inv=data||[];
+  $('inv-total').textContent=inv.length;
+  $('inv-unused').textContent=inv.filter(i=>i.status==='unused').length;
+  $('inv-redeemed').textContent=inv.filter(i=>i.status==='redeemed').length;
+  const list=$('inv-list');
+  if(!inv.length){ list.innerHTML='No invites yet. Generate one above to let someone in.'; return; }
+  list.innerHTML=inv.map(i=>{
+    const badge=i.status==='unused'?'<span class="tag val">unused</span>'
+      : i.status==='redeemed'?'<span class="tag owner">redeemed</span>'
+      : '<span class="tag" style="color:#f87171">revoked</span>';
+    const meta=[i.role, i.email_lock, i.note, i.redeemed_by?('by '+i.redeemed_by):'', i.expires_at?('exp '+new Date(i.expires_at).toLocaleDateString()):''].filter(Boolean).join(' · ');
+    return `<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);flex-wrap:wrap">
+      <code class="mono" style="font-size:.9rem;color:var(--ink)">${i.code}</code> ${badge}
+      <span style="font-size:.74rem;color:var(--faint)">${meta}</span>
+      <span style="flex:1"></span>
+      <button class="btn ghost sm" data-copy="${i.code}">Copy link</button>
+      ${i.status==='unused'?`<button class="btn ghost sm" data-revoke="${i.id}">Revoke</button>`:''}
+    </div>`;
+  }).join('');
+  list.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copyLink(b.dataset.copy));
+  list.querySelectorAll('[data-revoke]').forEach(b=>b.onclick=()=>revokeInvite(b.dataset.revoke));
+}
+async function createInvite(){
+  const code=($('inv-code').value.trim()||genCode()).toUpperCase();
+  const row={ code, email_lock:$('inv-email').value.trim().toLowerCase()||null, role:$('inv-role').value,
+    note:$('inv-note').value.trim()||null, single_use:$('inv-single').checked, status:'unused', created_by:ME,
+    expires_at:$('inv-exp').value?new Date($('inv-exp').value+'T23:59:59').toISOString():null };
+  const { error } = await sb.from('heliode_invites').insert(row);
+  if(error){ $('inv-msg').textContent=error.message; return; }
+  ['inv-code','inv-email','inv-note','inv-exp'].forEach(id=>$(id).value='');
+  $('inv-msg').textContent='Created. Link copied — share it.';
+  copyLink(code); loadInvites();
+}
+async function revokeInvite(id){ await sb.from('heliode_invites').update({status:'revoked'}).eq('id',id); loadInvites(); }
+$('inv-gen').onclick=()=>$('inv-code').value=genCode();
+$('inv-create').onclick=createInvite;
+
 // ---------- views ----------
 function switchView(v){
-  ['pipeline','find','score'].forEach(x=>{ $('view-'+x).classList.toggle('hidden',x!==v); });
+  ['pipeline','find','score','invites'].forEach(x=>{ $('view-'+x).classList.toggle('hidden',x!==v); });
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.view===v));
+  if(v==='invites') loadInvites();
 }
 document.querySelectorAll('.tab').forEach(t=> t.onclick=()=>switchView(t.dataset.view));
 $('ownerFilter').onchange=()=>{ renderBoard(); };

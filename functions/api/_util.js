@@ -63,8 +63,21 @@ export async function requireTeam(request, env) {
   });
   if (!res.ok) throw httpError('invalid session', 401);
   const user = await res.json();
-  if (!isTeamEmail(user.email)) throw httpError('not a team member', 403);
-  return { email: user.email, id: user.id };
+  if (isTeamEmail(user.email)) return { email: user.email, id: user.id };
+  // invited members: confirm team membership via the heliode_is_team() RPC (respects heliode_team_members)
+  try {
+    const r = await fetch(`${sbUrl(env)}/rest/v1/rpc/heliode_is_team`, {
+      method: 'POST',
+      headers: {
+        apikey: env.SUPABASE_ANON_KEY || ANON_KEY,
+        Authorization: `Bearer ${token}`,
+        'content-type': 'application/json',
+      },
+      body: '{}',
+    });
+    if (r.ok && (await r.json()) === true) return { email: user.email, id: user.id };
+  } catch (_) { /* fall through */ }
+  throw httpError('not a team member', 403);
 }
 export function httpError(msg, status) {
   const e = new Error(msg);
