@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Heliode — Dilution Calculator</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{--bg:#0a0f1c;--panel:#111a2e;--panel2:#16223c;--line:rgba(255,255,255,.10);
+    --ink:#eef2f8;--mute:#9fb0cf;--faint:#6b7790;--blue:#3b82f6;--violet:#8b5cf6;--green:#34d399;--amber:#fbbf24;
+    --grad:linear-gradient(110deg,#3b82f6,#8b5cf6);}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:820px;margin:0 auto;padding:34px 22px 70px;}
+  h1{font-family:system-ui;font-size:1.7rem;letter-spacing:-.02em;margin:8px 0 2px;}
+  .dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--violet);box-shadow:0 0 0 5px rgba(139,92,246,.2);vertical-align:middle;margin-right:8px;}
+  .sub{color:var(--mute);font-size:.95rem;margin-bottom:18px;}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px;}
+  .panel h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:12px;}
+  .row{display:flex;gap:10px;align-items:center;margin-bottom:8px;}
+  .row input.nm{flex:1;}
+  label{font-size:.72rem;color:var(--faint);display:block;margin-bottom:4px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:600px){.grid{grid-template-columns:1fr;}}
+  input{background:#0b1322;border:1px solid var(--line);border-radius:9px;padding:10px 12px;color:var(--ink);font-size:.92rem;outline:none;width:100%;font-family:inherit;}
+  input:focus{border-color:var(--blue);}
+  input.pct{width:84px;flex:0 0 84px;text-align:right;}
+  .sumwarn{font-size:.74rem;color:var(--amber);margin-top:4px;min-height:1em;}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:4px;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;}
+  th:first-child,td:first-child{text-align:left;}
+  th{font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);}
+  tr.you td{color:#fff;font-weight:700;background:rgba(59,130,246,.08);}
+  tr.inv td{color:var(--amber);}
+  tr.pool td{color:var(--mute);}
+  .callouts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+  @media(max-width:600px){.callouts{grid-template-columns:1fr;}}
+  .co{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:14px;}
+  .co.green{border-color:rgba(52,211,153,.4);}
+  .co .k{font-size:.72rem;color:var(--faint);}
+  .co .v{font-family:system-ui;font-weight:700;font-size:1.15rem;margin-top:4px;}
+  .co.green .v{color:var(--green);}
+  .note{font-size:.78rem;color:var(--faint);line-height:1.7;margin-top:14px;border-top:1px solid var(--line);padding-top:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><span class="dot"></span>Dilution calculator</h1>
+  <div class="sub">See how a funding round changes everyone's ownership — and how <b>debt stays non-dilutive</b>. Edit anything; it updates live. Philosophy: minimize equity, debt-finance the buildout, keep control.</div>
+
+  <div class="panel">
+    <h2>1 · Founding split (today — among the team)</h2>
+    <div class="row"><input class="nm" id="n0" value="You (Brandon Cruz)"><input class="pct" id="p0" value="60"><span style="color:var(--faint)">%</span></div>
+    <div class="row"><input class="nm" id="n1" value="Velasco LLC"><input class="pct" id="p1" value="13.34"><span style="color:var(--faint)">%</span></div>
+    <div class="row"><input class="nm" id="n2" value="Daniel — LLC (TBD)"><input class="pct" id="p2" value="13.33"><span style="color:var(--faint)">%</span></div>
+    <div class="row"><input class="nm" id="n3" value="Abner — LLC (TBD)"><input class="pct" id="p3" value="13.33"><span style="color:var(--faint)">%</span></div>
+    <div class="sumwarn" id="sumwarn"></div>
+  </div>
+
+  <div class="panel">
+    <h2>2 · The funding round</h2>
+    <div class="grid">
+      <div><label>Equity raised ($)</label><input id="raise" value="$1,500,000"></div>
+      <div><label>Post-money valuation / cap ($)</label><input id="cap" value="$10,000,000"></div>
+      <div><label>New option pool (%) — optional</label><input id="pool" value="0"></div>
+      <div><label>Debt raised ($) — NON-dilutive</label><input id="debt" value="$0"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>3 · Hypothetical exit valuation</h2>
+    <input id="exit" value="$100,000,000">
+  </div>
+
+  <div class="panel">
+    <h2>Result</h2>
+    <table id="tbl"><thead><tr><th>Owner</th><th>Today</th><th>After round</th><th>Value @ exit</th></tr></thead><tbody></tbody></table>
+    <div class="callouts">
+      <div class="co"><div class="k">Equity sold (dilution to the team)</div><div class="v" id="c-eq">—</div></div>
+      <div class="co green"><div class="k">Debt raised (ownership given up)</div><div class="v" id="c-debt">—</div></div>
+      <div class="co"><div class="k">Total capital raised</div><div class="v" id="c-total">—</div></div>
+      <div class="co green"><div class="k">Your stake value @ exit</div><div class="v" id="c-you">—</div></div>
+    </div>
+    <div class="note" id="insight"></div>
+  </div>
+
+  <div class="note">Illustrative only — not legal, tax, or financial advice; confirm structure with the startup attorney/CPA. Post-money SAFE/round math: investors get (raise ÷ post-money). An option pool dilutes the team too. Debt is repaid from cash flow and gives up <b>zero</b> ownership — the core of the "minimize dilution, debt-finance the buildout" plan.</div>
+</div>
+
+<script>
+  const $=id=>document.getElementById(id);
+  const num=id=>{const v=$(id).value.replace(/[^0-9.]/g,'');return parseFloat(v)||0;};
+  function fmtUSD(v){if(!isFinite(v))return'—';const a=Math.abs(v);
+    if(a>=1e9)return'$'+(v/1e9).toFixed(2)+'B';if(a>=1e6)return'$'+(v/1e6).toFixed(2)+'M';
+    if(a>=1e3)return'$'+(v/1e3).toFixed(0)+'K';return'$'+Math.round(v).toLocaleString();}
+  const fmtMoneyInput=el=>{const d=el.value.replace(/[^0-9]/g,'');el.value=d?'$'+(+d).toLocaleString():'';};
+
+  function calc(){
+    const names=[$('n0').value,$('n1').value,$('n2').value,$('n3').value];
+    const raw=[num('p0'),num('p1'),num('p2'),num('p3')];
+    const sum=raw.reduce((a,b)=>a+b,0)||1;
+    $('sumwarn').textContent = Math.abs(sum-100)>0.5 ? `Note: founding split sums to ${sum.toFixed(1)}% — normalizing to 100%.` : '';
+    const today=raw.map(r=>r/sum);                 // normalized fractions
+
+    const raise=num('raise'), cap=num('cap'), pool=num('pool')/100, debt=num('debt'), exit=num('exit');
+    let invPct = cap>0 ? raise/cap : 0; invPct=Math.max(0,Math.min(0.9,invPct));
+    let poolPct=Math.max(0,Math.min(0.9,pool));
+    const keep = Math.max(0, 1 - invPct - poolPct);   // fraction existing team retains
+
+    const tb=$('tbl').querySelector('tbody'); tb.innerHTML='';
+    today.forEach((t,i)=>{
+      const after=t*keep;
+      tb.innerHTML+=`<tr class="${i===0?'you':''}"><td>${names[i]}</td><td>${(t*100).toFixed(1)}%</td><td>${(after*100).toFixed(1)}%</td><td>${fmtUSD(after*exit)}</td></tr>`;
+    });
+    if(poolPct>0) tb.innerHTML+=`<tr class="pool"><td>Option pool</td><td>—</td><td>${(poolPct*100).toFixed(1)}%</td><td>${fmtUSD(poolPct*exit)}</td></tr>`;
+    tb.innerHTML+=`<tr class="inv"><td>Investors (equity)</td><td>—</td><td>${(invPct*100).toFixed(1)}%</td><td>${fmtUSD(invPct*exit)}</td></tr>`;
+
+    $('c-eq').textContent = (invPct*100).toFixed(1)+'%';
+    $('c-debt').textContent = '0%  ·  '+fmtUSD(debt);
+    $('c-total').textContent = fmtUSD(raise+debt);
+    const youAfter=today[0]*keep;
+    $('c-you').textContent = (youAfter*100).toFixed(1)+'%  ·  '+fmtUSD(youAfter*exit);
+
+    const debtAsEq = cap>0 ? debt/cap : 0;
+    $('insight').innerHTML = `You keep <b>${(youAfter*100).toFixed(1)}%</b> after the round`+
+      (youAfter>=0.5?` — still majority control.`:` — below 50%; protect control via board seats / dual-class voting.`)+
+      (debt>0?` The <b>${fmtUSD(debt)}</b> in debt added capital with <b>no dilution</b> — as equity at this valuation it would've cost the team about <b>${(debtAsEq*100).toFixed(1)}%</b> more.`:'')+
+      ` Percentages shrink, but if the valuation grows your slice is worth far more — that's healthy dilution.`;
+  }
+  ['raise','cap','debt','exit'].forEach(id=>$(id).addEventListener('input',e=>{fmtMoneyInput(e.target);calc();}));
+  ['p0','p1','p2','p3','pool','n0','n1','n2','n3'].forEach(id=>$(id).addEventListener('input',calc));
+  calc();
+</script>
+</body>
+</html>
