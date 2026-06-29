@@ -371,6 +371,15 @@
       <label for="v-homes">Homes / nodes deployed: <span class="range-val" id="v-homes-val">100,000</span></label>
       <input type="range" id="v-homes" min="0" max="100" value="67">
       <div class="range-mk" id="v-homes-mk"></div>
+      <details class="assump">
+        <summary>Adjust assumptions (sensitivity-test live)</summary>
+        <div class="calc-grid" style="margin-top:10px;">
+          <div><label for="v-net-in">Net profit / node / month<span class="info" tabindex="0" role="note" aria-label="Monthly net profit assumed per node. Base ~$7,600.">i<span class="tip">Monthly net profit assumed per node. Base ~$7,600.</span></span></label><input type="text" inputmode="numeric" id="v-net-in" value="$7,600"></div>
+          <div><label for="v-mult-in">Valuation multiple (&times; annual net)<span class="info" tabindex="0" role="note" aria-label="Multiple applied to annual net profit. Base 8x.">i<span class="tip">Multiple applied to annual net profit. Base 8x.</span></span></label><input type="number" id="v-mult-in" value="8" min="1" step="1"></div>
+          <div><label for="v-kw-in">Power per node (kW)<span class="info" tabindex="0" role="note" aria-label="IT load per node. One 8-GPU server is ~10 kW. Sets the GW capacity math.">i<span class="tip">IT load per node. One 8-GPU server is ~10 kW. Sets the GW capacity math.</span></span></label><input type="number" id="v-kw-in" value="10" min="1" step="0.5"></div>
+          <div><label for="v-capex-in">Capital per home (node + solar + battery)<span class="info" tabindex="0" role="note" aria-label="All-in build cost per home. Base ~$300,000.">i<span class="tip">All-in build cost per home. Base ~$300,000.</span></span></label><input type="text" inputmode="numeric" id="v-capex-in" value="$300,000"></div>
+        </div>
+      </details>
       <div class="calc-out">
         <div class="o"><div class="ok">Compute capacity (nameplate)<span class="info" tabindex="0" role="note" aria-label="Total power of the network at ~10 kW per node. Nameplate — solar is intermittent, so 24/7 compute is lower.">i<span class="tip">Total power of the network at ~10 kW per node. Nameplate — solar is intermittent, so 24/7 compute is lower.</span></span></div><div class="ov" id="v-gw">&mdash;</div></div>
         <div class="o"><div class="ok">vs. a 1&nbsp;GW AI campus (Colossus-class)<span class="info" tabindex="0" role="note" aria-label="How many flagship 1 GW AI data centers this network equals. xAI's Colossus 2 is ~1.2 GW.">i<span class="tip">How many flagship 1 GW AI data centers this network equals. xAI's Colossus 2 is ~1.2 GW.</span></span></div><div class="ov" id="v-vs">&mdash;</div></div>
@@ -692,18 +701,27 @@
   function vcalc(){
     const t=(+$('v-homes').value)/100;                       // 0..1
     const homes=Math.max(1000, Math.round(Math.pow(10, 3 + t*3)/1000)*1000); // 1k..1M
-    const gw=homes/100000;                                   // ~10 kW per node
+    const netPer=num('v-net-in')||7600, mult=+$('v-mult-in').value||8;
+    const kw=+$('v-kw-in').value||10, capexPer=num('v-capex-in')||300000;
+    const gw=homes*kw/1e6;                                   // kW per node → GW
+    const annualNet=homes*netPer*12;
     $('v-homes-val').textContent=homes.toLocaleString();
     $('v-gw').textContent = gw<1 ? Math.round(gw*1000)+' MW' : gw.toFixed(1)+' GW';
     $('v-vs').textContent = gw.toFixed(gw<1?2:1)+'×';
-    $('v-net').textContent = fmtUSD(homes*7600*12)+'/yr';
-    $('v-val').textContent = fmtUSD(homes*7600*12*8);
-    $('v-capex').textContent = fmtUSD(homes*300000);
-    $('v-homes-mk').textContent = homes>=1000000?'national grid — ~10 GW, hyperscaler-scale'
-      : homes>=100000?'hyperscaler-scale AI capacity'
+    $('v-net').textContent = fmtUSD(annualNet)+'/yr';
+    $('v-val').textContent = fmtUSD(annualNet*mult);
+    $('v-capex').textContent = fmtUSD(homes*capexPer);
+    $('v-homes-mk').textContent = gw>=10?'national grid — hyperscaler-scale'
+      : gw>=1?'1 GW+ AI capacity'
       : homes>=10000?'regional network' : 'pilot / early build';
   }
-  if($('v-homes')){ $('v-homes').addEventListener('input', vcalc); vcalc(); }
+  if($('v-homes')){
+    $('v-homes').addEventListener('input', vcalc);
+    ['v-mult-in','v-kw-in'].forEach(id=> $(id) && $(id).addEventListener('input', vcalc));
+    ['v-net-in','v-capex-in'].forEach(id=>{ const el=$(id); if(!el) return;
+      el.addEventListener('input', e=>{ const d=e.target.value.replace(/[^0-9]/g,''); e.target.value=d?'$'+(+d).toLocaleString():''; vcalc(); }); });
+    vcalc();
+  }
 
   route();
 </script>

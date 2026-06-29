@@ -73,6 +73,7 @@ Related docs: `sales/return-todo.md` (detailed to-dos + drafts) · `sales/invest
 ### ⭐ Positioning
 - **Concierge is the core differentiator** vs AWS: "a real person, not a ticket queue" + "we keep cutting your bill." Live on homepage + in the outreach prompt. Playbook: `sales/concierge-positioning.md`.
 - Sunrun competitive answer: `sales/sunrun-positioning.md`.
+- **Node strategy / vision** (for investor calls): `strategy/node-economics-and-scale.md` (dual market, ITC reality + closing solar window, 1GW≈100k homes / 1M≈10GW≈$730B model w/ caveats, ~$300B capex, home-host offer + risks) · maps: `strategy/node-demand-map.html`, `strategy/node-rollout-phased.html`. Live in investor portal: demand map, phased rollout, scale calculator, + latency objection.
 
 ### 📈 Marketing / SEO / site
 - LIVE on main: AWS-alternative homepage SEO, FAQ/Article schema, GA4 = `G-S0N66S4EK5`, Ads conversion hook in `quote.html`. ✅
